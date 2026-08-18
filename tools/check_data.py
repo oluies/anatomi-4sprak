@@ -13,6 +13,7 @@ import json
 import pathlib
 import re
 import sys
+import unicodedata
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 JSON_PATH = ROOT / "data" / "anatomi-termer.json"
@@ -49,6 +50,31 @@ def inline_data(html_text):
         # Blocket är JavaScript, så det kan vara giltig JS men ogiltig JSON
         # (avslutande komma, enkla citattecken, kommentarer).
         raise SystemExit(f"index.html: DATA-blocket är inte giltig JSON: {exc}")
+
+
+def _fold(text):
+    """Gemener utan diakriter och skiljetecken, för jämförelse av termformer."""
+    text = unicodedata.normalize("NFKD", text.lower())
+    text = "".join(c for c in text if not unicodedata.combining(c))
+    return re.sub(r"[^a-z ]", "", text).strip()
+
+
+def latin_in_swedish(terms):
+    """Den svenska termen ska inte upprepa sitt eget latinska namn i parentes.
+
+    Latinet har ett eget fält och visas som eget svar; en dubblett i sv-fältet
+    avslöjar svaret när latin är svarsspråk. Svenska förklaringar i parentes,
+    som "anterior (främre)", är avsiktliga och rapporteras inte.
+    """
+    problems = []
+    for term in terms:
+        match = re.search(r"\(([^)]*)\)", str(term.get("sv", "")))
+        if match and _fold(match.group(1)) == _fold(str(term.get("la", ""))):
+            problems.append(
+                f"post id={term.get('id')!r}: sv {term['sv']!r} upprepar latinet "
+                f"{term['la']!r} — ta bort parentesen"
+            )
+    return problems
 
 
 def describe_drift(inline, terms):
@@ -102,6 +128,8 @@ def main():
         if n in seen_n:
             errors.append(f"{where}: n={n} används redan av post {seen_n[n]}")
         seen_n[n] = i
+
+    errors.extend(latin_in_swedish(terms))
 
     inline = require_list_of_dicts(
         inline_data(HTML_PATH.read_text(encoding="utf-8")), "index.html DATA"

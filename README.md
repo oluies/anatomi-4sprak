@@ -93,8 +93,11 @@ python tools/sync_html_data.py   # skriver om DATA i index.html och numrerar om 
 python tools/check_data.py       # kontrollerar invarianterna
 ```
 
-Skriptet verifierar att `id` och `n` är unika, att alla fält är ifyllda och att
-`index.html` och JSON-filen innehåller exakt samma data. Samma kontroll körs i CI och
+Skriptet verifierar att `id` och `n` är unika, att alla fält är ifyllda, att
+`index.html` och JSON-filen innehåller exakt samma data, och att en svensk term
+inte upprepar sitt eget latinska namn i parentes — latinet har ett eget fält och
+en dubblett avslöjar svaret när latin är svarsspråk. Svenska förklaringar i
+parentes, som `anterior (främre)`, är avsiktliga och flaggas inte. Samma kontroll körs i CI och
 stoppar bygget om filerna glidit isär.
 
 ### Lägga till ett språk

@@ -174,3 +174,24 @@ def test_non_dict_entry_in_index_html(tmp_path, monkeypatch):
         check_data.main()
     assert "index.html DATA" in str(exc.value)
     assert "post 0 är str" in str(exc.value)
+
+
+def test_swedish_term_may_not_repeat_its_own_latin(repo, capsys):
+    """Latinet har ett eget fält; en dubblett i sv avslöjar svaret."""
+    repo([term(1, sv="organsystem (systema organorum)", la="systema organorum")])
+    assert check_data.main() == 1
+    err = capsys.readouterr().err
+    assert "upprepar latinet" in err
+
+
+def test_swedish_gloss_in_parentheses_is_allowed(repo):
+    """Svenska förklaringar i parentes ska inte flaggas."""
+    repo([term(1, sv="anterior (främre)", la="anterior"),
+          term(2, sv="fog (symfys)", la="symphysis")])
+    assert check_data.main() == 0
+
+
+def test_latin_check_ignores_case_and_diacritics(repo, capsys):
+    repo([term(1, sv="lår (Femur)", la="femur")])
+    assert check_data.main() == 1
+    assert "upprepar latinet" in capsys.readouterr().err

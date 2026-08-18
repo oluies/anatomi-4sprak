@@ -2,7 +2,7 @@
  {
   "id": "abdomen",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "buk (abdomen)",
+  "sv": "buk",
   "la": "abdomen",
   "uk": "живіт",
   "ru": "живот",
@@ -14,7 +14,7 @@
  {
   "id": "antebrachium",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "underarm (antebrachium)",
+  "sv": "underarm",
   "la": "antebrachium",
   "uk": "передпліччя",
   "ru": "предплечье",
@@ -38,7 +38,7 @@
  {
   "id": "brachium",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "överarm (brachium)",
+  "sv": "överarm",
   "la": "brachium",
   "uk": "плече",
   "ru": "плечо",
@@ -50,7 +50,7 @@
  {
   "id": "caput",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "huvud (caput)",
+  "sv": "huvud",
   "la": "caput",
   "uk": "голова",
   "ru": "голова",
@@ -74,7 +74,7 @@
  {
   "id": "cavitas-abdominis",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "bukhålan (cavitas abdominis)",
+  "sv": "bukhålan",
   "la": "cavitas abdominis",
   "uk": "черевна порожнина",
   "ru": "брюшная полость",
@@ -86,7 +86,7 @@
  {
   "id": "cavitas-cranii",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "skallhålan (cavitas cranii)",
+  "sv": "skallhålan",
   "la": "cavitas cranii",
   "uk": "порожнина черепа",
   "ru": "полость черепа",
@@ -98,7 +98,7 @@
  {
   "id": "cavitas-thoracis",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "brösthålan (cavitas thoracis)",
+  "sv": "brösthålan",
   "la": "cavitas thoracis",
   "uk": "грудна порожнина",
   "ru": "грудная полость",
@@ -110,7 +110,7 @@
  {
   "id": "cellula",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "cell (cellula)",
+  "sv": "cell",
   "la": "cellula",
   "uk": "клітина",
   "ru": "клетка",
@@ -122,7 +122,7 @@
  {
   "id": "collum",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "hals (collum)",
+  "sv": "hals",
   "la": "collum",
   "uk": "шия",
   "ru": "шея",
@@ -146,7 +146,7 @@
  {
   "id": "crus",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "underben (crus)",
+  "sv": "underben",
   "la": "crus",
   "uk": "гомілка",
   "ru": "голень",
@@ -194,7 +194,7 @@
  {
   "id": "femur",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "lår (femur)",
+  "sv": "lår",
   "la": "femur",
   "uk": "стегно",
   "ru": "бедро",
@@ -230,7 +230,7 @@
  {
   "id": "manus",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "hand (manus)",
+  "sv": "hand",
   "la": "manus",
   "uk": "кисть",
   "ru": "кисть",
@@ -266,7 +266,7 @@
  {
   "id": "organismus",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "organism (organismus)",
+  "sv": "organism",
   "la": "organismus",
   "uk": "організм",
   "ru": "организм",
@@ -278,7 +278,7 @@
  {
   "id": "organum",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "organ (organum)",
+  "sv": "organ",
   "la": "organum",
   "uk": "орган",
   "ru": "орган",
@@ -290,7 +290,7 @@
  {
   "id": "pelvis",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "bäcken (pelvis)",
+  "sv": "bäcken",
   "la": "pelvis",
   "uk": "таз",
   "ru": "таз",
@@ -302,7 +302,7 @@
  {
   "id": "pes",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "fot (pes)",
+  "sv": "fot",
   "la": "pes",
   "uk": "стопа",
   "ru": "стопа",
@@ -434,7 +434,7 @@
  {
   "id": "systema-organorum",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "organsystem (systema organorum)",
+  "sv": "organsystem",
   "la": "systema organorum",
   "uk": "система органів",
   "ru": "система органов",
@@ -446,7 +446,7 @@
  {
   "id": "textus",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "vävnad (textus)",
+  "sv": "vävnad",
   "la": "textus",
   "uk": "тканина",
   "ru": "ткань",
@@ -458,7 +458,7 @@
  {
   "id": "thorax",
   "cat": "Kroppens organisation och riktningstermer",
-  "sv": "bröstkorg (thorax)",
+  "sv": "bröstkorg",
   "la": "thorax",
   "uk": "грудна клітка",
   "ru": "грудная клетка",
@@ -578,7 +578,7 @@
  {
   "id": "nucleus",
   "cat": "Cellen och vävnader",
-  "sv": "cellkärna (nucleus)",
+  "sv": "cellkärna",
   "la": "nucleus",
   "uk": "клітинне ядро",
   "ru": "клеточное ядро",
@@ -1166,7 +1166,7 @@
  {
   "id": "calcaneus",
   "cat": "Skelettet",
-  "sv": "hälben (calcaneus)",
+  "sv": "hälben",
   "la": "calcaneus",
   "uk": "п'яткова кістка",
   "ru": "пяточная кость",
@@ -1178,7 +1178,7 @@
  {
   "id": "cartilago",
   "cat": "Skelettet",
-  "sv": "brosk (cartilago)",
+  "sv": "brosk",
   "la": "cartilago",
   "uk": "хрящ",
   "ru": "хрящ",
@@ -1190,7 +1190,7 @@
  {
   "id": "clavicula",
   "cat": "Skelettet",
-  "sv": "nyckelben (clavicula)",
+  "sv": "nyckelben",
   "la": "clavicula",
   "uk": "ключиця",
   "ru": "ключица",
@@ -1214,7 +1214,7 @@
  {
   "id": "costa",
   "cat": "Skelettet",
-  "sv": "revben (costa)",
+  "sv": "revben",
   "la": "costa",
   "uk": "ребро",
   "ru": "ребро",
@@ -1250,7 +1250,7 @@
  {
   "id": "fibula",
   "cat": "Skelettet",
-  "sv": "vadben (fibula)",
+  "sv": "vadben",
   "la": "fibula",
   "uk": "малогомілкова кістка",
   "ru": "малоберцовая кость",
@@ -1262,7 +1262,7 @@
  {
   "id": "humerus",
   "cat": "Skelettet",
-  "sv": "överarmsben (humerus)",
+  "sv": "överarmsben",
   "la": "humerus",
   "uk": "плечова кістка",
   "ru": "плечевая кость",
@@ -1274,7 +1274,7 @@
  {
   "id": "mandibula",
   "cat": "Skelettet",
-  "sv": "underkäke (mandibula)",
+  "sv": "underkäke",
   "la": "mandibula",
   "uk": "нижня щелепа",
   "ru": "нижняя челюсть",
@@ -1286,7 +1286,7 @@
  {
   "id": "maxilla",
   "cat": "Skelettet",
-  "sv": "överkäksben (maxilla)",
+  "sv": "överkäksben",
   "la": "maxilla",
   "uk": "верхня щелепа",
   "ru": "верхняя челюсть",
@@ -1322,7 +1322,7 @@
  {
   "id": "os-coxae",
   "cat": "Skelettet",
-  "sv": "höftben (os coxae)",
+  "sv": "höftben",
   "la": "os coxae",
   "uk": "кульшова кістка",
   "ru": "тазовая кость",
@@ -1346,7 +1346,7 @@
  {
   "id": "os-frontale",
   "cat": "Skelettet",
-  "sv": "pannben (os frontale)",
+  "sv": "pannben",
   "la": "os frontale",
   "uk": "лобова кістка",
   "ru": "лобная кость",
@@ -1382,7 +1382,7 @@
  {
   "id": "os-nasale",
   "cat": "Skelettet",
-  "sv": "näsben (os nasale)",
+  "sv": "näsben",
   "la": "os nasale",
   "uk": "носова кістка",
   "ru": "носовая кость",
@@ -1394,7 +1394,7 @@
  {
   "id": "os-occipitale",
   "cat": "Skelettet",
-  "sv": "nackben (os occipitale)",
+  "sv": "nackben",
   "la": "os occipitale",
   "uk": "потилична кістка",
   "ru": "затылочная кость",
@@ -1406,7 +1406,7 @@
  {
   "id": "os-parietale",
   "cat": "Skelettet",
-  "sv": "hjässben (os parietale)",
+  "sv": "hjässben",
   "la": "os parietale",
   "uk": "тім'яна кістка",
   "ru": "теменная кость",
@@ -1442,7 +1442,7 @@
  {
   "id": "os-temporale",
   "cat": "Skelettet",
-  "sv": "tinningben (os temporale)",
+  "sv": "tinningben",
   "la": "os temporale",
   "uk": "скронева кістка",
   "ru": "височная кость",
@@ -1454,7 +1454,7 @@
  {
   "id": "os-zygomaticum",
   "cat": "Skelettet",
-  "sv": "okben (os zygomaticum)",
+  "sv": "okben",
   "la": "os zygomaticum",
   "uk": "вилична кістка",
   "ru": "скуловая кость",
@@ -1526,7 +1526,7 @@
  {
   "id": "patella",
   "cat": "Skelettet",
-  "sv": "knäskål (patella)",
+  "sv": "knäskål",
   "la": "patella",
   "uk": "наколінок",
   "ru": "надколенник",
@@ -1562,7 +1562,7 @@
  {
   "id": "radius",
   "cat": "Skelettet",
-  "sv": "strålben (radius)",
+  "sv": "strålben",
   "la": "radius",
   "uk": "променева кістка",
   "ru": "лучевая кость",
@@ -1574,7 +1574,7 @@
  {
   "id": "scapula",
   "cat": "Skelettet",
-  "sv": "skulderblad (scapula)",
+  "sv": "skulderblad",
   "la": "scapula",
   "uk": "лопатка",
   "ru": "лопатка",
@@ -1586,7 +1586,7 @@
  {
   "id": "sternum",
   "cat": "Skelettet",
-  "sv": "bröstben (sternum)",
+  "sv": "bröstben",
   "la": "sternum",
   "uk": "грудина",
   "ru": "грудина",
@@ -1622,7 +1622,7 @@
  {
   "id": "talus",
   "cat": "Skelettet",
-  "sv": "språngben (talus)",
+  "sv": "språngben",
   "la": "talus",
   "uk": "надп'яткова кістка (таранна кістка)",
   "ru": "таранная кость",
@@ -1634,7 +1634,7 @@
  {
   "id": "tibia",
   "cat": "Skelettet",
-  "sv": "skenben (tibia)",
+  "sv": "skenben",
   "la": "tibia",
   "uk": "великогомілкова кістка",
   "ru": "большеберцовая кость",
@@ -1646,7 +1646,7 @@
  {
   "id": "ulna",
   "cat": "Skelettet",
-  "sv": "armbågsben (ulna)",
+  "sv": "armbågsben",
   "la": "ulna",
   "uk": "ліктьова кістка",
   "ru": "локтевая кость",
@@ -3098,7 +3098,7 @@
  {
   "id": "pleura",
   "cat": "Andningsorganen",
-  "sv": "lungsäck (pleura)",
+  "sv": "lungsäck",
   "la": "pleura",
   "uk": "плевра",
   "ru": "плевра",
@@ -3242,7 +3242,7 @@
  {
   "id": "cardia-2",
   "cat": "Matsmältningsorganen",
-  "sv": "magmun (cardia)",
+  "sv": "magmun",
   "la": "cardia",
   "uk": "кардія (вхід у шлунок)",
   "ru": "кардия (вход в желудок)",
@@ -3518,7 +3518,7 @@
  {
   "id": "pylorus",
   "cat": "Matsmältningsorganen",
-  "sv": "portvakt (pylorus)",
+  "sv": "portvakt",
   "la": "pylorus",
   "uk": "воротар (пілорус)",
   "ru": "привратник (пилорус)",
