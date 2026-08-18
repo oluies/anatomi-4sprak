@@ -48,7 +48,7 @@
  "cavitas-thoracis": {
   "artikel": "https://sv.wikipedia.org/wiki/Br%C3%B6sth%C3%A5lan",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Blausen_0467_HeartLocation.png/500px-Blausen_0467_HeartLocation.png",
-  "upphov": "BruceBlaus. When using this image in external sources it can be cited as: Blausen.com staff (2014). \"Medical gallery of Blausen Medical 2014\". WikiJournal of Medicine 1 (2). DOI:10.15347/wjm/2014.010. ISSN 2002-4436.",
+  "upphov": "BruceBlaus. When using this image in external sources it can be cited as…",
   "licens": "CC BY 3.0",
   "licensurl": "https://creativecommons.org/licenses/by/3.0",
   "filsida": "https://commons.wikimedia.org/wiki/File:Blausen_0467_HeartLocation.png"
@@ -167,7 +167,7 @@
  "planum-sagittale": {
   "artikel": "https://sv.wikipedia.org/wiki/Sagittalplan",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Human_anatomy_planes_signatures.svg/500px-Human_anatomy_planes_signatures.svg.png",
-  "upphov": "Human_anatomy_planes.svg: GYassineMrabetTalk✉ Den här W3C-overifiera vektorbilden skapades med Inkscape . derivative work: Marek M (talk)",
+  "upphov": "Human_anatomy_planes.svg: GYassineMrabetTalk✉ Den här W3C-overifiera…",
   "licens": "CC BY-SA 3.0",
   "licensurl": "https://creativecommons.org/licenses/by-sa/3.0",
   "filsida": "https://commons.wikimedia.org/wiki/File:Human_anatomy_planes_signatures.svg"
@@ -570,7 +570,7 @@
  "ossa-metacarpi": {
   "artikel": "https://sv.wikipedia.org/wiki/Metacarpus",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Metacarpus_ant.jpg/500px-Metacarpus_ant.jpg",
-  "upphov": "Ingen maskinläsbar skapare angavs. Palica antaget (baserat på upphovsrättsanspråk).",
+  "upphov": "Ingen maskinläsbar skapare angavs. Palica antaget (baserat på…",
   "licens": "CC BY-SA 3.0",
   "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Metacarpus_ant.jpg"
@@ -697,7 +697,7 @@
  "articulatio-coxae": {
   "artikel": "https://sv.wikipedia.org/wiki/H%C3%B6ftled",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Hueftgelenk-gesund.jpg",
-  "upphov": "Ingen maskinläsbar skapare angavs. Scuba-limp~commonswiki antaget (baserat på upphovsrättsanspråk).",
+  "upphov": "Ingen maskinläsbar skapare angavs. Scuba-limp~commonswiki antaget (baserat på…",
   "licens": "CC BY-SA 3.0",
   "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Hueftgelenk-gesund.jpg"
@@ -1131,7 +1131,7 @@
  "thrombocytus": {
   "artikel": "https://sv.wikipedia.org/wiki/Trombocyt",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/2/24/Red_White_Blood_cells.jpg",
-  "upphov": "Electron Microscopy Facility at The National Cancer Institute at Frederick (NCI-Frederick)",
+  "upphov": "Electron Microscopy Facility at The National Cancer Institute at Frederick…",
   "licens": "Public domain",
   "licensurl": "",
   "filsida": "https://commons.wikimedia.org/wiki/File:Red_White_Blood_cells.jpg"
@@ -1145,12 +1145,7 @@
   "filsida": "https://commons.wikimedia.org/wiki/File:Illu_thymus.jpg"
  },
  "tonsilla": {
-  "artikel": "https://sv.wikipedia.org/wiki/Tonsill",
-  "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Cavernous_tonsils.jpg/500px-Cavernous_tonsils.jpg",
-  "upphov": "The quick brown fox jumps over the laxy dog. asd",
-  "licens": "Public domain",
-  "licensurl": "",
-  "filsida": "https://commons.wikimedia.org/wiki/File:Cavernous_tonsils.jpg"
+  "artikel": "https://sv.wikipedia.org/wiki/Tonsill"
  },
  "vaccinum": {
   "artikel": "https://sv.wikipedia.org/wiki/Vaccin",
@@ -1473,7 +1468,7 @@
  "glomerulus": {
   "artikel": "https://sv.wikipedia.org/wiki/Glomerulus",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Renal_corpuscle.svg/500px-Renal_corpuscle.svg.png",
-  "upphov": "M.Komorniczak (polish Wikipedist) Illustration by : Michał Komorniczak This file has been released into the Creative Commons 3.0. Attribution-ShareAlike (CC BY-SA 3.0) If you use on your website or in your publication my images (either original or modified), you are requested to give me details: Michał Komorniczak (Poland) or Michal Komorniczak (Poland). For more information, write to my e-mail address: m.komorniczak.pl@gmail.com",
+  "upphov": "M.Komorniczak (polish Wikipedist) Illustration by : Michał Komorniczak This…",
   "licens": "CC BY-SA 3.0",
   "licensurl": "https://creativecommons.org/licenses/by-sa/3.0",
   "filsida": "https://commons.wikimedia.org/wiki/File:Renal_corpuscle.svg"
@@ -1701,7 +1696,7 @@
  "glucagonum": {
   "artikel": "https://sv.wikipedia.org/wiki/Glukagon",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/1gcn.jpg/500px-1gcn.jpg",
-  "upphov": "Deposition authors: Blundell, T.L., Sasaki, K., Dockerill, S., Tickle, I.J.; visualization author: User:Astrojan",
+  "upphov": "Deposition authors: Blundell, T.L., Sasaki, K., Dockerill, S., Tickle, I.J…",
   "licens": "CC BY 3.0",
   "licensurl": "https://creativecommons.org/licenses/by/3.0",
   "filsida": "https://commons.wikimedia.org/wiki/File:1gcn.jpg"
@@ -1715,7 +1710,7 @@
  "hypophysis": {
   "artikel": "https://sv.wikipedia.org/wiki/Hypofys",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Pituitary_gland.png",
-  "upphov": "Ingen maskinläsbar skapare angavs. Jomegat antaget (baserat på upphovsrättsanspråk).",
+  "upphov": "Ingen maskinläsbar skapare angavs. Jomegat antaget (baserat på…",
   "licens": "CC BY-SA 3.0",
   "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Pituitary_gland.png"
@@ -1875,7 +1870,7 @@
  "nervi-craniales": {
   "artikel": "https://sv.wikipedia.org/wiki/Kranialnerv",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Brain_human_normal_inferior_view_with_labels_en-2.svg/500px-Brain_human_normal_inferior_view_with_labels_en-2.svg.png",
-  "upphov": "Brain_human_normal_inferior_view_with_labels_en.svg: *Brain_human_normal_inferior_view.svg: Patrick J. Lynch, medical illustrator derivative work: Beao derivative work: Dwstultz (talk)",
+  "upphov": "Brain_human_normal_inferior_view_with_labels_en.svg…",
   "licens": "CC BY 2.5",
   "licensurl": "https://creativecommons.org/licenses/by/2.5",
   "filsida": "https://commons.wikimedia.org/wiki/File:Brain_human_normal_inferior_view_with_labels_en-2.svg"
@@ -1986,7 +1981,7 @@
  "iris": {
   "artikel": "https://sv.wikipedia.org/wiki/Regnb%C3%A5gshinna",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Eye_iris.jpg/500px-Eye_iris.jpg",
-  "upphov": "che (Please credit as \"Petr Novák, Wikipedia\" in case you use this outside Wikimedia projects.)",
+  "upphov": "che (Please credit as \"Petr Novák, Wikipedia\" in case you use this outside…",
   "licens": "CC BY-SA 2.5",
   "licensurl": "https://creativecommons.org/licenses/by-sa/2.5",
   "filsida": "https://commons.wikimedia.org/wiki/File:Eye_iris.jpg"
@@ -1997,7 +1992,7 @@
  "nervus-opticus": {
   "artikel": "https://sv.wikipedia.org/wiki/Synnerv",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/1/17/Calf-Eye-Posterior-Outside-2005-Oct-13.jpg",
-  "upphov": "Ingen maskinläsbar skapare angavs. Naib antaget (baserat på upphovsrättsanspråk).",
+  "upphov": "Ingen maskinläsbar skapare angavs. Naib antaget (baserat på…",
   "licens": "CC BY-SA 2.5",
   "licensurl": "https://creativecommons.org/licenses/by-sa/2.5",
   "filsida": "https://commons.wikimedia.org/wiki/File:Calf-Eye-Posterior-Outside-2005-Oct-13.jpg"
@@ -2029,7 +2024,7 @@
  "ossicula-auditus": {
   "artikel": "https://sv.wikipedia.org/wiki/H%C3%B6rselben",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Illu_auditory_ossicles-en.svg/500px-Illu_auditory_ossicles-en.svg.png",
-  "upphov": "Illu auditory ossicles.jpg: US Government (original); SVG version: Angelito7 (talk)",
+  "upphov": "Illu auditory ossicles.jpg: US Government (original); SVG version: Angelito7…",
   "licens": "Public domain",
   "licensurl": "",
   "filsida": "https://commons.wikimedia.org/wiki/File:Illu_auditory_ossicles-en.svg"
@@ -2059,7 +2054,7 @@
  "tactus": {
   "artikel": "https://sv.wikipedia.org/wiki/K%C3%A4nsel",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Blausen_0809_Skin_TactileReceptors.png/500px-Blausen_0809_Skin_TactileReceptors.png",
-  "upphov": "BruceBlaus. When using this image in external sources it can be cited as: Blausen.com staff (2014). \"Medical gallery of Blausen Medical 2014\". WikiJournal of Medicine 1 (2). DOI:10.15347/wjm/2014.010. ISSN 2002-4436.",
+  "upphov": "BruceBlaus. When using this image in external sources it can be cited as…",
   "licens": "CC BY 3.0",
   "licensurl": "https://creativecommons.org/licenses/by/3.0",
   "filsida": "https://commons.wikimedia.org/wiki/File:Blausen_0809_Skin_TactileReceptors.png"
@@ -2223,7 +2218,7 @@
  "nausea": {
   "artikel": "https://sv.wikipedia.org/wiki/Illam%C3%A5ende",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/2/22/3205_-_Milano%2C_Duomo_-_Giorgio_Bonola_-_Miracolo_di_Marco_Spagnolo_%281681%29_-_Foto_Giovanni_Dall%27Orto%2C_6-Dec-2007-cropped.jpg",
-  "upphov": "derivative work: Kostisl (talk) 3205_-_Milano,_Duomo_-_Giorgio_Bonola_-_Miracolo_di_Marco_Spagnolo_(1681)_-_Foto_Giovanni_Dall'Orto,_6-Dec-2007.jpg: User:G.dallorto",
+  "upphov": "derivative work: Kostisl (talk)…",
   "licens": "Public domain",
   "licensurl": "",
   "filsida": "https://commons.wikimedia.org/wiki/File:3205_-_Milano,_Duomo_-_Giorgio_Bonola_-_Miracolo_di_Marco_Spagnolo_(1681)_-_Foto_Giovanni_Dall%27Orto,_6-Dec-2007-cropped.jpg"
@@ -2271,7 +2266,7 @@
  "vomitus": {
   "artikel": "https://sv.wikipedia.org/wiki/Kr%C3%A4kning",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/2/22/3205_-_Milano%2C_Duomo_-_Giorgio_Bonola_-_Miracolo_di_Marco_Spagnolo_%281681%29_-_Foto_Giovanni_Dall%27Orto%2C_6-Dec-2007-cropped.jpg",
-  "upphov": "derivative work: Kostisl (talk) 3205_-_Milano,_Duomo_-_Giorgio_Bonola_-_Miracolo_di_Marco_Spagnolo_(1681)_-_Foto_Giovanni_Dall'Orto,_6-Dec-2007.jpg: User:G.dallorto",
+  "upphov": "derivative work: Kostisl (talk)…",
   "licens": "Public domain",
   "licensurl": "",
   "filsida": "https://commons.wikimedia.org/wiki/File:3205_-_Milano,_Duomo_-_Giorgio_Bonola_-_Miracolo_di_Marco_Spagnolo_(1681)_-_Foto_Giovanni_Dall%27Orto,_6-Dec-2007-cropped.jpg"

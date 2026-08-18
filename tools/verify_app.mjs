@@ -273,6 +273,10 @@ try {
     return i.naturalWidth > 0;
   });
   check('bilden laddas från Commons', imgOk);
+  // Upphovsfältet är fritext från Commons — det får inte spränga kreditraden.
+  const longest = await page.evaluate(() =>
+    Math.max(...Object.values(IMGS).filter(e => e.bild).map(e => (e.upphov || '').length)));
+  check('kreditraden är rimligt kort', longest <= 82, `längsta upphovssträng: ${longest}`);
 
   // uteslutna bilder får inte dyka upp
   const uteslutna = await (await page.request.get(base + 'data/bilder-uteslutna.json')).json();

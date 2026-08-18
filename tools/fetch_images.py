@@ -65,8 +65,22 @@ def clean_url(url):
     return url.split("?")[0] if url else None
 
 
+# Upphovsfältet på Commons är fritext och kan vara en hel licensuppsats — eller
+# klotter. Kapa det till en kreditrad som får plats; filsidan länkas alltid och
+# bär den fullständiga uppgiften.
+MAX_CREDIT = 80
+
+
 def strip_html(text):
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", text or "")).strip()
+
+
+def shorten(text, limit=MAX_CREDIT):
+    text = (text or "").strip()
+    if len(text) <= limit:
+        return text
+    cut = text[:limit].rsplit(" ", 1)[0].rstrip(" ,.;:-")
+    return (cut or text[:limit]) + "…"
 
 
 def lookup_pages(titles):
@@ -155,7 +169,7 @@ def lookup_licenses(filenames):
             key = page["title"].split(":", 1)[-1].replace(" ", "_")
             field = lambda name: (meta.get(name) or {}).get("value") if isinstance(meta.get(name), dict) else None
             result[key] = {
-                "upphov": strip_html(field("Artist")) or "Okänd",
+                "upphov": shorten(strip_html(field("Artist"))) or "Okänd",
                 "licens": strip_html(field("LicenseShortName")) or "Okänd",
                 "licensurl": field("LicenseUrl") or "",
                 "filsida": info.get("descriptionurl", ""),
