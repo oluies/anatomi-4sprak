@@ -1,7 +1,7 @@
 # Anatomi 4 språk
 
 Flashcards för grundläggande anatomi, fysiologi och medicinsk terminologi på
-**svenska, latin, ukrainska och ryska** — 424 termer med korta förklaringar på
+**svenska, latin, ukrainska och ryska** — 438 termer med korta förklaringar på
 svenska, ukrainska och ryska.
 
 Materialet är tänkt som stöd för elever som läser **Anatomi och fysiologi 1** på
@@ -15,6 +15,8 @@ funktion och vanlig medicinsk terminologi.
 | --- | --- |
 | `index.html` | Fristående webbapp med flashcards, quiz och söklista. Allt ligger i en enda fil, inga beroenden. |
 | `data/anatomi-termer.json` | Termdatan. Fält: `id`, `cat`, `sv`, `la`, `uk`, `ru`, `def_sv`, `def_uk`, `def_ru`, `n`. |
+| `data/kategorier.json` | Kategorinamnen översatta till ukrainska, ryska och engelska. |
+| `data/sprak.json` | Språkuppsättningen: vilka språk som är termspråk, har förklaringar, går att välja som gränssnitt, och vad fälten heter i Anki. |
 | `data/anatomi-4sprak.apkg` | Anki-deck genererat från JSON-filen. |
 | `tools/build_deck.py` | Bygger om `.apkg` från JSON med `genanki`. |
 | `tools/sync_html_data.py` | Skriver om det inbakade `DATA`-blocket i `index.html` från JSON-filen och numrerar om `n`. |
@@ -35,10 +37,10 @@ ett kort. Hopfällda ersätts de av en rad som visar vad som är valt.
 
 | Kategori | Antal |
 | --- | ---: |
+| Leder och muskler | 49 |
 | Skelettet | 46 |
 | Kroppens organisation och riktningstermer | 40 |
 | Medicinsk terminologi | 35 |
-| Leder och muskler | 35 |
 | Matsmältningsorganen | 33 |
 | Hjärta och blodkärl | 32 |
 | Nervsystemet | 30 |
@@ -51,7 +53,7 @@ ett kort. Hopfällda ersätts de av en rad som visar vad som är valt.
 | Urinorganen | 17 |
 | Endokrina systemet | 16 |
 | Huden | 15 |
-| **Totalt** | **424** |
+| **Totalt** | **438** |
 
 ## Importera decket i Anki
 
@@ -61,7 +63,7 @@ ett kort. Hopfällda ersätts de av en rad som visar vad som är valt.
 3. Decket heter *Anatomi 4 språk* och innehåller ett underdeck per kategori.
 
 Varje term ger fyra kort — ett per frågespråk (svenska, latin, ukrainska, ryska) —
-alltså 1 696 kort totalt. Vill du bara öva ett håll kan du stänga av de övriga
+alltså 1 752 kort totalt. Vill du bara öva ett håll kan du stänga av de övriga
 korttyperna under **Verktyg → Hantera korttyper**.
 
 Korten har stabila guid:n som härleds ur `id`-fältet i JSON-filen. Importerar du en
@@ -94,6 +96,34 @@ python tools/check_data.py       # kontrollerar invarianterna
 Skriptet verifierar att `id` och `n` är unika, att alla fält är ifyllda och att
 `index.html` och JSON-filen innehåller exakt samma data. Samma kontroll körs i CI och
 stoppar bygget om filerna glidit isär.
+
+### Lägga till ett språk
+
+Språken är inte hårdkodade i appen. För att lägga till exempelvis polska (`pl`),
+litauiska (`lt`), lettiska (`lv`) eller estniska (`et`):
+
+1. Lägg in språket i `data/sprak.json`:
+
+   ```json
+   "pl": {"namn": "Polski", "term": true, "forklaring": true,
+          "granssnitt": "Polski", "ankifalt": "Polska", "ankidef": "DefPl"}
+   ```
+
+   `term` gör språket valbart som fråge- och svarsspråk, `forklaring` ger det ett
+   `def_pl`-fält, och `granssnitt` gör det valbart som gränssnittsspråk.
+   `ankifalt`/`ankidef` är fältnamnen i Anki och måste vara stabila över tid —
+   byter de namn bryts befintliga användares kort vid en ny import.
+
+2. Lägg fälten `pl` och `def_pl` på **varje** term i `data/anatomi-termer.json`.
+3. Översätt kategorinamnen i `data/kategorier.json`.
+4. Vill du ha gränssnittet på språket: lägg till en `pl`-post i `I18N` i `index.html`.
+   Utan den faller gränssnittet tillbaka på svenska, men termerna fungerar ändå.
+5. Kör `python tools/sync_html_data.py`.
+
+Sync-verktyget vägrar om någon term saknar det nya fältet, så du får veta direkt
+om översättningen är ofullständig. Appen bygger språkväljare, svarschips, listkolumner
+och sökning ur konfigurationen, och `build_deck.py` lägger automatiskt till ett
+Anki-fält och en korttyp per nytt termspråk.
 
 Vid push till `main` som ändrar termdatan byggs decket automatiskt om av GitHub Actions
 (`.github/workflows/deck.yml`), den nya `.apkg`-filen committas och sajten deployas om.
@@ -140,6 +170,22 @@ npm install playwright && npx playwright install chromium
 node tools/verify_app.mjs .
 ```
 
-## Licens
+## Licens och källor
 
-Termdatan och koden får användas fritt i undervisning.
+Hela projektet — både termdatan och koden — är licensierat under
+[Creative Commons Erkännande-DelaLika 4.0 Internationell (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.sv).
+Licenstexten finns i [`LICENSE`](LICENSE).
+
+Det betyder att du fritt får kopiera, sprida och bearbeta materialet, även
+kommersiellt, så länge du **anger källan** och sprider eventuella bearbetningar
+under **samma licens**.
+
+Termdatan är delvis baserad på artikeln
+[Människans anatomi](https://sv.wikipedia.org/wiki/M%C3%A4nniskans_anatomi)
+och närliggande artiklar på svenskspråkiga Wikipedia, som också är CC BY-SA 4.0.
+Wikipedias upphovspersoner framgår av respektive artikels versionshistorik.
+
+Skapad av [Örjan Lundberg](https://github.com/oluies).
+
+Vill du stödja källan går det att
+[donera till Wikimedia](https://donate.wikimedia.org/).

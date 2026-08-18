@@ -1,0 +1,11 @@
+{
+ "sv": {"namn": "Svenska",    "term": true,  "forklaring": true,  "granssnitt": "Svenska",
+        "ankifalt": "Svenska",    "ankidef": "DefSv"},
+ "la": {"namn": "Latin",      "term": true,  "forklaring": false,
+        "ankifalt": "Latin"},
+ "uk": {"namn": "Українська", "term": true,  "forklaring": true,  "granssnitt": "Українська",
+        "ankifalt": "Ukrainska",  "ankidef": "DefUk"},
+ "ru": {"namn": "Русский",    "term": true,  "forklaring": true,  "granssnitt": "Русский",
+        "ankifalt": "Ryska",      "ankidef": "DefRu"},
+ "en": {"namn": "English",    "term": false, "forklaring": false, "granssnitt": "English"}
+}

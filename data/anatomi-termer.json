@@ -1716,6 +1716,18 @@
   "n": 143
  },
  {
+  "id": "amphiarthrosis",
+  "cat": "Leder och muskler",
+  "sv": "amfiartros (halvrörlig fog)",
+  "la": "amphiarthrosis",
+  "uk": "амфіартроз (напіврухоме з'єднання)",
+  "ru": "амфиартроз (полуподвижное соединение)",
+  "def_sv": "En halvrörlig fog som bara tillåter små rörelser, till exempel mellan kotkropparna.",
+  "def_uk": "Напіврухоме з'єднання, яке допускає лише невеликі рухи, наприклад між тілами хребців.",
+  "def_ru": "Полуподвижное соединение, допускающее лишь небольшие движения, например между телами позвонков.",
+  "n": 144
+ },
+ {
   "id": "articulatio",
   "cat": "Leder och muskler",
   "sv": "led",
@@ -1725,7 +1737,7 @@
   "def_sv": "En led är förbindelsen där två eller flera ben möts och rörelse sker.",
   "def_uk": "Суглоб — це з'єднання, де сходяться дві або більше кісток і відбувається рух.",
   "def_ru": "Сустав — это соединение, где сходятся две или более костей и происходит движение.",
-  "n": 144
+  "n": 145
  },
  {
   "id": "articulatio-coxae",
@@ -1737,7 +1749,7 @@
   "def_sv": "Höftleden förbinder lårbenet med bäckenet och bär kroppens tyngd.",
   "def_uk": "Кульшовий суглоб з'єднує стегнову кістку з тазом і несе вагу тіла.",
   "def_ru": "Тазобедренный сустав соединяет бедренную кость с тазом и несёт вес тела.",
-  "n": 145
+  "n": 146
  },
  {
   "id": "articulatio-cubiti",
@@ -1749,7 +1761,19 @@
   "def_sv": "Armbågsleden böjer och sträcker armen mellan överarm och underarm.",
   "def_uk": "Ліктьовий суглоб згинає та розгинає руку між плечем і передпліччям.",
   "def_ru": "Локтевой сустав сгибает и разгибает руку между плечом и предплечьем.",
-  "n": 146
+  "n": 147
+ },
+ {
+  "id": "articulatio-ellipsoidea",
+  "cat": "Leder och muskler",
+  "sv": "ellipsoidled (äggled)",
+  "la": "articulatio ellipsoidea",
+  "uk": "еліпсоподібний суглоб",
+  "ru": "эллипсовидный сустав",
+  "def_sv": "Led där en äggformad ledyta rör sig i en oval grop, som i handleden.",
+  "def_uk": "Суглоб, у якому яйцеподібна головка рухається в овальній ямці, як у променево-зап'ястковому суглобі.",
+  "def_ru": "Сустав, в котором яйцевидная головка движется в овальной ямке, как в лучезапястном суставе.",
+  "n": 148
  },
  {
   "id": "articulatio-genus",
@@ -1761,7 +1785,7 @@
   "def_sv": "Knäleden ligger mellan lårben och skenben och böjer benet.",
   "def_uk": "Колінний суглоб лежить між стегновою та великогомілковою кістками і згинає ногу.",
   "def_ru": "Коленный сустав лежит между бедренной и большеберцовой костями и сгибает ногу.",
-  "n": 147
+  "n": 149
  },
  {
   "id": "articulatio-humeri",
@@ -1773,7 +1797,43 @@
   "def_sv": "Axelleden sitter mellan skulderbladet och överarmsbenet och rör sig åt alla håll.",
   "def_uk": "Плечовий суглоб розташований між лопаткою та плечовою кісткою і рухається в усіх напрямках.",
   "def_ru": "Плечевой сустав расположен между лопаткой и плечевой костью и движется во всех направлениях.",
-  "n": 148
+  "n": 150
+ },
+ {
+  "id": "articulatio-plana",
+  "cat": "Leder och muskler",
+  "sv": "planled (glidled)",
+  "la": "articulatio plana",
+  "uk": "плоский суглоб",
+  "ru": "плоский сустав",
+  "def_sv": "Led med nästan flata ledytor som glider mot varandra, till exempel mellan handlovsbenen.",
+  "def_uk": "Суглоб з майже рівними поверхнями, які ковзають одна по одній, наприклад між кістками зап'ястка.",
+  "def_ru": "Сустав с почти ровными поверхностями, скользящими друг по другу, например между костями запястья.",
+  "n": 151
+ },
+ {
+  "id": "articulatio-sellaris",
+  "cat": "Leder och muskler",
+  "sv": "sadelled",
+  "la": "articulatio sellaris",
+  "uk": "сідлоподібний суглоб",
+  "ru": "седловидный сустав",
+  "def_sv": "Led där båda ledytorna är sadelformade, som i tummens grundled.",
+  "def_uk": "Суглоб, де обидві поверхні мають форму сідла, як у суглобі великого пальця.",
+  "def_ru": "Сустав, где обе поверхности имеют форму седла, как в суставе большого пальца.",
+  "n": 152
+ },
+ {
+  "id": "articulatio-spheroidea",
+  "cat": "Leder och muskler",
+  "sv": "kulled",
+  "la": "articulatio spheroidea",
+  "uk": "кулястий суглоб",
+  "ru": "шаровидный сустав",
+  "def_sv": "Led där ett kulformat ledhuvud rör sig i en skål och tillåter rörelse åt alla håll, som i axelleden.",
+  "def_uk": "Суглоб, у якому куляста головка рухається в западині й дозволяє рухи в усіх напрямках, як у плечовому суглобі.",
+  "def_ru": "Сустав, в котором шаровидная головка движется во впадине и допускает движения во всех направлениях, как в плечевом суставе.",
+  "n": 153
  },
  {
   "id": "articulatio-talocruralis",
@@ -1785,7 +1845,19 @@
   "def_sv": "Fotleden ligger mellan underbenet och språngbenet och lyfter foten.",
   "def_uk": "Надп'ятково-гомілковий суглоб лежить між гомілкою та надп'ятковою кісткою і піднімає стопу.",
   "def_ru": "Голеностопный сустав лежит между голенью и таранной костью и поднимает стопу.",
-  "n": 149
+  "n": 154
+ },
+ {
+  "id": "articulatio-trochoidea",
+  "cat": "Leder och muskler",
+  "sv": "vridled (trissled)",
+  "la": "articulatio trochoidea",
+  "uk": "обертовий суглоб",
+  "ru": "вращательный сустав",
+  "def_sv": "Led där ett ben roterar kring sin egen längdaxel, som mellan strålbenet och armbågsbenet.",
+  "def_uk": "Суглоб, у якому кістка обертається навколо власної поздовжньої осі, як між променевою та ліктьовою кістками.",
+  "def_ru": "Сустав, в котором кость вращается вокруг собственной продольной оси, как между лучевой и локтевой костями.",
+  "n": 155
  },
  {
   "id": "bursa",
@@ -1797,7 +1869,7 @@
   "def_sv": "En slemsäck ligger som en dyna mellan sena och ben.",
   "def_uk": "Синовіальна сумка лежить як подушка між сухожилком і кісткою.",
   "def_ru": "Синовиальная сумка лежит как подушка между сухожилием и костью.",
-  "n": 150
+  "n": 156
  },
  {
   "id": "capsula-articularis",
@@ -1809,7 +1881,7 @@
   "def_sv": "Ledkapseln omsluter leden och håller ledvätskan på plats.",
   "def_uk": "Суглобова капсула оточує суглоб і утримує синовіальну рідину на місці.",
   "def_ru": "Суставная капсула окружает сустав и удерживает синовиальную жидкость на месте.",
-  "n": 151
+  "n": 157
  },
  {
   "id": "cartilago-articularis",
@@ -1821,7 +1893,7 @@
   "def_sv": "Ledbrosket täcker benändarna i leden och minskar friktion vid rörelse.",
   "def_uk": "Суглобовий хрящ покриває кінці кісток у суглобі та зменшує тертя під час руху.",
   "def_ru": "Суставной хрящ покрывает концы костей в суставе и уменьшает трение при движении.",
-  "n": 152
+  "n": 158
  },
  {
   "id": "diaphragma",
@@ -1833,7 +1905,19 @@
   "def_sv": "Mellangärdet skiljer bröstkorgen från buken och styr andningen.",
   "def_uk": "Діафрагма відділяє грудну клітку від живота і керує диханням.",
   "def_ru": "Диафрагма отделяет грудную клетку от живота и управляет дыханием.",
-  "n": 153
+  "n": 159
+ },
+ {
+  "id": "diarthrosis",
+  "cat": "Leder och muskler",
+  "sv": "diartros (fritt rörlig led)",
+  "la": "diarthrosis",
+  "uk": "діартроз (рухоме з'єднання)",
+  "ru": "диартроз (подвижное соединение)",
+  "def_sv": "En fritt rörlig led med ledhåla, ledkapsel och ledvätska, till exempel axelleden.",
+  "def_uk": "Вільно рухоме з'єднання із суглобовою порожниною, капсулою та синовіальною рідиною, наприклад плечовий суглоб.",
+  "def_ru": "Свободно подвижное соединение с суставной полостью, капсулой и синовиальной жидкостью, например плечевой сустав.",
+  "n": 160
  },
  {
   "id": "extensio",
@@ -1845,7 +1929,7 @@
   "def_sv": "Extension betyder att sträcka en kroppsdel så att vinkeln ökar.",
   "def_uk": "Розгинання означає випрямляти частину тіла так, що кут збільшується.",
   "def_ru": "Разгибание означает выпрямлять часть тела так, что угол увеличивается.",
-  "n": 154
+  "n": 161
  },
  {
   "id": "flexio",
@@ -1857,7 +1941,55 @@
   "def_sv": "Flexion betyder att böja en kroppsdel så att vinkeln minskar.",
   "def_uk": "Згинання означає згинати частину тіла так, що кут зменшується.",
   "def_ru": "Сгибание означает сгибать часть тела так, что угол уменьшается.",
-  "n": 155
+  "n": 162
+ },
+ {
+  "id": "ginglymus",
+  "cat": "Leder och muskler",
+  "sv": "gångjärnsled",
+  "la": "ginglymus",
+  "uk": "блокоподібний суглоб",
+  "ru": "блоковидный сустав",
+  "def_sv": "Led som bara böjer och sträcker i ett plan, som armbågsleden.",
+  "def_uk": "Суглоб, який згинається і розгинається лише в одній площині, як ліктьовий суглоб.",
+  "def_ru": "Сустав, который сгибается и разгибается только в одной плоскости, как локтевой сустав.",
+  "n": 163
+ },
+ {
+  "id": "gomphosis",
+  "cat": "Leder och muskler",
+  "sv": "gomfos (tappfog)",
+  "la": "gomphosis",
+  "uk": "гомфоз (вклинення)",
+  "ru": "гомфоз (вколачивание)",
+  "def_sv": "Fog där en tand sitter fast i sitt tandfäste i käkbenet.",
+  "def_uk": "З'єднання, у якому зуб закріплений у комірці щелепи.",
+  "def_ru": "Соединение, при котором зуб закреплён в лунке челюсти.",
+  "n": 164
+ },
+ {
+  "id": "junctura-cartilaginea",
+  "cat": "Leder och muskler",
+  "sv": "broskfog",
+  "la": "junctura cartilaginea",
+  "uk": "хрящове з'єднання",
+  "ru": "хрящевое соединение",
+  "def_sv": "Fog där benen förenas av brosk och rörligheten är liten.",
+  "def_uk": "З'єднання, у якому кістки сполучені хрящем і рухливість незначна.",
+  "def_ru": "Соединение, в котором кости связаны хрящом и подвижность невелика.",
+  "n": 165
+ },
+ {
+  "id": "junctura-fibrosa",
+  "cat": "Leder och muskler",
+  "sv": "fibrös fog (bindvävsfog)",
+  "la": "junctura fibrosa",
+  "uk": "волокнисте з'єднання",
+  "ru": "фиброзное соединение",
+  "def_sv": "Fog där benen hålls samman av tät bindväv utan ledhåla.",
+  "def_uk": "З'єднання, у якому кістки утримуються щільною сполучною тканиною без суглобової порожнини.",
+  "def_ru": "Соединение, в котором кости удерживаются плотной соединительной тканью без суставной полости.",
+  "n": 166
  },
  {
   "id": "ligamentum",
@@ -1869,7 +2001,7 @@
   "def_sv": "Ett ledband är stark bindväv som håller ihop två ben.",
   "def_uk": "Зв'язка — це міцна сполучна тканина, яка з'єднує дві кістки.",
   "def_ru": "Связка — это прочная соединительная ткань, которая соединяет две кости.",
-  "n": 156
+  "n": 167
  },
  {
   "id": "meniscus",
@@ -1881,7 +2013,7 @@
   "def_sv": "Menisken är en broskskiva i knäleden som dämpar och stabiliserar.",
   "def_uk": "Меніск — це хрящова пластинка в колінному суглобі, яка амортизує та стабілізує.",
   "def_ru": "Мениск — это хрящевая пластинка в коленном суставе, которая амортизирует и стабилизирует.",
-  "n": 157
+  "n": 168
  },
  {
   "id": "musculus-biceps-brachii",
@@ -1893,7 +2025,7 @@
   "def_sv": "Biceps ligger på överarmens framsida och böjer armbågen.",
   "def_uk": "Двоголовий м'яз плеча лежить на передній поверхні плеча і згинає лікоть.",
   "def_ru": "Двуглавая мышца плеча лежит на передней поверхности плеча и сгибает локоть.",
-  "n": 158
+  "n": 169
  },
  {
   "id": "musculus-biceps-femoris",
@@ -1905,7 +2037,7 @@
   "def_sv": "Tvåhövdade lårmuskeln ligger på lårets baksida och böjer knäet.",
   "def_uk": "Двоголовий м'яз стегна лежить на задній поверхні стегна і згинає коліно.",
   "def_ru": "Двуглавая мышца бедра лежит на задней поверхности бедра и сгибает колено.",
-  "n": 159
+  "n": 170
  },
  {
   "id": "musculus-deltoideus",
@@ -1917,7 +2049,7 @@
   "def_sv": "Deltamuskeln ligger över axeln och lyfter armen ut från kroppen.",
   "def_uk": "Дельтоподібний м'яз лежить над плечовим суглобом і відводить руку від тулуба.",
   "def_ru": "Дельтовидная мышца лежит над плечевым суставом и отводит руку от туловища.",
-  "n": 160
+  "n": 171
  },
  {
   "id": "musculus-erector-spinae",
@@ -1929,7 +2061,7 @@
   "def_sv": "Ryggsträckaren löper längs ryggraden och håller kroppen upprätt.",
   "def_uk": "М'яз-випрямляч хребта проходить уздовж хребта і тримає тіло прямо.",
   "def_ru": "Мышца, выпрямляющая позвоночник, проходит вдоль позвоночника и держит тело прямо.",
-  "n": 161
+  "n": 172
  },
  {
   "id": "musculus-gastrocnemius",
@@ -1941,7 +2073,7 @@
   "def_sv": "Vadmuskeln ligger på vadens baksida och lyfter hälen vid gång.",
   "def_uk": "Литковий м'яз лежить на задній поверхні гомілки і піднімає п'яту під час ходьби.",
   "def_ru": "Икроножная мышца лежит на задней поверхности голени и поднимает пятку при ходьбе.",
-  "n": 162
+  "n": 173
  },
  {
   "id": "musculus-gluteus-maximus",
@@ -1953,7 +2085,7 @@
   "def_sv": "Stora sätesmuskeln bildar skinkan och sträcker höften vid gång.",
   "def_uk": "Великий сідничний м'яз утворює сідницю і розгинає стегно під час ходьби.",
   "def_ru": "Большая ягодичная мышца образует ягодицу и разгибает бедро при ходьбе.",
-  "n": 163
+  "n": 174
  },
  {
   "id": "musculus-latissimus-dorsi",
@@ -1965,7 +2097,7 @@
   "def_sv": "Breda ryggmuskeln täcker nedre ryggen och drar armen bakåt.",
   "def_uk": "Найширший м'яз спини покриває нижню частину спини і тягне руку назад.",
   "def_ru": "Широчайшая мышца спины покрывает нижнюю часть спины и тянет руку назад.",
-  "n": 164
+  "n": 175
  },
  {
   "id": "musculus-pectoralis-major",
@@ -1977,7 +2109,7 @@
   "def_sv": "Stora bröstmuskeln täcker bröstkorgens framsida och för armen inåt.",
   "def_uk": "Великий грудний м'яз покриває передню поверхню грудної клітки і приводить руку.",
   "def_ru": "Большая грудная мышца покрывает переднюю поверхность грудной клетки и приводит руку.",
-  "n": 165
+  "n": 176
  },
  {
   "id": "musculus-quadriceps-femoris",
@@ -1989,7 +2121,7 @@
   "def_sv": "Fyrhövdade lårmuskeln ligger på lårets framsida och sträcker knäet.",
   "def_uk": "Чотириголовий м'яз стегна лежить на передній поверхні стегна і розгинає коліно.",
   "def_ru": "Четырёхглавая мышца бедра лежит на передней поверхности бедра и разгибает колено.",
-  "n": 166
+  "n": 177
  },
  {
   "id": "musculus-rectus-abdominis",
@@ -2001,7 +2133,7 @@
   "def_sv": "Raka bukmuskeln löper längs magen och böjer bålen framåt.",
   "def_uk": "Прямий м'яз живота проходить уздовж живота і згинає тулуб уперед.",
   "def_ru": "Прямая мышца живота проходит вдоль живота и сгибает туловище вперёд.",
-  "n": 167
+  "n": 178
  },
  {
   "id": "musculus-sphincter",
@@ -2013,7 +2145,7 @@
   "def_sv": "En ringmuskel sluter en kroppsöppning, till exempel vid ändtarmen.",
   "def_uk": "М'яз-замикач закриває отвір тіла, наприклад біля прямої кишки.",
   "def_ru": "Мышца-сжиматель закрывает отверстие тела, например у прямой кишки.",
-  "n": 168
+  "n": 179
  },
  {
   "id": "musculus-trapezius",
@@ -2025,7 +2157,7 @@
   "def_sv": "Kappmuskeln sträcker sig över nacke och rygg och lyfter axlarna.",
   "def_uk": "Трапецієподібний м'яз простягається по шиї та спині і піднімає плечі.",
   "def_ru": "Трапециевидная мышца простирается по шее и спине и поднимает плечи.",
-  "n": 169
+  "n": 180
  },
  {
   "id": "musculus-triceps-brachii",
@@ -2037,7 +2169,7 @@
   "def_sv": "Triceps ligger på överarmens baksida och sträcker armbågen.",
   "def_uk": "Триголовий м'яз плеча лежить на задній поверхні плеча і розгинає лікоть.",
   "def_ru": "Трёхглавая мышца плеча лежит на задней поверхности плеча и разгибает локоть.",
-  "n": 170
+  "n": 181
  },
  {
   "id": "pronatio",
@@ -2049,7 +2181,7 @@
   "def_sv": "Pronation är att vrida underarmen så att handflatan vänds nedåt.",
   "def_uk": "Пронація — це поворот передпліччя так, що долоня повертається вниз.",
   "def_ru": "Пронация — это поворот предплечья так, что ладонь поворачивается вниз.",
-  "n": 171
+  "n": 182
  },
  {
   "id": "rotatio",
@@ -2061,7 +2193,7 @@
   "def_sv": "Rotation är att vrida en kroppsdel runt sin egen längdaxel.",
   "def_uk": "Обертання — це поворот частини тіла навколо власної поздовжньої осі.",
   "def_ru": "Вращение — это поворот части тела вокруг собственной продольной оси.",
-  "n": 172
+  "n": 183
  },
  {
   "id": "supinatio",
@@ -2073,7 +2205,19 @@
   "def_sv": "Supination är att vrida underarmen så att handflatan vänds uppåt.",
   "def_uk": "Супінація — це поворот передпліччя так, що долоня повертається вгору.",
   "def_ru": "Супинация — это поворот предплечья так, что ладонь поворачивается вверх.",
-  "n": 173
+  "n": 184
+ },
+ {
+  "id": "sutura",
+  "cat": "Leder och muskler",
+  "sv": "sutur (skallsöm)",
+  "la": "sutura",
+  "uk": "шов (черепний шов)",
+  "ru": "шов (черепной шов)",
+  "def_sv": "Söm mellan skallbenen där benkanterna griper in i varandra och nästan ingen rörelse sker.",
+  "def_uk": "Шов між кістками черепа, де краї кісток заходять одне в одне й рух майже відсутній.",
+  "def_ru": "Шов между костями черепа, где края костей заходят друг за друга и движение почти отсутствует.",
+  "n": 185
  },
  {
   "id": "symphysis",
@@ -2085,7 +2229,31 @@
   "def_sv": "En fog är en förbindelse där två ben hålls samman av fibröst brosk och bara kan röra sig obetydligt, till exempel blygdbensfogen.",
   "def_uk": "Симфіз — це з'єднання, де дві кістки утримуються волокнистим хрящем і майже не рухаються, наприклад лобковий симфіз.",
   "def_ru": "Симфиз — это соединение, где две кости удерживаются волокнистым хрящом и почти не двигаются, например лобковый симфиз.",
-  "n": 174
+  "n": 186
+ },
+ {
+  "id": "synarthrosis",
+  "cat": "Leder och muskler",
+  "sv": "synartros (orörlig fog)",
+  "la": "synarthrosis",
+  "uk": "синартроз (нерухоме з'єднання)",
+  "ru": "синартроз (неподвижное соединение)",
+  "def_sv": "En orörlig fog där benen sitter ihop utan ledhåla, till exempel skallens sömmar.",
+  "def_uk": "Нерухоме з'єднання, у якому кістки сполучені без суглобової порожнини, наприклад черепні шви.",
+  "def_ru": "Неподвижное соединение, в котором кости соединены без суставной полости, например черепные швы.",
+  "n": 187
+ },
+ {
+  "id": "synchondrosis",
+  "cat": "Leder och muskler",
+  "sv": "synkondros",
+  "la": "synchondrosis",
+  "uk": "синхондроз (хрящове зрощення)",
+  "ru": "синхондроз (хрящевое сращение)",
+  "def_sv": "Broskfog där benen förenas av hyalint brosk, till exempel tillväxtzonen i ett rörben.",
+  "def_uk": "Хрящове зрощення, у якому кістки сполучені гіаліновим хрящем, наприклад зона росту трубчастої кістки.",
+  "def_ru": "Хрящевое сращение, в котором кости соединены гиалиновым хрящом, например зона роста трубчатой кости.",
+  "n": 188
  },
  {
   "id": "synovia",
@@ -2097,7 +2265,7 @@
   "def_sv": "Ledvätskan smörjer leden och ger näring till ledbrosket.",
   "def_uk": "Синовіальна рідина змащує суглоб і живить суглобовий хрящ.",
   "def_ru": "Синовиальная жидкость смазывает сустав и питает суставной хрящ.",
-  "n": 175
+  "n": 189
  },
  {
   "id": "tendo",
@@ -2109,7 +2277,7 @@
   "def_sv": "En sena fäster muskeln vid benet och överför kraften.",
   "def_uk": "Сухожилок прикріплює м'яз до кістки та передає силу.",
   "def_ru": "Сухожилие прикрепляет мышцу к кости и передаёт силу.",
-  "n": 176
+  "n": 190
  },
  {
   "id": "aorta",
@@ -2121,7 +2289,7 @@
   "def_sv": "Kroppens största pulsåder som utgår från vänster kammare.",
   "def_uk": "Найбільша артерія тіла, що виходить із лівого шлуночка.",
   "def_ru": "Самая крупная артерия тела, выходящая из левого желудочка.",
-  "n": 177
+  "n": 191
  },
  {
   "id": "arteria",
@@ -2133,7 +2301,7 @@
   "def_sv": "Kärl som leder blod från hjärtat ut i kroppen.",
   "def_uk": "Судина, яка несе кров від серця до тканин тіла.",
   "def_ru": "Сосуд, который несёт кровь от сердца к тканям тела.",
-  "n": 178
+  "n": 192
  },
  {
   "id": "arteria-carotis-communis",
@@ -2145,7 +2313,7 @@
   "def_sv": "Pulsåder på halsen som försörjer huvudet och hjärnan.",
   "def_uk": "Артерія на шиї, яка живить голову та головний мозок.",
   "def_ru": "Артерия на шее, которая питает голову и головной мозг.",
-  "n": 179
+  "n": 193
  },
  {
   "id": "arteria-femoralis",
@@ -2157,7 +2325,7 @@
   "def_sv": "Stor pulsåder i ljumsken som försörjer benet.",
   "def_uk": "Велика артерія в паху, яка живить ногу.",
   "def_ru": "Крупная артерия в паху, которая питает ногу.",
-  "n": 180
+  "n": 194
  },
  {
   "id": "arteria-pulmonalis",
@@ -2169,7 +2337,7 @@
   "def_sv": "Pulsåder som för syrefattigt blod till lungorna.",
   "def_uk": "Артерія, що несе бідну на кисень кров до легень.",
   "def_ru": "Артерия, несущая бедную кислородом кровь в лёгкие.",
-  "n": 181
+  "n": 195
  },
  {
   "id": "arteria-radialis",
@@ -2181,7 +2349,7 @@
   "def_sv": "Pulsåder vid handleden där pulsen ofta räknas.",
   "def_uk": "Артерія на зап'ясті, де найчастіше вимірюють пульс.",
   "def_ru": "Артерия на запястье, где чаще всего измеряют пульс.",
-  "n": 182
+  "n": 196
  },
  {
   "id": "arteriae-coronariae",
@@ -2193,7 +2361,7 @@
   "def_sv": "Artärer som förser hjärtmuskeln med syrerikt blod.",
   "def_uk": "Артерії, які постачають серцевий м'яз багатою на кисень кров'ю.",
   "def_ru": "Артерии, снабжающие сердечную мышцу богатой кислородом кровью.",
-  "n": 183
+  "n": 197
  },
  {
   "id": "atrium-dextrum",
@@ -2205,7 +2373,7 @@
   "def_sv": "Hjärtats högra förmak tar emot syrefattigt blod från kroppen.",
   "def_uk": "Праве передсердя серця приймає бідну на кисень кров від тіла.",
   "def_ru": "Правое предсердие сердца принимает бедную кислородом кровь от тела.",
-  "n": 184
+  "n": 198
  },
  {
   "id": "atrium-sinistrum",
@@ -2217,19 +2385,7 @@
   "def_sv": "Hjärtats vänstra förmak tar emot syresatt blod från lungorna.",
   "def_uk": "Ліве передсердя серця приймає насичену киснем кров від легень.",
   "def_ru": "Левое предсердие сердца принимает насыщенную кислородом кровь от лёгких.",
-  "n": 185
- },
- {
-  "id": "capillaris",
-  "cat": "Hjärta och blodkärl",
-  "sv": "kapillär",
-  "la": "vas capillare",
-  "uk": "капіляр",
-  "ru": "капилляр",
-  "def_sv": "Mycket tunt kärl där syre och näring byts ut.",
-  "def_uk": "Дуже тонка судина, де відбувається обмін киснем і поживними речовинами.",
-  "def_ru": "Очень тонкий сосуд, где происходит обмен кислородом и питательными веществами.",
-  "n": 186
+  "n": 199
  },
  {
   "id": "circulatio-magna",
@@ -2241,7 +2397,7 @@
   "def_sv": "Blodets väg från hjärtat ut till kroppen och tillbaka.",
   "def_uk": "Шлях крові від серця до тіла і назад.",
   "def_ru": "Путь крови от сердца к телу и обратно.",
-  "n": 187
+  "n": 200
  },
  {
   "id": "circulatio-parva",
@@ -2253,7 +2409,7 @@
   "def_sv": "Blodets väg mellan hjärtat och lungorna.",
   "def_uk": "Шлях крові між серцем і легенями.",
   "def_ru": "Путь крови между сердцем и лёгкими.",
-  "n": 188
+  "n": 201
  },
  {
   "id": "cor",
@@ -2265,7 +2421,7 @@
   "def_sv": "Muskulärt organ som pumpar blod genom kroppens blodkärl.",
   "def_uk": "М'язовий орган, який перекачує кров судинами тіла.",
   "def_ru": "Мышечный орган, который перекачивает кровь по сосудам тела.",
-  "n": 189
+  "n": 202
  },
  {
   "id": "diastole",
@@ -2277,7 +2433,7 @@
   "def_sv": "Fasen när hjärtat slappnar av och fylls med blod.",
   "def_uk": "Фаза, коли серце розслабляється і наповнюється кров'ю.",
   "def_ru": "Фаза, когда сердце расслабляется и наполняется кровью.",
-  "n": 190
+  "n": 203
  },
  {
   "id": "endocardium",
@@ -2289,7 +2445,7 @@
   "def_sv": "Tunn hinna som klär hjärtats insida och klaffarna.",
   "def_uk": "Тонка оболонка, яка вистилає внутрішню поверхню серця та клапани.",
   "def_ru": "Тонкая оболочка, выстилающая внутреннюю поверхность сердца и клапаны.",
-  "n": 191
+  "n": 204
  },
  {
   "id": "myocardium",
@@ -2301,7 +2457,7 @@
   "def_sv": "Hjärtats muskellager som drar ihop sig vid varje hjärtslag.",
   "def_uk": "М'язовий шар серця, який скорочується при кожному серцебитті.",
   "def_ru": "Мышечный слой сердца, который сокращается при каждом сердцебиении.",
-  "n": 192
+  "n": 205
  },
  {
   "id": "pericardium",
@@ -2313,7 +2469,7 @@
   "def_sv": "Säck av bindväv som omger och skyddar hjärtat.",
   "def_uk": "Сполучнотканинний мішок, який оточує та захищає серце.",
   "def_ru": "Соединительнотканный мешок, который окружает и защищает сердце.",
-  "n": 193
+  "n": 206
  },
  {
   "id": "pulsus",
@@ -2325,7 +2481,7 @@
   "def_sv": "Kännbar tryckvåg i artärerna vid varje hjärtslag.",
   "def_uk": "Відчутна хвиля тиску в артеріях при кожному серцебитті.",
   "def_ru": "Ощутимая волна давления в артериях при каждом сердцебиении.",
-  "n": 194
+  "n": 207
  },
  {
   "id": "septum",
@@ -2337,7 +2493,7 @@
   "def_sv": "Vägg som skiljer hjärtats högra och vänstra sida åt.",
   "def_uk": "Стінка, яка розділяє праву та ліву половини серця.",
   "def_ru": "Стенка, которая разделяет правую и левую половины сердца.",
-  "n": 195
+  "n": 208
  },
  {
   "id": "systole",
@@ -2349,7 +2505,7 @@
   "def_sv": "Fasen när hjärtats kammare drar ihop sig och pumpar blod.",
   "def_uk": "Фаза, коли шлуночки серця скорочуються і виштовхують кров.",
   "def_ru": "Фаза, когда желудочки сердца сокращаются и выталкивают кровь.",
-  "n": 196
+  "n": 209
  },
  {
   "id": "tensio-arterialis",
@@ -2361,7 +2517,7 @@
   "def_sv": "Trycket som blodet utövar mot artärernas väggar.",
   "def_uk": "Тиск, який кров чинить на стінки артерій.",
   "def_ru": "Давление, которое кровь оказывает на стенки артерий.",
-  "n": 197
+  "n": 210
  },
  {
   "id": "valva-aortae",
@@ -2373,7 +2529,7 @@
   "def_sv": "Klaff mellan vänster kammare och aorta.",
   "def_uk": "Клапан між лівим шлуночком і аортою.",
   "def_ru": "Клапан между левым желудочком и аортой.",
-  "n": 198
+  "n": 211
  },
  {
   "id": "valva-mitralis",
@@ -2385,7 +2541,7 @@
   "def_sv": "Klaff mellan vänster förmak och vänster kammare.",
   "def_uk": "Клапан між лівим передсердям і лівим шлуночком.",
   "def_ru": "Клапан между левым предсердием и левым желудочком.",
-  "n": 199
+  "n": 212
  },
  {
   "id": "valva-tricuspidalis",
@@ -2397,7 +2553,7 @@
   "def_sv": "Klaff mellan höger förmak och höger kammare.",
   "def_uk": "Клапан між правим передсердям і правим шлуночком.",
   "def_ru": "Клапан между правым предсердием и правым желудочком.",
-  "n": 200
+  "n": 213
  },
  {
   "id": "valva-trunci-pulmonalis",
@@ -2409,7 +2565,19 @@
   "def_sv": "Klaff mellan höger kammare och lungpulsådern.",
   "def_uk": "Клапан між правим шлуночком і легеневим стовбуром.",
   "def_ru": "Клапан между правым желудочком и лёгочным стволом.",
-  "n": 201
+  "n": 214
+ },
+ {
+  "id": "capillaris",
+  "cat": "Hjärta och blodkärl",
+  "sv": "kapillär",
+  "la": "vas capillare",
+  "uk": "капіляр",
+  "ru": "капилляр",
+  "def_sv": "Mycket tunt kärl där syre och näring byts ut.",
+  "def_uk": "Дуже тонка судина, де відбувається обмін киснем і поживними речовинами.",
+  "def_ru": "Очень тонкий сосуд, где происходит обмен кислородом и питательными веществами.",
+  "n": 215
  },
  {
   "id": "vena",
@@ -2421,7 +2589,7 @@
   "def_sv": "Kärl som leder blod tillbaka till hjärtat.",
   "def_uk": "Судина, яка повертає кров до серця.",
   "def_ru": "Сосуд, который возвращает кровь к сердцу.",
-  "n": 202
+  "n": 216
  },
  {
   "id": "vena-cava-inferior",
@@ -2433,7 +2601,7 @@
   "def_sv": "Ven som för blod från buk och ben till hjärtat.",
   "def_uk": "Вена, яка несе кров від живота та ніг до серця.",
   "def_ru": "Вена, несущая кровь от живота и ног к сердцу.",
-  "n": 203
+  "n": 217
  },
  {
   "id": "vena-cava-superior",
@@ -2445,7 +2613,7 @@
   "def_sv": "Ven som för blod från huvud och armar till hjärtat.",
   "def_uk": "Вена, яка несе кров від голови та рук до серця.",
   "def_ru": "Вена, несущая кровь от головы и рук к сердцу.",
-  "n": 204
+  "n": 218
  },
  {
   "id": "vena-jugularis",
@@ -2457,7 +2625,7 @@
   "def_sv": "Ven på halsen som för blod från huvudet.",
   "def_uk": "Вена на шиї, яка відводить кров від голови.",
   "def_ru": "Вена на шее, отводящая кровь от головы.",
-  "n": 205
+  "n": 219
  },
  {
   "id": "venae-pulmonales",
@@ -2469,7 +2637,7 @@
   "def_sv": "Vener som för syresatt blod från lungorna till hjärtat.",
   "def_uk": "Вени, які несуть насичену киснем кров від легень до серця.",
   "def_ru": "Вены, несущие насыщенную кислородом кровь от лёгких к сердцу.",
-  "n": 206
+  "n": 220
  },
  {
   "id": "ventriculus-dexter",
@@ -2481,7 +2649,7 @@
   "def_sv": "Höger kammare pumpar syrefattigt blod vidare till lungorna.",
   "def_uk": "Правий шлуночок перекачує бідну на кисень кров до легень.",
   "def_ru": "Правый желудочек перекачивает бедную кислородом кровь в лёгкие.",
-  "n": 207
+  "n": 221
  },
  {
   "id": "ventriculus-sinister",
@@ -2493,7 +2661,7 @@
   "def_sv": "Vänster kammare pumpar syresatt blod ut i stora kretsloppet.",
   "def_uk": "Лівий шлуночок нагнітає насичену киснем кров у велике коло кровообігу.",
   "def_ru": "Левый желудочек нагнетает насыщенную кислородом кровь в большой круг кровообращения.",
-  "n": 208
+  "n": 222
  },
  {
   "id": "anticorpus-immunoglobulinum",
@@ -2505,7 +2673,7 @@
   "def_sv": "Protein som binder till antigen och oskadliggör smittämnen.",
   "def_uk": "Білок, який зв'язується з антигеном і знешкоджує збудників.",
   "def_ru": "Белок, который связывается с антигеном и обезвреживает возбудителей.",
-  "n": 209
+  "n": 223
  },
  {
   "id": "antigenum",
@@ -2517,7 +2685,7 @@
   "def_sv": "Främmande ämne som immunförsvaret känner igen och reagerar mot.",
   "def_uk": "Чужорідна речовина, яку імунна система розпізнає і на яку реагує.",
   "def_ru": "Чужеродное вещество, которое иммунная система распознаёт и на которое реагирует.",
-  "n": 210
+  "n": 224
  },
  {
   "id": "coagulatio",
@@ -2529,7 +2697,7 @@
   "def_sv": "Process där blodet stelnar och stoppar en blödning.",
   "def_uk": "Процес, під час якого кров твердне і зупиняє кровотечу.",
   "def_ru": "Процесс, при котором кровь застывает и останавливает кровотечение.",
-  "n": 211
+  "n": 225
  },
  {
   "id": "erythrocytus",
@@ -2541,7 +2709,7 @@
   "def_sv": "Röd blodkropp som transporterar syre med hjälp av hemoglobin.",
   "def_uk": "Червона клітина крові, яка переносить кисень за допомогою гемоглобіну.",
   "def_ru": "Красная клетка крови, которая переносит кислород с помощью гемоглобина.",
-  "n": 212
+  "n": 226
  },
  {
   "id": "fibrinum",
@@ -2553,7 +2721,7 @@
   "def_sv": "Trådformigt protein som bildar stommen i ett blodkoagel.",
   "def_uk": "Нитчастий білок, який утворює основу кров'яного згустку.",
   "def_ru": "Нитевидный белок, образующий основу кровяного сгустка.",
-  "n": 213
+  "n": 227
  },
  {
   "id": "gruppae-sanguinis-ab0-rh",
@@ -2565,7 +2733,7 @@
   "def_sv": "Indelning av blod efter antigen på röda blodkroppar.",
   "def_uk": "Поділ крові за антигенами на поверхні еритроцитів.",
   "def_ru": "Деление крови по антигенам на поверхности эритроцитов.",
-  "n": 214
+  "n": 228
  },
  {
   "id": "haemoglobinum",
@@ -2577,7 +2745,7 @@
   "def_sv": "Järnhaltigt protein i röda blodkroppar som binder syre.",
   "def_uk": "Залізовмісний білок еритроцитів, який зв'язує кисень.",
   "def_ru": "Железосодержащий белок эритроцитов, который связывает кислород.",
-  "n": 215
+  "n": 229
  },
  {
   "id": "immunitas",
@@ -2589,7 +2757,7 @@
   "def_sv": "Kroppens förmåga att skydda sig mot sjukdomsframkallande mikrober.",
   "def_uk": "Здатність організму захищатися від хвороботворних мікробів.",
   "def_ru": "Способность организма защищаться от болезнетворных микробов.",
-  "n": 216
+  "n": 230
  },
  {
   "id": "inflammatio",
@@ -2601,7 +2769,7 @@
   "def_sv": "Kroppens reaktion med rodnad, värme, svullnad och smärta.",
   "def_uk": "Реакція організму з почервонінням, теплом, набряком і болем.",
   "def_ru": "Реакция организма с покраснением, жаром, отёком и болью.",
-  "n": 217
+  "n": 231
  },
  {
   "id": "leucocytus",
@@ -2613,7 +2781,7 @@
   "def_sv": "Vit blodkropp som försvarar kroppen mot infektioner.",
   "def_uk": "Біла клітина крові, яка захищає організм від інфекцій.",
   "def_ru": "Белая клетка крови, которая защищает организм от инфекций.",
-  "n": 218
+  "n": 232
  },
  {
   "id": "lympha",
@@ -2625,7 +2793,7 @@
   "def_sv": "Klar vätska som samlas från vävnaderna och rinner i lymfkärlen.",
   "def_uk": "Прозора рідина, яка збирається з тканин і тече лімфатичними судинами.",
   "def_ru": "Прозрачная жидкость, которая собирается из тканей и течёт по лимфатическим сосудам.",
-  "n": 219
+  "n": 233
  },
  {
   "id": "medulla-ossium-rubra",
@@ -2637,7 +2805,7 @@
   "def_sv": "Vävnad inuti benen där blodkropparna bildas.",
   "def_uk": "Тканина всередині кісток, де утворюються клітини крові.",
   "def_ru": "Ткань внутри костей, где образуются клетки крови.",
-  "n": 220
+  "n": 234
  },
  {
   "id": "nodus-lymphaticus",
@@ -2649,7 +2817,7 @@
   "def_sv": "Liten körtel som filtrerar lymfa och innehåller vita blodkroppar.",
   "def_uk": "Невеликий орган, який фільтрує лімфу і містить білі клітини крові.",
   "def_ru": "Небольшой орган, который фильтрует лимфу и содержит белые клетки крови.",
-  "n": 221
+  "n": 235
  },
  {
   "id": "phagocytosis",
@@ -2661,7 +2829,7 @@
   "def_sv": "Vita blodkroppar äter upp bakterier och döda celler.",
   "def_uk": "Білі клітини крові поглинають бактерії та відмерлі клітини.",
   "def_ru": "Белые клетки крови поглощают бактерии и погибшие клетки.",
-  "n": 222
+  "n": 236
  },
  {
   "id": "plasma",
@@ -2673,7 +2841,7 @@
   "def_sv": "Blodets gulaktiga vätskedel utan blodkroppar.",
   "def_uk": "Жовтувата рідка частина крові без клітин крові.",
   "def_ru": "Желтоватая жидкая часть крови без клеток крови.",
-  "n": 223
+  "n": 237
  },
  {
   "id": "sanguis",
@@ -2685,7 +2853,7 @@
   "def_sv": "Vätska som transporterar syre, näring och avfall i kroppen.",
   "def_uk": "Рідина, яка переносить кисень, поживні речовини та відходи в організмі.",
   "def_ru": "Жидкость, переносящая кислород, питательные вещества и отходы в организме.",
-  "n": 224
+  "n": 238
  },
  {
   "id": "splen",
@@ -2697,7 +2865,7 @@
   "def_sv": "Organ i vänstra övre delen av buken som renar blodet.",
   "def_uk": "Орган у лівій верхній частині живота, який очищує кров.",
   "def_ru": "Орган в левой верхней части живота, который очищает кровь.",
-  "n": 225
+  "n": 239
  },
  {
   "id": "systema-lymphaticum",
@@ -2709,7 +2877,7 @@
   "def_sv": "Kärlsystem som transporterar lymfa och stödjer immunförsvaret.",
   "def_uk": "Система судин, яка транспортує лімфу і підтримує імунний захист.",
   "def_ru": "Система сосудов, которая переносит лимфу и поддерживает иммунную защиту.",
-  "n": 226
+  "n": 240
  },
  {
   "id": "thrombocytus",
@@ -2721,7 +2889,7 @@
   "def_sv": "Blodplätt som hjälper blodet att levra sig vid blödning.",
   "def_uk": "Кров'яна пластинка, яка допомагає крові зсідатися при кровотечі.",
   "def_ru": "Кровяная пластинка, которая помогает крови свёртываться при кровотечении.",
-  "n": 227
+  "n": 241
  },
  {
   "id": "thymus",
@@ -2733,7 +2901,7 @@
   "def_sv": "Organ bakom bröstbenet där vissa vita blodkroppar mognar.",
   "def_uk": "Орган за грудниною, де дозрівають певні білі клітини крові.",
   "def_ru": "Орган за грудиной, где созревают определённые белые клетки крови.",
-  "n": 228
+  "n": 242
  },
  {
   "id": "tonsilla",
@@ -2745,7 +2913,7 @@
   "def_sv": "Lymfatisk vävnad i svalget som fångar upp smittämnen.",
   "def_uk": "Лімфоїдна тканина в горлі, яка затримує збудників інфекцій.",
   "def_ru": "Лимфоидная ткань в глотке, которая задерживает возбудителей инфекций.",
-  "n": 229
+  "n": 243
  },
  {
   "id": "vaccinum",
@@ -2757,7 +2925,7 @@
   "def_sv": "Preparat som ger skydd genom att träna immunförsvaret.",
   "def_uk": "Препарат, який дає захист, тренуючи імунну систему.",
   "def_ru": "Препарат, который даёт защиту, тренируя иммунную систему.",
-  "n": 230
+  "n": 244
  },
  {
   "id": "alveolus-pulmonis",
@@ -2769,7 +2937,7 @@
   "def_sv": "Lungblåsorna är små säckar där gasutbytet med blodet sker.",
   "def_uk": "Легеневі альвеоли - це маленькі мішечки, де відбувається газообмін із кров'ю.",
   "def_ru": "Лёгочные альвеолы - это маленькие мешочки, где происходит газообмен с кровью.",
-  "n": 231
+  "n": 245
  },
  {
   "id": "bronchiolus",
@@ -2781,7 +2949,7 @@
   "def_sv": "Bronkiolerna är de minsta luftrören inne i lungan.",
   "def_uk": "Бронхіоли - це найдрібніші дихальні трубочки всередині легені.",
   "def_ru": "Бронхиолы - это самые мелкие дыхательные трубочки внутри лёгкого.",
-  "n": 232
+  "n": 246
  },
  {
   "id": "bronchus",
@@ -2793,7 +2961,7 @@
   "def_sv": "Bronkerna är de två stora luftrören till höger och vänster lunga.",
   "def_uk": "Бронхи - це дві великі повітроносні трубки до правої та лівої легені.",
   "def_ru": "Бронхи - это две большие воздухоносные трубки к правому и левому лёгкому.",
-  "n": 233
+  "n": 247
  },
  {
   "id": "cavitas-nasi",
@@ -2805,7 +2973,7 @@
   "def_sv": "Näshålan är utrymmet bakom näsan där inandningsluften passerar.",
   "def_uk": "Носова порожнина - це простір за носом, через який проходить вдихуване повітря.",
   "def_ru": "Полость носа - это пространство за носом, через которое проходит вдыхаемый воздух.",
-  "n": 234
+  "n": 248
  },
  {
   "id": "dyspnoe",
@@ -2817,7 +2985,7 @@
   "def_sv": "Andnöd är en känsla av att inte få tillräckligt med luft.",
   "def_uk": "Задишка - це відчуття нестачі повітря.",
   "def_ru": "Одышка - это ощущение нехватки воздуха.",
-  "n": 235
+  "n": 249
  },
  {
   "id": "epiglottis",
@@ -2829,7 +2997,7 @@
   "def_sv": "Struplocket täcker struphuvudet vid sväljning så att maten går rätt.",
   "def_uk": "Надгортанник закриває гортань під час ковтання, щоб їжа йшла правильно.",
   "def_ru": "Надгортанник закрывает гортань при глотании, чтобы пища шла правильно.",
-  "n": 236
+  "n": 250
  },
  {
   "id": "expiratio",
@@ -2841,7 +3009,7 @@
   "def_sv": "Utandning är när luft pressas ut ur lungorna.",
   "def_uk": "Видих - це коли повітря виштовхується з легень.",
   "def_ru": "Выдох - это когда воздух выталкивается из лёгких.",
-  "n": 237
+  "n": 251
  },
  {
   "id": "frequentia-respiratoria",
@@ -2853,7 +3021,7 @@
   "def_sv": "Andningsfrekvens är antalet andetag per minut.",
   "def_uk": "Частота дихання - це кількість дихальних рухів за хвилину.",
   "def_ru": "Частота дыхания - это количество дыхательных движений в минуту.",
-  "n": 238
+  "n": 252
  },
  {
   "id": "inspiratio",
@@ -2865,7 +3033,7 @@
   "def_sv": "Inandning är när luft dras in i lungorna.",
   "def_uk": "Вдих - це коли повітря втягується в легені.",
   "def_ru": "Вдох - это когда воздух втягивается в лёгкие.",
-  "n": 239
+  "n": 253
  },
  {
   "id": "larynx",
@@ -2877,7 +3045,7 @@
   "def_sv": "Struphuvudet innehåller stämbanden och leder luften till luftstrupen.",
   "def_uk": "Гортань містить голосові зв'язки і проводить повітря до трахеї.",
   "def_ru": "Гортань содержит голосовые связки и проводит воздух в трахею.",
-  "n": 240
+  "n": 254
  },
  {
   "id": "lobus-pulmonis",
@@ -2889,7 +3057,7 @@
   "def_sv": "En lunglob är en tydligt avgränsad del av lungan.",
   "def_uk": "Частка легені - це чітко відмежована частина легені.",
   "def_ru": "Доля лёгкого - это чётко отграниченная часть лёгкого.",
-  "n": 241
+  "n": 255
  },
  {
   "id": "musculi-intercostales",
@@ -2901,7 +3069,7 @@
   "def_sv": "Mellanrevbensmusklerna lyfter revbenen och hjälper till vid andningen.",
   "def_uk": "Міжреброві м'язи піднімають ребра і допомагають під час дихання.",
   "def_ru": "Межрёберные мышцы поднимают рёбра и помогают при дыхании.",
-  "n": 242
+  "n": 256
  },
  {
   "id": "nasus",
@@ -2913,7 +3081,7 @@
   "def_sv": "Näsan värmer, fuktar och renar luften som andas in.",
   "def_uk": "Ніс зігріває, зволожує та очищає повітря, яке вдихають.",
   "def_ru": "Нос согревает, увлажняет и очищает вдыхаемый воздух.",
-  "n": 243
+  "n": 257
  },
  {
   "id": "pharynx",
@@ -2925,7 +3093,7 @@
   "def_sv": "Svalget är en kanal där både luft och mat passerar.",
   "def_uk": "Глотка - це канал, через який проходять і повітря, і їжа.",
   "def_ru": "Глотка - это канал, через который проходят и воздух, и пища.",
-  "n": 244
+  "n": 258
  },
  {
   "id": "pleura",
@@ -2937,7 +3105,7 @@
   "def_sv": "Lungsäcken är hinnan som omger lungan och minskar friktionen.",
   "def_uk": "Плевра - це оболонка, яка оточує легеню і зменшує тертя.",
   "def_ru": "Плевра - это оболочка, которая окружает лёгкое и уменьшает трение.",
-  "n": 245
+  "n": 259
  },
  {
   "id": "pulmo-dexter",
@@ -2949,7 +3117,7 @@
   "def_sv": "Höger lunga har tre lober och ligger till höger i bröstkorgen.",
   "def_uk": "Права легеня має три частки і лежить праворуч у грудній клітці.",
   "def_ru": "Правое лёгкое имеет три доли и лежит справа в грудной клетке.",
-  "n": 246
+  "n": 260
  },
  {
   "id": "pulmo-sinister",
@@ -2961,7 +3129,7 @@
   "def_sv": "Vänster lunga har två lober och ger plats åt hjärtat.",
   "def_uk": "Ліва легеня має дві частки і залишає місце для серця.",
   "def_ru": "Левое лёгкое имеет две доли и оставляет место для сердца.",
-  "n": 247
+  "n": 261
  },
  {
   "id": "respiratio-externa",
@@ -2973,7 +3141,7 @@
   "def_sv": "Yttre andning är gasutbytet mellan lungblåsorna och blodet.",
   "def_uk": "Зовнішнє дихання - це газообмін між альвеолами і кров'ю.",
   "def_ru": "Внешнее дыхание - это газообмен между альвеолами и кровью.",
-  "n": 248
+  "n": 262
  },
  {
   "id": "saturatio",
@@ -2985,7 +3153,7 @@
   "def_sv": "Syremättnad visar hur stor del av blodets hemoglobin som bär syre.",
   "def_uk": "Сатурація показує, яка частина гемоглобіну крові несе кисень.",
   "def_ru": "Сатурация показывает, какая часть гемоглобина крови несёт кислород.",
-  "n": 249
+  "n": 263
  },
  {
   "id": "trachea",
@@ -2997,7 +3165,7 @@
   "def_sv": "Luftstrupen är ett rör som leder luften ner till bronkerna.",
   "def_uk": "Трахея - це трубка, яка проводить повітря вниз до бронхів.",
   "def_ru": "Трахея - это трубка, которая проводит воздух вниз к бронхам.",
-  "n": 250
+  "n": 264
  },
  {
   "id": "ventilatio",
@@ -3009,7 +3177,7 @@
   "def_sv": "Ventilation är luftens rörelse in i och ut ur lungorna.",
   "def_uk": "Вентиляція - це рух повітря в легені та з легень.",
   "def_ru": "Вентиляция - это движение воздуха в лёгкие и из лёгких.",
-  "n": 251
+  "n": 265
  },
  {
   "id": "acidum-hydrochloricum-ventriculi",
@@ -3021,7 +3189,7 @@
   "def_sv": "Saltsyran i magsäcken dödar bakterier och hjälper till att bryta ner protein.",
   "def_uk": "Соляна кислота шлунка вбиває бактерії і допомагає розщеплювати білки.",
   "def_ru": "Соляная кислота желудка убивает бактерии и помогает расщеплять белки.",
-  "n": 252
+  "n": 266
  },
  {
   "id": "anus",
@@ -3033,7 +3201,7 @@
   "def_sv": "Analöppningen är tarmens yttre öppning med slutmuskler.",
   "def_uk": "Анус - це зовнішній отвір кишківника зі сфінктерами.",
   "def_ru": "Анус - это наружное отверстие кишечника со сфинктерами.",
-  "n": 253
+  "n": 267
  },
  {
   "id": "appendix-vermiformis",
@@ -3045,7 +3213,7 @@
   "def_sv": "Appendix är ett litet bihang på blindtarmen som kan bli inflammerat.",
   "def_uk": "Апендикс - це невеликий відросток сліпої кишки, який може запалитися.",
   "def_ru": "Аппендикс - это небольшой отросток слепой кишки, который может воспалиться.",
-  "n": 254
+  "n": 268
  },
  {
   "id": "bilis",
@@ -3057,7 +3225,7 @@
   "def_sv": "Galla är en vätska från levern som hjälper till att bryta ner fett.",
   "def_uk": "Жовч - це рідина з печінки, яка допомагає розщеплювати жири.",
   "def_ru": "Жёлчь - это жидкость из печени, которая помогает расщеплять жиры.",
-  "n": 255
+  "n": 269
  },
  {
   "id": "caecum",
@@ -3069,7 +3237,7 @@
   "def_sv": "Blindtarmen är tjocktarmens första säckformade del.",
   "def_uk": "Сліпа кишка - це перший мішкоподібний відділ товстої кишки.",
   "def_ru": "Слепая кишка - это первый мешковидный отдел толстой кишки.",
-  "n": 256
+  "n": 270
  },
  {
   "id": "cardia-2",
@@ -3081,7 +3249,7 @@
   "def_sv": "Magmunnen är övergången mellan matstrupen och magsäcken.",
   "def_uk": "Кардія - це перехід між стравоходом і шлунком.",
   "def_ru": "Кардия - это переход между пищеводом и желудком.",
-  "n": 257
+  "n": 271
  },
  {
   "id": "cavitas-oris",
@@ -3093,7 +3261,7 @@
   "def_sv": "Munhålan är där maten tuggas och blandas med saliv.",
   "def_uk": "Порожнина рота - це місце, де їжу пережовують і змішують зі слиною.",
   "def_ru": "Полость рта - это место, где пищу пережёвывают и смешивают со слюной.",
-  "n": 258
+  "n": 272
  },
  {
   "id": "colon-ascendens",
@@ -3105,7 +3273,7 @@
   "def_sv": "Uppåtgående tjocktarmen går uppåt på höger sida av buken.",
   "def_uk": "Висхідна ободова кишка йде вгору по правому боці живота.",
   "def_ru": "Восходящая ободочная кишка идёт вверх по правой стороне живота.",
-  "n": 259
+  "n": 273
  },
  {
   "id": "colon-descendens",
@@ -3117,7 +3285,7 @@
   "def_sv": "Nedåtgående tjocktarmen går nedåt på vänster sida av buken.",
   "def_uk": "Низхідна ободова кишка йде вниз по лівому боці живота.",
   "def_ru": "Нисходящая ободочная кишка идёт вниз по левой стороне живота.",
-  "n": 260
+  "n": 274
  },
  {
   "id": "colon-sigmoideum",
@@ -3129,7 +3297,7 @@
   "def_sv": "Sigmoideum är tjocktarmens S-formade del före ändtarmen.",
   "def_uk": "Сигмоподібна кишка - це S-подібний відділ товстої кишки перед прямою кишкою.",
   "def_ru": "Сигмовидная кишка - это S-образный отдел толстой кишки перед прямой кишкой.",
-  "n": 261
+  "n": 275
  },
  {
   "id": "colon-transversum",
@@ -3141,7 +3309,7 @@
   "def_sv": "Tvärgående tjocktarmen går tvärs över buken under magsäcken.",
   "def_uk": "Поперечна ободова кишка йде впоперек живота під шлунком.",
   "def_ru": "Поперечная ободочная кишка идёт поперёк живота под желудком.",
-  "n": 262
+  "n": 276
  },
  {
   "id": "dentes",
@@ -3153,7 +3321,7 @@
   "def_sv": "Tänderna sönderdelar maten genom att bita och tugga.",
   "def_uk": "Зуби подрібнюють їжу за допомогою кусання та жування.",
   "def_ru": "Зубы измельчают пищу при откусывании и жевании.",
-  "n": 263
+  "n": 277
  },
  {
   "id": "digestio",
@@ -3165,7 +3333,7 @@
   "def_sv": "Matsmältning är nedbrytning av maten till små näringsämnen.",
   "def_uk": "Травлення - це розщеплення їжі до дрібних поживних речовин.",
   "def_ru": "Пищеварение - это расщепление пищи до мелких питательных веществ.",
-  "n": 264
+  "n": 278
  },
  {
   "id": "duodenum",
@@ -3177,7 +3345,7 @@
   "def_sv": "Tolvfingertarmen är tunntarmens första del efter magsäcken.",
   "def_uk": "Дванадцятипала кишка - це перший відділ тонкої кишки після шлунка.",
   "def_ru": "Двенадцатиперстная кишка - это первый отдел тонкой кишки после желудка.",
-  "n": 265
+  "n": 279
  },
  {
   "id": "enzymum",
@@ -3189,7 +3357,7 @@
   "def_sv": "Enzym är ett protein som snabbar på nedbrytningen av näringsämnen.",
   "def_uk": "Фермент - це білок, який прискорює розщеплення поживних речовин.",
   "def_ru": "Фермент - это белок, который ускоряет расщепление питательных веществ.",
-  "n": 266
+  "n": 280
  },
  {
   "id": "gaster",
@@ -3201,7 +3369,7 @@
   "def_sv": "Magsäcken blandar maten med magsaft och bryter ner protein.",
   "def_uk": "Шлунок змішує їжу зі шлунковим соком і розщеплює білки.",
   "def_ru": "Желудок смешивает пищу с желудочным соком и расщепляет белки.",
-  "n": 267
+  "n": 281
  },
  {
   "id": "glandulae-salivariae",
@@ -3213,7 +3381,7 @@
   "def_sv": "Spottkörtlarna bildar saliv som fuktar maten och startar matsmältningen.",
   "def_uk": "Слинні залози виробляють слину, яка зволожує їжу і починає травлення.",
   "def_ru": "Слюнные железы вырабатывают слюну, которая увлажняет пищу и начинает пищеварение.",
-  "n": 268
+  "n": 282
  },
  {
   "id": "hepar",
@@ -3225,7 +3393,7 @@
   "def_sv": "Levern bildar galla och renar blodet från skadliga ämnen.",
   "def_uk": "Печінка виробляє жовч і очищає кров від шкідливих речовин.",
   "def_ru": "Печень вырабатывает жёлчь и очищает кровь от вредных веществ.",
-  "n": 269
+  "n": 283
  },
  {
   "id": "ileum",
@@ -3237,7 +3405,7 @@
   "def_sv": "Krumtarmen är tunntarmens sista del före tjocktarmen.",
   "def_uk": "Клубова кишка - це останній відділ тонкої кишки перед товстою кишкою.",
   "def_ru": "Подвздошная кишка - это последний отдел тонкой кишки перед толстой кишкой.",
-  "n": 270
+  "n": 284
  },
  {
   "id": "intestinum-crassum",
@@ -3249,7 +3417,7 @@
   "def_sv": "Tjocktarmen tar upp vatten och salter och bildar avföring.",
   "def_uk": "Товста кишка всмоктує воду і солі та формує кал.",
   "def_ru": "Толстая кишка всасывает воду и соли и формирует кал.",
-  "n": 271
+  "n": 285
  },
  {
   "id": "intestinum-tenue",
@@ -3261,7 +3429,7 @@
   "def_sv": "Tunntarmen bryter ner maten och tar upp näringsämnen till blodet.",
   "def_uk": "Тонка кишка розщеплює їжу і всмоктує поживні речовини в кров.",
   "def_ru": "Тонкая кишка расщепляет пищу и всасывает питательные вещества в кровь.",
-  "n": 272
+  "n": 286
  },
  {
   "id": "jejunum",
@@ -3273,7 +3441,7 @@
   "def_sv": "Tomtarmen är tunntarmens mellersta del där mycket näring tas upp.",
   "def_uk": "Порожня кишка - це середній відділ тонкої кишки, де всмоктується багато поживних речовин.",
   "def_ru": "Тощая кишка - это средний отдел тонкой кишки, где всасывается много питательных веществ.",
-  "n": 273
+  "n": 287
  },
  {
   "id": "lingua",
@@ -3285,7 +3453,7 @@
   "def_sv": "Tungan känner smak och hjälper till vid tuggning och sväljning.",
   "def_uk": "Язик відчуває смак і допомагає жувати та ковтати.",
   "def_ru": "Язык чувствует вкус и помогает жевать и глотать.",
-  "n": 274
+  "n": 288
  },
  {
   "id": "metabolismus",
@@ -3297,7 +3465,7 @@
   "def_sv": "Ämnesomsättning är kroppens alla kemiska processer för energi och uppbyggnad.",
   "def_uk": "Обмін речовин - це всі хімічні процеси тіла для енергії та побудови.",
   "def_ru": "Обмен веществ - это все химические процессы тела для энергии и построения.",
-  "n": 275
+  "n": 289
  },
  {
   "id": "oesophagus",
@@ -3309,7 +3477,7 @@
   "def_sv": "Matstrupen transporterar maten från svalget ner till magsäcken.",
   "def_uk": "Стравохід переносить їжу з глотки вниз до шлунка.",
   "def_ru": "Пищевод переносит пищу из глотки вниз в желудок.",
-  "n": 276
+  "n": 290
  },
  {
   "id": "pancreas",
@@ -3321,7 +3489,7 @@
   "def_sv": "Bukspottkörteln bildar matsmältningsenzymer och hormonet insulin.",
   "def_uk": "Підшлункова залоза виробляє травні ферменти і гормон інсулін.",
   "def_ru": "Поджелудочная железа вырабатывает пищеварительные ферменты и гормон инсулин.",
-  "n": 277
+  "n": 291
  },
  {
   "id": "peristalsis",
@@ -3333,7 +3501,7 @@
   "def_sv": "Peristaltik är vågformade muskelrörelser som för maten framåt.",
   "def_uk": "Перистальтика - це хвилеподібні рухи м'язів, які просувають їжу вперед.",
   "def_ru": "Перистальтика - это волнообразные движения мышц, продвигающие пищу вперёд.",
-  "n": 278
+  "n": 292
  },
  {
   "id": "peritoneum",
@@ -3345,7 +3513,7 @@
   "def_sv": "Bukhinnan är hinnan som klär buken och täcker organen.",
   "def_uk": "Очеревина - це оболонка, яка вистилає живіт і вкриває органи.",
   "def_ru": "Брюшина - это оболочка, которая выстилает живот и покрывает органы.",
-  "n": 279
+  "n": 293
  },
  {
   "id": "pylorus",
@@ -3357,7 +3525,7 @@
   "def_sv": "Portvakten är muskeln som släpper ut maginnehållet i tolvfingertarmen.",
   "def_uk": "Воротар - це м'яз, який випускає вміст шлунка у дванадцятипалу кишку.",
   "def_ru": "Привратник - это мышца, которая выпускает содержимое желудка в двенадцатиперстную кишку.",
-  "n": 280
+  "n": 294
  },
  {
   "id": "rectum",
@@ -3369,7 +3537,7 @@
   "def_sv": "Ändtarmen samlar avföringen innan den töms ut.",
   "def_uk": "Пряма кишка збирає кал перед його виведенням.",
   "def_ru": "Прямая кишка собирает кал перед его выведением.",
-  "n": 281
+  "n": 295
  },
  {
   "id": "resorptio",
@@ -3381,7 +3549,7 @@
   "def_sv": "Resorption är när näring tas upp från tarmen till blodet.",
   "def_uk": "Резорбція - це всмоктування поживних речовин із кишківника в кров.",
   "def_ru": "Резорбция - это всасывание питательных веществ из кишечника в кровь.",
-  "n": 282
+  "n": 296
  },
  {
   "id": "vesica-biliaris",
@@ -3393,7 +3561,7 @@
   "def_sv": "Gallblåsan lagrar galla och tömmer den i tolvfingertarmen.",
   "def_uk": "Жовчний міхур накопичує жовч і виділяє її у дванадцятипалу кишку.",
   "def_ru": "Жёлчный пузырь накапливает жёлчь и выделяет её в двенадцатиперстную кишку.",
-  "n": 283
+  "n": 297
  },
  {
   "id": "villi-intestinales",
@@ -3405,7 +3573,7 @@
   "def_sv": "Tarmludd är små utskott som ökar tunntarmens upptagsyta.",
   "def_uk": "Кишкові ворсинки - це маленькі вирости, що збільшують всисну поверхню тонкої кишки.",
   "def_ru": "Кишечные ворсинки - это маленькие выросты, увеличивающие всасывающую поверхность тонкой кишки.",
-  "n": 284
+  "n": 298
  },
  {
   "id": "aequilibrium-aquae-et-electrolytorum",
@@ -3417,7 +3585,7 @@
   "def_sv": "Vätske- och elektrolytbalans är jämvikt mellan vatten och salter.",
   "def_uk": "Водно-електролітний баланс - це рівновага між водою та солями.",
   "def_ru": "Водно-электролитный баланс - это равновесие между водой и солями.",
-  "n": 285
+  "n": 299
  },
  {
   "id": "catheter-urinarius",
@@ -3429,7 +3597,7 @@
   "def_sv": "En urinkateter är en tunn slang som tömmer urinblåsan.",
   "def_uk": "Сечовий катетер - це тонка трубка, що випорожнює сечовий міхур.",
   "def_ru": "Мочевой катетер - это тонкая трубка, опорожняющая мочевой пузырь.",
-  "n": 286
+  "n": 300
  },
  {
   "id": "cortex-renalis",
@@ -3441,7 +3609,7 @@
   "def_sv": "Njurbarken är njurens yttre del där blodet filtreras.",
   "def_uk": "Кіркова речовина є зовнішньою частиною нирки, де фільтрується кров.",
   "def_ru": "Корковое вещество - наружная часть почки, где фильтруется кровь.",
-  "n": 287
+  "n": 301
  },
  {
   "id": "diuresis",
@@ -3453,7 +3621,7 @@
   "def_sv": "Diures är mängden urin som bildas under en tid.",
   "def_uk": "Діурез - це кількість сечі, утвореної за певний час.",
   "def_ru": "Диурез - это количество мочи, образованной за определённое время.",
-  "n": 288
+  "n": 302
  },
  {
   "id": "filtratio",
@@ -3465,7 +3633,7 @@
   "def_sv": "Filtration är när vätska pressas ur blodet i glomerulus.",
   "def_uk": "Фільтрація - це витиснення рідини з крові у клубочку.",
   "def_ru": "Фильтрация - это выдавливание жидкости из крови в клубочке.",
-  "n": 289
+  "n": 303
  },
  {
   "id": "glomerulus",
@@ -3477,7 +3645,7 @@
   "def_sv": "I glomerulus filtreras blodet till primärurin.",
   "def_uk": "У клубочку кров фільтрується у первинну сечу.",
   "def_ru": "В клубочке кровь фильтруется в первичную мочу.",
-  "n": 290
+  "n": 304
  },
  {
   "id": "incontinentia-urinae",
@@ -3489,7 +3657,7 @@
   "def_sv": "Urininkontinens är ofrivilligt läckage av urin.",
   "def_uk": "Нетримання сечі - це мимовільне витікання сечі.",
   "def_ru": "Недержание мочи - это непроизвольное подтекание мочи.",
-  "n": 291
+  "n": 305
  },
  {
   "id": "medulla-renalis",
@@ -3501,7 +3669,7 @@
   "def_sv": "Njurmärgen är njurens inre del med urinsamlande kanaler.",
   "def_uk": "Мозкова речовина є внутрішньою частиною нирки із сечозбірними канальцями.",
   "def_ru": "Мозговое вещество - внутренняя часть почки с собирательными трубочками.",
-  "n": 292
+  "n": 306
  },
  {
   "id": "micturitio",
@@ -3513,7 +3681,7 @@
   "def_sv": "Miktion är att tömma urinblåsan.",
   "def_uk": "Сечовипускання - це випорожнення сечового міхура.",
   "def_ru": "Мочеиспускание - это опорожнение мочевого пузыря.",
-  "n": 293
+  "n": 307
  },
  {
   "id": "nephronum",
@@ -3525,7 +3693,7 @@
   "def_sv": "Nefronet är njurens minsta enhet som bildar urin.",
   "def_uk": "Нефрон - найменша одиниця нирки, яка утворює сечу.",
   "def_ru": "Нефрон - наименьшая единица почки, образующая мочу.",
-  "n": 294
+  "n": 308
  },
  {
   "id": "pelvis-renalis",
@@ -3537,7 +3705,7 @@
   "def_sv": "Njurbäckenet samlar urinen innan den rinner till urinledaren.",
   "def_uk": "Ниркова миска збирає сечу, перш ніж вона тече в сечовід.",
   "def_ru": "Почечная лоханка собирает мочу перед её оттоком в мочеточник.",
-  "n": 295
+  "n": 309
  },
  {
   "id": "ren",
@@ -3549,7 +3717,7 @@
   "def_sv": "Njuren renar blodet och bildar urin.",
   "def_uk": "Нирка очищує кров і утворює сечу.",
   "def_ru": "Почка очищает кровь и образует мочу.",
-  "n": 296
+  "n": 310
  },
  {
   "id": "retentio-urinae",
@@ -3561,7 +3729,7 @@
   "def_sv": "Urinretention är att blåsan inte kan tömmas normalt.",
   "def_uk": "Затримка сечі - це неможливість нормально випорожнити міхур.",
   "def_ru": "Задержка мочи - это невозможность нормально опорожнить пузырь.",
-  "n": 297
+  "n": 311
  },
  {
   "id": "ureter",
@@ -3573,7 +3741,7 @@
   "def_sv": "Urinledaren transporterar urin från njuren till urinblåsan.",
   "def_uk": "Сечовід транспортує сечу від нирки до сечового міхура.",
   "def_ru": "Мочеточник переносит мочу от почки к мочевому пузырю.",
-  "n": 298
+  "n": 312
  },
  {
   "id": "urethra",
@@ -3585,7 +3753,7 @@
   "def_sv": "Urinröret leder urinen ut ur kroppen.",
   "def_uk": "Сечівник виводить сечу назовні з тіла.",
   "def_ru": "Мочеиспускательный канал выводит мочу наружу из тела.",
-  "n": 299
+  "n": 313
  },
  {
   "id": "urina",
@@ -3597,7 +3765,7 @@
   "def_sv": "Urin är vätska med avfallsämnen som njurarna bildar.",
   "def_uk": "Сеча - це рідина з відходами обміну, яку утворюють нирки.",
   "def_ru": "Моча - это жидкость с продуктами обмена, образуемая почками.",
-  "n": 300
+  "n": 314
  },
  {
   "id": "vesica-urinaria",
@@ -3609,7 +3777,7 @@
   "def_sv": "Urinblåsan samlar och lagrar urin före tömning.",
   "def_uk": "Сечовий міхур збирає та зберігає сечу до випорожнення.",
   "def_ru": "Мочевой пузырь собирает и хранит мочу до опорожнения.",
-  "n": 301
+  "n": 315
  },
  {
   "id": "cicatrix",
@@ -3621,7 +3789,7 @@
   "def_sv": "Ett ärr är ny bindväv efter ett läkt sår.",
   "def_uk": "Рубець - це нова сполучна тканина після загоєної рани.",
   "def_ru": "Рубец - это новая соединительная ткань после зажившей раны.",
-  "n": 302
+  "n": 316
  },
  {
   "id": "cutis",
@@ -3633,7 +3801,7 @@
   "def_sv": "Huden skyddar kroppen mot skador, smitta och uttorkning.",
   "def_uk": "Шкіра захищає тіло від ушкоджень, інфекцій та зневоднення.",
   "def_ru": "Кожа защищает тело от повреждений, инфекций и высыхания.",
-  "n": 303
+  "n": 317
  },
  {
   "id": "decubitus",
@@ -3645,7 +3813,7 @@
   "def_sv": "Trycksår uppstår när tryck hindrar blodflödet i huden.",
   "def_uk": "Пролежень виникає, коли тиск порушує кровотік у шкірі.",
   "def_ru": "Пролежень возникает, когда давление нарушает кровоток в коже.",
-  "n": 304
+  "n": 318
  },
  {
   "id": "dermis",
@@ -3657,7 +3825,7 @@
   "def_sv": "Läderhuden innehåller blodkärl, nerver och körtlar.",
   "def_uk": "Дерма містить кровоносні судини, нерви та залози.",
   "def_ru": "Дерма содержит кровеносные сосуды, нервы и железы.",
-  "n": 305
+  "n": 319
  },
  {
   "id": "epidermis",
@@ -3669,7 +3837,7 @@
   "def_sv": "Överhuden är hudens yttersta lager utan blodkärl.",
   "def_uk": "Епідерміс - це найзовнішній шар шкіри без судин.",
   "def_ru": "Эпидермис - это самый наружный слой кожи без сосудов.",
-  "n": 306
+  "n": 320
  },
  {
   "id": "glandula-sebacea",
@@ -3681,7 +3849,7 @@
   "def_sv": "Talgkörteln bildar talg som håller huden mjuk.",
   "def_uk": "Сальна залоза виробляє шкірне сало, що робить шкіру м'якою.",
   "def_ru": "Сальная железа вырабатывает кожное сало, делающее кожу мягкой.",
-  "n": 307
+  "n": 321
  },
  {
   "id": "glandula-sudorifera",
@@ -3693,7 +3861,7 @@
   "def_sv": "Svettkörteln bildar svett som kyler kroppen.",
   "def_uk": "Потова залоза виробляє піт, який охолоджує тіло.",
   "def_ru": "Потовая железа вырабатывает пот, который охлаждает тело.",
-  "n": 308
+  "n": 322
  },
  {
   "id": "melaninum",
@@ -3705,7 +3873,7 @@
   "def_sv": "Melanin ger huden färg och skyddar mot solens strålar.",
   "def_uk": "Меланін надає шкірі колір і захищає від сонячних променів.",
   "def_ru": "Меланин придаёт коже цвет и защищает от солнечных лучей.",
-  "n": 309
+  "n": 323
  },
  {
   "id": "oedema",
@@ -3717,7 +3885,7 @@
   "def_sv": "Ödem är svullnad av vätska i kroppens vävnader.",
   "def_uk": "Набряк - це припухлість через рідину в тканинах тіла.",
   "def_ru": "Отёк - это припухлость из-за жидкости в тканях тела.",
-  "n": 310
+  "n": 324
  },
  {
   "id": "pilus",
@@ -3729,7 +3897,7 @@
   "def_sv": "Håret växer ur huden och skyddar mot kyla.",
   "def_uk": "Волосся росте зі шкіри та захищає від холоду.",
   "def_ru": "Волос растёт из кожи и защищает от холода.",
-  "n": 311
+  "n": 325
  },
  {
   "id": "receptores-cutis",
@@ -3741,7 +3909,7 @@
   "def_sv": "Hudens receptorer känner tryck, beröring, smärta och temperatur.",
   "def_uk": "Рецептори шкіри відчувають тиск, дотик, біль і температуру.",
   "def_ru": "Рецепторы кожи ощущают давление, прикосновение, боль и температуру.",
-  "n": 312
+  "n": 326
  },
  {
   "id": "tela-subcutanea",
@@ -3753,7 +3921,7 @@
   "def_sv": "Underhuden består av fettväv som isolerar och dämpar stötar.",
   "def_uk": "Підшкірна клітковина складається з жирової тканини, що ізолює і пом'якшує удари.",
   "def_ru": "Подкожная клетчатка состоит из жировой ткани, изолирующей и смягчающей удары.",
-  "n": 313
+  "n": 327
  },
  {
   "id": "thermoregulatio",
@@ -3765,7 +3933,7 @@
   "def_sv": "Temperaturreglering håller kroppens temperatur jämn.",
   "def_uk": "Терморегуляція підтримує сталу температуру тіла.",
   "def_ru": "Терморегуляция поддерживает постоянную температуру тела.",
-  "n": 314
+  "n": 328
  },
  {
   "id": "unguis",
@@ -3777,7 +3945,7 @@
   "def_sv": "Nageln skyddar fingrarnas och tårnas yttersta delar.",
   "def_uk": "Ніготь захищає кінчики пальців рук і ніг.",
   "def_ru": "Ноготь защищает кончики пальцев рук и ног.",
-  "n": 315
+  "n": 329
  },
  {
   "id": "vulnus",
@@ -3789,7 +3957,7 @@
   "def_sv": "Ett sår är en skada i huden.",
   "def_uk": "Рана - це пошкодження шкіри.",
   "def_ru": "Рана - это повреждение кожи.",
-  "n": 316
+  "n": 330
  },
  {
   "id": "adrenalinum",
@@ -3801,7 +3969,7 @@
   "def_sv": "Adrenalin förbereder kroppen för kamp eller flykt.",
   "def_uk": "Адреналін готує тіло до боротьби або втечі.",
   "def_ru": "Адреналин готовит тело к борьбе или бегству.",
-  "n": 317
+  "n": 331
  },
  {
   "id": "cortisolum",
@@ -3813,7 +3981,7 @@
   "def_sv": "Kortisol är ett stresshormon från binjurebarken.",
   "def_uk": "Кортизол - це гормон стресу з кори надниркових залоз.",
   "def_ru": "Кортизол - это гормон стресса из коры надпочечников.",
-  "n": 318
+  "n": 332
  },
  {
   "id": "diabetes-mellitus",
@@ -3825,7 +3993,7 @@
   "def_sv": "Diabetes är en sjukdom med för högt blodsocker.",
   "def_uk": "Цукровий діабет - це хвороба з надто високим рівнем цукру крові.",
   "def_ru": "Сахарный диабет - это болезнь со слишком высоким сахаром крови.",
-  "n": 319
+  "n": 333
  },
  {
   "id": "glandula-suprarenalis",
@@ -3837,7 +4005,7 @@
   "def_sv": "Binjuren ligger ovanpå njuren och bildar flera hormoner.",
   "def_uk": "Надниркова залоза лежить над ниркою і виробляє кілька гормонів.",
   "def_ru": "Надпочечник лежит над почкой и вырабатывает несколько гормонов.",
-  "n": 320
+  "n": 334
  },
  {
   "id": "glandula-thyroidea",
@@ -3849,7 +4017,7 @@
   "def_sv": "Sköldkörteln sitter på halsen och styr ämnesomsättningen.",
   "def_uk": "Щитоподібна залоза розташована на шиї і керує обміном речовин.",
   "def_ru": "Щитовидная железа расположена на шее и управляет обменом веществ.",
-  "n": 321
+  "n": 335
  },
  {
   "id": "glandulae-parathyroideae",
@@ -3861,7 +4029,7 @@
   "def_sv": "Bisköldkörtlarna reglerar kalkhalten i blodet.",
   "def_uk": "Прищитоподібні залози регулюють рівень кальцію в крові.",
   "def_ru": "Паращитовидные железы регулируют уровень кальция в крови.",
-  "n": 322
+  "n": 336
  },
  {
   "id": "glucagonum",
@@ -3873,7 +4041,7 @@
   "def_sv": "Glukagon höjer blodsockret när kroppen behöver energi.",
   "def_uk": "Глюкагон підвищує цукор крові, коли тілу потрібна енергія.",
   "def_ru": "Глюкагон повышает сахар крови, когда телу нужна энергия.",
-  "n": 323
+  "n": 337
  },
  {
   "id": "glycaemia",
@@ -3885,7 +4053,7 @@
   "def_sv": "Blodsocker är mängden glukos i blodet.",
   "def_uk": "Глікемія - це кількість глюкози в крові.",
   "def_ru": "Гликемия - это количество глюкозы в крови.",
-  "n": 324
+  "n": 338
  },
  {
   "id": "hormonum",
@@ -3897,7 +4065,7 @@
   "def_sv": "Ett hormon är ett signalämne som transporteras med blodet.",
   "def_uk": "Гормон - це сигнальна речовина, яку переносить кров.",
   "def_ru": "Гормон - это сигнальное вещество, переносимое кровью.",
-  "n": 325
+  "n": 339
  },
  {
   "id": "hypophysis",
@@ -3909,7 +4077,7 @@
   "def_sv": "Hypofysen sitter i hjärnan och styr andra hormonkörtlar.",
   "def_uk": "Гіпофіз розташований у мозку і керує іншими залозами.",
   "def_ru": "Гипофиз расположен в мозге и управляет другими железами.",
-  "n": 326
+  "n": 340
  },
  {
   "id": "hypothalamus",
@@ -3921,7 +4089,7 @@
   "def_sv": "Hypotalamus kopplar samman nervsystemet och hormonsystemet.",
   "def_uk": "Гіпоталамус з'єднує нервову систему з гормональною.",
   "def_ru": "Гипоталамус связывает нервную систему с гормональной.",
-  "n": 327
+  "n": 341
  },
  {
   "id": "insulinum",
@@ -3933,7 +4101,7 @@
   "def_sv": "Insulin sänker blodsockret genom att föra socker in i cellerna.",
   "def_uk": "Інсулін знижує цукор крові, проводячи глюкозу в клітини.",
   "def_ru": "Инсулин снижает сахар крови, проводя глюкозу в клетки.",
-  "n": 328
+  "n": 342
  },
  {
   "id": "melatoninum",
@@ -3945,7 +4113,7 @@
   "def_sv": "Melatonin styr dygnsrytmen och gör oss sömniga.",
   "def_uk": "Мелатонін регулює добовий ритм і викликає сонливість.",
   "def_ru": "Мелатонин регулирует суточный ритм и вызывает сонливость.",
-  "n": 329
+  "n": 343
  },
  {
   "id": "pancreas-endocrinum",
@@ -3957,7 +4125,7 @@
   "def_sv": "Bukspottkörtelns endokrina del bildar insulin och glukagon.",
   "def_uk": "Ендокринна частина підшлункової залози виробляє інсулін і глюкагон.",
   "def_ru": "Эндокринная часть поджелудочной железы вырабатывает инсулин и глюкагон.",
-  "n": 330
+  "n": 344
  },
  {
   "id": "systema-endocrinum",
@@ -3969,7 +4137,7 @@
   "def_sv": "Endokrina systemet styr kroppens funktioner med hormoner.",
   "def_uk": "Ендокринна система керує функціями тіла за допомогою гормонів.",
   "def_ru": "Эндокринная система управляет функциями тела с помощью гормонов.",
-  "n": 331
+  "n": 345
  },
  {
   "id": "thyroxinum",
@@ -3981,7 +4149,7 @@
   "def_sv": "Tyroxin är sköldkörtelns hormon som ökar ämnesomsättningen.",
   "def_uk": "Тироксин - гормон щитоподібної залози, що посилює обмін речовин.",
   "def_ru": "Тироксин - гормон щитовидной железы, усиливающий обмен веществ.",
-  "n": 332
+  "n": 346
  },
  {
   "id": "apoplexia-cerebri",
@@ -3993,7 +4161,7 @@
   "def_sv": "Plötslig skada i hjärnan orsakad av blodpropp eller blödning.",
   "def_uk": "Раптове ушкодження мозку, спричинене тромбом або крововиливом.",
   "def_ru": "Внезапное повреждение мозга, вызванное тромбом или кровоизлиянием.",
-  "n": 333
+  "n": 347
  },
  {
   "id": "axonum",
@@ -4005,7 +4173,7 @@
   "def_sv": "Lång nervtråd som leder signalen bort från nervcellen.",
   "def_uk": "Довге нервове волокно, що проводить сигнал від нервової клітини.",
   "def_ru": "Длинное нервное волокно, проводящее сигнал от нервной клетки.",
-  "n": 334
+  "n": 348
  },
  {
   "id": "cerebellum",
@@ -4017,7 +4185,7 @@
   "def_sv": "Hjärndel bakom hjärnstammen som samordnar balans, rörelser och muskelspänning.",
   "def_uk": "Частина мозку позаду стовбура, що координує рівновагу, рухи та тонус м'язів.",
   "def_ru": "Часть мозга позади ствола, координирующая равновесие, движения и тонус мышц.",
-  "n": 335
+  "n": 349
  },
  {
   "id": "cerebrum",
@@ -4029,7 +4197,7 @@
   "def_sv": "Hjärnans största del som styr medvetande, tankar och viljemässiga rörelser.",
   "def_uk": "Найбільша частина мозку, що керує свідомістю, думками та довільними рухами.",
   "def_ru": "Самая большая часть мозга, управляющая сознанием, мыслями и произвольными движениями.",
-  "n": 336
+  "n": 350
  },
  {
   "id": "cortex-cerebri",
@@ -4041,7 +4209,7 @@
   "def_sv": "Storhjärnans yttre grå lager där tankar och sinnesintryck bearbetas.",
   "def_uk": "Зовнішній сірий шар великого мозку, де обробляються думки та відчуття.",
   "def_ru": "Наружный серый слой большого мозга, где обрабатываются мысли и ощущения.",
-  "n": 337
+  "n": 351
  },
  {
   "id": "dendritum",
@@ -4053,7 +4221,7 @@
   "def_sv": "Kort grenat utskott på nervcellen som tar emot signaler.",
   "def_uk": "Короткий розгалужений відросток нервової клітини, який приймає сигнали.",
   "def_ru": "Короткий ветвящийся отросток нервной клетки, который принимает сигналы.",
-  "n": 338
+  "n": 352
  },
  {
   "id": "encephalon",
@@ -4065,7 +4233,7 @@
   "def_sv": "Organet i skallen som styr tankar, känslor, rörelser och sinnen.",
   "def_uk": "Орган у черепі, що керує думками, почуттями, рухами та чуттями.",
   "def_ru": "Орган в черепе, управляющий мыслями, чувствами, движениями и органами чувств.",
-  "n": 339
+  "n": 353
  },
  {
   "id": "liquor-cerebrospinalis",
@@ -4077,7 +4245,7 @@
   "def_sv": "Klar vätska som omger och skyddar hjärnan och ryggmärgen.",
   "def_uk": "Прозора рідина, що оточує та захищає головний і спинний мозок.",
   "def_ru": "Прозрачная жидкость, окружающая и защищающая головной и спинной мозг.",
-  "n": 340
+  "n": 354
  },
  {
   "id": "lobus-frontalis",
@@ -4089,7 +4257,7 @@
   "def_sv": "Främre hjärnloben som styr planering, omdöme, personlighet och rörelser.",
   "def_uk": "Передня частка мозку, що керує плануванням, судженням, особистістю та рухами.",
   "def_ru": "Передняя доля мозга, управляющая планированием, суждением, личностью и движениями.",
-  "n": 341
+  "n": 355
  },
  {
   "id": "lobus-occipitalis",
@@ -4101,7 +4269,7 @@
   "def_sv": "Bakre hjärnloben där synintryck tolkas till bilder.",
   "def_uk": "Задня частка мозку, де зорові враження перетворюються на образи.",
   "def_ru": "Задняя доля мозга, где зрительные впечатления превращаются в образы.",
-  "n": 342
+  "n": 356
  },
  {
   "id": "lobus-parietalis",
@@ -4113,7 +4281,7 @@
   "def_sv": "Hjärnlob som tolkar känsel, beröring, smärta och kroppens läge.",
   "def_uk": "Частка мозку, що тлумачить чутливість, дотик, біль і положення тіла.",
   "def_ru": "Доля мозга, которая обрабатывает чувствительность, прикосновение, боль и положение тела.",
-  "n": 343
+  "n": 357
  },
  {
   "id": "lobus-temporalis",
@@ -4125,7 +4293,7 @@
   "def_sv": "Hjärnlob som bearbetar hörsel, språkförståelse och minne.",
   "def_uk": "Частка мозку, що обробляє слух, розуміння мови та пам'ять.",
   "def_ru": "Доля мозга, обрабатывающая слух, понимание речи и память.",
-  "n": 344
+  "n": 358
  },
  {
   "id": "medulla-oblongata",
@@ -4137,7 +4305,7 @@
   "def_sv": "Nedersta delen av hjärnstammen som styr andning, hjärtrytm och blodtryck.",
   "def_uk": "Найнижча частина стовбура мозку, що керує диханням, ритмом серця та тиском.",
   "def_ru": "Нижняя часть ствола мозга, управляющая дыханием, ритмом сердца и давлением.",
-  "n": 345
+  "n": 359
  },
  {
   "id": "medulla-spinalis",
@@ -4149,7 +4317,7 @@
   "def_sv": "Nervsträng i ryggraden som leder signaler mellan hjärnan och kroppen.",
   "def_uk": "Нервовий тяж у хребті, що проводить сигнали між мозком і тілом.",
   "def_ru": "Нервный тяж в позвоночнике, проводящий сигналы между мозгом и телом.",
-  "n": 346
+  "n": 360
  },
  {
   "id": "meninges",
@@ -4161,7 +4329,7 @@
   "def_sv": "Tre skyddande hinnor runt hjärnan och ryggmärgen.",
   "def_uk": "Три захисні оболони навколо головного та спинного мозку.",
   "def_ru": "Три защитные оболочки вокруг головного и спинного мозга.",
-  "n": 347
+  "n": 361
  },
  {
   "id": "nervi-craniales",
@@ -4173,7 +4341,7 @@
   "def_sv": "Tolv nervpar som utgår från hjärnan till huvud och hals.",
   "def_uk": "Дванадцять пар нервів, що відходять від мозку до голови та шиї.",
   "def_ru": "Двенадцать пар нервов, отходящих от мозга к голове и шее.",
-  "n": 348
+  "n": 362
  },
  {
   "id": "nervi-spinales",
@@ -4185,7 +4353,7 @@
   "def_sv": "Trettioett nervpar som utgår från ryggmärgen till kroppens olika delar.",
   "def_uk": "Тридцять одна пара нервів, що відходять від спинного мозку до частин тіла.",
   "def_ru": "Тридцать одна пара нервов, отходящих от спинного мозга к частям тела.",
-  "n": 349
+  "n": 363
  },
  {
   "id": "nervus",
@@ -4197,7 +4365,7 @@
   "def_sv": "Bunt av nervtrådar som leder signaler mellan kroppen och centrum.",
   "def_uk": "Пучок нервових волокон, що проводить сигнали між тілом і центром.",
   "def_ru": "Пучок нервных волокон, проводящий сигналы между телом и центром.",
-  "n": 350
+  "n": 364
  },
  {
   "id": "nervus-motorius",
@@ -4209,67 +4377,7 @@
   "def_sv": "Nerv som leder signaler från hjärnan till musklerna för rörelse.",
   "def_uk": "Нерв, що проводить сигнали від мозку до м'язів для руху.",
   "def_ru": "Нерв, проводящий сигналы от мозга к мышцам для движения.",
-  "n": 351
- },
- {
-  "id": "neuronum",
-  "cat": "Nervsystemet",
-  "sv": "nervcell (neuron)",
-  "la": "neuronum",
-  "uk": "нейрон",
-  "ru": "нейрон",
-  "def_sv": "Nervcell som tar emot, leder och skickar vidare elektriska signaler.",
-  "def_uk": "Нервова клітина, яка приймає, проводить і передає електричні сигнали.",
-  "def_ru": "Нервная клетка, которая принимает, проводит и передаёт электрические сигналы.",
-  "n": 352
- },
- {
-  "id": "neurotransmitter",
-  "cat": "Nervsystemet",
-  "sv": "signalsubstans (neurotransmittor)",
-  "la": "neurotransmitterum",
-  "uk": "нейромедіатор",
-  "ru": "нейромедиатор",
-  "def_sv": "Kemiskt ämne som överför signaler mellan nervceller i synapsen.",
-  "def_uk": "Хімічна речовина, що передає сигнали між нервовими клітинами в синапсі.",
-  "def_ru": "Химическое вещество, передающее сигналы между нервными клетками в синапсе.",
-  "n": 353
- },
- {
-  "id": "pars-parasympathica",
-  "cat": "Nervsystemet",
-  "sv": "parasympatiska nervsystemet",
-  "la": "pars parasympathica",
-  "uk": "парасимпатична частина",
-  "ru": "парасимпатическая часть",
-  "def_sv": "Del av autonoma nervsystemet som lugnar kroppen och främjar matsmältning.",
-  "def_uk": "Частина вегетативної нервової системи, що заспокоює тіло та сприяє травленню.",
-  "def_ru": "Часть вегетативной нервной системы, которая успокаивает тело и способствует пищеварению.",
-  "n": 354
- },
- {
-  "id": "pars-sympathica",
-  "cat": "Nervsystemet",
-  "sv": "sympatiska nervsystemet",
-  "la": "pars sympathica",
-  "uk": "симпатична частина",
-  "ru": "симпатическая часть",
-  "def_sv": "Del av autonoma nervsystemet som aktiverar kroppen vid ansträngning och stress.",
-  "def_uk": "Частина вегетативної нервової системи, що активує тіло при навантаженні та стресі.",
-  "def_ru": "Часть вегетативной нервной системы, активирующая тело при нагрузке и стрессе.",
-  "n": 355
- },
- {
-  "id": "reflexus",
-  "cat": "Nervsystemet",
-  "sv": "reflex",
-  "la": "reflexus",
-  "uk": "рефлекс",
-  "ru": "рефлекс",
-  "def_sv": "Snabbt automatiskt svar på en retning utan viljans inblandning.",
-  "def_uk": "Швидка автоматична відповідь на подразнення без участі волі.",
-  "def_ru": "Быстрый автоматический ответ на раздражение без участия воли.",
-  "n": 356
+  "n": 365
  },
  {
   "id": "sensus",
@@ -4281,7 +4389,67 @@
   "def_sv": "Nerv som leder känsel- och sinnesintryck från kroppen till hjärnan.",
   "def_uk": "Нерв, що проводить чутливі відчуття від тіла до мозку.",
   "def_ru": "Нерв, проводящий чувствительные ощущения от тела к мозгу.",
-  "n": 357
+  "n": 366
+ },
+ {
+  "id": "neuronum",
+  "cat": "Nervsystemet",
+  "sv": "nervcell (neuron)",
+  "la": "neuronum",
+  "uk": "нейрон",
+  "ru": "нейрон",
+  "def_sv": "Nervcell som tar emot, leder och skickar vidare elektriska signaler.",
+  "def_uk": "Нервова клітина, яка приймає, проводить і передає електричні сигнали.",
+  "def_ru": "Нервная клетка, которая принимает, проводит и передаёт электрические сигналы.",
+  "n": 367
+ },
+ {
+  "id": "neurotransmitter",
+  "cat": "Nervsystemet",
+  "sv": "signalsubstans (neurotransmittor)",
+  "la": "neurotransmitterum",
+  "uk": "нейромедіатор",
+  "ru": "нейромедиатор",
+  "def_sv": "Kemiskt ämne som överför signaler mellan nervceller i synapsen.",
+  "def_uk": "Хімічна речовина, що передає сигнали між нервовими клітинами в синапсі.",
+  "def_ru": "Химическое вещество, передающее сигналы между нервными клетками в синапсе.",
+  "n": 368
+ },
+ {
+  "id": "pars-parasympathica",
+  "cat": "Nervsystemet",
+  "sv": "parasympatiska nervsystemet",
+  "la": "pars parasympathica",
+  "uk": "парасимпатична частина",
+  "ru": "парасимпатическая часть",
+  "def_sv": "Del av autonoma nervsystemet som lugnar kroppen och främjar matsmältning.",
+  "def_uk": "Частина вегетативної нервової системи, що заспокоює тіло та сприяє травленню.",
+  "def_ru": "Часть вегетативной нервной системы, которая успокаивает тело и способствует пищеварению.",
+  "n": 369
+ },
+ {
+  "id": "pars-sympathica",
+  "cat": "Nervsystemet",
+  "sv": "sympatiska nervsystemet",
+  "la": "pars sympathica",
+  "uk": "симпатична частина",
+  "ru": "симпатическая часть",
+  "def_sv": "Del av autonoma nervsystemet som aktiverar kroppen vid ansträngning och stress.",
+  "def_uk": "Частина вегетативної нервової системи, що активує тіло при навантаженні та стресі.",
+  "def_ru": "Часть вегетативной нервной системы, активирующая тело при нагрузке и стрессе.",
+  "n": 370
+ },
+ {
+  "id": "reflexus",
+  "cat": "Nervsystemet",
+  "sv": "reflex",
+  "la": "reflexus",
+  "uk": "рефлекс",
+  "ru": "рефлекс",
+  "def_sv": "Snabbt automatiskt svar på en retning utan viljans inblandning.",
+  "def_uk": "Швидка автоматична відповідь на подразнення без участі волі.",
+  "def_ru": "Быстрый автоматический ответ на раздражение без участия воли.",
+  "n": 371
  },
  {
   "id": "synapsis",
@@ -4293,7 +4461,7 @@
   "def_sv": "Kontaktställe där signalen överförs från en nervcell till nästa.",
   "def_uk": "Місце контакту, де сигнал передається від однієї нервової клітини до іншої.",
   "def_ru": "Место контакта, где сигнал передаётся от одной нервной клетки к другой.",
-  "n": 358
+  "n": 372
  },
  {
   "id": "systema-nervosum-autonomicum",
@@ -4305,7 +4473,7 @@
   "def_sv": "Nervsystemet som styr inre organ utan viljans kontroll.",
   "def_uk": "Нервова система, що керує внутрішніми органами без контролю волі.",
   "def_ru": "Нервная система, управляющая внутренними органами без контроля воли.",
-  "n": 359
+  "n": 373
  },
  {
   "id": "systema-nervosum-centrale",
@@ -4317,7 +4485,7 @@
   "def_sv": "Hjärnan och ryggmärgen som styr kroppens funktioner och tolkar signaler.",
   "def_uk": "Головний і спинний мозок, які керують функціями тіла та тлумачать сигнали.",
   "def_ru": "Головной и спинной мозг, которые управляют функциями тела и обрабатывают сигналы.",
-  "n": 360
+  "n": 374
  },
  {
   "id": "systema-nervosum-periphericum",
@@ -4329,7 +4497,7 @@
   "def_sv": "Alla nerver utanför hjärnan och ryggmärgen som förbinder kroppen med centrum.",
   "def_uk": "Усі нерви поза головним і спинним мозком, що з'єднують тіло з центром.",
   "def_ru": "Все нервы вне головного и спинного мозга, соединяющие тело с центром.",
-  "n": 361
+  "n": 375
  },
  {
   "id": "truncus-encephali",
@@ -4341,7 +4509,7 @@
   "def_sv": "Hjärndelen som förbinder storhjärnan med ryggmärgen och styr livsviktiga funktioner.",
   "def_uk": "Частина мозку, що з'єднує великий мозок зі спинним і керує життєвими функціями.",
   "def_ru": "Часть мозга, соединяющая большой мозг со спинным и управляющая жизненными функциями.",
-  "n": 362
+  "n": 376
  },
  {
   "id": "auris-externa",
@@ -4353,7 +4521,7 @@
   "def_sv": "Öronmussla och hörselgång som fångar upp och leder ljudvågor.",
   "def_uk": "Вушна раковина та слуховий хід, які вловлюють і проводять звукові хвилі.",
   "def_ru": "Ушная раковина и слуховой проход, улавливающие и проводящие звуковые волны.",
-  "n": 363
+  "n": 377
  },
  {
   "id": "auris-media",
@@ -4365,7 +4533,7 @@
   "def_sv": "Luftfyllt rum med hörselben som förstärker ljudet inåt.",
   "def_uk": "Повітряна порожнина зі слуховими кісточками, що підсилюють звук усередину.",
   "def_ru": "Воздушная полость со слуховыми косточками, усиливающими звук внутрь.",
-  "n": 364
+  "n": 378
  },
  {
   "id": "cochlea",
@@ -4377,7 +4545,7 @@
   "def_sv": "Snäckformad del av innerörat där ljud blir nervsignaler.",
   "def_uk": "Завиткоподібна частина внутрішнього вуха, де звук стає нервовими сигналами.",
   "def_ru": "Улиткообразная часть внутреннего уха, где звук становится нервными сигналами.",
-  "n": 365
+  "n": 379
  },
  {
   "id": "cornea",
@@ -4389,7 +4557,7 @@
   "def_sv": "Genomskinlig hinna längst fram på ögat som bryter ljuset.",
   "def_uk": "Прозора оболонка спереду ока, яка заломлює світло.",
   "def_ru": "Прозрачная оболочка спереди глаза, которая преломляет свет.",
-  "n": 366
+  "n": 380
  },
  {
   "id": "corpus-vitreum",
@@ -4401,7 +4569,7 @@
   "def_sv": "Geléaktig massa som fyller ögat och bevarar dess form.",
   "def_uk": "Драглиста маса, що заповнює око та зберігає його форму.",
   "def_ru": "Студенистая масса, заполняющая глаз и сохраняющая его форму.",
-  "n": 367
+  "n": 381
  },
  {
   "id": "gustus",
@@ -4413,7 +4581,7 @@
   "def_sv": "Sinnet som känner smak genom smakceller på tungan.",
   "def_uk": "Чуття, що сприймає смак через смакові клітини на язиці.",
   "def_ru": "Чувство, воспринимающее вкус через вкусовые клетки на языке.",
-  "n": 368
+  "n": 382
  },
  {
   "id": "iris",
@@ -4425,7 +4593,7 @@
   "def_sv": "Färgad ring i ögat som reglerar pupillens storlek.",
   "def_uk": "Кольорове кільце в оці, що регулює розмір зіниці.",
   "def_ru": "Цветное кольцо в глазу, регулирующее размер зрачка.",
-  "n": 369
+  "n": 383
  },
  {
   "id": "lens",
@@ -4437,7 +4605,7 @@
   "def_sv": "Genomskinlig lins bakom pupillen som ställer in skärpan.",
   "def_uk": "Прозора лінза позаду зіниці, що налаштовує різкість.",
   "def_ru": "Прозрачная линза позади зрачка, которая настраивает резкость.",
-  "n": 370
+  "n": 384
  },
  {
   "id": "membrana-tympani",
@@ -4449,7 +4617,7 @@
   "def_sv": "Tunn hinna som vibrerar när ljudvågor träffar den.",
   "def_uk": "Тонка перетинка, яка вібрує, коли на неї потрапляють звукові хвилі.",
   "def_ru": "Тонкая перепонка, которая вибрирует, когда на неё попадают звуковые волны.",
-  "n": 371
+  "n": 385
  },
  {
   "id": "nervus-opticus",
@@ -4461,7 +4629,7 @@
   "def_sv": "Nerven som leder synsignaler från näthinnan till hjärnan.",
   "def_uk": "Нерв, що проводить зорові сигнали від сітківки до мозку.",
   "def_ru": "Нерв, проводящий зрительные сигналы от сетчатки к мозгу.",
-  "n": 372
+  "n": 386
  },
  {
   "id": "nervus-vestibulocochlearis",
@@ -4473,7 +4641,7 @@
   "def_sv": "Nerv som leder hörsel- och balanssignaler till hjärnan.",
   "def_uk": "Нерв, що проводить слухові та рівноважні сигнали до мозку.",
   "def_ru": "Нерв, проводящий слуховые и вестибулярные сигналы к мозгу.",
-  "n": 373
+  "n": 387
  },
  {
   "id": "nociceptio",
@@ -4485,7 +4653,7 @@
   "def_sv": "Kroppens förmåga att känna och signalera smärta vid skada.",
   "def_uk": "Здатність тіла відчувати та сигналізувати біль при ушкодженні.",
   "def_ru": "Способность тела ощущать и сигнализировать боль при повреждении.",
-  "n": 374
+  "n": 388
  },
  {
   "id": "oculus",
@@ -4497,7 +4665,7 @@
   "def_sv": "Sinnesorgan som fångar ljus och gör det möjligt att se.",
   "def_uk": "Орган чуття, що вловлює світло й уможливлює зір.",
   "def_ru": "Орган чувств, улавливающий свет и обеспечивающий зрение.",
-  "n": 375
+  "n": 389
  },
  {
   "id": "olfactus",
@@ -4509,7 +4677,7 @@
   "def_sv": "Sinnet som känner dofter genom celler högt upp i näsan.",
   "def_uk": "Чуття, що сприймає запахи через клітини у верхній частині носа.",
   "def_ru": "Чувство, воспринимающее запахи через клетки в верхней части носа.",
-  "n": 376
+  "n": 390
  },
  {
   "id": "organum-vestibulare",
@@ -4521,7 +4689,7 @@
   "def_sv": "Del av innerörat som känner huvudets läge och rörelse.",
   "def_uk": "Частина внутрішнього вуха, що відчуває положення й рух голови.",
   "def_ru": "Часть внутреннего уха, ощущающая положение и движение головы.",
-  "n": 377
+  "n": 391
  },
  {
   "id": "ossicula-auditus",
@@ -4533,7 +4701,7 @@
   "def_sv": "Tre små ben i mellanörat som överför ljudvibrationer.",
   "def_uk": "Три маленькі кісточки середнього вуха, що передають звукові коливання.",
   "def_ru": "Три маленькие косточки среднего уха, передающие звуковые колебания.",
-  "n": 378
+  "n": 392
  },
  {
   "id": "papillae-linguales",
@@ -4545,7 +4713,7 @@
   "def_sv": "Små upphöjningar på tungans yta som innehåller smaklökar.",
   "def_uk": "Маленькі підвищення на поверхні язика, що містять смакові бруньки.",
   "def_ru": "Маленькие возвышения на поверхности языка, содержащие вкусовые почки.",
-  "n": 379
+  "n": 393
  },
  {
   "id": "proprioceptio",
@@ -4557,7 +4725,7 @@
   "def_sv": "Sinnet som ger information om kroppsdelarnas läge och rörelse.",
   "def_uk": "Чуття, що дає інформацію про положення та рух частин тіла.",
   "def_ru": "Чувство, дающее информацию о положении и движении частей тела.",
-  "n": 380
+  "n": 394
  },
  {
   "id": "pupilla",
@@ -4569,7 +4737,7 @@
   "def_sv": "Öppningen mitt i regnbågshinnan som släpper in ljus.",
   "def_uk": "Отвір посередині райдужки, що пропускає світло.",
   "def_ru": "Отверстие в середине радужки, пропускающее свет.",
-  "n": 381
+  "n": 395
  },
  {
   "id": "retina",
@@ -4581,7 +4749,7 @@
   "def_sv": "Innersta ögonhinnan med celler som omvandlar ljus till nervsignaler.",
   "def_uk": "Найглибша оболонка ока з клітинами, що перетворюють світло на нервові сигнали.",
   "def_ru": "Внутренняя оболочка глаза с клетками, превращающими свет в нервные сигналы.",
-  "n": 382
+  "n": 396
  },
  {
   "id": "sclera",
@@ -4593,7 +4761,7 @@
   "def_sv": "Vit seg hinna som skyddar ögat och håller dess form.",
   "def_uk": "Біла міцна оболонка, що захищає око та підтримує його форму.",
   "def_ru": "Белая прочная оболочка, защищающая глаз и поддерживающая его форму.",
-  "n": 383
+  "n": 397
  },
  {
   "id": "tactus",
@@ -4605,7 +4773,7 @@
   "def_sv": "Sinnet som känner beröring, tryck, värme och kyla i huden.",
   "def_uk": "Чуття, що сприймає дотик, тиск, тепло та холод у шкірі.",
   "def_ru": "Чувство, воспринимающее прикосновение, давление, тепло и холод в коже.",
-  "n": 384
+  "n": 398
  },
  {
   "id": "cervix-uteri",
@@ -4617,7 +4785,7 @@
   "def_sv": "Nedre delen av livmodern som mynnar i slidan.",
   "def_uk": "Нижня частина матки, яка відкривається у піхву.",
   "def_ru": "Нижняя часть матки, которая открывается во влагалище.",
-  "n": 385
+  "n": 399
  },
  {
   "id": "ductus-deferens",
@@ -4629,7 +4797,7 @@
   "def_sv": "Kanal som leder spermier från bitestikeln mot urinröret.",
   "def_uk": "Канал, який веде сперматозоїди від придатка яєчка до сечівника.",
   "def_ru": "Канал, который ведёт сперматозоиды от придатка яичка к мочеиспускательному каналу.",
-  "n": 386
+  "n": 400
  },
  {
   "id": "epididymis",
@@ -4641,7 +4809,7 @@
   "def_sv": "Organ på testikeln där spermierna mognar och lagras.",
   "def_uk": "Орган на яєчку, де сперматозоїди дозрівають і зберігаються.",
   "def_ru": "Орган на яичке, где сперматозоиды созревают и хранятся.",
-  "n": 387
+  "n": 401
  },
  {
   "id": "glandula-mammaria",
@@ -4653,7 +4821,7 @@
   "def_sv": "Körtel i bröstet som producerar mjölk efter förlossning.",
   "def_uk": "Залоза в грудях, яка виробляє молоко після пологів.",
   "def_ru": "Железа в груди, которая вырабатывает молоко после родов.",
-  "n": 388
+  "n": 402
  },
  {
   "id": "graviditas",
@@ -4665,7 +4833,7 @@
   "def_sv": "Tiden då ett foster utvecklas i livmodern.",
   "def_uk": "Період, коли плід розвивається в матці.",
   "def_ru": "Период, когда плод развивается в матке.",
-  "n": 389
+  "n": 403
  },
  {
   "id": "menopausa",
@@ -4677,7 +4845,7 @@
   "def_sv": "Tidpunkten då menstruationerna upphör permanent hos kvinnan.",
   "def_uk": "Час, коли менструації у жінки припиняються остаточно.",
   "def_ru": "Время, когда менструации у женщины прекращаются окончательно.",
-  "n": 390
+  "n": 404
  },
  {
   "id": "menstruatio",
@@ -4689,7 +4857,7 @@
   "def_sv": "Regelbunden blödning när livmoderns slemhinna stöts bort.",
   "def_uk": "Регулярна кровотеча, коли слизова оболонка матки відшаровується.",
   "def_ru": "Регулярное кровотечение, когда слизистая оболочка матки отторгается.",
-  "n": 391
+  "n": 405
  },
  {
   "id": "ovarium",
@@ -4701,7 +4869,7 @@
   "def_sv": "Kvinnlig könskörtel som bildar ägg och könshormoner.",
   "def_uk": "Жіноча статева залоза, яка утворює яйцеклітини та статеві гормони.",
   "def_ru": "Женская половая железа, которая образует яйцеклетки и половые гормоны.",
-  "n": 392
+  "n": 406
  },
  {
   "id": "ovulatio",
@@ -4713,7 +4881,7 @@
   "def_sv": "Ägget lossnar från äggstocken ungefär mitt i menstruationscykeln.",
   "def_uk": "Яйцеклітина виходить з яєчника приблизно в середині менструального циклу.",
   "def_ru": "Яйцеклетка выходит из яичника примерно в середине менструального цикла.",
-  "n": 393
+  "n": 407
  },
  {
   "id": "partus",
@@ -4725,7 +4893,7 @@
   "def_sv": "Processen när barnet föds ut ur livmodern.",
   "def_uk": "Процес, коли дитина народжується з матки.",
   "def_ru": "Процесс, когда ребёнок рождается из матки.",
-  "n": 394
+  "n": 408
  },
  {
   "id": "penis",
@@ -4737,7 +4905,7 @@
   "def_sv": "Manligt könsorgan som används vid samlag och urinering.",
   "def_uk": "Чоловічий статевий орган, який використовується під час статевого акту та сечовипускання.",
   "def_ru": "Мужской половой орган, который используется при половом акте и мочеиспускании.",
-  "n": 395
+  "n": 409
  },
  {
   "id": "placenta",
@@ -4749,7 +4917,7 @@
   "def_sv": "Organ som ger fostret syre och näring under graviditeten.",
   "def_uk": "Орган, який дає плоду кисень і поживні речовини під час вагітності.",
   "def_ru": "Орган, который даёт плоду кислород и питательные вещества во время беременности.",
-  "n": 396
+  "n": 410
  },
  {
   "id": "prostata",
@@ -4761,7 +4929,7 @@
   "def_sv": "Körtel under urinblåsan som bildar en del av sädesvätskan.",
   "def_uk": "Залоза під сечовим міхуром, яка утворює частину сім'яної рідини.",
   "def_ru": "Железа под мочевым пузырём, которая образует часть семенной жидкости.",
-  "n": 397
+  "n": 411
  },
  {
   "id": "scrotum",
@@ -4773,7 +4941,7 @@
   "def_sv": "Hudpåse som innehåller testiklarna utanför bukhålan.",
   "def_uk": "Шкірний мішечок, який містить яєчка поза черевною порожниною.",
   "def_ru": "Кожный мешочек, который содержит яички вне брюшной полости.",
-  "n": 398
+  "n": 412
  },
  {
   "id": "spermatozoon",
@@ -4785,7 +4953,7 @@
   "def_sv": "Manlig könscell som kan befrukta ett ägg.",
   "def_uk": "Чоловіча статева клітина, яка може запліднити яйцеклітину.",
   "def_ru": "Мужская половая клетка, которая может оплодотворить яйцеклетку.",
-  "n": 399
+  "n": 413
  },
  {
   "id": "testis",
@@ -4797,7 +4965,7 @@
   "def_sv": "Manlig könskörtel som bildar spermier och testosteron.",
   "def_uk": "Чоловіча статева залоза, яка утворює сперматозоїди та тестостерон.",
   "def_ru": "Мужская половая железа, которая образует сперматозоиды и тестостерон.",
-  "n": 400
+  "n": 414
  },
  {
   "id": "tuba-uterina",
@@ -4809,7 +4977,7 @@
   "def_sv": "Kanal som transporterar ägget från äggstocken till livmodern.",
   "def_uk": "Канал, який транспортує яйцеклітину від яєчника до матки.",
   "def_ru": "Канал, который переносит яйцеклетку от яичника к матке.",
-  "n": 401
+  "n": 415
  },
  {
   "id": "uterus",
@@ -4821,7 +4989,7 @@
   "def_sv": "Muskulöst organ där fostret växer under graviditeten.",
   "def_uk": "М'язовий орган, у якому плід росте під час вагітності.",
   "def_ru": "Мышечный орган, в котором плод растёт во время беременности.",
-  "n": 402
+  "n": 416
  },
  {
   "id": "vagina",
@@ -4833,7 +5001,7 @@
   "def_sv": "Muskulös kanal mellan livmoderhalsen och de yttre könsorganen.",
   "def_uk": "М'язовий канал між шийкою матки та зовнішніми статевими органами.",
   "def_ru": "Мышечный канал между шейкой матки и наружными половыми органами.",
-  "n": 403
+  "n": 417
  },
  {
   "id": "vulva",
@@ -4845,7 +5013,7 @@
   "def_sv": "Kvinnans yttre könsorgan med blygdläppar och klitoris.",
   "def_uk": "Зовнішні статеві органи жінки зі статевими губами та клітором.",
   "def_ru": "Наружные половые органы женщины с половыми губами и клитором.",
-  "n": 404
+  "n": 418
  },
  {
   "id": "allergia",
@@ -4857,7 +5025,7 @@
   "def_sv": "Överkänslig reaktion mot ett ämne som normalt är ofarligt.",
   "def_uk": "Надмірна реакція на речовину, яка зазвичай є нешкідливою.",
   "def_ru": "Повышенная реакция на вещество, которое обычно безвредно.",
-  "n": 405
+  "n": 419
  },
  {
   "id": "anaemia",
@@ -4869,7 +5037,7 @@
   "def_sv": "Brist på röda blodkroppar eller hemoglobin i blodet.",
   "def_uk": "Нестача еритроцитів або гемоглобіну в крові.",
   "def_ru": "Недостаток эритроцитов или гемоглобина в крови.",
-  "n": 406
+  "n": 420
  },
  {
   "id": "contusio",
@@ -4881,127 +5049,7 @@
   "def_sv": "Skada på vävnad utan att huden går sönder.",
   "def_uk": "Пошкодження тканини без порушення цілості шкіри.",
   "def_ru": "Повреждение ткани без нарушения целостности кожи.",
-  "n": 407
- },
- {
-  "id": "cyanosis",
-  "cat": "Vanliga kliniska termer",
-  "sv": "cyanos",
-  "la": "cyanosis",
-  "uk": "ціаноз",
-  "ru": "цианоз",
-  "def_sv": "Blåaktig färg på hud och läppar vid syrebrist.",
-  "def_uk": "Синюватий колір шкіри та губ при нестачі кисню.",
-  "def_ru": "Синюшный цвет кожи и губ при нехватке кислорода.",
-  "n": 408
- },
- {
-  "id": "dehydratio",
-  "cat": "Vanliga kliniska termer",
-  "sv": "uttorkning, dehydrering",
-  "la": "dehydratio",
-  "uk": "зневоднення",
-  "ru": "обезвоживание",
-  "def_sv": "Brist på vätska i kroppen, ofta efter kräkning eller diarré.",
-  "def_uk": "Нестача рідини в організмі, часто після блювоти або діареї.",
-  "def_ru": "Недостаток жидкости в организме, часто после рвоты или диареи.",
-  "n": 409
- },
- {
-  "id": "diarrhoea",
-  "cat": "Vanliga kliniska termer",
-  "sv": "diarré",
-  "la": "diarrhoea",
-  "uk": "діарея, пронос",
-  "ru": "диарея, понос",
-  "def_sv": "Lös eller vattnig avföring flera gånger per dygn.",
-  "def_uk": "Рідкі або водянисті випорожнення кілька разів на добу.",
-  "def_ru": "Жидкий или водянистый стул несколько раз в сутки.",
-  "n": 410
- },
- {
-  "id": "dolor",
-  "cat": "Vanliga kliniska termer",
-  "sv": "smärta",
-  "la": "dolor",
-  "uk": "біль",
-  "ru": "боль",
-  "def_sv": "Obehaglig känsla som signalerar skada eller sjukdom i kroppen.",
-  "def_uk": "Неприємне відчуття, яке сигналізує про пошкодження або хворобу в тілі.",
-  "def_ru": "Неприятное ощущение, которое сигнализирует о повреждении или болезни в теле.",
-  "n": 411
- },
- {
-  "id": "febris",
-  "cat": "Vanliga kliniska termer",
-  "sv": "feber",
-  "la": "febris",
-  "uk": "гарячка",
-  "ru": "лихорадка",
-  "def_sv": "Förhöjd kroppstemperatur, oftast över trettioåtta grader.",
-  "def_uk": "Підвищена температура тіла, зазвичай понад тридцять вісім градусів.",
-  "def_ru": "Повышенная температура тела, обычно выше тридцати восьми градусов.",
-  "n": 412
- },
- {
-  "id": "fractura",
-  "cat": "Vanliga kliniska termer",
-  "sv": "fraktur, benbrott",
-  "la": "fractura",
-  "uk": "перелом",
-  "ru": "перелом",
-  "def_sv": "Brott på ett ben i skelettet.",
-  "def_uk": "Перелом кістки скелета.",
-  "def_ru": "Перелом кости скелета.",
-  "n": 413
- },
- {
-  "id": "hypoglycaemia",
-  "cat": "Vanliga kliniska termer",
-  "sv": "hypoglykemi, lågt blodsocker",
-  "la": "hypoglycaemia",
-  "uk": "гіпоглікемія",
-  "ru": "гипогликемия",
-  "def_sv": "För lågt socker i blodet, vanligt vid diabetes.",
-  "def_uk": "Занадто низький рівень цукру в крові, часто при діабеті.",
-  "def_ru": "Слишком низкий уровень сахара в крови, часто при диабете.",
-  "n": 414
- },
- {
-  "id": "infectio",
-  "cat": "Vanliga kliniska termer",
-  "sv": "infektion",
-  "la": "infectio",
-  "uk": "інфекція",
-  "ru": "инфекция",
-  "def_sv": "Sjukdom orsakad av bakterier, virus eller svamp.",
-  "def_uk": "Хвороба, спричинена бактеріями, вірусами або грибками.",
-  "def_ru": "Болезнь, вызванная бактериями, вирусами или грибками.",
-  "n": 415
- },
- {
-  "id": "nausea",
-  "cat": "Vanliga kliniska termer",
-  "sv": "illamående",
-  "la": "nausea",
-  "uk": "нудота",
-  "ru": "тошнота",
-  "def_sv": "Obehaglig känsla i magen med lust att kräkas.",
-  "def_uk": "Неприємне відчуття в шлунку з бажанням блювати.",
-  "def_ru": "Неприятное ощущение в желудке с позывом к рвоте.",
-  "n": 416
- },
- {
-  "id": "obstipatio",
-  "cat": "Vanliga kliniska termer",
-  "sv": "förstoppning",
-  "la": "obstipatio",
-  "uk": "закреп",
-  "ru": "запор",
-  "def_sv": "Svårighet att tömma tarmen, med hård och sällsynt avföring.",
-  "def_uk": "Труднощі з випорожненням кишечника, з твердими та нечастими випорожненнями.",
-  "def_ru": "Трудности с опорожнением кишечника, с твёрдым и редким стулом.",
-  "n": 417
+  "n": 421
  },
  {
   "id": "palliatio",
@@ -5013,7 +5061,127 @@
   "def_sv": "Lindrande vård vid obotlig sjukdom i livets slutskede.",
   "def_uk": "Полегшувальний догляд при невиліковній хворобі наприкінці життя.",
   "def_ru": "Облегчающий уход при неизлечимой болезни в конце жизни.",
-  "n": 418
+  "n": 422
+ },
+ {
+  "id": "cyanosis",
+  "cat": "Vanliga kliniska termer",
+  "sv": "cyanos",
+  "la": "cyanosis",
+  "uk": "ціаноз",
+  "ru": "цианоз",
+  "def_sv": "Blåaktig färg på hud och läppar vid syrebrist.",
+  "def_uk": "Синюватий колір шкіри та губ при нестачі кисню.",
+  "def_ru": "Синюшный цвет кожи и губ при нехватке кислорода.",
+  "n": 423
+ },
+ {
+  "id": "dehydratio",
+  "cat": "Vanliga kliniska termer",
+  "sv": "uttorkning, dehydrering",
+  "la": "dehydratio",
+  "uk": "зневоднення",
+  "ru": "обезвоживание",
+  "def_sv": "Brist på vätska i kroppen, ofta efter kräkning eller diarré.",
+  "def_uk": "Нестача рідини в організмі, часто після блювоти або діареї.",
+  "def_ru": "Недостаток жидкости в организме, часто после рвоты или диареи.",
+  "n": 424
+ },
+ {
+  "id": "diarrhoea",
+  "cat": "Vanliga kliniska termer",
+  "sv": "diarré",
+  "la": "diarrhoea",
+  "uk": "діарея, пронос",
+  "ru": "диарея, понос",
+  "def_sv": "Lös eller vattnig avföring flera gånger per dygn.",
+  "def_uk": "Рідкі або водянисті випорожнення кілька разів на добу.",
+  "def_ru": "Жидкий или водянистый стул несколько раз в сутки.",
+  "n": 425
+ },
+ {
+  "id": "dolor",
+  "cat": "Vanliga kliniska termer",
+  "sv": "smärta",
+  "la": "dolor",
+  "uk": "біль",
+  "ru": "боль",
+  "def_sv": "Obehaglig känsla som signalerar skada eller sjukdom i kroppen.",
+  "def_uk": "Неприємне відчуття, яке сигналізує про пошкодження або хворобу в тілі.",
+  "def_ru": "Неприятное ощущение, которое сигнализирует о повреждении или болезни в теле.",
+  "n": 426
+ },
+ {
+  "id": "febris",
+  "cat": "Vanliga kliniska termer",
+  "sv": "feber",
+  "la": "febris",
+  "uk": "гарячка",
+  "ru": "лихорадка",
+  "def_sv": "Förhöjd kroppstemperatur, oftast över trettioåtta grader.",
+  "def_uk": "Підвищена температура тіла, зазвичай понад тридцять вісім градусів.",
+  "def_ru": "Повышенная температура тела, обычно выше тридцати восьми градусов.",
+  "n": 427
+ },
+ {
+  "id": "fractura",
+  "cat": "Vanliga kliniska termer",
+  "sv": "fraktur, benbrott",
+  "la": "fractura",
+  "uk": "перелом",
+  "ru": "перелом",
+  "def_sv": "Brott på ett ben i skelettet.",
+  "def_uk": "Перелом кістки скелета.",
+  "def_ru": "Перелом кости скелета.",
+  "n": 428
+ },
+ {
+  "id": "hypoglycaemia",
+  "cat": "Vanliga kliniska termer",
+  "sv": "hypoglykemi, lågt blodsocker",
+  "la": "hypoglycaemia",
+  "uk": "гіпоглікемія",
+  "ru": "гипогликемия",
+  "def_sv": "För lågt socker i blodet, vanligt vid diabetes.",
+  "def_uk": "Занадто низький рівень цукру в крові, часто при діабеті.",
+  "def_ru": "Слишком низкий уровень сахара в крови, часто при диабете.",
+  "n": 429
+ },
+ {
+  "id": "infectio",
+  "cat": "Vanliga kliniska termer",
+  "sv": "infektion",
+  "la": "infectio",
+  "uk": "інфекція",
+  "ru": "инфекция",
+  "def_sv": "Sjukdom orsakad av bakterier, virus eller svamp.",
+  "def_uk": "Хвороба, спричинена бактеріями, вірусами або грибками.",
+  "def_ru": "Болезнь, вызванная бактериями, вирусами или грибками.",
+  "n": 430
+ },
+ {
+  "id": "nausea",
+  "cat": "Vanliga kliniska termer",
+  "sv": "illamående",
+  "la": "nausea",
+  "uk": "нудота",
+  "ru": "тошнота",
+  "def_sv": "Obehaglig känsla i magen med lust att kräkas.",
+  "def_uk": "Неприємне відчуття в шлунку з бажанням блювати.",
+  "def_ru": "Неприятное ощущение в желудке с позывом к рвоте.",
+  "n": 431
+ },
+ {
+  "id": "obstipatio",
+  "cat": "Vanliga kliniska termer",
+  "sv": "förstoppning",
+  "la": "obstipatio",
+  "uk": "закреп",
+  "ru": "запор",
+  "def_sv": "Svårighet att tömma tarmen, med hård och sällsynt avföring.",
+  "def_uk": "Труднощі з випорожненням кишечника, з твердими та нечастими випорожненнями.",
+  "def_ru": "Трудности с опорожнением кишечника, с твёрдым и редким стулом.",
+  "n": 432
  },
  {
   "id": "pallor",
@@ -5025,7 +5193,7 @@
   "def_sv": "Onaturligt blek hud, ofta vid chock eller blodbrist.",
   "def_uk": "Неприродно бліда шкіра, часто при шоці або анемії.",
   "def_ru": "Неестественно бледная кожа, часто при шоке или анемии.",
-  "n": 419
+  "n": 433
  },
  {
   "id": "sepsis",
@@ -5037,7 +5205,7 @@
   "def_sv": "Livshotande reaktion i kroppen på en spridd infektion.",
   "def_uk": "Небезпечна для життя реакція організму на поширену інфекцію.",
   "def_ru": "Опасная для жизни реакция организма на распространённую инфекцию.",
-  "n": 420
+  "n": 434
  },
  {
   "id": "syncope",
@@ -5049,7 +5217,7 @@
   "def_sv": "Kortvarig medvetslöshet på grund av minskat blodflöde till hjärnan.",
   "def_uk": "Короткочасна втрата свідомості через зменшений приплив крові до мозку.",
   "def_ru": "Кратковременная потеря сознания из-за уменьшенного притока крови к мозгу.",
-  "n": 421
+  "n": 435
  },
  {
   "id": "temperatura-corporis",
@@ -5061,7 +5229,7 @@
   "def_sv": "Kroppens värme som mäts med termometer, normalt cirka trettiosju grader.",
   "def_uk": "Тепло тіла, яке вимірюють термометром, у нормі близько тридцяти семи градусів.",
   "def_ru": "Тепло тела, которое измеряют термометром, в норме около тридцати семи градусов.",
-  "n": 422
+  "n": 436
  },
  {
   "id": "vertigo",
@@ -5073,7 +5241,7 @@
   "def_sv": "Känsla av att omgivningen eller kroppen snurrar.",
   "def_uk": "Відчуття, що оточення або тіло обертається.",
   "def_ru": "Ощущение, что окружение или тело вращается.",
-  "n": 423
+  "n": 437
  },
  {
   "id": "vomitus",
@@ -5085,6 +5253,6 @@
   "def_sv": "Maginnehåll kommer upp genom munnen.",
   "def_uk": "Вміст шлунка виходить назовні через рот.",
   "def_ru": "Содержимое желудка выходит наружу через рот.",
-  "n": 424
+  "n": 438
  }
 ]

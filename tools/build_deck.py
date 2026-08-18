@@ -21,22 +21,31 @@ import genanki
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DEFAULT_JSON = ROOT / "data" / "anatomi-termer.json"
 DEFAULT_OUT = ROOT / "data" / "anatomi-4sprak.apkg"
+LANGS_PATH = ROOT / "data" / "sprak.json"
 
 DECK_NAME = "Anatomi 4 språk"
 # Stabila id:n – ändra dem inte, annars skapas nya decks/modeller vid import.
 MODEL_ID = 1607392913
 DECK_ID_SEED = "anatomi-4sprak"
 
-FIELDS = [
-    "Svenska",
-    "Latin",
-    "Ukrainska",
-    "Ryska",
-    "DefSv",
-    "DefUk",
-    "DefRu",
-    "Kategori",
-]
+def load_langs():
+    """Språkuppsättningen kommer från data/sprak.json, samma fil som webbappen
+    använder. Lägg till ett språk där och både appen och decket följer med."""
+    langs = json.loads(LANGS_PATH.read_text(encoding="utf-8"))
+    # ankifalt/ankidef är Ankis fältnamn och måste vara stabila — byter de namn
+    # bryts befintliga användares kort vid en ny import. Därför står de
+    # uttryckligen i konfigurationen i stället för att härledas ur visningsnamnet.
+    term = [(k, v["ankifalt"], v["namn"].lower()) for k, v in langs.items() if v.get("term")]
+    defs = [(k, v["ankidef"]) for k, v in langs.items() if v.get("forklaring")]
+    return term, defs
+
+
+TERM_LANGS, DEF_LANGS = load_langs()
+
+# Fältnamnen i Anki: ett per termspråk, ett per förklaringsspråk, plus kategori.
+FIELDS = ([field for _, field, _ in TERM_LANGS]
+          + [field for _, field in DEF_LANGS]
+          + ["Kategori"])
 
 CSS = """
 .card {
@@ -54,14 +63,12 @@ CSS = """
 .def { font-size: 15px; color: #5b6673; margin-top: 10px; }
 """
 
-# (kortnamn, frågefält, etikett för frågespråket, svarsfält i ordning)
+# Ett korttyp per frågespråk: (kortnamn, frågefält, etikett, svarsfält i ordning)
 CARD_SPECS = [
-    ("Svenska → övriga", "Svenska", "svenska", ["Latin", "Ukrainska", "Ryska"]),
-    ("Latin → övriga", "Latin", "latin", ["Svenska", "Ukrainska", "Ryska"]),
-    ("Ukrainska → övriga", "Ukrainska", "українська", ["Svenska", "Latin", "Ryska"]),
-    ("Ryska → övriga", "Ryska", "русский", ["Svenska", "Latin", "Ukrainska"]),
+    (f"{field} → övriga", field, label,
+     [other for _, other, _ in TERM_LANGS if other != field])
+    for _, field, label in TERM_LANGS
 ]
-
 
 def _qfmt(qfield, qlang):
     return (
@@ -74,13 +81,14 @@ def _afmt(qfield, qlang, answers):
     rows = "\n".join(
         f'  <div><span class="tag">{f}</span>{{{{{f}}}}}</div>' for f in answers
     )
+    defs = "\n".join(
+        f'<div class="def">{{{{{field}}}}}</div>' for _, field in DEF_LANGS
+    )
     return (
         f'{_qfmt(qfield, qlang)}\n'
         "<hr id=answer>\n"
         f'<div class="answers">\n{rows}\n</div>\n'
-        '<div class="def">{{DefSv}}</div>\n'
-        '<div class="def">{{DefUk}}</div>\n'
-        '<div class="def">{{DefRu}}</div>\n'
+        f'{defs}\n'
         '<div class="cat">{{Kategori}}</div>'
     )
 
@@ -138,16 +146,9 @@ def build(json_path, out_path):
         note = StableNote(
             term["id"],
             model=model,
-            fields=[
-                term["sv"],
-                term["la"],
-                term["uk"],
-                term["ru"],
-                term.get("def_sv", ""),
-                term.get("def_uk", ""),
-                term.get("def_ru", ""),
-                cat,
-            ],
+            fields=([term[code] for code, _, _ in TERM_LANGS]
+                    + [term.get("def_" + code, "") for code, _ in DEF_LANGS]
+                    + [cat]),
             tags=["anatomi"],
         )
         decks[cat].add_note(note)
@@ -157,7 +158,8 @@ def build(json_path, out_path):
     package = genanki.Package(sorted(decks.values(), key=lambda d: d.name))
     package.write_to_file(str(out_path))
 
-    print(f"{len(terms)} termer i {len(decks)} underdeck -> {out_path}")
+    print(f"{len(terms)} termer i {len(decks)} underdeck, "
+          f"{len(TERM_LANGS)} korttyper -> {out_path}")
     for cat in sorted(decks):
         print(f"  {len(decks[cat].notes):3d}  {cat}")
     return out_path

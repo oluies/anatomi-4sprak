@@ -178,6 +178,73 @@ try {
   await page.click('#summary');
   check('klick på sammanfattningen fäller ut igen', await settingsOpen());
 
+  // --- kategorinamnen ska följa gränssnittsspråket ---
+  const catByUi = {};
+  for (const ui of ['sv', 'uk', 'ru', 'en']) {
+    await page.selectOption('#ui', ui);
+    catByUi[ui] = (await page.locator('#cats .chip').first().textContent()).trim();
+  }
+  const distinct = new Set(Object.values(catByUi));
+  check('kategorinamnen översätts med gränssnittet', distinct.size === 4,
+    Object.entries(catByUi).map(([k, v]) => `${k}=${v}`).join(' | '));
+  check('ukrainskt kategorinamn är kyrilliskt', /[\u0400-\u04FF]/.test(catByUi.uk), catByUi.uk);
+  check('engelskt kategorinamn är latinskt', /^[A-Za-z]/.test(catByUi.en), catByUi.en);
+  // listkolumnen och kortetiketten ska följa med
+  await page.selectOption('#ui', 'uk');
+  await page.click('#modes button[data-mode="list"]');
+  const lastCol = (await page.locator('#tbl tbody tr:first-child td:last-child').textContent()).trim();
+  check('listans kategorikolumn är översatt', /[\u0400-\u04FF]/.test(lastCol), lastCol);
+  // sökning på ett översatt kategorinamn ska ge träff
+  const uaCat = await page.evaluate(() => CATS['Leder och muskler'].uk);
+  await page.fill('#search', uaCat.split(' ')[0]);
+  const catRows = await page.locator('#tbl tbody tr').count();
+  const expectCat = await page.evaluate(() => DATA.filter(d => d.cat === 'Leder och muskler').length);
+  check('sökning på översatt kategorinamn ger träff', catRows >= expectCat, `${catRows} rader, väntade minst ${expectCat}`);
+  await page.fill('#search', '');
+  await page.selectOption('#ui', 'sv');
+  await page.click('#modes button[data-mode="card"]');
+
+  // --- språkkonfigurationen styr appen ---
+  const cfg = await page.evaluate(() => ({
+    langs: Object.keys(LANGS), defs: DEFFIELDS, uis: Object.keys(UILANGS),
+    backs: state.backs, cats: Object.keys(CATS).length
+  }));
+  const sprak = await (await page.request.get(base + 'data/sprak.json')).json();
+  const wantTerm = Object.keys(sprak).filter(k => sprak[k].term);
+  const wantDef = Object.keys(sprak).filter(k => sprak[k].forklaring).map(k => 'def_' + k);
+  const wantUi = Object.keys(sprak).filter(k => sprak[k].granssnitt);
+  check('termspråken kommer från data/sprak.json',
+    JSON.stringify(cfg.langs) === JSON.stringify(wantTerm), cfg.langs.join(','));
+  check('förklaringsfälten kommer från data/sprak.json',
+    JSON.stringify(cfg.defs) === JSON.stringify(wantDef), cfg.defs.join(','));
+  check('gränssnittsspråken kommer från data/sprak.json',
+    JSON.stringify(cfg.uis) === JSON.stringify(wantUi), cfg.uis.join(','));
+  const kategorier = await (await page.request.get(base + 'data/kategorier.json')).json();
+  check('kategoriöversättningarna är i synk', cfg.cats === Object.keys(kategorier).length,
+    `${cfg.cats} i appen, ${Object.keys(kategorier).length} i filen`);
+
+  // --- sidfoten: upphovsperson, licens och attribution ---
+  const foot = await page.evaluate(() => ({
+    meta: document.getElementById('footmeta').textContent.replace(/\s+/g, ' ').trim(),
+    hrefs: [...document.querySelectorAll('footer a')].map(a => a.getAttribute('href'))
+  }));
+  check('sidfoten anger upphovsperson', foot.meta.includes('Örjan Lundberg'), foot.meta);
+  check('sidfoten anger licensen', foot.meta.includes('CC BY-SA 4.0'));
+  check('sidfoten attribuerar Wikipedia', foot.meta.includes('Wikipedia'));
+  for (const [what, href] of [
+    ['licenslänk', 'https://creativecommons.org/licenses/by-sa/4.0/deed.sv'],
+    ['Wikipedia-artikeln', 'https://sv.wikipedia.org/wiki/M%C3%A4nniskans_anatomi'],
+    ['källkoden', 'https://github.com/oluies/anatomi-4sprak'],
+    ['donationslänk', 'https://donate.wikimedia.org/'],
+    ['deck-nedladdning', 'data/anatomi-4sprak.apkg']]) {
+    check(`sidfoten länkar till ${what}`, foot.hrefs.includes(href), href);
+  }
+  // sidfotens texter ska översättas
+  await page.selectOption('#ui', 'uk');
+  const ukFoot = (await page.textContent('#footmeta')).trim();
+  check('sidfoten översätts', /[\u0400-\u04FF]/.test(ukFoot) && ukFoot.includes('Örjan Lundberg'), ukFoot);
+  await page.selectOption('#ui', 'sv');
+
   // --- telefonvy: hopfällt från start ---
   const phone = await browser.newContext({ ...devices['iPhone 13'] });
   const small = await phone.newPage();

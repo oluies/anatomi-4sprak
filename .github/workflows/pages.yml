@@ -9,15 +9,17 @@ on:
       # Speglar deck.yml:s paths exakt — de pushar deployas av deck.yml efter
       # att decket byggts om, annars publiceras det gamla decket.
       - 'data/anatomi-termer.json'
+      - 'data/kategorier.json'
+      - 'data/sprak.json'
       - 'index.html'
       - 'tools/build_deck.py'
       - 'tools/check_data.py'
+      - 'tools/sync_html_data.py'
       - 'requirements.txt'
       - '.github/workflows/deck.yml'
       # Rör inte det som publiceras — ingen deploy behövs alls.
       - 'tests/**'
       - 'tools/verify_app.mjs'
-      - 'tools/sync_html_data.py'
       - 'requirements-dev.txt'
       - '.github/workflows/ci.yml'
   workflow_call:
@@ -52,7 +54,9 @@ jobs:
         with:
           python-version: '3.12'
       - name: Validate term data and index.html sync
-        run: python tools/check_data.py
+        run: |
+          python tools/sync_html_data.py --check
+          python tools/check_data.py
 
   deploy:
     needs: validate

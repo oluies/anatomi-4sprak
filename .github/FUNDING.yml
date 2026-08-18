@@ -1,0 +1,15 @@
+# GitHub visar en "Sponsor"-knapp på repot när den här filen har en aktiv rad.
+#
+# GitHub Sponsors måste aktiveras för kontot först — filen ensam gör ingenting:
+#   1. https://github.com/sponsors  ->  "Join the waitlist" / "Set up Sponsors"
+#   2. Fyll i profil, land och skatteuppgifter
+#   3. Koppla ett Stripe Connect-konto för utbetalning
+#   4. Godkännande tar oftast några dagar
+# När kontot är godkänt: avkommentera raden nedan.
+#
+# github: [oluies]
+#
+# Alternativ som inte kräver Sponsors-godkännande:
+# custom: ["https://donate.wikimedia.org/"]
+# ko_fi: dittnamn
+# buy_me_a_coffee: dittnamn

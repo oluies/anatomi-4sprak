@@ -5,9 +5,12 @@ on:
     branches: [main]
     paths:
       - 'data/anatomi-termer.json'
+      - 'data/kategorier.json'
+      - 'data/sprak.json'
       - 'index.html'
       - 'tools/build_deck.py'
       - 'tools/check_data.py'
+      - 'tools/sync_html_data.py'
       - 'requirements.txt'
       - '.github/workflows/deck.yml'
   workflow_dispatch:
@@ -32,7 +35,9 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Validate term data
-        run: python tools/check_data.py
+        run: |
+          python tools/sync_html_data.py --check
+          python tools/check_data.py
 
       # genanki-utdata är inte byte-reproducerbar (SQLite-tidsstämplar i .apkg),
       # så vi jämför en stämpel över källorna i stället för själva .apkg-filen.
@@ -40,7 +45,7 @@ jobs:
       - name: Compute source stamp
         id: stamp
         run: |
-          stamp=$(cat data/anatomi-termer.json tools/build_deck.py requirements.txt | shasum -a 256 | cut -d' ' -f1)
+          stamp=$(cat data/anatomi-termer.json data/sprak.json tools/build_deck.py requirements.txt | shasum -a 256 | cut -d' ' -f1)
           echo "value=$stamp" >> "$GITHUB_OUTPUT"
           if [ -f data/deck-source.sha256 ] && [ "$(cat data/deck-source.sha256)" = "$stamp" ]; then
             echo "unchanged=true" >> "$GITHUB_OUTPUT"
