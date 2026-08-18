@@ -240,6 +240,28 @@ kategori och alla fyra språken, så att det går att se exakt vilken term det g
 GitHub kräver inloggning för att skriva, därför finns e-postlänken som alternativ för
 den som inte har ett konto.
 
+## Besöksstatistik
+
+Sajten räknar sidvisningar med [GoatCounter](https://www.goatcounter.com/) — ingen
+kaka, ingen IP-lagring, inga personuppgifter, bara ett antal. Skriptet laddas bara
+över `https:`, så lokala körningar och rökprovet i CI hamnar inte i statistiken, och
+inte alls om besökaren skickar `Do Not Track` eller `Global Privacy Control`.
+
+Kontokoden står som `CODE` i skriptblocket längst ned i `index.html`:
+
+```js
+var CODE = "anatomi-4sprak";
+```
+
+**Registrera koden innan det ger någon data**: skapa kontot på
+[goatcounter.com](https://www.goatcounter.com/signup) med exakt det namnet, annars
+går anropen till en adress som inte finns. Väljer du ett annat namn räcker det att
+byta den raden. GoatCounter är gratis för icke-kommersiell användning och går även
+att köra själv.
+
+Statistiken kan göras publik i GoatCounters inställningar om du vill att andra ska
+kunna se den.
+
 ## Licens och källor
 
 Hela projektet — både termdatan och koden — är licensierat under

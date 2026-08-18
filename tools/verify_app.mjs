@@ -255,6 +255,24 @@ try {
   check('sidfoten översätts', /[\u0400-\u04FF]/.test(ukFoot) && ukFoot.includes('Örjan Lundberg'), ukFoot);
   await page.selectOption('#ui', 'sv');
 
+  // --- besöksräkning ---
+  // Över http (som här och i CI) får den inte laddas alls, annars skulle varje
+  // testkörning räknas som ett besök.
+  const gcHttp = await page.evaluate(() =>
+    [...document.querySelectorAll('script[src]')].some(s => s.src.includes('gc.zgo.at')));
+  check('besöksräknaren laddas inte över http', !gcHttp);
+  const gcCode = await page.evaluate(() => {
+    const m = document.documentElement.innerHTML.match(/var CODE = "([^"]+)"/);
+    return m && m[1];
+  });
+  check('besöksräknarens kod är satt', !!gcCode, gcCode || '(saknas)');
+  // Respekterar besökarens val att slippa spårning.
+  const gcDnt = await page.evaluate(() => {
+    const src = document.documentElement.innerHTML;
+    return src.includes('doNotTrack') && src.includes('globalPrivacyControl');
+  });
+  check('besöksräknaren respekterar do-not-track', gcDnt);
+
   // --- hjälpen ---
   const helpVisible = () => page.locator('#help').isVisible();
   check('hjälpen är dold från start', !(await helpVisible()));

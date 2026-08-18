@@ -899,6 +899,25 @@ if("serviceWorker" in navigator && location.protocol==="https:"){
     navigator.serviceWorker.register("sw.js").catch(()=>{});
   });
 }
+
+/* Besöksräkning med GoatCounter: ingen kaka, ingen IP-lagring, inga
+   personuppgifter — bara ett sidvisningsantal. Koden nedan är kontonamnet på
+   goatcounter.com; byt den om du registrerar ett annat.
+
+   Laddas bara över https, så lokala körningar och rökprovet i CI inte hamnar i
+   statistiken, och inte alls om besökaren bett om att slippa spårning. */
+(function(){
+  var CODE = "anatomi-4sprak";
+  if(location.protocol !== "https:") return;
+  var dnt = navigator.doNotTrack === "1" || window.doNotTrack === "1"
+         || navigator.msDoNotTrack === "1" || navigator.globalPrivacyControl === true;
+  if(dnt) return;
+  var el = document.createElement("script");
+  el.async = true;
+  el.src = "https://gc.zgo.at/count.js";
+  el.setAttribute("data-goatcounter", "https://" + CODE + ".goatcounter.com/count");
+  document.head.appendChild(el);
+})();
 </script>
 </body>
 </html>
