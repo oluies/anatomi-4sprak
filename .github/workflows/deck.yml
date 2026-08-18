@@ -6,6 +6,8 @@ on:
     paths:
       - 'data/anatomi-termer.json'
       - 'data/kategorier.json'
+      - 'data/bilder.json'
+      - 'data/bilder-uteslutna.json'
       - 'data/sprak.json'
       - 'index.html'
       - 'tools/build_deck.py'

@@ -21,10 +21,11 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 JSON_PATH = ROOT / "data" / "anatomi-termer.json"
 CATS_PATH = ROOT / "data" / "kategorier.json"
 LANGS_PATH = ROOT / "data" / "sprak.json"
+IMGS_PATH = ROOT / "data" / "bilder.json"
 HTML_PATH = ROOT / "index.html"
 
 # (variabelnamn i index.html, öppnande tecken)
-BLOCKS = [("const DATA = ", "["), ("const CATS = ", "{"),
+BLOCKS = [("const DATA = ", "["), ("const CATS = ", "{"), ("const IMGS = ", "{"),
           ("const LANGS = ", "{"), ("const DEFLANGS = ", "{"), ("const UILANGS = ", "{")]
 
 
@@ -89,14 +90,24 @@ def main(argv=None):
 
     html = HTML_PATH.read_text(encoding="utf-8")
     in_sync = True
-    values = [dump(terms), dump(cats), dump(term_langs), dump(def_langs), dump(ui_langs)]
+    imgs = json.loads(IMGS_PATH.read_text(encoding="utf-8")) if IMGS_PATH.exists() else {}
+    ids = {t["id"] for t in terms}
+    stray = sorted(set(imgs) - ids)
+    if stray:
+        raise SystemExit(f"{IMGS_PATH.name}: {len(stray)} poster saknar term, t.ex. {stray[:3]}")
+    for term_id, entry in imgs.items():
+        if entry.get("bild") and not entry.get("licens"):
+            raise SystemExit(f"{IMGS_PATH.name}: {term_id} har bild utan licensuppgift")
+
+    values = [dump(terms), dump(cats), dump(imgs),
+              dump(term_langs), dump(def_langs), dump(ui_langs)]
     for (marker, opener), value in zip(BLOCKS, values):
         html, same = replace_block(html, marker, opener, value)
         in_sync = in_sync and same
 
     if in_sync:
         print(f"index.html är redan i synk ({len(terms)} termer, {len(cats)} kategorier, "
-              f"{len(term_langs)} termspråk).")
+              f"{len(term_langs)} termspråk, {sum(1 for e in imgs.values() if e.get('bild'))} bilder).")
         return 0
 
     if args.check:
@@ -108,7 +119,7 @@ def main(argv=None):
     # samma format som filerna redan har, så diffen bara visar innehåll
     JSON_PATH.write_text(json.dumps(terms, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"index.html uppdaterad ({len(terms)} termer, {len(cats)} kategorier, "
-          f"{len(term_langs)} termspråk).")
+          f"{len(term_langs)} termspråk, {sum(1 for e in imgs.values() if e.get('bild'))} bilder).")
     return 0
 
 

@@ -16,6 +16,9 @@ funktion och vanlig medicinsk terminologi.
 | `index.html` | Fristående webbapp med flashcards, quiz och söklista. Allt ligger i en enda fil, inga beroenden. |
 | `data/anatomi-termer.json` | Termdatan. Fält: `id`, `cat`, `sv`, `la`, `uk`, `ru`, `def_sv`, `def_uk`, `def_ru`, `n`. |
 | `data/kategorier.json` | Kategorinamnen översatta till ukrainska, ryska och engelska. |
+| `data/bilder.json` | Bild och artikellänk per term, hämtade från svenskspråkiga Wikipedia, med licens och upphovsperson. |
+| `data/bilder-uteslutna.json` | Term-id vars automatiskt valda bild underkänts vid granskning, med skäl. |
+| `tools/fetch_images.py` | Slår upp bilderna mot Wikipedias API och skriver `bilder.json`. Körs för hand. |
 | `data/sprak.json` | Språkuppsättningen: vilka språk som är termspråk, har förklaringar, går att välja som gränssnitt, och vad fälten heter i Anki. |
 | `data/anatomi-4sprak.apkg` | Anki-deck genererat från JSON-filen. |
 | `tools/build_deck.py` | Bygger om `.apkg` från JSON med `genanki`. |
@@ -177,6 +180,46 @@ python tools/check_data.py && python -m pytest tests -q
 npm install playwright && npx playwright install chromium
 node tools/verify_app.mjs .
 ```
+
+## Bilder
+
+256 termer har en bild från svenskspråkiga Wikipedia. Bilden visas i svaret på
+flashcardet och i lägen *Bildquiz*, där man får se bilden och välja rätt term.
+
+Bilderna **hotlänkas** från `upload.wikimedia.org` — de ligger inte i repot. Service
+workern cachar dem efterhand, så en bild man sett en gång finns kvar offline. Varje
+bild visas tillsammans med upphovsperson, licens och länk till filsidan på Commons;
+en bild utan känd licens publiceras inte.
+
+Bildquizet använder bara termer vars bild är **unik**. Wikipedias huvudbild är ofta
+en översiktsillustration som delas av flera termer — samma njurdiagram gäller för
+njure, njurbark, njurmärg och njurbäcken — och en delad bild skulle ge flera rätta
+svar på samma fråga.
+
+### Uppdatera bildurvalet
+
+```bash
+python tools/fetch_images.py          # skriver om data/bilder.json
+python tools/sync_html_data.py        # bakar in det i index.html
+```
+
+Skriptet slår upp varje term på svenskspråkiga Wikipedia och tar artikelns huvudbild.
+Det kontrollerar också mot Wikidata om artikeln har en anatomisk identifierare (FMA,
+TA98, UBERON, MeSH) och **varnar** för dem som saknar den, eftersom det ofta är
+homonymer: uppslaget på *atlas* gav titanen i grekisk mytologi, *falang* gav den
+antika stridsformeringen och *lins* gav den optiska linsen. Varningen är avsiktligt
+inte ett automatiskt bortval — flera korrekta artiklar (Bröstkorg, Penis, Förlossning)
+saknar också identifierarna. Underkända bilder förs in i `data/bilder-uteslutna.json`
+med ett skäl, och utesluts vid nästa körning.
+
+## Felrapportering
+
+Varje kort har en rad med **Läs mer på Wikipedia**, **Rapportera fel i den här termen**
+och **e-post**. Rapportlänken öppnar en förifylld
+[GitHub-diskussion](https://github.com/oluies/anatomi-4sprak/discussions) med term-id,
+kategori och alla fyra språken, så att det går att se exakt vilken term det gäller.
+GitHub kräver inloggning för att skriva, därför finns e-postlänken som alternativ för
+den som inte har ett konto.
 
 ## Licens och källor
 

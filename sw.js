@@ -3,6 +3,10 @@
 // nästa besök får den senaste versionen utan att någon behöver röra den här filen.
 // CACHE-nyckeln är versionerad: höj den för att tvinga fram en total omladdning.
 const CACHE = "anatomi-4sprak-v1";
+// Termbilderna hotlänkas från Wikimedia Commons. De cachas när de väl hämtats
+// så att appen fungerar offline även med bilder — annars vore hela bildstödet
+// borta så fort nätet försvinner.
+const IMAGE_HOST = "https://upload.wikimedia.org";
 
 // Endast skalet precachas. Deck-filen (~450 kB) laddas bara om användaren begär
 // den, och cachas då av fetch-hanteraren nedan.
@@ -40,7 +44,9 @@ self.addEventListener("fetch", event => {
   } catch {
     return;
   }
-  if (url.origin !== self.location.origin) return;
+  const sameOrigin = url.origin === self.location.origin;
+  const isImage = url.origin === IMAGE_HOST;
+  if (!sameOrigin && !isImage) return;
 
   event.respondWith(
     caches.open(CACHE).then(cache =>
@@ -49,7 +55,9 @@ self.addEventListener("fetch", event => {
         // att bakgrundshämtningen inte lagrar om samma inaktuella byte:s.
         const network = fetch(hit ? new Request(req, { cache: "no-cache" }) : req)
           .then(res => {
-            if (!res || !res.ok || res.type !== "basic") return res;
+            // Commons svarar med CORS (*), så bilderna kommer tillbaka som
+            // "cors" och inte "basic" — båda ska få cachas.
+            if (!res || !res.ok || (res.type !== "basic" && res.type !== "cors")) return res;
             // Vänta in skrivningen, annars kan waitUntil avsluta workern innan
             // uppdateringen hunnit hamna i cachen.
             return cache.put(req, res.clone()).then(() => res);
@@ -68,6 +76,8 @@ self.addEventListener("fetch", event => {
           if (req.mode === "navigate") {
             return cache.match("./index.html").then(shell => shell || Response.error());
           }
+          // En bild som inte gick att hämta ska inte fälla hela kortet.
+          if (isImage) return new Response("", {status: 504, statusText: "offline"});
           return Response.error();
         });
       })

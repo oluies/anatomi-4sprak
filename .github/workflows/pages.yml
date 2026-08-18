@@ -10,6 +10,8 @@ on:
       # att decket byggts om, annars publiceras det gamla decket.
       - 'data/anatomi-termer.json'
       - 'data/kategorier.json'
+      - 'data/bilder.json'
+      - 'data/bilder-uteslutna.json'
       - 'data/sprak.json'
       - 'index.html'
       - 'tools/build_deck.py'
@@ -20,6 +22,7 @@ on:
       # Rör inte det som publiceras — ingen deploy behövs alls.
       - 'tests/**'
       - 'tools/verify_app.mjs'
+      - 'tools/fetch_images.py'
       - 'requirements-dev.txt'
       - '.github/workflows/ci.yml'
   workflow_call:

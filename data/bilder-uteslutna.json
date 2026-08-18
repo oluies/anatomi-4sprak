@@ -1,0 +1,9 @@
+{
+ "_kommentar": "Term-id vars automatiskt hämtade Wikipedia-bild underkänts vid granskning. Kör tools/fetch_images.py efter ändring. Nyckeln är term-id, värdet är skälet.",
+ "glandula-mammaria": "närbild på bröst — olämplig som automatiskt vald bild i ett skolmaterial",
+ "atlas": "homonym: artikeln Atlas handlar om titanen i grekisk mytologi, inte halskotan",
+ "phalanx": "homonym: artikeln Falang handlar om den antika stridsformeringen",
+ "inferior": "homonym: artikeln Inferiör vara är nationalekonomi",
+ "lens": "homonym: artikeln Lins handlar om den optiska linsen, inte ögats lins",
+ "pylorus": "homonym: artikeln Portvakt handlar om yrket, inte magmunnen"
+}

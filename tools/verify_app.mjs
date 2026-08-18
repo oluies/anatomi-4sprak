@@ -245,6 +245,73 @@ try {
   check('sidfoten översätts', /[\u0400-\u04FF]/.test(ukFoot) && ukFoot.includes('Örjan Lundberg'), ukFoot);
   await page.selectOption('#ui', 'sv');
 
+  // --- bilder: licensrad, kortsvar och bildquiz ---
+  const bilder = await (await page.request.get(base + 'data/bilder.json')).json();
+  const cfgImgs = await page.evaluate(() => ({
+    total: Object.keys(IMGS).length,
+    med: Object.values(IMGS).filter(e => e.bild).length,
+    unika: Object.values(IMGS).filter(e => e.bild && IMG_USES[e.bild] === 1).length,
+    utanLicens: Object.values(IMGS).filter(e => e.bild && !e.licens).length
+  }));
+  check('bilddatan är i synk med data/bilder.json',
+    cfgImgs.total === Object.keys(bilder).length, `${cfgImgs.total} vs ${Object.keys(bilder).length}`);
+  check('ingen bild saknar licensuppgift', cfgImgs.utanLicens === 0, `${cfgImgs.utanLicens} utan licens`);
+  check('det finns bilder att visa', cfgImgs.med > 100, `${cfgImgs.med} bilder`);
+
+  // bilden ska visas först när kortet vänds
+  await page.click('#modes button[data-mode="card"]');
+  await page.evaluate(() => { state.current = pool().find(t => imgOf(t)); state.flipped = false; renderCard(); });
+  check('bilden är dold innan kortet vänds', !(await page.locator('#cimg img').count()));
+  await page.evaluate(() => { state.flipped = true; renderCard(); });
+  check('bilden visas i svaret', (await page.locator('#cimg img').count()) === 1);
+  const cred = (await page.textContent('.imgcred')).trim();
+  check('bilden har upphovsperson och licens',
+    cred.includes('·') && cred.includes('Wikimedia Commons'), cred);
+  const imgOk = await page.evaluate(async () => {
+    const i = document.querySelector('#cimg img');
+    await new Promise(r => { if (i.complete) r(); else { i.onload = r; i.onerror = r; } });
+    return i.naturalWidth > 0;
+  });
+  check('bilden laddas från Commons', imgOk);
+
+  // uteslutna bilder får inte dyka upp
+  const uteslutna = await (await page.request.get(base + 'data/bilder-uteslutna.json')).json();
+  const stillThere = await page.evaluate(
+    ids => ids.filter(id => IMGS[id] && IMGS[id].bild),
+    Object.keys(uteslutna).filter(k => !k.startsWith('_')));
+  check('granskningsuteslutna bilder är borta', stillThere.length === 0, stillThere.join(','));
+
+  // bildquiz: bara unika bilder, annars finns flera rätta svar
+  await page.click('#modes button[data-mode="image"]');
+  await page.waitForSelector('#iopts button');
+  check('bildquizet använder bara unika bilder', cfgImgs.unika > 50, `${cfgImgs.unika} unika`);
+  const poolOnlyUnique = await page.evaluate(
+    () => imagePool().every(t => IMG_USES[IMGS[t.id].bild] === 1));
+  check('ingen delad bild kan bli bildfråga', poolOnlyUnique);
+  check('bildfrågan visar en bild', (await page.locator('#qimg img').count()) === 1);
+  check('bildfrågan har fyra alternativ', (await page.locator('#iopts button').count()) === 4);
+  await page.evaluate(() => {
+    const c = state.icur.item[state.front];
+    [...document.getElementById('iopts').children].find(b => b.textContent === c).click();
+  });
+  check('rätt svar i bildquizet räknas',
+    (await page.textContent('#i_r')).trim() === '1' && (await page.textContent('#i_n')).trim() === '1');
+
+  // --- felrapportering per term ---
+  await page.click('#modes button[data-mode="card"]');
+  await page.evaluate(() => { state.current = pool()[0]; state.flipped = true; renderCard(); });
+  const rep = await page.evaluate(() => ({
+    hrefs: [...document.querySelectorAll('#creport a')].map(a => a.getAttribute('href')),
+    id: state.current.id
+  }));
+  const gh = rep.hrefs.find(h => h.includes('/discussions/new'));
+  check('rapportlänk till GitHub-diskussion finns', !!gh);
+  check('rapportlänken är förifylld med term-id',
+    !!gh && decodeURIComponent(gh).includes('`' + rep.id + '`'), rep.id);
+  check('rapportlänken har en kategori', !!gh && gh.includes('category='));
+  check('e-postreserv finns för den utan GitHub-konto',
+    rep.hrefs.some(h => h.startsWith('mailto:')));
+
   // --- telefonvy: hopfällt från start ---
   const phone = await browser.newContext({ ...devices['iPhone 13'] });
   const small = await phone.newPage();
