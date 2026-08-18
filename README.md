@@ -250,17 +250,12 @@ inte alls om besökaren skickar `Do Not Track` eller `Global Privacy Control`.
 Kontokoden står som `CODE` i skriptblocket längst ned i `index.html`:
 
 ```js
-var CODE = "anatomi-4sprak";
+var CODE = "oluies";
 ```
 
-**Registrera koden innan det ger någon data**: skapa kontot på
-[goatcounter.com](https://www.goatcounter.com/signup) med exakt det namnet, annars
-går anropen till en adress som inte finns. Väljer du ett annat namn räcker det att
-byta den raden. GoatCounter är gratis för icke-kommersiell användning och går även
-att köra själv.
-
-Statistiken kan göras publik i GoatCounters inställningar om du vill att andra ska
-kunna se den.
+Statistiken finns på <https://oluies.goatcounter.com>. Den är privat som standard och
+kan göras publik i GoatCounters inställningar. GoatCounter är gratis för
+icke-kommersiell användning och går även att köra själv.
 
 ## Licens och källor
 
