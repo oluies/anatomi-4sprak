@@ -1,0 +1,11 @@
+{
+  "name": "Anatomi 4 språk",
+  "short_name": "Anatomi 4",
+  "description": "Flashcards för anatomi, fysiologi och medicinsk terminologi på svenska, latin, ukrainska och ryska.",
+  "lang": "sv",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f1216",
+  "theme_color": "#0f1216"
+}

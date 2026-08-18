@@ -1,0 +1,42 @@
+name: Build Anki deck
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/anatomi-termer.json'
+      - 'tools/build_deck.py'
+      - 'requirements.txt'
+      - '.github/workflows/deck.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deck-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Build deck
+        run: python tools/build_deck.py
+      - name: Commit updated deck
+        run: |
+          if git diff --quiet -- data/anatomi-4sprak.apkg; then
+            echo "Decket är oförändrat, inget att committa."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/anatomi-4sprak.apkg
+          git commit -m "Bygg om anatomi-4sprak.apkg från anatomi-termer.json"
+          git push
