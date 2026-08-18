@@ -17,6 +17,7 @@ funktion och vanlig medicinsk terminologi.
 | `data/anatomi-termer.json` | Termdatan. Fält: `id`, `cat`, `sv`, `la`, `uk`, `ru`, `def_sv`, `def_uk`, `def_ru`, `n`. |
 | `data/anatomi-4sprak.apkg` | Anki-deck genererat från JSON-filen. |
 | `tools/build_deck.py` | Bygger om `.apkg` från JSON med `genanki`. |
+| `tools/check_data.py` | Kontrollerar termdatans invarianter och att `index.html` är i synk med JSON-filen. |
 | `manifest.webmanifest`, `sw.js` | Gör sajten installerbar och användbar offline. |
 
 Webbappen kan visa frågan på vilket som helst av de fyra språken, med valfria
@@ -72,15 +73,40 @@ python tools/build_deck.py
 Skriptet läser `data/anatomi-termer.json` och skriver `data/anatomi-4sprak.apkg`.
 Andra sökvägar går att ange med `--json` och `--out`.
 
-Vid push till `main` som ändrar `data/anatomi-termer.json` byggs decket automatiskt om
-av GitHub Actions (`.github/workflows/deck.yml`), och den nya `.apkg`-filen committas.
+### Ändra en term
+
+Termdatan finns på **två** ställen: inbakad i `index.html` (webbappen är en enda fil
+utan beroenden och hämtar ingenting) och i `data/anatomi-termer.json` (som decket byggs
+från). Ändrar du en term måste båda uppdateras. Kontrollera med:
+
+```bash
+python tools/check_data.py
+```
+
+Skriptet verifierar att `id` och `n` är unika, att alla fält är ifyllda och att
+`index.html` och JSON-filen innehåller exakt samma data. Samma kontroll körs i CI och
+stoppar bygget om filerna glidit isär.
+
+Vid push till `main` som ändrar termdatan byggs decket automatiskt om av GitHub Actions
+(`.github/workflows/deck.yml`), den nya `.apkg`-filen committas och sajten deployas om.
+Eftersom genanki skriver tidsstämplar i `.apkg`-filen är utdatan inte byte-identisk
+mellan körningar; workflowet jämför därför en checksumma över källorna
+(`data/deck-source.sha256`) i stället för själva deckfilen, så att oförändrat innehåll
+inte ger en ny binär commit vid varje körning.
 
 ## Offline och installation
 
-Sajten registrerar en service worker (endast över `https:`) som cachar sidan,
-manifestet och filerna i `data/`. Efter första besöket fungerar appen utan nätverk,
-och den kan installeras som app från webbläsarens meny. Höj cache-nyckeln i `sw.js`
-när innehållet ändras.
+Sajten registrerar en service worker (endast över `https:`) som precachar skalet —
+sidan och manifestet — och cachar övriga filer, som Anki-decket, i takt med att de
+efterfrågas. Svaret kommer alltid från cachen först, medan en ny version hämtas i
+bakgrunden och används vid nästa besök. Efter första besöket fungerar appen utan
+nätverk. Behöver du tvinga fram en total omladdning för alla besökare, höj
+`CACHE`-nyckeln i `sw.js`.
+
+Manifestet saknar ikoner. Sajten går att lägga till på hemskärmen i Safari på iOS,
+men Chrome och Edge kräver ikoner på 192×192 och 512×512 px innan de erbjuder
+"installera app" — lägg till en `icons`-lista i `manifest.webmanifest` om den
+funktionen behövs.
 
 ## Licens
 

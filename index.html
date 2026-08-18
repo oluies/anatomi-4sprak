@@ -158,28 +158,28 @@ const I18N = {
      b_skip:"Hoppa över",b_next:"Nästa",s_seen:"Visade",s_known:"Kan",s_left:"Kvar",
      s_q:"Frågor",s_right:"Rätt",search:"Sök...",done:"Klart. Alla kort genomgångna.",
      restart:"Börja om",f_note:"Termlista för grundläggande anatomi, fysiologi och medicinsk terminologi.",
-     nocards:"Inga kort valda. Välj minst en kategori."},
+     nocards:"Inga kort valda. Välj minst en kategori.",cat:"Kategori"},
  uk:{title:"Анатомія і фізіологія",m_card:"Картки",m_quiz:"Тест",m_list:"Список",
      l_front:"Питання",l_back:"Відповідь",l_def:"Пояснення",l_ui:"Інтерфейс",b_all:"Усі",b_none:"Жодної",
      h_tap:"Натисніть або пробіл, щоб перевернути",b_again:"Повторити",b_known:"Знаю",
      b_skip:"Пропустити",b_next:"Далі",s_seen:"Показано",s_known:"Знаю",s_left:"Залишилось",
      s_q:"Питань",s_right:"Правильно",search:"Пошук...",done:"Готово. Усі картки пройдено.",
      restart:"Почати спочатку",f_note:"Словник основних термінів анатомії, фізіології та медичної термінології.",
-     nocards:"Картки не вибрані. Виберіть хоча б одну категорію."},
+     nocards:"Картки не вибрані. Виберіть хоча б одну категорію.",cat:"Категорія"},
  ru:{title:"Анатомия и физиология",m_card:"Карточки",m_quiz:"Тест",m_list:"Список",
      l_front:"Вопрос",l_back:"Ответ",l_def:"Пояснение",l_ui:"Интерфейс",b_all:"Все",b_none:"Ни одной",
      h_tap:"Нажмите или пробел, чтобы перевернуть",b_again:"Повторить",b_known:"Знаю",
      b_skip:"Пропустить",b_next:"Далее",s_seen:"Показано",s_known:"Знаю",s_left:"Осталось",
      s_q:"Вопросов",s_right:"Верно",search:"Поиск...",done:"Готово. Все карточки пройдены.",
      restart:"Начать заново",f_note:"Список основных терминов анатомии, физиологии и медицинской терминологии.",
-     nocards:"Карточки не выбраны. Выберите хотя бы одну категорию."},
+     nocards:"Карточки не выбраны. Выберите хотя бы одну категорию.",cat:"Категория"},
  en:{title:"Anatomy and physiology",m_card:"Flashcards",m_quiz:"Quiz",m_list:"List",
      l_front:"Prompt",l_back:"Answer",l_def:"Explanation",l_ui:"Interface",b_all:"All",b_none:"None",
      h_tap:"Click or press space to flip",b_again:"Repeat",b_known:"Known",
      b_skip:"Skip",b_next:"Next",s_seen:"Seen",s_known:"Known",s_left:"Left",
      s_q:"Questions",s_right:"Correct",search:"Search...",done:"Done. All cards reviewed.",
      restart:"Start over",f_note:"Term list for basic anatomy, physiology and medical terminology.",
-     nocards:"No cards selected. Pick at least one category."}
+     nocards:"No cards selected. Pick at least one category.",cat:"Category"}
 };
 
 const state = {
@@ -327,11 +327,14 @@ function newQuestion(){
 function renderList(){
   const q=$("search").value.trim().toLowerCase();
   const langs=["sv","la","uk","ru"];
-  const rows=pool().filter(d=>!q||langs.some(k=>d[k].toLowerCase().includes(q))||d.def_sv.toLowerCase().includes(q));
+  const defs=["def_sv","def_uk","def_ru"];
+  const rows=pool().filter(d=>!q
+    ||langs.some(k=>String(d[k]||"").toLowerCase().includes(q))
+    ||defs.some(k=>String(d[k]||"").toLowerCase().includes(q)));
   let h="<thead><tr><th>#</th>";
   for(const k of langs) h+="<th>"+LANGS[k]+"</th>";
   if(state.def!=="none") h+="<th>"+DEFLANGS[state.def]+"</th>";
-  h+="<th>"+T("m_list")+"</th></tr></thead><tbody>";
+  h+="<th>"+T("cat")+"</th></tr></thead><tbody>";
   for(const d of rows){
     h+="<tr><td>"+d.n+"</td>";
     for(const k of langs) h+="<td>"+esc(d[k])+"</td>";

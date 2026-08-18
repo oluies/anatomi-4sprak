@@ -5,7 +5,9 @@ on:
     branches: [main]
     paths:
       - 'data/anatomi-termer.json'
+      - 'index.html'
       - 'tools/build_deck.py'
+      - 'tools/check_data.py'
       - 'requirements.txt'
       - '.github/workflows/deck.yml'
   workflow_dispatch:
@@ -15,7 +17,7 @@ permissions:
 
 concurrency:
   group: deck-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -25,18 +27,53 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Build deck
-        run: python tools/build_deck.py
-      - name: Commit updated deck
+
+      - name: Validate term data
+        run: python tools/check_data.py
+
+      # genanki-utdata är inte byte-reproducerbar (SQLite-tidsstämplar i .apkg),
+      # så vi jämför en stämpel över källorna i stället för själva .apkg-filen.
+      # Annars skulle varje körning committa en ny binär på hundratals kB.
+      - name: Compute source stamp
+        id: stamp
         run: |
-          if git diff --quiet -- data/anatomi-4sprak.apkg; then
-            echo "Decket är oförändrat, inget att committa."
-            exit 0
+          stamp=$(cat data/anatomi-termer.json tools/build_deck.py requirements.txt | shasum -a 256 | cut -d' ' -f1)
+          echo "value=$stamp" >> "$GITHUB_OUTPUT"
+          if [ -f data/deck-source.sha256 ] && [ "$(cat data/deck-source.sha256)" = "$stamp" ]; then
+            echo "unchanged=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "unchanged=false" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Build deck
+        if: steps.stamp.outputs.unchanged == 'false'
+        run: python tools/build_deck.py
+
+      - name: Commit updated deck
+        if: steps.stamp.outputs.unchanged == 'false'
+        run: |
+          echo "${{ steps.stamp.outputs.value }}" > data/deck-source.sha256
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/anatomi-4sprak.apkg
+          git add data/anatomi-4sprak.apkg data/deck-source.sha256
           git commit -m "Bygg om anatomi-4sprak.apkg från anatomi-termer.json"
+          git pull --rebase --autostash
           git push
+
+      - name: Skip
+        if: steps.stamp.outputs.unchanged == 'true'
+        run: echo "Källorna är oförändrade sedan förra bygget — decket byggs inte om."
+
+  # En push med GITHUB_TOKEN startar inga nya workflows, så Pages-deployen
+  # måste triggas härifrån. Annars publiceras det gamla decket.
+  deploy-pages:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/pages.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
