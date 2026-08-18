@@ -32,6 +32,14 @@ Webbappen kan visa frågan på vilket som helst av de fyra språken, med valfria
 svarsspråk, förklaring på svenska/ukrainska/ryska och filtrering per kategori.
 Gränssnittet finns på svenska, ukrainska och ryska.
 
+På dator finns kortkommandon i flashcard-läget: **→** visar först svaret och går
+vid nästa tryck vidare till nästa kort, **←** går tillbaka till föregående kort
+(med svaret framme, så pilarna blir symmetriska), **mellanslag** vänder kortet,
+**1** lägger kortet sist i kön för repetition och **2** markerar det som kunnigt.
+Att gå bakåt återställer även räknarna och repetera-kön, så statistiken stämmer.
+I quizlägena går **→** till nästa fråga. Raden med genvägar visas bara på enheter
+med tangentbord.
+
 Urvalsinställningarna — språk, svarsspråk och kategorier — går att fälla ihop och är
 hopfällda från start på telefon, där de annars fyller nästan hela skärmen innan man ser
 ett kort. Hopfällda ersätts de av en rad som visar vad som är valt.

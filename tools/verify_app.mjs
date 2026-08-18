@@ -255,6 +255,67 @@ try {
   check('sidfoten översätts', /[\u0400-\u04FF]/.test(ukFoot) && ukFoot.includes('Örjan Lundberg'), ukFoot);
   await page.selectOption('#ui', 'sv');
 
+  // --- kortkommandon på dator ---
+  await page.click('#modes button[data-mode="card"]');
+  await page.evaluate(() => { resetQueue(); renderCard(); });
+  const kbState = () => page.evaluate(() => ({
+    term: state.current && state.current.id, flipped: state.flipped,
+    seen: state.seen, known: state.known, hist: state.history.length
+  }));
+
+  const k0 = await kbState();
+  await page.keyboard.press('ArrowRight');
+  const k1 = await kbState();
+  check('höger visar svaret först', k1.flipped && k1.term === k0.term && k1.seen === k0.seen,
+    `${k0.term} -> ${k1.term}, vänt=${k1.flipped}`);
+  await page.keyboard.press('ArrowRight');
+  const k2 = await kbState();
+  check('höger igen går till nästa kort',
+    !k2.flipped && k2.term !== k0.term && k2.seen === k0.seen + 1, `${k1.term} -> ${k2.term}`);
+
+  await page.keyboard.press('ArrowLeft');
+  const k3 = await kbState();
+  check('vänster går till föregående kort', k3.term === k0.term, `${k2.term} -> ${k3.term}`);
+  check('föregående kort visas med svaret framme', k3.flipped);
+  check('statistiken backar med kortet', k3.seen === k0.seen && k3.known === k0.known,
+    `visade ${k3.seen}, kan ${k3.known}`);
+  await page.keyboard.press('ArrowRight');
+  check('höger efter vänster går framåt igen', (await kbState()).term === k2.term);
+
+  // stat- och köåterställning efter "kan" och "repetera"
+  await page.evaluate(() => { resetQueue(); renderCard(); });
+  const before = await page.evaluate(() => ({ seen: state.seen, known: state.known, kö: state.queue.length }));
+  await page.keyboard.press('2');
+  await page.keyboard.press('2');
+  await page.keyboard.press('1');
+  await page.keyboard.press('ArrowLeft');
+  await page.keyboard.press('ArrowLeft');
+  await page.keyboard.press('ArrowLeft');
+  const after = await page.evaluate(() => ({ seen: state.seen, known: state.known, kö: state.queue.length }));
+  check('tre steg bakåt återställer räknare och repetera-kö',
+    after.seen === before.seen && after.known === before.known && after.kö === before.kö,
+    `${JSON.stringify(before)} vs ${JSON.stringify(after)}`);
+
+  const atStart = await page.evaluate(() => {
+    resetQueue(); renderCard();
+    const id = state.current.id; prev(); return id === state.current.id;
+  });
+  check('vänster i början gör ingenting', atStart);
+  const capped = await page.evaluate(() => {
+    resetQueue(); for (let i = 0; i < 80; i++) next(null); return state.history.length;
+  });
+  check('historiken är begränsad', capped === 50, `${capped} steg`);
+
+  // höger går vidare i quizlägena
+  await page.click('#modes button[data-mode="quiz"]');
+  await page.waitForSelector('#qopts button');
+  const q1 = await page.textContent('#qterm');
+  await page.keyboard.press('ArrowRight');
+  check('höger ger nästa quizfråga', (await page.textContent('#qterm')) !== q1 ||
+    (await page.locator('#qopts button').count()) === 4);
+  await page.click('#modes button[data-mode="card"]');
+  await page.evaluate(() => { resetQueue(); renderCard(); });
+
   // --- bilder: licensrad, kortsvar och bildquiz ---
   const bilder = await (await page.request.get(base + 'data/bilder.json')).json();
   const cfgImgs = await page.evaluate(() => ({

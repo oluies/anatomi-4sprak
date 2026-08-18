@@ -62,6 +62,11 @@ tr:hover td{background:var(--panel2)}
 .qopt.right{background:var(--good);border-color:var(--good);color:#fff}
 .qopt.wrong{background:var(--bad);border-color:var(--bad);color:#fff}
 .hidden{display:none}
+/* Genvägarna visas bara där det finns tangentbord — på pekskärm är raden brus. */
+.keys{display:none}
+@media (hover:hover) and (pointer:fine){
+  .keys{display:block;text-align:center;margin-top:12px;font-size:12px;color:var(--muted)}
+}
 .termimg{margin-top:16px;text-align:center}
 .termimg img{max-width:100%;max-height:230px;border-radius:8px;background:#fff}
 .imgcred{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.45;
@@ -163,6 +168,7 @@ footer a{color:var(--accent)}
       <button id="known" class="primary" data-i18n="b_known">Kan</button>
       <button id="skip" data-i18n="b_skip">Hoppa över</button>
     </div>
+    <div class="keys" id="keys" data-i18n="h_keys"></div>
     <div class="stats">
       <span><span data-i18n="s_seen">Visade</span>: <b id="s_seen">0</b></span>
       <span><span data-i18n="s_known">Kan</span>: <b id="s_known">0</b></span>
@@ -333,7 +339,8 @@ const I18N = {
      nocards:"Inga kort valda. Välj minst en kategori.",cat:"Kategori",b_settings:"Inställningar",s_allcats:"Alla kategorier",
      s_cats:["kategori","kategorier"],s_cards:["kort","kort"],
      f_by:"Skapad av",f_license:"Innehåll och kod under",f_wiki:"Termdata delvis baserad på %s på svenskspråkiga Wikipedia.",f_source:"Källkod på GitHub",f_donate:"Stöd Wikipedia",f_download:"Ladda ner Anki-deck (.apkg)",
-     m_image:"Bildquiz",b_report:"Rapportera fel i den här termen",b_wiki:"Läs mer på Wikipedia",s_noimg:"Inga bilder i det här urvalet. Välj fler kategorier."},
+     m_image:"Bildquiz",b_report:"Rapportera fel i den här termen",b_wiki:"Läs mer på Wikipedia",s_noimg:"Inga bilder i det här urvalet. Välj fler kategorier.",
+     h_keys:"← föregående · → visa svar, sedan nästa · 1 repetera · 2 kan"},
  uk:{title:"Анатомія і фізіологія",m_card:"Картки",m_quiz:"Тест",m_list:"Список",
      l_front:"Питання",l_back:"Відповідь",l_def:"Пояснення",l_ui:"Інтерфейс",b_all:"Усі",b_none:"Жодної",
      h_tap:"Натисніть або пробіл, щоб перевернути",b_again:"Повторити",b_known:"Знаю",
@@ -343,7 +350,8 @@ const I18N = {
      nocards:"Картки не вибрані. Виберіть хоча б одну категорію.",cat:"Категорія",b_settings:"Налаштування",s_allcats:"Усі категорії",
      s_cats:["категорія","категорії","категорій"],s_cards:["картка","картки","карток"],
      f_by:"Створив",f_license:"Вміст і код за ліцензією",f_wiki:"Термінологія частково базується на статті %s у шведській Вікіпедії.",f_source:"Вихідний код на GitHub",f_donate:"Підтримати Вікіпедію",f_download:"Завантажити колоду Anki (.apkg)",
-     m_image:"Вікторина з малюнками",b_report:"Повідомити про помилку в цьому терміні",b_wiki:"Докладніше у Вікіпедії",s_noimg:"У цій добірці немає зображень. Виберіть більше категорій."},
+     m_image:"Вікторина з малюнками",b_report:"Повідомити про помилку в цьому терміні",b_wiki:"Докладніше у Вікіпедії",s_noimg:"У цій добірці немає зображень. Виберіть більше категорій.",
+     h_keys:"← попереднє · → показати відповідь, потім наступне · 1 повторити · 2 знаю"},
  ru:{title:"Анатомия и физиология",m_card:"Карточки",m_quiz:"Тест",m_list:"Список",
      l_front:"Вопрос",l_back:"Ответ",l_def:"Пояснение",l_ui:"Интерфейс",b_all:"Все",b_none:"Ни одной",
      h_tap:"Нажмите или пробел, чтобы перевернуть",b_again:"Повторить",b_known:"Знаю",
@@ -353,7 +361,8 @@ const I18N = {
      nocards:"Карточки не выбраны. Выберите хотя бы одну категорию.",cat:"Категория",b_settings:"Настройки",s_allcats:"Все категории",
      s_cats:["категория","категории","категорий"],s_cards:["карточка","карточки","карточек"],
      f_by:"Создал",f_license:"Содержание и код под лицензией",f_wiki:"Терминология частично основана на статье %s в шведской Википедии.",f_source:"Исходный код на GitHub",f_donate:"Поддержать Википедию",f_download:"Скачать колоду Anki (.apkg)",
-     m_image:"Викторина с картинками",b_report:"Сообщить об ошибке в этом термине",b_wiki:"Подробнее в Википедии",s_noimg:"В этой подборке нет изображений. Выберите больше категорий."},
+     m_image:"Викторина с картинками",b_report:"Сообщить об ошибке в этом термине",b_wiki:"Подробнее в Википедии",s_noimg:"В этой подборке нет изображений. Выберите больше категорий.",
+     h_keys:"← предыдущая · → показать ответ, затем следующая · 1 повторить · 2 знаю"},
  en:{title:"Anatomy and physiology",m_card:"Flashcards",m_quiz:"Quiz",m_list:"List",
      l_front:"Prompt",l_back:"Answer",l_def:"Explanation",l_ui:"Interface",b_all:"All",b_none:"None",
      h_tap:"Click or press space to flip",b_again:"Repeat",b_known:"Known",
@@ -363,13 +372,14 @@ const I18N = {
      nocards:"No cards selected. Pick at least one category.",cat:"Category",b_settings:"Settings",s_allcats:"All categories",
      s_cats:["category","categories"],s_cards:["card","cards"],
      f_by:"Created by",f_license:"Content and code under",f_wiki:"Term data partly based on %s on Swedish Wikipedia.",f_source:"Source code on GitHub",f_donate:"Support Wikipedia",f_download:"Download Anki deck (.apkg)",
-     m_image:"Picture quiz",b_report:"Report an error in this term",b_wiki:"Read more on Wikipedia",s_noimg:"No pictures in this selection. Pick more categories."}
+     m_image:"Picture quiz",b_report:"Report an error in this term",b_wiki:"Read more on Wikipedia",s_noimg:"No pictures in this selection. Pick more categories.",
+     h_keys:"← previous · → reveal, then next · 1 repeat · 2 known"}
 };
 
 const state = {
   mode:"card", front:"sv", backs:Object.keys(LANGS), def:"sv", ui:"sv",
   cats:new Set(DATA.map(d=>d.cat)),
-  queue:[], current:null, flipped:false, seen:0, known:0,
+  queue:[], current:null, flipped:false, seen:0, known:0, history:[],
   qn:0, qr:0, qcur:null, qanswered:false,
   in_:0, ir:0, icur:null, ianswered:false,
   // Utfällt på stora skärmar, hopfällt på telefon där panelen annars skymmer kortet.
@@ -489,7 +499,7 @@ function setSettingsOpen(open){
 function resetQueue(){
   state.queue=shuffle(pool().slice());
   state.current=state.queue.shift()||null;
-  state.flipped=false; state.seen=0; state.known=0;
+  state.flipped=false; state.seen=0; state.known=0; state.history=[];
 }
 
 function backLangs(){ return state.backs.filter(k=>k!==state.front); }
@@ -542,8 +552,17 @@ function renderCard(){
   $("s_left").textContent=state.queue.length+(state.current?1:0);
 }
 
+/* Hur många steg bakåt man kan gå. Varje steg sparar en kopia av kön, så
+   djupet kostar minne — 50 räcker gott för en genomgång. */
+const HISTORY_MAX = 50;
+
 function next(known){
   if(state.current){
+    // Spara hela tillståndet, inte bara kortet: annars driver statistiken och
+    // "repetera"-kön isär när man går tillbaka.
+    state.history.push({item:state.current, queue:state.queue.slice(),
+                        seen:state.seen, known:state.known});
+    if(state.history.length>HISTORY_MAX) state.history.shift();
     state.seen++;
     if(known===true) state.known++;
     if(known===false) state.queue.push(state.current);
@@ -551,6 +570,19 @@ function next(known){
   state.current=state.queue.shift()||null;
   state.flipped=false;
   renderCard();
+}
+
+function prev(){
+  const step=state.history.pop();
+  if(!step) return false;
+  state.queue=step.queue;
+  state.current=step.item;
+  state.seen=step.seen; state.known=step.known;
+  // Kortet har redan visats, så det kommer tillbaka vänt — då fungerar
+  // vänster och höger som symmetrisk navigering.
+  state.flipped=true;
+  renderCard();
+  return true;
 }
 
 function newQuestion(){
@@ -698,11 +730,27 @@ $("nocats").onclick=()=>{ state.cats=new Set(); buildCatChips(); invalidateQuest
 $("search").oninput=()=>renderList();
 document.addEventListener("keydown",e=>{
   if(e.target.tagName==="INPUT"||e.target.tagName==="SELECT") return;
+  if(e.metaKey||e.ctrlKey||e.altKey) return;
+
+  if(state.mode==="quiz"||state.mode==="image"){
+    if(e.key==="ArrowRight"){ e.preventDefault();
+      (state.mode==="quiz"?newQuestion:newImageQuestion)(); }
+    return;
+  }
   if(state.mode!=="card") return;
-  if(e.code==="Space"){ e.preventDefault(); $("card").click(); }
-  if(e.key==="1") next(false);
-  if(e.key==="2") next(true);
-  if(e.key==="ArrowRight") next(null);
+
+  if(e.code==="Space"){ e.preventDefault(); $("card").click(); return; }
+  if(e.key==="1"){ next(false); return; }
+  if(e.key==="2"){ next(true); return; }
+  if(e.key==="ArrowRight"){
+    e.preventDefault();
+    // Första trycket visar svaret, nästa går vidare.
+    if(state.current && !state.flipped){ state.flipped=true; renderCard(); }
+    else if(state.current) next(null);
+    else { resetQueue(); renderCard(); }
+    return;
+  }
+  if(e.key==="ArrowLeft"){ e.preventDefault(); prev(); return; }
 });
 
 buildSelects(); buildBackChips(); buildCatChips(); setSettingsOpen(state.settingsOpen); applyI18n(); resetQueue(); render();
