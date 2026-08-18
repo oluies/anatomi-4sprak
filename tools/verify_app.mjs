@@ -7,7 +7,7 @@
 // Körs i CI av .github/workflows/ci.yml.
 // Lokalt: npm install playwright && npx playwright install chromium
 //         node tools/verify_app.mjs
-import { chromium } from 'playwright';
+import { chromium, devices } from 'playwright';
 import http from 'node:http';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -148,6 +148,56 @@ try {
   await page.waitForTimeout(500);
   check('ingen service worker över http',
     (await page.evaluate(async () => (await navigator.serviceWorker.getRegistrations()).length)) === 0);
+
+  // --- svarsspråken: svenska ska visas för varje frågespråk utom svenska ---
+  // Regression: state.backs saknade "sv", så svenska kunde aldrig bli svar.
+  await page.click('#modes button[data-mode="card"]');
+  for (const front of ['sv', 'la', 'uk', 'ru']) {
+    await page.selectOption('#front', front);
+    await page.evaluate(() => { if (!state.flipped) document.getElementById('card').click(); });
+    const shown = await page.evaluate(() => {
+      const vals = [...document.querySelectorAll('#answers .ansval')].map(e => e.textContent);
+      return { vals, sv: state.current.sv, langs: state.backs.filter(k => k !== state.front) };
+    });
+    check(`frågespråk ${front}: tre svarsspråk`, shown.langs.length === 3, shown.langs.join(','));
+    if (front !== 'sv') {
+      check(`frågespråk ${front}: svenska visas som svar`, shown.vals.includes(shown.sv), shown.sv);
+    }
+  }
+
+  // --- hopfällbara inställningar ---
+  const settingsOpen = () => page.locator('#settings').isVisible();
+  check('inställningarna är utfällda på stor skärm', await settingsOpen());
+  const tallHeader = await page.evaluate(() => document.querySelector('header').offsetHeight);
+  await page.click('#togglesettings');
+  check('knappen fäller ihop inställningarna', !(await settingsOpen()));
+  check('sammanfattningen visas i stället', await page.locator('#summary').isVisible());
+  const shortHeader = await page.evaluate(() => document.querySelector('header').offsetHeight);
+  check('hopfällt ger lägre sidhuvud', shortHeader < tallHeader, `${shortHeader}px < ${tallHeader}px`);
+  check('lägesväljaren är kvar när det är hopfällt', await page.locator('#modes').isVisible());
+  await page.click('#summary');
+  check('klick på sammanfattningen fäller ut igen', await settingsOpen());
+
+  // --- telefonvy: hopfällt från start ---
+  const phone = await browser.newContext({ ...devices['iPhone 13'] });
+  const small = await phone.newPage();
+  small.on('pageerror', e => errors.push(`[pageerror telefon] ${e.message}`));
+  await small.goto(base, { waitUntil: 'load' });
+  check('telefon: hopfällt från start',
+    (await small.getAttribute('#togglesettings', 'aria-expanded')) === 'false');
+  check('telefon: sammanfattningen syns', await small.locator('#summary').isVisible());
+  check('telefon: lägesväljaren syns', await small.locator('#modes').isVisible());
+  const cardTop = await small.evaluate(() => Math.round(document.querySelector('.card').getBoundingClientRect().top));
+  const vh = await small.evaluate(() => window.innerHeight);
+  check('telefon: kortet syns utan att man scrollar', cardTop < vh / 2, `kortet börjar ${cardTop}px av ${vh}px`);
+  // pluralformerna i sammanfattningen — panelen måste fällas ut för att nå väljaren
+  await small.click('#togglesettings');
+  await small.selectOption('#ui', 'ru');
+  await small.click('#togglesettings');
+  const ruSummary = await small.textContent('#summary');
+  check('telefon: ryska pluralformer i sammanfattningen',
+    ruSummary.includes('Все категории') && ruSummary.includes('423 карточки'), ruSummary.trim());
+  await phone.close();
 } catch (e) {
   // Utan detta dör skriptet på ett rått Playwright-stacktrace och operatören
   // ser aldrig vilka kontroller som hann gå igenom.

@@ -63,35 +63,72 @@ tr:hover td{background:var(--panel2)}
 .qopt.wrong{background:var(--bad);border-color:var(--bad);color:#fff}
 .hidden{display:none}
 footer{color:var(--muted);font-size:12.5px;padding:24px 18px;text-align:center;border-top:1px solid var(--line);margin-top:30px}
+
+/* Hopfällbara urvalsinställningar. På telefon tar de annars nästan hela skärmen
+   innan man ens ser ett kort, så där är de hopfällda från start. */
+.titlerow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.titlerow h1{margin:0}
+#togglesettings{display:inline-flex;align-items:center;gap:7px;font-size:13px;padding:5px 11px;
+  white-space:nowrap}
+#togglesettings .chev{font-size:10px;line-height:1;transition:transform .15s ease}
+#togglesettings[aria-expanded="false"] .chev{transform:rotate(-90deg)}
+#settings{margin-top:10px}
+#cats{max-height:none;overflow:visible}
+#summary{margin-top:9px;font-size:12.5px;color:var(--muted);line-height:1.5;cursor:pointer}
+#summary b{color:var(--fg);font-weight:600}
+#summary .sep{opacity:.5;margin:0 6px}
+
+@media (max-width:700px){
+  header{padding:10px 14px}
+  .wrap{padding:14px}
+  h1{font-size:16px}
+  .row{gap:8px}
+  .seg button{padding:6px 10px;font-size:13.5px}
+  /* Kategorilistan är 16 chips lång — låt den rulla i stället för att trycka
+     ned kortet under skärmkanten när panelen är utfälld. */
+  #cats{max-height:34vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .card{min-height:210px;padding:22px 18px}
+  .front{font-size:26px}
+}
 </style>
 </head>
 <body>
 <header>
   <div class="wrap" style="padding:0">
-    <h1 id="title">Anatomi och fysiologi</h1>
-    <div class="row">
+    <div class="titlerow">
+      <h1 id="title">Anatomi och fysiologi</h1>
+      <button id="togglesettings" aria-expanded="true" aria-controls="settings">
+        <span data-i18n="b_settings">Inställningar</span><span class="chev">▼</span>
+      </button>
+    </div>
+    <div class="row" style="margin-top:10px">
       <div class="seg" id="modes">
         <button data-mode="card" class="on" data-i18n="m_card">Flashcards</button>
         <button data-mode="quiz" data-i18n="m_quiz">Quiz</button>
         <button data-mode="list" data-i18n="m_list">Lista</button>
       </div>
-      <label data-i18n="l_front">Fråga</label>
-      <select id="front"></select>
-      <label data-i18n="l_def">Förklaring</label>
-      <select id="deflang"></select>
-      <label data-i18n="l_ui">Gränssnitt</label>
-      <select id="ui"></select>
     </div>
-    <div class="row">
-      <label data-i18n="l_back">Svar</label>
-      <span id="backs" class="chips" style="margin-top:0"></span>
+    <div id="settings">
+      <div class="row">
+        <label data-i18n="l_front">Fråga</label>
+        <select id="front"></select>
+        <label data-i18n="l_def">Förklaring</label>
+        <select id="deflang"></select>
+        <label data-i18n="l_ui">Gränssnitt</label>
+        <select id="ui"></select>
+      </div>
+      <div class="row">
+        <label data-i18n="l_back">Svar</label>
+        <span id="backs" class="chips" style="margin-top:0"></span>
+      </div>
+      <div class="chips" id="cats"></div>
+      <div class="row" style="margin-top:10px">
+        <button id="allcats" data-i18n="b_all">Alla</button>
+        <button id="nocats" data-i18n="b_none">Inga</button>
+        <span id="count" style="font-size:13px;color:var(--muted)"></span>
+      </div>
     </div>
-    <div class="chips" id="cats"></div>
-    <div class="row" style="margin-top:10px">
-      <button id="allcats" data-i18n="b_all">Alla</button>
-      <button id="nocats" data-i18n="b_none">Inga</button>
-      <span id="count" style="font-size:13px;color:var(--muted)"></span>
-    </div>
+    <div id="summary" class="hidden" role="button" tabindex="0"></div>
   </div>
 </header>
 
@@ -158,35 +195,41 @@ const I18N = {
      b_skip:"Hoppa över",b_next:"Nästa",s_seen:"Visade",s_known:"Kan",s_left:"Kvar",
      s_q:"Frågor",s_right:"Rätt",search:"Sök...",done:"Klart. Alla kort genomgångna.",
      restart:"Börja om",f_note:"Termlista för grundläggande anatomi, fysiologi och medicinsk terminologi.",
-     nocards:"Inga kort valda. Välj minst en kategori.",cat:"Kategori"},
+     nocards:"Inga kort valda. Välj minst en kategori.",cat:"Kategori",b_settings:"Inställningar",s_allcats:"Alla kategorier",
+     s_cats:["kategori","kategorier"],s_cards:["kort","kort"]},
  uk:{title:"Анатомія і фізіологія",m_card:"Картки",m_quiz:"Тест",m_list:"Список",
      l_front:"Питання",l_back:"Відповідь",l_def:"Пояснення",l_ui:"Інтерфейс",b_all:"Усі",b_none:"Жодної",
      h_tap:"Натисніть або пробіл, щоб перевернути",b_again:"Повторити",b_known:"Знаю",
      b_skip:"Пропустити",b_next:"Далі",s_seen:"Показано",s_known:"Знаю",s_left:"Залишилось",
      s_q:"Питань",s_right:"Правильно",search:"Пошук...",done:"Готово. Усі картки пройдено.",
      restart:"Почати спочатку",f_note:"Словник основних термінів анатомії, фізіології та медичної термінології.",
-     nocards:"Картки не вибрані. Виберіть хоча б одну категорію.",cat:"Категорія"},
+     nocards:"Картки не вибрані. Виберіть хоча б одну категорію.",cat:"Категорія",b_settings:"Налаштування",s_allcats:"Усі категорії",
+     s_cats:["категорія","категорії","категорій"],s_cards:["картка","картки","карток"]},
  ru:{title:"Анатомия и физиология",m_card:"Карточки",m_quiz:"Тест",m_list:"Список",
      l_front:"Вопрос",l_back:"Ответ",l_def:"Пояснение",l_ui:"Интерфейс",b_all:"Все",b_none:"Ни одной",
      h_tap:"Нажмите или пробел, чтобы перевернуть",b_again:"Повторить",b_known:"Знаю",
      b_skip:"Пропустить",b_next:"Далее",s_seen:"Показано",s_known:"Знаю",s_left:"Осталось",
      s_q:"Вопросов",s_right:"Верно",search:"Поиск...",done:"Готово. Все карточки пройдены.",
      restart:"Начать заново",f_note:"Список основных терминов анатомии, физиологии и медицинской терминологии.",
-     nocards:"Карточки не выбраны. Выберите хотя бы одну категорию.",cat:"Категория"},
+     nocards:"Карточки не выбраны. Выберите хотя бы одну категорию.",cat:"Категория",b_settings:"Настройки",s_allcats:"Все категории",
+     s_cats:["категория","категории","категорий"],s_cards:["карточка","карточки","карточек"]},
  en:{title:"Anatomy and physiology",m_card:"Flashcards",m_quiz:"Quiz",m_list:"List",
      l_front:"Prompt",l_back:"Answer",l_def:"Explanation",l_ui:"Interface",b_all:"All",b_none:"None",
      h_tap:"Click or press space to flip",b_again:"Repeat",b_known:"Known",
      b_skip:"Skip",b_next:"Next",s_seen:"Seen",s_known:"Known",s_left:"Left",
      s_q:"Questions",s_right:"Correct",search:"Search...",done:"Done. All cards reviewed.",
      restart:"Start over",f_note:"Term list for basic anatomy, physiology and medical terminology.",
-     nocards:"No cards selected. Pick at least one category.",cat:"Category"}
+     nocards:"No cards selected. Pick at least one category.",cat:"Category",b_settings:"Settings",s_allcats:"All categories",
+     s_cats:["category","categories"],s_cards:["card","cards"]}
 };
 
 const state = {
-  mode:"card", front:"sv", backs:["la","uk","ru"], def:"sv", ui:"sv",
+  mode:"card", front:"sv", backs:["sv","la","uk","ru"], def:"sv", ui:"sv",
   cats:new Set(DATA.map(d=>d.cat)),
   queue:[], current:null, flipped:false, seen:0, known:0,
-  qn:0, qr:0, qcur:null, qanswered:false
+  qn:0, qr:0, qcur:null, qanswered:false,
+  // Utfällt på stora skärmar, hopfällt på telefon där panelen annars skymmer kortet.
+  settingsOpen: !window.matchMedia("(max-width:700px)").matches
 };
 
 const $ = id => document.getElementById(id);
@@ -245,6 +288,40 @@ function applyI18n(){
   $("title").textContent=T("title");
   $("search").placeholder=T("search");
   document.documentElement.lang = state.ui==="en"?"en":state.ui;
+  renderSummary();
+}
+
+/* Ukrainska och ryska har tre numerusformer efter räkneord (1 картка,
+   2-4 картки, 5+ карток), svenska och engelska två. */
+function plural(n,forms){
+  if(forms.length<3) return forms[n===1?0:1];
+  const t=n%10, h=n%100;
+  if(t===1 && h!==11) return forms[0];
+  if(t>=2 && t<=4 && (h<12||h>14)) return forms[1];
+  return forms[2];
+}
+
+/* När inställningarna är hopfällda ersätts de av en rad som visar vad som är
+   valt, så att man ser urvalet utan att fälla ut panelen igen. */
+function renderSummary(){
+  const el=$("summary");
+  if(state.settingsOpen){ el.className="hidden"; return; }
+  el.className="";
+  const backs=backLangs().map(k=>LANGS[k]).join(", ")||"—";
+  const total=new Set(DATA.map(d=>d.cat)).size, n=pool().length;
+  const cats = state.cats.size===total
+    ? "<b>"+esc(T("s_allcats"))+"</b>"
+    : "<b>"+state.cats.size+"/"+total+"</b> "+esc(plural(total,T("s_cats")));
+  el.innerHTML="<b>"+esc(LANGS[state.front])+"</b> → "+esc(backs)
+    +"<span class=\"sep\">·</span>"+cats
+    +"<span class=\"sep\">·</span><b>"+n+"</b> "+esc(plural(n,T("s_cards")));
+}
+
+function setSettingsOpen(open){
+  state.settingsOpen=open;
+  $("settings").className=open?"":"hidden";
+  $("togglesettings").setAttribute("aria-expanded",String(open));
+  renderSummary();
 }
 
 function resetQueue(){
@@ -353,7 +430,12 @@ function render(){
   if(state.mode==="quiz"){ if(!state.qcur) newQuestion(); }
   if(state.mode==="list") renderList();
   $("total").textContent = " " + DATA.length + " termer / термінів / терминов.";
+  renderSummary();
 }
+
+$("togglesettings").onclick=()=>setSettingsOpen(!state.settingsOpen);
+$("summary").onclick=()=>setSettingsOpen(true);
+$("summary").onkeydown=e=>{ if(e.key==="Enter"||e.code==="Space"){ e.preventDefault(); setSettingsOpen(true); } };
 
 $("modes").onclick=e=>{
   const b=e.target.closest("button"); if(!b) return;
@@ -383,7 +465,7 @@ document.addEventListener("keydown",e=>{
   if(e.key==="ArrowRight") next(null);
 });
 
-buildSelects(); buildBackChips(); buildCatChips(); applyI18n(); resetQueue(); render();
+buildSelects(); buildBackChips(); buildCatChips(); setSettingsOpen(state.settingsOpen); applyI18n(); resetQueue(); render();
 </script>
 <script>
 if("serviceWorker" in navigator && location.protocol==="https:"){

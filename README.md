@@ -26,6 +26,10 @@ Webbappen kan visa frågan på vilket som helst av de fyra språken, med valfria
 svarsspråk, förklaring på svenska/ukrainska/ryska och filtrering per kategori.
 Gränssnittet finns på svenska, ukrainska och ryska.
 
+Urvalsinställningarna — språk, svarsspråk och kategorier — går att fälla ihop och är
+hopfällda från start på telefon, där de annars fyller nästan hela skärmen innan man ser
+ett kort. Hopfällda ersätts de av en rad som visar vad som är valt.
+
 ## Termer per kategori
 
 | Kategori | Antal |
@@ -120,8 +124,10 @@ funktionen behövs.
 - `tools/verify_app.mjs` — serverar katalogen över http, startar webbappen i headless
   Chromium och kör 24 kontroller: kortvändning, byte av frågespråk till latin, ett rätt
   quizsvar som ska räknas som rätt, sökning på svenska, ukrainska och ryska förklaringar
-  med förväntat radantal, nedladdningslänken, manifestet och att konsolen är fri från fel.
-  Sökord och antal härleds ur datan, så en ny eller ändrad term fäller inte bygget
+  med förväntat radantal, att svenska visas som svar för varje frågespråk, att panelen
+  med urvalsinställningar fälls ihop och ut, nedladdningslänken, manifestet och att
+  konsolen är fri från fel. Kontrollerna körs både i desktop- och telefonvy, och sökord
+  och antal härleds ur datan så att en ny eller ändrad term inte fäller bygget
 
 Kör detsamma lokalt:
 
