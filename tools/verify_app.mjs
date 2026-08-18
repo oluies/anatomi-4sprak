@@ -255,6 +255,64 @@ try {
   check('sidfoten översätts', /[\u0400-\u04FF]/.test(ukFoot) && ukFoot.includes('Örjan Lundberg'), ukFoot);
   await page.selectOption('#ui', 'sv');
 
+  // --- hjälpen ---
+  const helpVisible = () => page.locator('#help').isVisible();
+  check('hjälpen är dold från start', !(await helpVisible()));
+  await page.keyboard.press('h');
+  check('h öppnar hjälpen', await helpVisible());
+  await page.keyboard.press('h');
+  check('h stänger hjälpen igen', !(await helpVisible()));
+  await page.keyboard.press('?');
+  check('frågetecken öppnar hjälpen', await helpVisible());
+  await page.keyboard.press('Escape');
+  check('Esc stänger hjälpen', !(await helpVisible()));
+  await page.click('#helpbtn');
+  check('knappen öppnar hjälpen', await helpVisible());
+  await page.click('#help', { position: { x: 5, y: 5 } });
+  check('klick utanför rutan stänger', !(await helpVisible()));
+
+  // Med hjälpen öppen får inga andra genvägar plocka upp tangenten.
+  await page.evaluate(() => { resetQueue(); renderCard(); });
+  const beforeHelp = await page.evaluate(() => state.current.id);
+  await page.keyboard.press('h');
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('ArrowRight');
+  const during = await page.evaluate(() => ({ id: state.current.id, flipped: state.flipped }));
+  check('pilarna är blockerade när hjälpen är öppen',
+    during.id === beforeHelp && !during.flipped);
+  await page.keyboard.press('Escape');
+
+  for (const mode of ['quiz', 'image', 'list']) {
+    await page.click(`#modes button[data-mode="${mode}"]`);
+    await page.keyboard.press('h');
+    const on = await helpVisible();
+    await page.keyboard.press('Escape');
+    check(`hjälpen går att öppna i läget ${mode}`, on);
+  }
+  // h ska inte kapas när man skriver i sökrutan
+  await page.click('#modes button[data-mode="list"]');
+  await page.fill('#search', 'h');
+  check('h i sökrutan skriver text i stället för att öppna hjälpen',
+    (await page.inputValue('#search')) === 'h' && !(await helpVisible()));
+  await page.fill('#search', '');
+  await page.click('#modes button[data-mode="card"]');
+
+  // innehåll och översättning
+  await page.keyboard.press('h');
+  const caps = await page.locator('.keycap').allTextContents();
+  check('hjälpen listar alla genvägar', caps.length === 7, caps.join(' '));
+  check('hjälpen nämner både h och ?', caps.some(c => c.includes('h') && c.includes('?')));
+  const helpSv = await page.textContent('#help_h');
+  await page.keyboard.press('Escape');
+  await page.selectOption('#ui', 'uk');
+  await page.keyboard.press('h');
+  const helpUk = await page.textContent('#help_h');
+  check('hjälpen följer gränssnittsspråket', helpSv !== helpUk && /[\u0400-\u04FF]/.test(helpUk),
+    `${helpSv} / ${helpUk}`);
+  check('hjälptexten översätts', /[\u0400-\u04FF]/.test(await page.textContent('#helpbody')));
+  await page.keyboard.press('Escape');
+  await page.selectOption('#ui', 'sv');
+
   // --- kortkommandon på dator ---
   await page.click('#modes button[data-mode="card"]');
   await page.evaluate(() => { resetQueue(); renderCard(); });

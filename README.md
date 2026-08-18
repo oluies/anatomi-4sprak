@@ -37,8 +37,10 @@ vid nästa tryck vidare till nästa kort, **←** går tillbaka till föregåend
 (med svaret framme, så pilarna blir symmetriska), **mellanslag** vänder kortet,
 **1** lägger kortet sist i kön för repetition och **2** markerar det som kunnigt.
 Att gå bakåt återställer även räknarna och repetera-kön, så statistiken stämmer.
-I quizlägena går **→** till nästa fråga. Raden med genvägar visas bara på enheter
-med tangentbord.
+I quizlägena går **→** till nästa fråga. **h** eller **?** öppnar en hjälpruta som
+beskriver lägena, genvägarna och inställningarna på gränssnittets språk; **Esc**,
+klick utanför rutan eller knappen **?** i sidhuvudet stänger den. Raden med genvägar
+visas bara på enheter med tangentbord, medan **?**-knappen finns även på telefon.
 
 Urvalsinställningarna — språk, svarsspråk och kategorier — går att fälla ihop och är
 hopfällda från start på telefon, där de annars fyller nästan hela skärmen innan man ser

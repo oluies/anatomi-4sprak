@@ -62,6 +62,25 @@ tr:hover td{background:var(--panel2)}
 .qopt.right{background:var(--good);border-color:var(--good);color:#fff}
 .qopt.wrong{background:var(--bad);border-color:var(--bad);color:#fff}
 .hidden{display:none}
+#help{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.55);
+  display:flex;align-items:flex-start;justify-content:center;padding:24px 14px;overflow-y:auto}
+#help.hidden{display:none}
+.helpbox{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  max-width:640px;width:100%;padding:20px 22px}
+.helphead{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin-bottom:6px}
+.helphead h2{font-size:17px;margin:0}
+#helpclose{font-size:20px;line-height:1;padding:2px 10px}
+#helpbody h3{font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
+  margin:18px 0 8px;font-weight:600}
+#helpbody p{margin:0 0 8px;font-size:14.5px}
+#helpbody ul{margin:0;padding-left:18px;font-size:14.5px}
+#helpbody li{margin:4px 0}
+.keytable{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:baseline;
+  font-size:14.5px}
+.keycap{font:600 12.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;
+  background:var(--panel2);border:1px solid var(--line);border-bottom-width:2px;
+  border-radius:6px;padding:1px 8px;white-space:nowrap;justify-self:start}
 /* Genvägarna visas bara där det finns tangentbord — på pekskärm är raden brus. */
 .keys{display:none}
 @media (hover:hover) and (pointer:fine){
@@ -115,9 +134,12 @@ footer a{color:var(--accent)}
   <div class="wrap" style="padding:0">
     <div class="titlerow">
       <h1 id="title">Anatomi och fysiologi</h1>
-      <button id="togglesettings" aria-expanded="true" aria-controls="settings">
-        <span data-i18n="b_settings">Inställningar</span><span class="chev">▼</span>
-      </button>
+      <div class="row" style="gap:8px">
+        <button id="togglesettings" aria-expanded="true" aria-controls="settings">
+          <span data-i18n="b_settings">Inställningar</span><span class="chev">▼</span>
+        </button>
+        <button id="helpbtn" aria-haspopup="dialog" aria-controls="help" title="?">?</button>
+      </div>
     </div>
     <div class="row" style="margin-top:10px">
       <div class="seg" id="modes">
@@ -212,6 +234,16 @@ footer a{color:var(--accent)}
   <!-- Utanför lägesvyerna: rapportraden ska synas även i bildquizet, som är
        där en felaktig eller olämplig bild upptäcks. -->
   <div class="report" id="creport"></div>
+</div>
+
+<div id="help" class="hidden" role="dialog" aria-modal="true" aria-labelledby="help_h">
+  <div class="helpbox">
+    <div class="helphead">
+      <h2 id="help_h"></h2>
+      <button id="helpclose" aria-label="Stäng">×</button>
+    </div>
+    <div id="helpbody"></div>
+  </div>
 </div>
 
 <footer>
@@ -340,7 +372,23 @@ const I18N = {
      s_cats:["kategori","kategorier"],s_cards:["kort","kort"],
      f_by:"Skapad av",f_license:"Innehåll och kod under",f_wiki:"Termdata delvis baserad på %s på svenskspråkiga Wikipedia.",f_source:"Källkod på GitHub",f_donate:"Stöd Wikipedia",f_download:"Ladda ner Anki-deck (.apkg)",
      m_image:"Bildquiz",b_report:"Rapportera fel i den här termen",b_wiki:"Läs mer på Wikipedia",s_noimg:"Inga bilder i det här urvalet. Välj fler kategorier.",
-     h_keys:"← föregående · → visa svar, sedan nästa · 1 repetera · 2 kan"},
+     h_keys:"← föregående · → visa svar, sedan nästa · 1 repetera · 2 kan · h hjälp",
+     b_help:"Hjälp",help_title:"Hjälp",help_close:"Stäng",
+     k_space:"mellanslag",k_esc:"Esc",
+     h_right:"Visar svaret. Nästa tryck går till nästa kort.",
+     h_left:"Föregående kort, med svaret framme.",
+     h_space:"Vänder kortet.",
+     h_1:"Lägger kortet sist i kön för repetition.",
+     h_2:"Markerar kortet som kunnigt.",
+     h_h:"Visar och döljer den här hjälpen.",
+     h_esc:"Stänger hjälpen.",
+     hs_modes:"Lägen",hs_keys:"Tangentbord",hs_settings:"Inställningar",hs_more:"Övrigt",
+     hm_card:"Flashcards — term på ett språk, svaren på de andra när du vänder.",
+     hm_quiz:"Quiz — välj rätt översättning bland fyra alternativ.",
+     hm_image:"Bildquiz — se en bild och välj rätt term.",
+     hm_list:"Lista — alla termer i en tabell, sökbar på alla språk och förklaringar.",
+     hset:"Under Inställningar väljer du frågespråk, vilka svarsspråk som visas, förklaringsspråk, gränssnittsspråk och vilka kategorier som ingår. På telefon är panelen hopfälld från start.",
+     hmore:"Bilderna kommer från Wikipedia och visas med upphovsperson och licens. Varje kort har en länk för att rapportera fel. Sajten fungerar offline när du besökt den en gång, och kan läggas till på hemskärmen."},
  uk:{title:"Анатомія і фізіологія",m_card:"Картки",m_quiz:"Тест",m_list:"Список",
      l_front:"Питання",l_back:"Відповідь",l_def:"Пояснення",l_ui:"Інтерфейс",b_all:"Усі",b_none:"Жодної",
      h_tap:"Натисніть або пробіл, щоб перевернути",b_again:"Повторити",b_known:"Знаю",
@@ -351,7 +399,23 @@ const I18N = {
      s_cats:["категорія","категорії","категорій"],s_cards:["картка","картки","карток"],
      f_by:"Створив",f_license:"Вміст і код за ліцензією",f_wiki:"Термінологія частково базується на статті %s у шведській Вікіпедії.",f_source:"Вихідний код на GitHub",f_donate:"Підтримати Вікіпедію",f_download:"Завантажити колоду Anki (.apkg)",
      m_image:"Вікторина з малюнками",b_report:"Повідомити про помилку в цьому терміні",b_wiki:"Докладніше у Вікіпедії",s_noimg:"У цій добірці немає зображень. Виберіть більше категорій.",
-     h_keys:"← попереднє · → показати відповідь, потім наступне · 1 повторити · 2 знаю"},
+     h_keys:"← попереднє · → показати відповідь, потім наступне · 1 повторити · 2 знаю · h довідка",
+     b_help:"Довідка",help_title:"Довідка",help_close:"Закрити",
+     k_space:"пробіл",k_esc:"Esc",
+     h_right:"Показує відповідь. Наступне натискання — наступна картка.",
+     h_left:"Попередня картка, з показаною відповіддю.",
+     h_space:"Перевертає картку.",
+     h_1:"Ставить картку в кінець черги для повторення.",
+     h_2:"Позначає картку як вивчену.",
+     h_h:"Показує і ховає цю довідку.",
+     h_esc:"Закриває довідку.",
+     hs_modes:"Режими",hs_keys:"Клавіатура",hs_settings:"Налаштування",hs_more:"Інше",
+     hm_card:"Картки — термін однією мовою, відповіді іншими після перевертання.",
+     hm_quiz:"Тест — виберіть правильний переклад із чотирьох варіантів.",
+     hm_image:"Вікторина з малюнками — подивіться на зображення й виберіть термін.",
+     hm_list:"Список — усі терміни в таблиці, з пошуком за всіма мовами й поясненнями.",
+     hset:"У налаштуваннях вибираються мова питання, мови відповідей, мова пояснень, мова інтерфейсу та категорії. На телефоні панель згорнута від початку.",
+     hmore:"Зображення взяті з Вікіпедії та показані з автором і ліцензією. Кожна картка має посилання, щоб повідомити про помилку. Сайт працює офлайн після першого відвідування і його можна додати на головний екран."},
  ru:{title:"Анатомия и физиология",m_card:"Карточки",m_quiz:"Тест",m_list:"Список",
      l_front:"Вопрос",l_back:"Ответ",l_def:"Пояснение",l_ui:"Интерфейс",b_all:"Все",b_none:"Ни одной",
      h_tap:"Нажмите или пробел, чтобы перевернуть",b_again:"Повторить",b_known:"Знаю",
@@ -362,7 +426,23 @@ const I18N = {
      s_cats:["категория","категории","категорий"],s_cards:["карточка","карточки","карточек"],
      f_by:"Создал",f_license:"Содержание и код под лицензией",f_wiki:"Терминология частично основана на статье %s в шведской Википедии.",f_source:"Исходный код на GitHub",f_donate:"Поддержать Википедию",f_download:"Скачать колоду Anki (.apkg)",
      m_image:"Викторина с картинками",b_report:"Сообщить об ошибке в этом термине",b_wiki:"Подробнее в Википедии",s_noimg:"В этой подборке нет изображений. Выберите больше категорий.",
-     h_keys:"← предыдущая · → показать ответ, затем следующая · 1 повторить · 2 знаю"},
+     h_keys:"← предыдущая · → показать ответ, затем следующая · 1 повторить · 2 знаю · h справка",
+     b_help:"Справка",help_title:"Справка",help_close:"Закрыть",
+     k_space:"пробел",k_esc:"Esc",
+     h_right:"Показывает ответ. Следующее нажатие — следующая карточка.",
+     h_left:"Предыдущая карточка, с показанным ответом.",
+     h_space:"Переворачивает карточку.",
+     h_1:"Ставит карточку в конец очереди для повторения.",
+     h_2:"Отмечает карточку как выученную.",
+     h_h:"Показывает и скрывает эту справку.",
+     h_esc:"Закрывает справку.",
+     hs_modes:"Режимы",hs_keys:"Клавиатура",hs_settings:"Настройки",hs_more:"Прочее",
+     hm_card:"Карточки — термин на одном языке, ответы на остальных после переворота.",
+     hm_quiz:"Тест — выберите правильный перевод из четырёх вариантов.",
+     hm_image:"Викторина с картинками — посмотрите на изображение и выберите термин.",
+     hm_list:"Список — все термины в таблице, с поиском по всем языкам и пояснениям.",
+     hset:"В настройках выбираются язык вопроса, языки ответов, язык пояснений, язык интерфейса и категории. На телефоне панель свёрнута с самого начала.",
+     hmore:"Изображения взяты из Википедии и показаны с автором и лицензией. У каждой карточки есть ссылка, чтобы сообщить об ошибке. Сайт работает офлайн после первого посещения и его можно добавить на главный экран."},
  en:{title:"Anatomy and physiology",m_card:"Flashcards",m_quiz:"Quiz",m_list:"List",
      l_front:"Prompt",l_back:"Answer",l_def:"Explanation",l_ui:"Interface",b_all:"All",b_none:"None",
      h_tap:"Click or press space to flip",b_again:"Repeat",b_known:"Known",
@@ -373,7 +453,23 @@ const I18N = {
      s_cats:["category","categories"],s_cards:["card","cards"],
      f_by:"Created by",f_license:"Content and code under",f_wiki:"Term data partly based on %s on Swedish Wikipedia.",f_source:"Source code on GitHub",f_donate:"Support Wikipedia",f_download:"Download Anki deck (.apkg)",
      m_image:"Picture quiz",b_report:"Report an error in this term",b_wiki:"Read more on Wikipedia",s_noimg:"No pictures in this selection. Pick more categories.",
-     h_keys:"← previous · → reveal, then next · 1 repeat · 2 known"}
+     h_keys:"← previous · → reveal, then next · 1 repeat · 2 known · h help",
+     b_help:"Help",help_title:"Help",help_close:"Close",
+     k_space:"space",k_esc:"Esc",
+     h_right:"Reveals the answer. Press again for the next card.",
+     h_left:"Previous card, with the answer showing.",
+     h_space:"Flips the card.",
+     h_1:"Puts the card at the end of the queue for repetition.",
+     h_2:"Marks the card as known.",
+     h_h:"Shows and hides this help.",
+     h_esc:"Closes the help.",
+     hs_modes:"Modes",hs_keys:"Keyboard",hs_settings:"Settings",hs_more:"Other",
+     hm_card:"Flashcards — a term in one language, the answers in the others when you flip.",
+     hm_quiz:"Quiz — pick the right translation among four options.",
+     hm_image:"Picture quiz — look at an image and pick the right term.",
+     hm_list:"List — every term in a table, searchable across all languages and explanations.",
+     hset:"Settings holds the prompt language, which answer languages are shown, the explanation language, the interface language and which categories are included. On phones the panel starts collapsed.",
+     hmore:"The images come from Wikipedia and are shown with author and licence. Every card has a link for reporting an error. The site works offline once visited, and can be added to the home screen."}
 };
 
 const state = {
@@ -454,12 +550,44 @@ function renderFooter(){
   $("footmeta").innerHTML=by+" · "+lic+"<br>"+wiki;
 }
 
+/* Hjälpen byggs om vid varje visning så att den följer gränssnittsspråket. */
+const HELP_KEYS = [
+  ["\u2192", "h_right"], ["\u2190", "h_left"], [null, "h_space"],
+  ["1", "h_1"], ["2", "h_2"], ["h / ?", "h_h"], [null, "h_esc"]
+];
+
+function renderHelp(){
+  $("help_h").textContent=T("help_title");
+  $("helpclose").setAttribute("aria-label", T("help_close"));
+  const li=k=>"<li>"+esc(T(k))+"</li>";
+  const rows=HELP_KEYS.map(function(pair){
+    const cap=pair[0], key=pair[1];
+    const label = cap!==null ? cap : (key==="h_esc" ? T("k_esc") : T("k_space"));
+    return '<span class="keycap">'+esc(label)+"</span><span>"+esc(T(key))+"</span>";
+  }).join("");
+  $("helpbody").innerHTML=
+     "<h3>"+esc(T("hs_modes"))+"</h3><ul>"
+      +li("hm_card")+li("hm_quiz")+li("hm_image")+li("hm_list")+"</ul>"
+    +"<h3>"+esc(T("hs_keys"))+"</h3><div class=\"keytable\">"+rows+"</div>"
+    +"<h3>"+esc(T("hs_settings"))+"</h3><p>"+esc(T("hset"))+"</p>"
+    +"<h3>"+esc(T("hs_more"))+"</h3><p>"+esc(T("hmore"))+"</p>";
+}
+
+function helpOpen(){ return $("help").className!=="hidden"; }
+
+function toggleHelp(open){
+  const show = open===undefined ? !helpOpen() : open;
+  if(show){ renderHelp(); $("help").className=""; $("helpclose").focus(); }
+  else { $("help").className="hidden"; $("helpbtn").focus(); }
+}
+
 function applyI18n(){
   document.querySelectorAll("[data-i18n]").forEach(el=>{ el.textContent=T(el.dataset.i18n); });
   renderFooter();
   $("title").textContent=T("title");
   $("search").placeholder=T("search");
   document.documentElement.lang = state.ui==="en"?"en":state.ui;
+  if(helpOpen()) renderHelp();
   renderSummary();
 }
 
@@ -705,6 +833,9 @@ function render(){
 }
 
 $("togglesettings").onclick=()=>setSettingsOpen(!state.settingsOpen);
+$("helpbtn").onclick=()=>toggleHelp(true);
+$("helpclose").onclick=()=>toggleHelp(false);
+$("help").onclick=e=>{ if(e.target===$("help")) toggleHelp(false); };
 $("summary").onclick=()=>setSettingsOpen(true);
 $("summary").onkeydown=e=>{ if(e.key==="Enter"||e.code==="Space"){ e.preventDefault(); setSettingsOpen(true); } };
 
@@ -729,8 +860,15 @@ $("allcats").onclick=()=>{ state.cats=new Set(DATA.map(d=>d.cat)); buildCatChips
 $("nocats").onclick=()=>{ state.cats=new Set(); buildCatChips(); invalidateQuestions(); resetQueue(); render(); };
 $("search").oninput=()=>renderList();
 document.addEventListener("keydown",e=>{
+  // Esc måste fungera även med fokus i dialogens stängknapp.
+  if(e.key==="Escape" && helpOpen()){ e.preventDefault(); toggleHelp(false); return; }
   if(e.target.tagName==="INPUT"||e.target.tagName==="SELECT") return;
   if(e.metaKey||e.ctrlKey||e.altKey) return;
+
+  // Hjälpen gäller hela appen och ligger därför före lägeskontrollerna.
+  if(e.key==="h"||e.key==="H"||e.key==="?"){ e.preventDefault(); toggleHelp(); return; }
+  // Med hjälpen öppen ska inga andra genvägar plocka upp tangenten.
+  if(helpOpen()) return;
 
   if(state.mode==="quiz"||state.mode==="image"){
     if(e.key==="ArrowRight"){ e.preventDefault();
