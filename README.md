@@ -18,6 +18,8 @@ funktion och vanlig medicinsk terminologi.
 | `data/anatomi-4sprak.apkg` | Anki-deck genererat från JSON-filen. |
 | `tools/build_deck.py` | Bygger om `.apkg` från JSON med `genanki`. |
 | `tools/check_data.py` | Kontrollerar termdatans invarianter och att `index.html` är i synk med JSON-filen. |
+| `tools/verify_app.mjs` | Rökprov som kör webbappen i en headless-webbläsare (Playwright). |
+| `tests/` | Pytest-tester för `check_data.py`. |
 | `manifest.webmanifest`, `sw.js` | Gör sajten installerbar och användbar offline. |
 
 Webbappen kan visa frågan på vilket som helst av de fyra språken, med valfria
@@ -107,6 +109,26 @@ Manifestet saknar ikoner. Sajten går att lägga till på hemskärmen i Safari p
 men Chrome och Edge kräver ikoner på 192×192 och 512×512 px innan de erbjuder
 "installera app" — lägg till en `icons`-lista i `manifest.webmanifest` om den
 funktionen behövs.
+
+## CI
+
+`.github/workflows/ci.yml` körs vid varje push och pull request:
+
+- `tools/check_data.py` — termdatans invarianter och synken mot `index.html`
+- `pytest tests` — tester för kontrollskriptet
+- ett rökbygge av `.apkg` och en syntaxkontroll av `sw.js`
+- `tools/verify_app.mjs` — startar webbappen i headless Chromium, vänder ett kort,
+  byter frågespråk till latin, svarar på en quizfråga, söker i listan och kräver
+  att konsolen är fri från fel och varningar
+
+Kör detsamma lokalt:
+
+```bash
+pip install -r requirements-dev.txt
+python tools/check_data.py && python -m pytest tests -q
+npm install playwright && npx playwright install chromium
+node tools/verify_app.mjs index.html
+```
 
 ## Licens
 

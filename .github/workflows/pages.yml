@@ -3,6 +3,15 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+    # Ändringar i termdatan och byggkedjan deployas av deck.yml, efter att
+    # tools/check_data.py har validerat dem. Utan den här listan skulle en
+    # push-triggad deploy publicera osynkad data förbi valideringen.
+    paths-ignore:
+      - 'index.html'
+      - 'data/**'
+      - 'tools/**'
+      - 'requirements.txt'
+      - '.github/workflows/deck.yml'
   workflow_call:
   workflow_dispatch:
 

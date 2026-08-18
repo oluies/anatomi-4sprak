@@ -45,17 +45,31 @@ self.addEventListener("fetch", event => {
   event.respondWith(
     caches.open(CACHE).then(cache =>
       cache.match(req).then(hit => {
-        const network = fetch(req).then(res => {
-          if (res && res.ok && res.type === "basic") cache.put(req, res.clone());
-          return res;
-        }).catch(() => null);
+        // no-cache kringgår HTTP-cachen (GitHub Pages svarar max-age=600) så
+        // att bakgrundshämtningen inte lagrar om samma inaktuella byte:s.
+        const network = fetch(hit ? new Request(req, { cache: "no-cache" }) : req)
+          .then(res => {
+            if (!res || !res.ok || res.type !== "basic") return res;
+            // Vänta in skrivningen, annars kan waitUntil avsluta workern innan
+            // uppdateringen hunnit hamna i cachen.
+            return cache.put(req, res.clone()).then(() => res);
+          })
+          .catch(() => null);
 
         // Cache-first: svara direkt från cachen och uppdatera den i bakgrunden.
         if (hit) {
           event.waitUntil(network);
           return hit;
         }
-        return network.then(res => res || cache.match("./index.html"));
+        return network.then(res => {
+          if (res) return res;
+          // Bara sidnavigeringar faller tillbaka på skalet — annars skulle en
+          // offline-nedladdning av .apkg spara ett HTML-dokument under fel namn.
+          if (req.mode === "navigate") {
+            return cache.match("./index.html").then(shell => shell || Response.error());
+          }
+          return Response.error();
+        });
       })
     )
   );

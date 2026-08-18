@@ -28,7 +28,39 @@ def inline_data(html_text):
         raise SystemExit("index.html: hittade ingen 'const DATA = [' -rad")
     open_bracket = html_text.index("[", start)
     end = html_text.index("];", open_bracket)
-    return json.loads(html_text[open_bracket:end + 1])
+    raw = html_text[open_bracket:end + 1]
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError as exc:
+        # Blocket är JavaScript, så det kan vara giltig JS men ogiltig JSON
+        # (avslutande komma, enkla citattecken, kommentarer).
+        raise SystemExit(f"index.html: DATA-blocket är inte giltig JSON: {exc}")
+
+
+def describe_drift(inline, terms):
+    """Beskriv exakt var index.html och JSON-filen skiljer sig åt."""
+    if inline == terms:
+        return []
+    if len(inline) != len(terms):
+        return [
+            f"index.html DATA ({len(inline)} termer) skiljer sig från "
+            f"{JSON_PATH.name} ({len(terms)} termer) — uppdatera båda"
+        ]
+    problems = []
+    for i, (a, b) in enumerate(zip(inline, terms)):
+        if a == b:
+            continue
+        tid = b.get("id", a.get("id", "?"))
+        diff = sorted(set(a) | set(b))
+        fields = [f for f in diff if a.get(f) != b.get(f)]
+        detail = ", ".join(
+            f"{f}: index.html={a.get(f)!r} vs json={b.get(f)!r}" for f in fields
+        )
+        problems.append(f"post {i} (id={tid!r}) skiljer sig mellan index.html och JSON — {detail}")
+        if len(problems) == 5:
+            problems.append("... fler skillnader finns, visar de första fem")
+            break
+    return problems
 
 
 def main():
@@ -55,11 +87,7 @@ def main():
         seen_n[n] = i
 
     inline = inline_data(HTML_PATH.read_text(encoding="utf-8"))
-    if inline != terms:
-        errors.append(
-            f"index.html DATA ({len(inline)} termer) skiljer sig från "
-            f"{JSON_PATH.name} ({len(terms)} termer) — uppdatera båda"
-        )
+    errors.extend(describe_drift(inline, terms))
 
     if errors:
         for e in errors:
