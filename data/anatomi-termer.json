@@ -566,7 +566,7 @@
  {
   "id": "mitosis",
   "cat": "Cellen och vävnader",
-  "sv": "celldelning (mitos)",
+  "sv": "celldelning",
   "la": "mitosis",
   "uk": "мітоз (поділ клітини)",
   "ru": "митоз (деление клетки)",
@@ -1238,7 +1238,7 @@
  {
   "id": "discus-intervertebralis",
   "cat": "Skelettet",
-  "sv": "mellankotskiva (disk)",
+  "sv": "mellankotskiva",
   "la": "discus intervertebralis",
   "uk": "міжхребцевий диск",
   "ru": "межпозвонковый диск",
@@ -1310,7 +1310,7 @@
  {
   "id": "os-coccygis",
   "cat": "Skelettet",
-  "sv": "svansben (coccyx)",
+  "sv": "svansben",
   "la": "os coccygis",
   "uk": "куприк",
   "ru": "копчик",
@@ -1334,7 +1334,7 @@
  {
   "id": "os-femoris",
   "cat": "Skelettet",
-  "sv": "lårben (femur)",
+  "sv": "lårben",
   "la": "os femoris",
   "uk": "стегнова кістка",
   "ru": "бедренная кость",
@@ -1358,7 +1358,7 @@
  {
   "id": "os-ilium",
   "cat": "Skelettet",
-  "sv": "tarmben (ilium)",
+  "sv": "tarmben",
   "la": "os ilium",
   "uk": "клубова кістка",
   "ru": "подвздошная кость",
@@ -1370,7 +1370,7 @@
  {
   "id": "os-ischii",
   "cat": "Skelettet",
-  "sv": "sittben (ischium)",
+  "sv": "sittben",
   "la": "os ischii",
   "uk": "сіднича кістка",
   "ru": "седалищная кость",
@@ -1418,7 +1418,7 @@
  {
   "id": "os-pubis",
   "cat": "Skelettet",
-  "sv": "blygdben (pubis)",
+  "sv": "blygdben",
   "la": "os pubis",
   "uk": "лобкова кістка",
   "ru": "лобковая кость",
@@ -1430,7 +1430,7 @@
  {
   "id": "os-sacrum",
   "cat": "Skelettet",
-  "sv": "korsben (sakrum)",
+  "sv": "korsben",
   "la": "os sacrum",
   "uk": "крижова кістка",
   "ru": "крестец",
@@ -1466,7 +1466,7 @@
  {
   "id": "ossa-carpi",
   "cat": "Skelettet",
-  "sv": "handlovsben (karpalben)",
+  "sv": "handlovsben",
   "la": "ossa carpi",
   "uk": "кістки зап'ястка",
   "ru": "кости запястья",
@@ -1478,7 +1478,7 @@
  {
   "id": "ossa-metacarpi",
   "cat": "Skelettet",
-  "sv": "mellanhandsben (metakarpalben)",
+  "sv": "mellanhandsben",
   "la": "ossa metacarpi",
   "uk": "п'ясткові кістки",
   "ru": "пястные кости",
@@ -1490,7 +1490,7 @@
  {
   "id": "ossa-metatarsi",
   "cat": "Skelettet",
-  "sv": "mellanfotsben (metatarsalben)",
+  "sv": "mellanfotsben",
   "la": "ossa metatarsi",
   "uk": "плеснові кістки",
   "ru": "плюсневые кости",
@@ -1502,7 +1502,7 @@
  {
   "id": "ossa-tarsi",
   "cat": "Skelettet",
-  "sv": "fotrotsben (tarsalben)",
+  "sv": "fotrotsben",
   "la": "ossa tarsi",
   "uk": "кістки заплесна",
   "ru": "кости предплюсны",
@@ -1514,7 +1514,7 @@
  {
   "id": "osteoporosis",
   "cat": "Skelettet",
-  "sv": "benskörhet (osteoporos)",
+  "sv": "benskörhet",
   "la": "osteoporosis",
   "uk": "остеопороз",
   "ru": "остеопороз",
@@ -1538,7 +1538,7 @@
  {
   "id": "periosteum",
   "cat": "Skelettet",
-  "sv": "benhinna (periost)",
+  "sv": "benhinna",
   "la": "periosteum",
   "uk": "окістя",
   "ru": "надкостница",
@@ -1598,7 +1598,7 @@
  {
   "id": "substantia-compacta",
   "cat": "Skelettet",
-  "sv": "kompakt benvävnad (kompakta)",
+  "sv": "kompakt benvävnad",
   "la": "substantia compacta",
   "uk": "компактна речовина",
   "ru": "компактное вещество",
@@ -1658,7 +1658,7 @@
  {
   "id": "vertebra-cervicalis",
   "cat": "Skelettet",
-  "sv": "halskota (cervikalkota)",
+  "sv": "halskota",
   "la": "vertebra cervicalis",
   "uk": "шийний хребець",
   "ru": "шейный позвонок",
@@ -1670,7 +1670,7 @@
  {
   "id": "vertebra-lumbalis",
   "cat": "Skelettet",
-  "sv": "ländkota (lumbalkota)",
+  "sv": "ländkota",
   "la": "vertebra lumbalis",
   "uk": "поперековий хребець",
   "ru": "поясничный позвонок",
@@ -1682,7 +1682,7 @@
  {
   "id": "vertebra-thoracica",
   "cat": "Skelettet",
-  "sv": "bröstkota (torakalkota)",
+  "sv": "bröstkota",
   "la": "vertebra thoracica",
   "uk": "грудний хребець",
   "ru": "грудной позвонок",
@@ -1898,7 +1898,7 @@
  {
   "id": "diaphragma",
   "cat": "Leder och muskler",
-  "sv": "mellangärdet (diafragma)",
+  "sv": "mellangärdet",
   "la": "diaphragma",
   "uk": "діафрагма",
   "ru": "диафрагма",
@@ -2222,7 +2222,7 @@
  {
   "id": "symphysis",
   "cat": "Leder och muskler",
-  "sv": "fog (symfys)",
+  "sv": "fog",
   "la": "symphysis",
   "uk": "симфіз (напівсуглоб)",
   "ru": "симфиз (полусустав)",
@@ -2666,7 +2666,7 @@
  {
   "id": "anticorpus-immunoglobulinum",
   "cat": "Blod och immunförsvar",
-  "sv": "antikropp (immunglobulin)",
+  "sv": "antikropp",
   "la": "anticorpus (immunoglobulinum)",
   "uk": "антитіло (імуноглобулін)",
   "ru": "антитело (иммуноглобулин)",
@@ -2894,7 +2894,7 @@
  {
   "id": "thymus",
   "cat": "Blod och immunförsvar",
-  "sv": "brässen (tymus)",
+  "sv": "brässen",
   "la": "thymus",
   "uk": "тимус (вилочкова залоза)",
   "ru": "тимус (вилочковая железа)",
@@ -2930,7 +2930,7 @@
  {
   "id": "alveolus-pulmonis",
   "cat": "Andningsorganen",
-  "sv": "lungblåsa (alveol)",
+  "sv": "lungblåsa",
   "la": "alveolus pulmonis",
   "uk": "легенева альвеола",
   "ru": "лёгочная альвеола",
@@ -2978,7 +2978,7 @@
  {
   "id": "dyspnoe",
   "cat": "Andningsorganen",
-  "sv": "andnöd (dyspné)",
+  "sv": "andnöd",
   "la": "dyspnoea",
   "uk": "задишка",
   "ru": "одышка",
@@ -3146,7 +3146,7 @@
  {
   "id": "saturatio",
   "cat": "Andningsorganen",
-  "sv": "syremättnad (saturation)",
+  "sv": "syremättnad",
   "la": "saturatio",
   "uk": "сатурація (насичення крові киснем)",
   "ru": "сатурация (насыщение крови кислородом)",
@@ -3206,7 +3206,7 @@
  {
   "id": "appendix-vermiformis",
   "cat": "Matsmältningsorganen",
-  "sv": "maskformiga bihanget (appendix)",
+  "sv": "maskformiga bihanget",
   "la": "appendix vermiformis",
   "uk": "червоподібний відросток (апендикс)",
   "ru": "червеобразный отросток (аппендикс)",
@@ -3290,7 +3290,7 @@
  {
   "id": "colon-sigmoideum",
   "cat": "Matsmältningsorganen",
-  "sv": "S-formade tjocktarmen (sigmoideum)",
+  "sv": "S-formade tjocktarmen",
   "la": "colon sigmoideum",
   "uk": "сигмоподібна ободова кишка",
   "ru": "сигмовидная ободочная кишка",
@@ -3458,7 +3458,7 @@
  {
   "id": "metabolismus",
   "cat": "Matsmältningsorganen",
-  "sv": "ämnesomsättning (metabolism)",
+  "sv": "ämnesomsättning",
   "la": "metabolismus",
   "uk": "обмін речовин (метаболізм)",
   "ru": "обмен веществ (метаболизм)",
@@ -3542,7 +3542,7 @@
  {
   "id": "resorptio",
   "cat": "Matsmältningsorganen",
-  "sv": "upptag (resorption)",
+  "sv": "upptag",
   "la": "resorptio",
   "uk": "всмоктування (резорбція)",
   "ru": "всасывание (резорбция)",
@@ -3566,7 +3566,7 @@
  {
   "id": "villi-intestinales",
   "cat": "Matsmältningsorganen",
-  "sv": "tarmludd (villi)",
+  "sv": "tarmludd",
   "la": "villi intestinales",
   "uk": "кишкові ворсинки",
   "ru": "кишечные ворсинки",
@@ -3914,7 +3914,7 @@
  {
   "id": "tela-subcutanea",
   "cat": "Huden",
-  "sv": "underhud (subkutis)",
+  "sv": "underhud",
   "la": "tela subcutanea",
   "uk": "підшкірна клітковина",
   "ru": "подкожная клетчатка",
@@ -4046,7 +4046,7 @@
  {
   "id": "glycaemia",
   "cat": "Endokrina systemet",
-  "sv": "blodsocker (glykemi)",
+  "sv": "blodsocker",
   "la": "glycaemia",
   "uk": "глікемія (цукор крові)",
   "ru": "гликемия (сахар крови)",
@@ -4238,7 +4238,7 @@
  {
   "id": "liquor-cerebrospinalis",
   "cat": "Nervsystemet",
-  "sv": "cerebrospinalvätska (likvor)",
+  "sv": "cerebrospinalvätska",
   "la": "liquor cerebrospinalis",
   "uk": "спинномозкова рідина",
   "ru": "спинномозговая жидкость",
@@ -4394,7 +4394,7 @@
  {
   "id": "neuronum",
   "cat": "Nervsystemet",
-  "sv": "nervcell (neuron)",
+  "sv": "nervcell",
   "la": "neuronum",
   "uk": "нейрон",
   "ru": "нейрон",
@@ -4406,7 +4406,7 @@
  {
   "id": "neurotransmitter",
   "cat": "Nervsystemet",
-  "sv": "signalsubstans (neurotransmittor)",
+  "sv": "signalsubstans",
   "la": "neurotransmitterum",
   "uk": "нейромедіатор",
   "ru": "нейромедиатор",
@@ -4646,7 +4646,7 @@
  {
   "id": "nociceptio",
   "cat": "Sinnesorganen",
-  "sv": "smärtsinne (nociception)",
+  "sv": "smärtsinne",
   "la": "nociceptio",
   "uk": "ноцицепція",
   "ru": "ноцицепция",

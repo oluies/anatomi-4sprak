@@ -97,7 +97,12 @@ Skriptet verifierar att `id` och `n` är unika, att alla fält är ifyllda, att
 `index.html` och JSON-filen innehåller exakt samma data, och att en svensk term
 inte upprepar sitt eget latinska namn i parentes — latinet har ett eget fält och
 en dubblett avslöjar svaret när latin är svarsspråk. Svenska förklaringar i
-parentes, som `anterior (främre)`, är avsiktliga och flaggas inte. Samma kontroll körs i CI och
+parentes, som `anterior (främre)`, är avsiktliga och flaggas inte.
+
+Termerna innehåller alltså inte sitt eget latin: `organsystem`, inte
+`organsystem (systema organorum)`. Parentesen används bara till svenska
+förklaringar (`kaudal (mot svansbenet)`) och till svenska synonymer där båda
+formerna är svenska (`erytrocyt (röd blodkropp)`). Samma kontroll körs i CI och
 stoppar bygget om filerna glidit isär.
 
 ### Lägga till ett språk
