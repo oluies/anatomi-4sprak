@@ -27,7 +27,9 @@ jobs:
         run: pip install -r requirements-dev.txt
 
       - name: Validate term data and index.html sync
-        run: python tools/check_data.py
+        run: |
+          python tools/sync_html_data.py --check
+          python tools/check_data.py
 
       - name: Run tests
         run: python -m pytest tests -q

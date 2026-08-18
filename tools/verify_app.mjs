@@ -194,9 +194,28 @@ try {
   await small.click('#togglesettings');
   await small.selectOption('#ui', 'ru');
   await small.click('#togglesettings');
-  const ruSummary = await small.textContent('#summary');
+  const ruSummary = (await small.textContent('#summary')).trim();
+  // Förväntad form räknas ut här, oberoende av sidans egen plural(), och
+  // antalet läses ur datan så att en ny term inte fäller bygget.
+  const ruForms = ['карточка', 'карточки', 'карточек'];
+  const ruPlural = n => {
+    const t = n % 10, h = n % 100;
+    if (t === 1 && h !== 11) return ruForms[0];
+    if (t >= 2 && t <= 4 && (h < 12 || h > 14)) return ruForms[1];
+    return ruForms[2];
+  };
+  const n = await small.evaluate(() => DATA.length);
   check('telefon: ryska pluralformer i sammanfattningen',
-    ruSummary.includes('Все категории') && ruSummary.includes('423 карточки'), ruSummary.trim());
+    ruSummary.includes('Все категории') && ruSummary.includes(`${n} ${ruPlural(n)}`),
+    `väntade "${n} ${ruPlural(n)}" i: ${ruSummary}`);
+  // Själva böjningsregeln, mot oberoende facit.
+  const pluralCases = { 1: 0, 2: 1, 4: 1, 5: 2, 11: 2, 12: 2, 21: 0, 22: 1, 25: 2, 101: 0, 111: 2, 424: 1 };
+  const pluralActual = await small.evaluate(
+    (ns) => ns.map(x => plural(x, ['ett', 'få', 'många'])), Object.keys(pluralCases).map(Number));
+  const want = Object.values(pluralCases).map(i => ['ett', 'få', 'många'][i]);
+  check('böjningsregeln för ryska/ukrainska räkneord',
+    JSON.stringify(pluralActual) === JSON.stringify(want),
+    `${pluralActual.join(',')} vs ${want.join(',')}`);
   await phone.close();
 } catch (e) {
   // Utan detta dör skriptet på ett rått Playwright-stacktrace och operatören

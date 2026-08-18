@@ -17,6 +17,7 @@ on:
       # Rör inte det som publiceras — ingen deploy behövs alls.
       - 'tests/**'
       - 'tools/verify_app.mjs'
+      - 'tools/sync_html_data.py'
       - 'requirements-dev.txt'
       - '.github/workflows/ci.yml'
   workflow_call:

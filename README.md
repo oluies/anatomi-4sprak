@@ -1,7 +1,7 @@
 # Anatomi 4 språk
 
 Flashcards för grundläggande anatomi, fysiologi och medicinsk terminologi på
-**svenska, latin, ukrainska och ryska** — 423 termer med korta förklaringar på
+**svenska, latin, ukrainska och ryska** — 424 termer med korta förklaringar på
 svenska, ukrainska och ryska.
 
 Materialet är tänkt som stöd för elever som läser **Anatomi och fysiologi 1** på
@@ -17,6 +17,7 @@ funktion och vanlig medicinsk terminologi.
 | `data/anatomi-termer.json` | Termdatan. Fält: `id`, `cat`, `sv`, `la`, `uk`, `ru`, `def_sv`, `def_uk`, `def_ru`, `n`. |
 | `data/anatomi-4sprak.apkg` | Anki-deck genererat från JSON-filen. |
 | `tools/build_deck.py` | Bygger om `.apkg` från JSON med `genanki`. |
+| `tools/sync_html_data.py` | Skriver om det inbakade `DATA`-blocket i `index.html` från JSON-filen och numrerar om `n`. |
 | `tools/check_data.py` | Kontrollerar termdatans invarianter och att `index.html` är i synk med JSON-filen. |
 | `tools/verify_app.mjs` | Rökprov som kör webbappen i en headless-webbläsare (Playwright). |
 | `tests/` | Pytest-tester för `check_data.py`. |
@@ -37,7 +38,7 @@ ett kort. Hopfällda ersätts de av en rad som visar vad som är valt.
 | Skelettet | 46 |
 | Kroppens organisation och riktningstermer | 40 |
 | Medicinsk terminologi | 35 |
-| Leder och muskler | 34 |
+| Leder och muskler | 35 |
 | Matsmältningsorganen | 33 |
 | Hjärta och blodkärl | 32 |
 | Nervsystemet | 30 |
@@ -50,7 +51,7 @@ ett kort. Hopfällda ersätts de av en rad som visar vad som är valt.
 | Urinorganen | 17 |
 | Endokrina systemet | 16 |
 | Huden | 15 |
-| **Totalt** | **423** |
+| **Totalt** | **424** |
 
 ## Importera decket i Anki
 
@@ -60,7 +61,7 @@ ett kort. Hopfällda ersätts de av en rad som visar vad som är valt.
 3. Decket heter *Anatomi 4 språk* och innehåller ett underdeck per kategori.
 
 Varje term ger fyra kort — ett per frågespråk (svenska, latin, ukrainska, ryska) —
-alltså 1 692 kort totalt. Vill du bara öva ett håll kan du stänga av de övriga
+alltså 1 696 kort totalt. Vill du bara öva ett håll kan du stänga av de övriga
 korttyperna under **Verktyg → Hantera korttyper**.
 
 Korten har stabila guid:n som härleds ur `id`-fältet i JSON-filen. Importerar du en
@@ -82,11 +83,12 @@ Andra sökvägar går att ange med `--json` och `--out`.
 ### Ändra en term
 
 Termdatan finns på **två** ställen: inbakad i `index.html` (webbappen är en enda fil
-utan beroenden och hämtar ingenting) och i `data/anatomi-termer.json` (som decket byggs
-från). Ändrar du en term måste båda uppdateras. Kontrollera med:
+utan beroenden och hämtar ingenting) och i `data/anatomi-termer.json`. JSON-filen är
+källan — redigera den, lägg nya termer där de hör hemma i kategorin, och kör sedan:
 
 ```bash
-python tools/check_data.py
+python tools/sync_html_data.py   # skriver om DATA i index.html och numrerar om n
+python tools/check_data.py       # kontrollerar invarianterna
 ```
 
 Skriptet verifierar att `id` och `n` är unika, att alla fält är ifyllda och att
