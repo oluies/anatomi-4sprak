@@ -19,7 +19,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 def repo(tmp_path):
     """Kopiera det som behövs för att köra verktygen fristående."""
     for rel in ["index.html", "tools/sync_html_data.py", "tools/build_deck.py",
-                "tools/check_data.py", "data/anatomi-termer.json",
+                "tools/check_data.py", "tools/fetch_images.py", "data/anatomi-termer.json",
                 "data/kategorier.json", "data/sprak.json", "data/bilder.json",
                 "data/bilder-uteslutna.json"]:
         dst = tmp_path / rel

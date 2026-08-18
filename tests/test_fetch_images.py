@@ -171,3 +171,15 @@ def test_committed_data_has_no_orphan_credits_or_bad_urls():
         if not reason["artikel_ok"]:
             assert "artikel" not in data.get(term_id, {}), \
                 f"{term_id}: artikel_ok=false men artikellänken finns kvar"
+
+
+def test_exclusion_shape_is_validated_in_one_place():
+    """sync_html_data ska använda samma regel, inte en egen kopia."""
+    sync = (ROOT / "tools" / "sync_html_data.py").read_text(encoding="utf-8")
+    assert "validate_exclusion" in sync, "sync måste återanvända valideringen"
+    for bad in [{"skal": "x"}, {"artikel_ok": False}, {"skal": " ", "artikel_ok": False},
+                {"skal": "x", "artikel_ok": "nej"}, "fritext"]:
+        with pytest.raises(SystemExit):
+            fi.validate_exclusion("t", bad)
+    ok = {"skal": "x", "artikel_ok": False}
+    assert fi.validate_exclusion("t", ok) is ok

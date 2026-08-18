@@ -99,15 +99,15 @@ def main(argv=None):
     html = HTML_PATH.read_text(encoding="utf-8")
     in_sync = True
     imgs = json.loads(IMGS_PATH.read_text(encoding="utf-8"))
+    # Formen valideras av fetch_images, så regeln finns bara på ett ställe.
+    sys.path.insert(0, str(ROOT / "tools"))
+    from fetch_images import validate_exclusion
+
     excluded = json.loads(EXCLUDE_PATH.read_text(encoding="utf-8"))
     for term_id, rule in excluded.items():
         if term_id.startswith("_"):
             continue
-        if not isinstance(rule, dict) or not isinstance(rule.get("artikel_ok"), bool) \
-                or not str(rule.get("skal", "")).strip():
-            raise SystemExit(
-                f"{EXCLUDE_PATH.name}: {term_id} måste vara "
-                '{"skal": "...", "artikel_ok": true|false}')
+        validate_exclusion(term_id, rule)
         entry = imgs.get(term_id, {})
         if entry.get("bild"):
             raise SystemExit(f"{EXCLUDE_PATH.name}: {term_id} är utesluten men har ändå en bild")

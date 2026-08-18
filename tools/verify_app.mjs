@@ -256,22 +256,41 @@ try {
   await page.selectOption('#ui', 'sv');
 
   // --- besöksräkning ---
-  // Över http (som här och i CI) får den inte laddas alls, annars skulle varje
-  // testkörning räknas som ett besök.
-  const gcHttp = await page.evaluate(() =>
-    [...document.querySelectorAll('script[src]')].some(s => s.src.includes('gc.zgo.at')));
-  check('besöksräknaren laddas inte över http', !gcHttp);
-  const gcCode = await page.evaluate(() => {
-    const m = document.documentElement.innerHTML.match(/var CODE = "([^"]+)"/);
-    return m && m[1];
+  // Anropa laddaren direkt med stubbar: annars går varken https-grinden,
+  // adressen eller do-not-track att pröva, eftersom sviten kör över http.
+  const gc = await page.evaluate(() => {
+    const mk = () => { const head = []; return {
+      head: { appendChild: e => head.push(e) },
+      createElement: () => ({ setAttribute(k, v) { this[k] = v; }, }),
+      defaultView: {}, _appended: head }; };
+    const run = (loc, nav) => { const d = mk(); const el = installCounter(loc, nav, d, GC_CODE);
+      return el ? el["data-goatcounter"] : null; };
+    return {
+      https: run({ protocol: 'https:' }, {}),
+      http: run({ protocol: 'http:' }, {}),
+      dnt1: run({ protocol: 'https:' }, { doNotTrack: '1' }),
+      dntYes: run({ protocol: 'https:' }, { doNotTrack: 'yes' }),
+      msDnt: run({ protocol: 'https:' }, { msDoNotTrack: '1' }),
+      gpc: run({ protocol: 'https:' }, { globalPrivacyControl: true }),
+      code: GC_CODE, src: 'vendor/count.js'
+    };
   });
-  check('besöksräknarens kod är satt', !!gcCode, gcCode || '(saknas)');
-  // Respekterar besökarens val att slippa spårning.
-  const gcDnt = await page.evaluate(() => {
-    const src = document.documentElement.innerHTML;
-    return src.includes('doNotTrack') && src.includes('globalPrivacyControl');
-  });
-  check('besöksräknaren respekterar do-not-track', gcDnt);
+  check('räknaren skickas till rätt konto',
+    gc.https === `https://${gc.code}.goatcounter.com/count`, String(gc.https));
+  check('räknaren laddas inte över http', gc.http === null);
+  check('do-not-track "1" stoppar räknaren', gc.dnt1 === null);
+  check('do-not-track "yes" stoppar räknaren', gc.dntYes === null, String(gc.dntYes));
+  check('msDoNotTrack stoppar räknaren', gc.msDnt === null);
+  check('global privacy control stoppar räknaren', gc.gpc === null);
+  // Ingen räknare får ha laddats i själva testkörningen.
+  check('inget räknarskript i sidan över http', !(await page.evaluate(() =>
+    [...document.querySelectorAll('script[src]')].some(s => /count\.js/.test(s.src)))));
+  // Skriptet ska ligga i repot, inte hämtas från tredje part.
+  const vendored = await page.request.get(base + 'vendor/count.js');
+  check('räknarskriptet serveras från samma origin', vendored.status() === 200);
+  check('inga externa skriptkällor i sidan', await page.evaluate(() =>
+    [...document.querySelectorAll('script[src]')]
+      .every(s => new URL(s.src, location.href).origin === location.origin)));
 
   // --- hjälpen ---
   const helpVisible = () => page.locator('#help').isVisible();
@@ -286,8 +305,21 @@ try {
   check('Esc stänger hjälpen', !(await helpVisible()));
   await page.click('#helpbtn');
   check('knappen öppnar hjälpen', await helpVisible());
+  await page.click('#helpclose');
+  check('stängknappen stänger', !(await helpVisible()));
+  await page.click('#helpbtn');
+  // Överlägget täcker sidhuvudet, så ?-knappen kan inte nås medan rutan är
+  // öppen — den öppnar, och Esc, × eller klick utanför stänger.
+  check('knappen är otillgänglig medan rutan är öppen', await page.evaluate(() => {
+    const r = document.getElementById('helpbtn').getBoundingClientRect();
+    const top = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+    return !!top && top.closest('#help') !== null;
+  }));
   await page.click('#help', { position: { x: 5, y: 5 } });
   check('klick utanför rutan stänger', !(await helpVisible()));
+  check('knappen har ett läsbart namn',
+    !!(await page.getAttribute('#helpbtn', 'aria-label')),
+    await page.getAttribute('#helpbtn', 'aria-label'));
 
   // Med hjälpen öppen får inga andra genvägar plocka upp tangenten.
   await page.evaluate(() => { resetQueue(); renderCard(); });
@@ -318,8 +350,34 @@ try {
   // innehåll och översättning
   await page.keyboard.press('h');
   const caps = await page.locator('.keycap').allTextContents();
-  check('hjälpen listar alla genvägar', caps.length === 7, caps.join(' '));
+  check('hjälpen listar kortlägets genvägar', caps.length === 7, caps.join(' '));
   check('hjälpen nämner både h och ?', caps.some(c => c.includes('h') && c.includes('?')));
+  await page.keyboard.press('Escape');
+  // Genvägslistan ska gälla det läge man är i: 1, 2, mellanslag och vänsterpil
+  // gör ingenting i quizlägena och ska inte stå listade där.
+  await page.click('#modes button[data-mode="quiz"]');
+  await page.waitForSelector('#qopts button');
+  await page.keyboard.press('h');
+  const quizCaps = await page.locator('.keycap').allTextContents();
+  check('hjälpen listar bara quizlägets genvägar', quizCaps.length < caps.length,
+    quizCaps.join(' '));
+  check('quizhjälpen nämner inte kortbetygen', !quizCaps.includes('1') && !quizCaps.includes('2'),
+    quizCaps.join(' '));
+  await page.keyboard.press('Escape');
+  await page.click('#modes button[data-mode="card"]');
+  await page.keyboard.press('h');
+  // Fokus ska stanna i dialogen.
+  const trapped = await page.evaluate(() => {
+    const f = document.querySelectorAll('#help a[href], #help button:not([disabled])');
+    return f.length > 0 && document.activeElement === document.getElementById('helpclose');
+  });
+  check('fokus hamnar i dialogen när den öppnas', trapped);
+  // Besökaren ska kunna läsa vad som registreras utan att gå till repot.
+  const priv = (await page.textContent('#helpbody')).replace(/\s+/g, ' ');
+  check('hjälpen beskriver vad statistiken registrerar',
+    priv.includes('GoatCounter') && /skärmstorlek|land/.test(priv), priv.slice(-120));
+  check('hjälpen länkar till GoatCounters integritetssida', await page.evaluate(() =>
+    [...document.querySelectorAll('#helpbody a')].some(a => /goatcounter\.com\/help\/privacy/.test(a.href))));
   const helpSv = await page.textContent('#help_h');
   await page.keyboard.press('Escape');
   await page.selectOption('#ui', 'uk');
@@ -378,17 +436,41 @@ try {
   });
   check('vänster i början gör ingenting', atStart);
   const capped = await page.evaluate(() => {
-    resetQueue(); for (let i = 0; i < 80; i++) next(null); return state.history.length;
+    resetQueue(); for (let i = 0; i < HISTORY_MAX + 30; i++) next(null);
+    return { längd: state.history.length, gräns: HISTORY_MAX };
   });
-  check('historiken är begränsad', capped === 50, `${capped} steg`);
+  check('historiken är begränsad', capped.längd === capped.gräns,
+    `${capped.längd} av ${capped.gräns}`);
+
+  // Betyg får inte tyst nedgraderas när man går bakåt och framåt igen.
+  await page.evaluate(() => { resetQueue(); renderCard(); });
+  await page.keyboard.press('2');
+  await page.keyboard.press('2');
+  const graded = await page.evaluate(() => ({ seen: state.seen, known: state.known }));
+  await page.keyboard.press('ArrowLeft');
+  await page.keyboard.press('ArrowLeft');
+  for (let i = 0; i < 4; i++) await page.keyboard.press('ArrowRight');
+  const regraded = await page.evaluate(() => ({ seen: state.seen, known: state.known }));
+  check('betygen överlever bakåt och framåt',
+    regraded.known === graded.known && regraded.seen === graded.seen,
+    `${JSON.stringify(graded)} -> ${JSON.stringify(regraded)}`);
 
   // höger går vidare i quizlägena
   await page.click('#modes button[data-mode="quiz"]');
   await page.waitForSelector('#qopts button');
-  const q1 = await page.textContent('#qterm');
+  // Jämför frågans identitet, inte texten: två termer kan dela form, och ett
+  // "|| fyra alternativ" gjorde tidigare kontrollen omöjlig att falla på.
+  const q1 = await page.evaluate(() => state.qcur.item.id);
   await page.keyboard.press('ArrowRight');
-  check('höger ger nästa quizfråga', (await page.textContent('#qterm')) !== q1 ||
-    (await page.locator('#qopts button').count()) === 4);
+  const q2 = await page.evaluate(() => ({ id: state.qcur.item.id, svarat: state.qanswered }));
+  check('höger ger en ny quizfråga', q2.id !== q1 && !q2.svarat, `${q1} -> ${q2.id}`);
+
+  await page.click('#modes button[data-mode="image"]');
+  await page.waitForSelector('#iopts button');
+  const i1 = await page.evaluate(() => state.icur.item.id);
+  await page.keyboard.press('ArrowRight');
+  const i2 = await page.evaluate(() => ({ id: state.icur.item.id, svarat: state.ianswered }));
+  check('höger ger en ny bildfråga', i2.id !== i1 && !i2.svarat, `${i1} -> ${i2.id}`);
   await page.click('#modes button[data-mode="card"]');
   await page.evaluate(() => { resetQueue(); renderCard(); });
 
@@ -471,10 +553,15 @@ try {
     Object.keys(uteslutna).filter(k => !k.startsWith('_')));
   check('granskningsuteslutna bilder är borta', stillThere.length === 0, stillThere.join(','));
   // Vid homonym är uppslaget fel, inte bara bilden — artikellänken måste bort.
-  const homonymArticles = await page.evaluate(ids => ids.filter(id => IMGS[id] && IMGS[id].artikel),
-    Object.entries(uteslutna).filter(([k, v]) => !k.startsWith('_') &&
-      String(v).toLowerCase().startsWith('homonym')).map(([k]) => k));
-  check('homonymer länkar inte till fel artikel', homonymArticles.length === 0,
+  // Värdena är objekt sedan formatbytet; String(v) gav "[object Object]" och
+  // filtret valde ut noll poster, så kontrollen passerade utan att pröva något.
+  const wrongArticle = Object.entries(uteslutna)
+    .filter(([k, v]) => !k.startsWith('_') && v && v.artikel_ok === false).map(([k]) => k);
+  check('granskningslistan pekar ut minst en felaktig artikel', wrongArticle.length > 0,
+    `${wrongArticle.length} poster med artikel_ok=false`);
+  const homonymArticles = await page.evaluate(
+    ids => ids.filter(id => IMGS[id] && IMGS[id].artikel), wrongArticle);
+  check('artikel_ok=false lämnar ingen artikellänk kvar', homonymArticles.length === 0,
     homonymArticles.join(','));
 
   // bildquiz: bara unika bilder, annars finns flera rätta svar

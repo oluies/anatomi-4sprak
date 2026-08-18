@@ -138,7 +138,7 @@ footer a{color:var(--accent)}
         <button id="togglesettings" aria-expanded="true" aria-controls="settings">
           <span data-i18n="b_settings">Inställningar</span><span class="chev">▼</span>
         </button>
-        <button id="helpbtn" aria-haspopup="dialog" aria-controls="help" title="?">?</button>
+        <button id="helpbtn" aria-haspopup="dialog" aria-controls="help" aria-expanded="false">?</button>
       </div>
     </div>
     <div class="row" style="margin-top:10px">
@@ -297,8 +297,11 @@ function shortCredit(t){
   /* Commons anger härledda verk som "Fil_A.svg: *Fil_B.svg: Namn Namnsson
      derivative work: Någon". Filnamnen äter upp hela utrymmet och namnet — som
      CC BY kräver att vi anger — faller bort. Skala av filnamnsleden först. */
-  t=t.replace(/^(?:\**\s*[^\s:]+\.(?:svg|png|jpe?g|gif|tif+)\s*:\s*)+/i,"").trim();
-  t=t.replace(/^\*+\s*/,"").trim();
+  const stripped=t.replace(/^(?:\**\s*[^\s:]+\.(?:svg|png|jpe?g|gif|tif+)\s*:\s*)+/i,"")
+                  .replace(/^\*+\s*/,"").trim();
+  // Består upphovsfältet bara av filnamn finns inget namn att rädda — behåll
+  // originalet hellre än att visa en tom kreditrad.
+  if(stripped) t=stripped;
   if(t.length<=MAX_CREDIT) return t;
   const cut=t.slice(0,MAX_CREDIT).replace(/\s+\S*$/,"").replace(/[ ,.;:-]+$/,"");
   return (cut||t.slice(0,MAX_CREDIT))+"…";
@@ -348,7 +351,11 @@ function renderReport(item, revealed){
     a.textContent=text;
     a.rel="noopener";
     if(href){ a.href=href; }
-    else { a.href="#"; a.onclick=e=>{ e.preventDefault(); window.open(onclick(), "_blank", "noopener"); }; }
+    else { a.href="#"; a.onclick=e=>{ e.preventDefault();
+      const url=onclick();
+      // window.open på en mailto-adress lämnar en tom flik i många webbläsare.
+      if(url.slice(0,7)==="mailto:") location.href=url;
+      else window.open(url, "_blank", "noopener"); }; }
     el.appendChild(a);
   };
 
@@ -382,6 +389,8 @@ const I18N = {
      h_2:"Markerar kortet som kunnigt.",
      h_h:"Visar och döljer den här hjälpen.",
      h_esc:"Stänger hjälpen.",
+     h_next:"Nästa fråga.",
+     hs_privacy:"Statistik",hprivacy:"Sajten räknar besök med GoatCounter. Det som registreras är sidadress, hänvisande sida, webbläsare, skärmstorlek och land — ingen kaka, ingen lagrad IP-adress och inget som pekar ut dig som enskild besökare. Skickar din webbläsare Do Not Track eller Global Privacy Control räknas du inte alls.",
      hs_modes:"Lägen",hs_keys:"Tangentbord",hs_settings:"Inställningar",hs_more:"Övrigt",
      hm_card:"Flashcards — term på ett språk, svaren på de andra när du vänder.",
      hm_quiz:"Quiz — välj rätt översättning bland fyra alternativ.",
@@ -409,6 +418,8 @@ const I18N = {
      h_2:"Позначає картку як вивчену.",
      h_h:"Показує і ховає цю довідку.",
      h_esc:"Закриває довідку.",
+     h_next:"Наступне питання.",
+     hs_privacy:"Статистика",hprivacy:"Сайт рахує відвідування за допомогою GoatCounter. Записуються адреса сторінки, сторінка-джерело, браузер, розмір екрана і країна — без кук, без збереження IP-адреси й без нічого, що вказує саме на вас. Якщо ваш браузер надсилає Do Not Track або Global Privacy Control, вас не рахують узагалі.",
      hs_modes:"Режими",hs_keys:"Клавіатура",hs_settings:"Налаштування",hs_more:"Інше",
      hm_card:"Картки — термін однією мовою, відповіді іншими після перевертання.",
      hm_quiz:"Тест — виберіть правильний переклад із чотирьох варіантів.",
@@ -436,6 +447,8 @@ const I18N = {
      h_2:"Отмечает карточку как выученную.",
      h_h:"Показывает и скрывает эту справку.",
      h_esc:"Закрывает справку.",
+     h_next:"Следующий вопрос.",
+     hs_privacy:"Статистика",hprivacy:"Сайт считает посещения с помощью GoatCounter. Записываются адрес страницы, страница-источник, браузер, размер экрана и страна — без кук, без хранения IP-адреса и без чего-либо, указывающего именно на вас. Если браузер отправляет Do Not Track или Global Privacy Control, вас не считают вовсе.",
      hs_modes:"Режимы",hs_keys:"Клавиатура",hs_settings:"Настройки",hs_more:"Прочее",
      hm_card:"Карточки — термин на одном языке, ответы на остальных после переворота.",
      hm_quiz:"Тест — выберите правильный перевод из четырёх вариантов.",
@@ -463,6 +476,8 @@ const I18N = {
      h_2:"Marks the card as known.",
      h_h:"Shows and hides this help.",
      h_esc:"Closes the help.",
+     h_next:"Next question.",
+     hs_privacy:"Statistics",hprivacy:"The site counts visits with GoatCounter. What is recorded is the page address, referring page, browser, screen size and country — no cookie, no stored IP address and nothing that identifies you individually. If your browser sends Do Not Track or Global Privacy Control you are not counted at all.",
      hs_modes:"Modes",hs_keys:"Keyboard",hs_settings:"Settings",hs_more:"Other",
      hm_card:"Flashcards — a term in one language, the answers in the others when you flip.",
      hm_quiz:"Quiz — pick the right translation among four options.",
@@ -475,7 +490,7 @@ const I18N = {
 const state = {
   mode:"card", front:"sv", backs:Object.keys(LANGS), def:"sv", ui:"sv",
   cats:new Set(DATA.map(d=>d.cat)),
-  queue:[], current:null, flipped:false, seen:0, known:0, history:[],
+  queue:[], current:null, flipped:false, seen:0, known:0, history:[], redo:[],
   qn:0, qr:0, qcur:null, qanswered:false,
   in_:0, ir:0, icur:null, ianswered:false,
   // Utfällt på stora skärmar, hopfällt på telefon där panelen annars skymmer kortet.
@@ -512,7 +527,7 @@ function buildBackChips(){
       const i=state.backs.indexOf(k);
       if(i>=0){ if(state.backs.filter(x=>x!==state.front).length>1) state.backs.splice(i,1); }
       else state.backs.push(k);
-      buildBackChips(); render();
+      buildBackChips(); invalidateQuestions(); render();
     };
     c.appendChild(b);
   }
@@ -551,16 +566,22 @@ function renderFooter(){
 }
 
 /* Hjälpen byggs om vid varje visning så att den följer gränssnittsspråket. */
-const HELP_KEYS = [
-  ["\u2192", "h_right"], ["\u2190", "h_left"], [null, "h_space"],
-  ["1", "h_1"], ["2", "h_2"], ["h / ?", "h_h"], [null, "h_esc"]
-];
+/* Genvägarna skiljer sig åt mellan lägena — 1, 2, mellanslag och vänsterpil
+   gör ingenting i quizlägena, så de ska inte stå listade där. */
+const HELP_KEYS = {
+  card:  [["\u2192","h_right"],["\u2190","h_left"],[null,"h_space"],["1","h_1"],["2","h_2"]],
+  quiz:  [["\u2192","h_next"]],
+  image: [["\u2192","h_next"]],
+  list:  []
+};
+const HELP_KEYS_ALWAYS = [["h / ?", "h_h"], [null, "h_esc"]];
 
 function renderHelp(){
   $("help_h").textContent=T("help_title");
   $("helpclose").setAttribute("aria-label", T("help_close"));
   const li=k=>"<li>"+esc(T(k))+"</li>";
-  const rows=HELP_KEYS.map(function(pair){
+  const keys=(HELP_KEYS[state.mode]||[]).concat(HELP_KEYS_ALWAYS);
+  const rows=keys.map(function(pair){
     const cap=pair[0], key=pair[1];
     const label = cap!==null ? cap : (key==="h_esc" ? T("k_esc") : T("k_space"));
     return '<span class="keycap">'+esc(label)+"</span><span>"+esc(T(key))+"</span>";
@@ -570,19 +591,36 @@ function renderHelp(){
       +li("hm_card")+li("hm_quiz")+li("hm_image")+li("hm_list")+"</ul>"
     +"<h3>"+esc(T("hs_keys"))+"</h3><div class=\"keytable\">"+rows+"</div>"
     +"<h3>"+esc(T("hs_settings"))+"</h3><p>"+esc(T("hset"))+"</p>"
-    +"<h3>"+esc(T("hs_more"))+"</h3><p>"+esc(T("hmore"))+"</p>";
+    +"<h3>"+esc(T("hs_more"))+"</h3><p>"+esc(T("hmore"))+"</p>"
+    +"<h3>"+esc(T("hs_privacy"))+"</h3><p>"+esc(T("hprivacy"))
+      +' <a href="https://www.goatcounter.com/help/privacy" rel="noopener">GoatCounter</a></p>';
 }
 
 function helpOpen(){ return $("help").className!=="hidden"; }
 
+/* aria-modal ensamt gör ingenting åt tangentbordet: utan det här kunde Tab
+   vandra ut till knapparna bakom överlägget. */
+function trapFocus(e){
+  if(e.key!=="Tab" || !helpOpen()) return;
+  const f=$("help").querySelectorAll("a[href], button:not([disabled])");
+  if(!f.length) return;
+  const first=f[0], last=f[f.length-1];
+  if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+}
+
 function toggleHelp(open){
   const show = open===undefined ? !helpOpen() : open;
+  $("helpbtn").setAttribute("aria-expanded", String(show));
   if(show){ renderHelp(); $("help").className=""; $("helpclose").focus(); }
   else { $("help").className="hidden"; $("helpbtn").focus(); }
 }
 
 function applyI18n(){
   document.querySelectorAll("[data-i18n]").forEach(el=>{ el.textContent=T(el.dataset.i18n); });
+  // Knappen visar bara "?" — skärmläsaren behöver ett riktigt namn.
+  $("helpbtn").setAttribute("aria-label", T("b_help"));
+  $("helpbtn").title=T("b_help");
   renderFooter();
   $("title").textContent=T("title");
   $("search").placeholder=T("search");
@@ -627,7 +665,7 @@ function setSettingsOpen(open){
 function resetQueue(){
   state.queue=shuffle(pool().slice());
   state.current=state.queue.shift()||null;
-  state.flipped=false; state.seen=0; state.known=0; state.history=[];
+  state.flipped=false; state.seen=0; state.known=0; state.history=[]; state.redo=[];
 }
 
 function backLangs(){ return state.backs.filter(k=>k!==state.front); }
@@ -684,12 +722,14 @@ function renderCard(){
    djupet kostar minne — 50 räcker gott för en genomgång. */
 const HISTORY_MAX = 50;
 
-function next(known){
+function next(known, replay){
+  // Ett nytt betyg gör den sparade framåtvägen ogiltig.
+  if(!replay) state.redo.length=0;
   if(state.current){
     // Spara hela tillståndet, inte bara kortet: annars driver statistiken och
     // "repetera"-kön isär när man går tillbaka.
     state.history.push({item:state.current, queue:state.queue.slice(),
-                        seen:state.seen, known:state.known});
+                        seen:state.seen, known:state.known, grade:known});
     if(state.history.length>HISTORY_MAX) state.history.shift();
     state.seen++;
     if(known===true) state.known++;
@@ -703,6 +743,9 @@ function next(known){
 function prev(){
   const step=state.history.pop();
   if(!step) return false;
+  // Spara betyget som gällde kortet vi lämnar, så att en framåtpil återställer
+  // det i stället för att tyst nedgradera "kan" till "hoppa över".
+  state.redo.push(step.grade);
   state.queue=step.queue;
   state.current=step.item;
   state.seen=step.seen; state.known=step.known;
@@ -833,7 +876,7 @@ function render(){
 }
 
 $("togglesettings").onclick=()=>setSettingsOpen(!state.settingsOpen);
-$("helpbtn").onclick=()=>toggleHelp(true);
+$("helpbtn").onclick=()=>toggleHelp();
 $("helpclose").onclick=()=>toggleHelp(false);
 $("help").onclick=e=>{ if(e.target===$("help")) toggleHelp(false); };
 $("summary").onclick=()=>setSettingsOpen(true);
@@ -862,6 +905,7 @@ $("search").oninput=()=>renderList();
 document.addEventListener("keydown",e=>{
   // Esc måste fungera även med fokus i dialogens stängknapp.
   if(e.key==="Escape" && helpOpen()){ e.preventDefault(); toggleHelp(false); return; }
+  if(helpOpen() && e.key==="Tab"){ trapFocus(e); return; }
   if(e.target.tagName==="INPUT"||e.target.tagName==="SELECT") return;
   if(e.metaKey||e.ctrlKey||e.altKey) return;
 
@@ -884,7 +928,11 @@ document.addEventListener("keydown",e=>{
     e.preventDefault();
     // Första trycket visar svaret, nästa går vidare.
     if(state.current && !state.flipped){ state.flipped=true; renderCard(); }
-    else if(state.current) next(null);
+    else if(state.current){
+      // Har vi gått bakåt återanvänds det ursprungliga betyget.
+      if(state.redo.length) next(state.redo.pop(), true);
+      else next(null);
+    }
     else { resetQueue(); renderCard(); }
     return;
   }
@@ -900,24 +948,31 @@ if("serviceWorker" in navigator && location.protocol==="https:"){
   });
 }
 
-/* Besöksräkning med GoatCounter: ingen kaka, ingen IP-lagring, inga
-   personuppgifter — bara ett sidvisningsantal. Koden nedan är kontonamnet på
-   goatcounter.com; byt den om du registrerar ett annat.
+/* Besöksräkning med GoatCounter. Vad som registreras: sidadress, hänvisande
+   sida, webbläsare och operativsystem, skärmstorlek och land. Ingen kaka, ingen
+   lagrad IP-adress och inget som pekar ut en enskild besökare.
 
-   Laddas bara över https, så lokala körningar och rökprovet i CI inte hamnar i
-   statistiken, och inte alls om besökaren bett om att slippa spårning. */
-(function(){
-  var CODE = "oluies";
-  if(location.protocol !== "https:") return;
-  var dnt = navigator.doNotTrack === "1" || window.doNotTrack === "1"
-         || navigator.msDoNotTrack === "1" || navigator.globalPrivacyControl === true;
-  if(dnt) return;
-  var el = document.createElement("script");
+   CODE är kontonamnet på goatcounter.com. Forkar du sajten: byt det till ditt
+   eget konto eller ta bort anropet nedan, annars hamnar din trafik i någon
+   annans statistik.
+
+   Räknaren laddas bara över https, så lokala körningar och rökprovet i CI inte
+   räknas som besök, och inte alls om besökaren bett om att slippa spårning. */
+function installCounter(loc, nav, doc, code){
+  if(loc.protocol !== "https:") return null;
+  // Äldre webbläsare svarade "yes" i stället för "1" på en uttrycklig avböjan.
+  var raw = nav.doNotTrack || nav.msDoNotTrack || (doc.defaultView && doc.defaultView.doNotTrack);
+  if(raw === "1" || raw === "yes" || nav.globalPrivacyControl === true) return null;
+  var el = doc.createElement("script");
   el.async = true;
-  el.src = "https://gc.zgo.at/count.js";
-  el.setAttribute("data-goatcounter", "https://" + CODE + ".goatcounter.com/count");
-  document.head.appendChild(el);
-})();
+  el.src = "vendor/count.js";
+  el.setAttribute("data-goatcounter", "https://" + code + ".goatcounter.com/count");
+  doc.head.appendChild(el);
+  return el;
+}
+
+var GC_CODE = "oluies";
+installCounter(location, navigator, document, GC_CODE);
 </script>
 </body>
 </html>

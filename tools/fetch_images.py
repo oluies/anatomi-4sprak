@@ -192,6 +192,23 @@ def drop_image(entry, drop_article=False):
     return had
 
 
+def validate_exclusion(term_id, value):
+    """Enda stället som avgör vad en uteslutningspost måste innehålla.
+
+    Formen kontrollerades tidigare på två ställen med olika stränghet, vilket
+    är samma sorts dubblerade regel som fritextkonventionen den ersatte.
+    """
+    if not isinstance(value, dict):
+        raise SystemExit(
+            f"bilder-uteslutna.json: {term_id} måste vara "
+            '{"skal": "...", "artikel_ok": true|false}')
+    if not str(value.get("skal", "")).strip():
+        raise SystemExit(f"bilder-uteslutna.json: {term_id}.skal får inte vara tomt")
+    if not isinstance(value.get("artikel_ok"), bool):
+        raise SystemExit(f"bilder-uteslutna.json: {term_id}.artikel_ok måste vara true eller false")
+    return value
+
+
 def load_excluded():
     """Term-id vars automatiskt valda bild har underkänts vid granskning.
 
@@ -201,19 +218,7 @@ def load_excluded():
     artikellänken fast uppslaget är fel.
     """
     raw = json.loads(EXCLUDE_PATH.read_text(encoding="utf-8"))
-    out = {}
-    for term_id, value in raw.items():
-        if term_id.startswith("_"):
-            continue
-        if not isinstance(value, dict) or "skal" not in value or "artikel_ok" not in value:
-            raise SystemExit(
-                f"{EXCLUDE_PATH.name}: {term_id} måste vara "
-                '{"skal": "...", "artikel_ok": true|false}'
-            )
-        if not isinstance(value["artikel_ok"], bool):
-            raise SystemExit(f"{EXCLUDE_PATH.name}: {term_id}.artikel_ok måste vara true eller false")
-        out[term_id] = value
-    return out
+    return {k: validate_exclusion(k, v) for k, v in raw.items() if not k.startswith("_")}
 
 
 def build(terms, dry_run=False, order=None):

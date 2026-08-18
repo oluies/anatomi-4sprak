@@ -38,9 +38,10 @@ vid nästa tryck vidare till nästa kort, **←** går tillbaka till föregåend
 **1** lägger kortet sist i kön för repetition och **2** markerar det som kunnigt.
 Att gå bakåt återställer även räknarna och repetera-kön, så statistiken stämmer.
 I quizlägena går **→** till nästa fråga. **h** eller **?** öppnar en hjälpruta som
-beskriver lägena, genvägarna och inställningarna på gränssnittets språk; **Esc**,
-klick utanför rutan eller knappen **?** i sidhuvudet stänger den. Raden med genvägar
-visas bara på enheter med tangentbord, medan **?**-knappen finns även på telefon.
+beskriver lägena, genvägarna och inställningarna på gränssnittets språk, och listar
+bara de genvägar som gäller i det läge man är i. **Esc**, **×** eller klick utanför
+rutan stänger den. Raden med genvägar visas bara på enheter med tangentbord, medan
+**?**-knappen i sidhuvudet finns även på telefon.
 
 Urvalsinställningarna — språk, svarsspråk och kategorier — går att fälla ihop och är
 hopfällda från start på telefon, där de annars fyller nästan hela skärmen innan man ser
@@ -242,10 +243,23 @@ den som inte har ett konto.
 
 ## Besöksstatistik
 
-Sajten räknar sidvisningar med [GoatCounter](https://www.goatcounter.com/) — ingen
-kaka, ingen IP-lagring, inga personuppgifter, bara ett antal. Skriptet laddas bara
-över `https:`, så lokala körningar och rökprovet i CI hamnar inte i statistiken, och
-inte alls om besökaren skickar `Do Not Track` eller `Global Privacy Control`.
+Sajten räknar sidvisningar med [GoatCounter](https://www.goatcounter.com/). Det som
+registreras är sidadress, hänvisande sida, webbläsare och operativsystem,
+skärmstorlek och land, plus en saltad och roterande hash av IP och User-Agent för att
+gruppera en session. Ingen kaka sätts, ingen IP-adress lagras, och inget pekar ut en
+enskild besökare — men det är mer än "bara ett antal", och
+[GoatCounters egen redogörelse](https://www.goatcounter.com/help/privacy) beskriver
+det i detalj. Samma text finns för besökarna i hjälprutan under **Statistik**.
+
+`vendor/count.js` är en kopia av GoatCounters räknarskript (ISC-licens) i stället för
+ett anrop till deras CDN. Sajten är i övrigt helt självständig — all data ligger inline
+och allt annat är samma origin eller en bild från Commons — så ett externt skript med
+full DOM-åtkomst vore hela den externa angreppsytan. Uppdatera med
+`curl -s https://gc.zgo.at/count.js -o vendor/count.js` och lägg tillbaka huvudet.
+
+Skriptet laddas bara över `https:`, så lokala körningar och rökprovet i CI hamnar inte
+i statistiken, och inte alls om besökaren skickar `Do Not Track` (värdena `1` och
+`yes`) eller `Global Privacy Control`.
 
 Kontokoden står som `CODE` i skriptblocket längst ned i `index.html`:
 
@@ -256,6 +270,10 @@ var CODE = "oluies";
 Statistiken finns på <https://oluies.goatcounter.com>. Den är privat som standard och
 kan göras publik i GoatCounters inställningar. GoatCounter är gratis för
 icke-kommersiell användning och går även att köra själv.
+
+**Forkar du sajten:** byt `CODE` till ditt eget konto eller ta bort anropet till
+`installCounter`, annars hamnar din trafik i statistiken ovan och dina besökare räknas
+av någon de aldrig valt.
 
 ## Licens och källor
 
