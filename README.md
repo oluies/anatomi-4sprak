@@ -117,9 +117,10 @@ funktionen behövs.
 - `tools/check_data.py` — termdatans invarianter och synken mot `index.html`
 - `pytest tests` — tester för kontrollskriptet
 - ett rökbygge av `.apkg` och en syntaxkontroll av `sw.js`
-- `tools/verify_app.mjs` — startar webbappen i headless Chromium, vänder ett kort,
-  byter frågespråk till latin, svarar på en quizfråga, söker i listan och kräver
-  att konsolen är fri från fel och varningar
+- `tools/verify_app.mjs` — serverar katalogen över http, startar webbappen i headless
+  Chromium och kör 18 kontroller: kortvändning, byte av frågespråk till latin, ett rätt
+  quizsvar som ska räknas som rätt, sökning på svenska, ukrainska och ryska förklaringar,
+  nedladdningslänken, manifestet och att konsolen är fri från fel
 
 Kör detsamma lokalt:
 
@@ -127,7 +128,7 @@ Kör detsamma lokalt:
 pip install -r requirements-dev.txt
 python tools/check_data.py && python -m pytest tests -q
 npm install playwright && npx playwright install chromium
-node tools/verify_app.mjs index.html
+node tools/verify_app.mjs .
 ```
 
 ## Licens

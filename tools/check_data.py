@@ -20,6 +20,20 @@ HTML_PATH = ROOT / "index.html"
 
 REQUIRED = ["id", "cat", "sv", "la", "uk", "ru", "def_sv", "def_uk", "def_ru", "n"]
 
+# Så många skiljande poster rapporteras innan listan kortas av.
+MAX_REPORTED = 5
+
+
+def require_list_of_dicts(items, source):
+    """Resten av skriptet indexerar posterna som dictar — kontrollera det först,
+    annars faller kontrollen på en rå AttributeError i stället för ett läsbart fel."""
+    if not isinstance(items, list):
+        raise SystemExit(f"{source}: förväntade en lista av termer, fick {type(items).__name__}")
+    for i, item in enumerate(items):
+        if not isinstance(item, dict):
+            raise SystemExit(f"{source}: post {i} är {type(item).__name__}, förväntade ett objekt")
+    return items
+
 
 def inline_data(html_text):
     """Plocka ut DATA-arrayen ur index.html."""
@@ -46,26 +60,29 @@ def describe_drift(inline, terms):
             f"index.html DATA ({len(inline)} termer) skiljer sig från "
             f"{JSON_PATH.name} ({len(terms)} termer) — uppdatera båda"
         ]
+    differing = [i for i, (a, b) in enumerate(zip(inline, terms)) if a != b]
     problems = []
-    for i, (a, b) in enumerate(zip(inline, terms)):
-        if a == b:
-            continue
+    for i in differing[:MAX_REPORTED]:
+        a, b = inline[i], terms[i]
         tid = b.get("id", a.get("id", "?"))
-        diff = sorted(set(a) | set(b))
-        fields = [f for f in diff if a.get(f) != b.get(f)]
+        fields = [f for f in sorted(set(a) | set(b)) if a.get(f) != b.get(f)]
         detail = ", ".join(
             f"{f}: index.html={a.get(f)!r} vs json={b.get(f)!r}" for f in fields
         )
         problems.append(f"post {i} (id={tid!r}) skiljer sig mellan index.html och JSON — {detail}")
-        if len(problems) == 5:
-            problems.append("... fler skillnader finns, visar de första fem")
-            break
+    if len(differing) > MAX_REPORTED:
+        problems.append(
+            f"... {len(differing) - MAX_REPORTED} skillnader till, "
+            f"visar de första {MAX_REPORTED}"
+        )
     return problems
 
 
 def main():
     errors = []
-    terms = json.loads(JSON_PATH.read_text(encoding="utf-8"))
+    terms = require_list_of_dicts(
+        json.loads(JSON_PATH.read_text(encoding="utf-8")), JSON_PATH.name
+    )
 
     if not terms:
         errors.append("JSON-filen är tom")
@@ -86,7 +103,9 @@ def main():
             errors.append(f"{where}: n={n} används redan av post {seen_n[n]}")
         seen_n[n] = i
 
-    inline = inline_data(HTML_PATH.read_text(encoding="utf-8"))
+    inline = require_list_of_dicts(
+        inline_data(HTML_PATH.read_text(encoding="utf-8")), "index.html DATA"
+    )
     errors.extend(describe_drift(inline, terms))
 
     if errors:

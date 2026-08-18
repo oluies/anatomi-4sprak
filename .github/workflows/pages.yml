@@ -3,15 +3,17 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-    # Ändringar i termdatan och byggkedjan deployas av deck.yml, efter att
-    # tools/check_data.py har validerat dem. Utan den här listan skulle en
-    # push-triggad deploy publicera osynkad data förbi valideringen.
+    # Ren avdubblering: pushar som bara rör deck.yml:s egna källor deployas av
+    # deck.yml efter bygget. Korrektheten vilar inte på den här listan — en push
+    # som rör både en ignorerad och en icke-ignorerad fil kör ändå det här
+    # workflowet, och därför validerar validate-jobbet nedan varje deploy.
     paths-ignore:
-      - 'index.html'
-      - 'data/**'
-      - 'tools/**'
-      - 'requirements.txt'
+      - 'data/anatomi-termer.json'
+      - 'tools/build_deck.py'
+      - 'tools/check_data.py'
       - '.github/workflows/deck.yml'
+      - 'tests/**'
+      - 'requirements-dev.txt'
   workflow_call:
   workflow_dispatch:
 
@@ -25,7 +27,22 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Grinden ligger i deployen själv, inte i triggerfiltren, så att ingen väg
+  # in i det här workflowet kan publicera osynkad termdata.
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate term data and index.html sync
+        run: python tools/check_data.py
+
   deploy:
+    needs: validate
     runs-on: ubuntu-latest
     environment:
       name: github-pages

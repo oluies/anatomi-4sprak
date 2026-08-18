@@ -54,4 +54,4 @@ jobs:
           npx playwright install --with-deps chromium
 
       - name: Verify index.html in a headless browser
-        run: node tools/verify_app.mjs index.html
+        run: node tools/verify_app.mjs .

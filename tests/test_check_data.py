@@ -124,3 +124,39 @@ def test_missing_data_block(tmp_path, monkeypatch):
 def test_real_repo_data_is_valid():
     """Den riktiga datan i repot ska alltid passera."""
     assert check_data.main() == 0
+
+
+def test_truncation_note_only_when_truncated(repo, capsys):
+    """Exakt fem skillnader ska rapporteras utan '... fler skillnader'-noten."""
+    terms = [term(i) for i in range(1, 8)]
+    inline = [dict(t) for t in terms]
+    for t in inline[:5]:
+        t["uk"] = "ändrad"
+    repo(terms, inline=inline)
+    assert check_data.main() == 1
+    err = capsys.readouterr().err
+    assert err.count("skiljer sig mellan index.html och JSON") == 5
+    assert "skillnader till" not in err
+
+
+def test_truncation_note_when_more_than_five(repo, capsys):
+    terms = [term(i) for i in range(1, 10)]
+    inline = [dict(t) for t in terms]
+    for t in inline:
+        t["uk"] = "ändrad"
+    repo(terms, inline=inline)
+    assert check_data.main() == 1
+    err = capsys.readouterr().err
+    assert "4 skillnader till, visar de första 5" in err
+
+
+def test_non_dict_entries_give_readable_error(tmp_path, monkeypatch):
+    json_path = tmp_path / "anatomi-termer.json"
+    html_path = tmp_path / "index.html"
+    json_path.write_text(json.dumps([term(1), "inte ett objekt"], ensure_ascii=False), encoding="utf-8")
+    html_path.write_text("<script>const DATA = [];</script>", encoding="utf-8")
+    monkeypatch.setattr(check_data, "JSON_PATH", json_path)
+    monkeypatch.setattr(check_data, "HTML_PATH", html_path)
+    with pytest.raises(SystemExit) as exc:
+        check_data.main()
+    assert "post 1 är str" in str(exc.value)
