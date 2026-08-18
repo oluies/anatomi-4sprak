@@ -179,14 +179,24 @@ try {
   check('klick på sammanfattningen fäller ut igen', await settingsOpen());
 
   // --- kategorinamnen ska följa gränssnittsspråket ---
+  // Utgå från en namngiven kategori, inte "första chipet" — vilken term som
+  // sorterar först i datan är irrelevant för det som testas.
+  const CAT = 'Leder och muskler';
   const catByUi = {};
   for (const ui of ['sv', 'uk', 'ru', 'en']) {
     await page.selectOption('#ui', ui);
-    catByUi[ui] = (await page.locator('#cats .chip').first().textContent()).trim();
+    catByUi[ui] = await page.evaluate(c => catName(c), CAT);
   }
-  const distinct = new Set(Object.values(catByUi));
-  check('kategorinamnen översätts med gränssnittet', distinct.size === 4,
+  const expected = await page.evaluate(c => CATS[c], CAT);
+  check('kategorinamnen översätts med gränssnittet',
+    catByUi.sv === CAT && catByUi.uk === expected.uk &&
+    catByUi.ru === expected.ru && catByUi.en === expected.en,
     Object.entries(catByUi).map(([k, v]) => `${k}=${v}`).join(' | '));
+  await page.selectOption('#ui', 'uk');
+  check('chipsen visar det översatta namnet', await page.evaluate(c => {
+    const want = CATS[c].uk;
+    return [...document.querySelectorAll('#cats .chip')].some(b => b.textContent.startsWith(want));
+  }, CAT));
   check('ukrainskt kategorinamn är kyrilliskt', /[\u0400-\u04FF]/.test(catByUi.uk), catByUi.uk);
   check('engelskt kategorinamn är latinskt', /^[A-Za-z]/.test(catByUi.en), catByUi.en);
   // listkolumnen och kortetiketten ska följa med
@@ -267,16 +277,39 @@ try {
   const cred = (await page.textContent('.imgcred')).trim();
   check('bilden har upphovsperson och licens',
     cred.includes('·') && cred.includes('Wikimedia Commons'), cred);
+  // URL-formen kontrolleras hermetiskt. Själva hämtningen från Wikimedia
+  // rapporteras men fäller inte bygget — den säger inget om ändringen och gör
+  // annars CI rött när Commons är långsamt eller döper om en tumnagel.
+  const src = await page.getAttribute('#cimg img', 'src');
+  check('bildadressen pekar på en Commons-tumnagel',
+    /^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\//.test(src), src);
+  check('bildtaggen begär CORS så service workern kan cacha',
+    (await page.getAttribute('#cimg img', 'crossorigin')) === 'anonymous');
   const imgOk = await page.evaluate(async () => {
     const i = document.querySelector('#cimg img');
     await new Promise(r => { if (i.complete) r(); else { i.onload = r; i.onerror = r; } });
     return i.naturalWidth > 0;
   });
-  check('bilden laddas från Commons', imgOk);
+  if (!imgOk) warnings.push('bilden kunde inte hämtas från Commons (nätverk, ej kodfel)');
   // Upphovsfältet är fritext från Commons — det får inte spränga kreditraden.
-  const longest = await page.evaluate(() =>
-    Math.max(...Object.values(IMGS).filter(e => e.bild).map(e => (e.upphov || '').length)));
-  check('kreditraden är rimligt kort', longest <= 82, `längsta upphovssträng: ${longest}`);
+  // Gränsen läses ur appen i stället för att upprepas här, och kapningen sker
+  // vid rendering — datan behåller hela attributionen.
+  const creditCheck = await page.evaluate(() => {
+    const longestRaw = Math.max(...Object.values(IMGS).filter(e => e.bild)
+      .map(e => (e.upphov || '').length));
+    const longestShown = Math.max(...Object.values(IMGS).filter(e => e.bild)
+      .map(e => shortCredit(e.upphov).length));
+    return { MAX_CREDIT, longestRaw, longestShown };
+  });
+  check('kreditraden kapas vid visning', creditCheck.longestShown <= creditCheck.MAX_CREDIT + 1,
+    `visad ${creditCheck.longestShown}, gräns ${creditCheck.MAX_CREDIT}`);
+  check('datan behåller hela attributionen', creditCheck.longestRaw > creditCheck.MAX_CREDIT,
+    `längsta rå upphovssträng: ${creditCheck.longestRaw}`);
+  const titled = await page.evaluate(() => {
+    const s = document.querySelector('.imgcred span[title]');
+    return s ? s.getAttribute('title').length >= s.textContent.length : false;
+  });
+  check('hela upphovsuppgiften finns i title', titled);
 
   // uteslutna bilder får inte dyka upp
   const uteslutna = await (await page.request.get(base + 'data/bilder-uteslutna.json')).json();
@@ -284,6 +317,12 @@ try {
     ids => ids.filter(id => IMGS[id] && IMGS[id].bild),
     Object.keys(uteslutna).filter(k => !k.startsWith('_')));
   check('granskningsuteslutna bilder är borta', stillThere.length === 0, stillThere.join(','));
+  // Vid homonym är uppslaget fel, inte bara bilden — artikellänken måste bort.
+  const homonymArticles = await page.evaluate(ids => ids.filter(id => IMGS[id] && IMGS[id].artikel),
+    Object.entries(uteslutna).filter(([k, v]) => !k.startsWith('_') &&
+      String(v).toLowerCase().startsWith('homonym')).map(([k]) => k));
+  check('homonymer länkar inte till fel artikel', homonymArticles.length === 0,
+    homonymArticles.join(','));
 
   // bildquiz: bara unika bilder, annars finns flera rätta svar
   await page.click('#modes button[data-mode="image"]');
@@ -301,6 +340,32 @@ try {
   check('rätt svar i bildquizet räknas',
     (await page.textContent('#i_r')).trim() === '1' && (await page.textContent('#i_n')).trim() === '1');
 
+  // --- rapportraden ska finnas i bildquizet, där felaktiga bilder upptäcks ---
+  await page.click('#modes button[data-mode="image"]');
+  await page.waitForSelector('#iopts button');
+  // Ny fråga: en redan besvarad fråga får visa artikellänken, en obesvarad inte.
+  const repImg = await page.evaluate(() => {
+    newImageQuestion();
+    return {
+      synlig: !!document.getElementById('creport').offsetParent,
+      hrefs: [...document.querySelectorAll('#creport a')].map(a => a.getAttribute('href'))
+    };
+  });
+  check('rapportraden syns i bildquizet', repImg.synlig);
+  check('bildquizet har en rapportlänk',
+    repImg.hrefs.some(h => h.includes('/discussions/new')));
+  check('wikipedialänken röjer inte svaret i en obesvarad bildfråga',
+    !repImg.hrefs.some(h => h.includes('sv.wikipedia.org')), repImg.hrefs.join(' '));
+  const afterAnswer = await page.evaluate(() => {
+    const c = state.icur.item[state.front];
+    [...document.getElementById('iopts').children].find(b => b.textContent === c).click();
+    return [...document.querySelectorAll('#creport a')].map(a => a.getAttribute('href'));
+  });
+  check('artikellänken kommer fram när bildfrågan besvarats',
+    afterAnswer.some(h => h.includes('sv.wikipedia.org')) ||
+    !(await page.evaluate(() => !!articleOf(state.icur.item))),
+    afterAnswer.length + ' länkar');
+
   // --- felrapportering per term ---
   await page.click('#modes button[data-mode="card"]');
   await page.evaluate(() => { state.current = pool()[0]; state.flipped = true; renderCard(); });
@@ -309,6 +374,18 @@ try {
     id: state.current.id
   }));
   const gh = rep.hrefs.find(h => h.includes('/discussions/new'));
+  const beforeFlip = await page.evaluate(() => {
+    state.flipped = false; renderCard();
+    return [...document.querySelectorAll('#creport a')].map(a => a.getAttribute('href'));
+  });
+  check('wikipedialänken visas inte innan kortet vänts',
+    !beforeFlip.some(h => h.includes('sv.wikipedia.org')), beforeFlip.join(' '));
+  const afterFlip = await page.evaluate(() => {
+    state.flipped = true; renderCard();
+    return [...document.querySelectorAll('#creport a')].map(a => a.getAttribute('href'));
+  });
+  check('wikipedialänken visas när kortet vänts',
+    afterFlip.some(h => h.includes('sv.wikipedia.org')));
   check('rapportlänk till GitHub-diskussion finns', !!gh);
   check('rapportlänken är förifylld med term-id',
     !!gh && decodeURIComponent(gh).includes('`' + rep.id + '`'), rep.id);

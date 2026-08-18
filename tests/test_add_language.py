@@ -20,7 +20,7 @@ def repo(tmp_path):
     """Kopiera det som behövs för att köra verktygen fristående."""
     for rel in ["index.html", "tools/sync_html_data.py", "tools/build_deck.py",
                 "tools/check_data.py", "data/anatomi-termer.json",
-                "data/kategorier.json", "data/sprak.json"]:
+                "data/kategorier.json", "data/sprak.json", "data/bilder.json"]:
         dst = tmp_path / rel
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy(ROOT / rel, dst)

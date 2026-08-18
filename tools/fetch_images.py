@@ -37,17 +37,17 @@ THUMB_WIDTH = 400
 BATCH = 40
 PAUSE = 0.3
 
-# Prefix och suffix ("hyper-", "-emi") och rena riktningsord har inga
-# meningsfulla bilder — hoppa över dem i stället för att hämta brus.
-SKIP_CATEGORIES = set()
-
-
 def strip_paren(text):
     return re.sub(r"\s*\([^)]*\)", "", text).strip()
 
 
 def is_affix(term):
-    sv = term["sv"]
+    """Prefix och suffix ("hyper-", "-emi") har inga meningsfulla bilder.
+
+    Jämförelsen görs på termen utan förklaringsparentes — annars slipper
+    "hyper- (över, förhöjd)" igenom, eftersom den slutar med ")" och inte "-".
+    """
+    sv = strip_paren(term["sv"])
     return sv.startswith("-") or sv.endswith("-") or "/" in sv
 
 
@@ -60,27 +60,23 @@ def api(params):
         return json.load(fh)
 
 
+def https_url(url):
+    """Creative Commons svarar med http://-adresser i metadatan. De finns över
+    https också, och en https-sida ska inte länka nedåt i protokoll."""
+    url = (url or "").strip()
+    return "https://" + url[len("http://"):] if url.startswith("http://") else url
+
+
 def clean_url(url):
     """Ta bort API:ets utm-parametrar ur tumnagel-URL:en."""
     return url.split("?")[0] if url else None
-
-
-# Upphovsfältet på Commons är fritext och kan vara en hel licensuppsats — eller
-# klotter. Kapa det till en kreditrad som får plats; filsidan länkas alltid och
-# bär den fullständiga uppgiften.
-MAX_CREDIT = 80
 
 
 def strip_html(text):
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", text or "")).strip()
 
 
-def shorten(text, limit=MAX_CREDIT):
-    text = (text or "").strip()
-    if len(text) <= limit:
-        return text
-    cut = text[:limit].rsplit(" ", 1)[0].rstrip(" ,.;:-")
-    return (cut or text[:limit]) + "…"
+
 
 
 def lookup_pages(titles):
@@ -169,13 +165,35 @@ def lookup_licenses(filenames):
             key = page["title"].split(":", 1)[-1].replace(" ", "_")
             field = lambda name: (meta.get(name) or {}).get("value") if isinstance(meta.get(name), dict) else None
             result[key] = {
-                "upphov": shorten(strip_html(field("Artist"))) or "Okänd",
+                "upphov": strip_html(field("Artist")) or "Okänd",
                 "licens": strip_html(field("LicenseShortName")) or "Okänd",
-                "licensurl": field("LicenseUrl") or "",
-                "filsida": info.get("descriptionurl", ""),
+                "licensurl": https_url(field("LicenseUrl")),
+                "filsida": https_url(info.get("descriptionurl", "")),
             }
         time.sleep(PAUSE)
     return result
+
+
+CREDIT_KEYS = ("bild", "licens", "upphov", "licensurl", "filsida")
+
+
+def drop_image(entry, drop_article=False):
+    """Ta bort bilden och alla kreditfält som hör till den.
+
+    Vid homonym är det uppslaget självt som är fel, inte bara bilden — då måste
+    även artikellänken bort, annars skickas eleven till fel artikel ("atlas"
+    till titanen i grekisk mytologi).
+    """
+    had = bool(entry.get("bild"))
+    for key in CREDIT_KEYS:
+        entry.pop(key, None)
+    if drop_article:
+        entry.pop("artikel", None)
+    return had
+
+
+def is_homonym(reason):
+    return str(reason).lower().startswith("homonym")
 
 
 def load_excluded():
@@ -188,7 +206,7 @@ def load_excluded():
 
 def build(terms, dry_run=False):
     excluded = load_excluded()
-    wanted = [t for t in terms if not is_affix(t) and t["cat"] not in SKIP_CATEGORIES]
+    wanted = [t for t in terms if not is_affix(t)]
     titles = {t["id"]: strip_paren(t["sv"]) for t in wanted}
     pages = lookup_pages(sorted(set(titles.values())))
 
@@ -225,18 +243,16 @@ def build(terms, dry_run=False):
                 entry.pop("bild", None)
 
     for term_id, reason in excluded.items():
-        if term_id in entries and entries[term_id].pop("bild", None):
-            entries[term_id].pop("licens", None)
-            entries[term_id].pop("upphov", None)
-            entries[term_id].pop("licensurl", None)
-            entries[term_id].pop("filsida", None)
+        entry = entries.get(term_id)
+        if entry and drop_image(entry, drop_article=is_homonym(reason)):
             print(f"  utesluten vid granskning: {term_id} ({reason})")
 
-    # Utan känd licens och upphovsperson får bilden inte publiceras.
+    # Utan känd licens får bilden inte publiceras — och då ska inte heller
+    # kreditfälten ligga kvar och beskriva en bild som inte visas.
     for term_id, entry in entries.items():
         if entry.get("bild") and entry.get("licens", "Okänd") == "Okänd":
             print(f"  utan känd licens, utelämnas: {term_id}")
-            entry.pop("bild", None)
+            drop_image(entry)
 
     # Flagga misstänkta homonymer så att de kan granskas och vid behov föras in
     # i bilder-uteslutna.json. Automatiskt bortval vore fel: flera korrekta
@@ -268,7 +284,18 @@ def build(terms, dry_run=False):
         print("\n--dry-run: inget skrevs")
         return entries
 
-    ordered = {t["id"]: entries[t["id"]] for t in terms if t["id"] in entries}
+    # Slå ihop med det som redan finns. Utan detta raderar --only <kategori>
+    # alla andra termers bilder, eftersom build() bara känner till de termer
+    # den fått. Ordningen följer termfilen.
+    existing = json.loads(OUT_PATH.read_text(encoding="utf-8")) if OUT_PATH.exists() else {}
+    merged = dict(existing)
+    for term in terms:
+        if term["id"] in entries:
+            merged[term["id"]] = entries[term["id"]]
+        else:
+            merged.pop(term["id"], None)
+    all_terms = json.loads(JSON_PATH.read_text(encoding="utf-8"))
+    ordered = {t["id"]: merged[t["id"]] for t in all_terms if t["id"] in merged}
     OUT_PATH.write_text(json.dumps(ordered, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"\nskrev {OUT_PATH.relative_to(ROOT)}")
     return entries

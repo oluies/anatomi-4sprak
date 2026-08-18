@@ -10,7 +10,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Anatomical-directions-kangaroo.svg/500px-Anatomical-directions-kangaroo.svg.png",
   "upphov": "Jmerritt på engelska Wikipedia / أبو تائب på arabiska Wikipedia",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Anatomical-directions-kangaroo.svg"
  },
  "brachium": {
@@ -26,7 +26,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Giraffe-closeup-head.jpg/500px-Giraffe-closeup-head.jpg",
   "upphov": "Rob Hooft",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Giraffe-closeup-head.jpg"
  },
  "caudalis": {
@@ -34,7 +34,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Anatomical-directions-kangaroo.svg/500px-Anatomical-directions-kangaroo.svg.png",
   "upphov": "Jmerritt på engelska Wikipedia / أبو تائب på arabiska Wikipedia",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Anatomical-directions-kangaroo.svg"
  },
  "cavitas-abdominis": {
@@ -48,7 +48,7 @@
  "cavitas-thoracis": {
   "artikel": "https://sv.wikipedia.org/wiki/Br%C3%B6sth%C3%A5lan",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Blausen_0467_HeartLocation.png/500px-Blausen_0467_HeartLocation.png",
-  "upphov": "BruceBlaus. When using this image in external sources it can be cited as…",
+  "upphov": "BruceBlaus. When using this image in external sources it can be cited as: Blausen.com staff (2014). \"Medical gallery of Blausen Medical 2014\". WikiJournal of Medicine 1 (2). DOI:10.15347/wjm/2014.010. ISSN 2002-4436.",
   "licens": "CC BY 3.0",
   "licensurl": "https://creativecommons.org/licenses/by/3.0",
   "filsida": "https://commons.wikimedia.org/wiki/File:Blausen_0467_HeartLocation.png"
@@ -58,7 +58,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Biological_cell.svg/500px-Biological_cell.svg.png",
   "upphov": "MesserWoland och Szczepan1990",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Biological_cell.svg"
  },
  "collum": {
@@ -93,7 +93,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Anatomical-directions-kangaroo.svg/500px-Anatomical-directions-kangaroo.svg.png",
   "upphov": "Jmerritt på engelska Wikipedia / أبو تائب på arabiska Wikipedia",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Anatomical-directions-kangaroo.svg"
  },
  "dorsalis": {
@@ -112,9 +112,7 @@
   "licensurl": "",
   "filsida": "https://commons.wikimedia.org/wiki/File:Gray432.png"
  },
- "inferior": {
-  "artikel": "https://sv.wikipedia.org/wiki/Inferi%C3%B6r_vara"
- },
+ "inferior": {},
  "lateralis": {
   "artikel": "https://sv.wikipedia.org/wiki/Lateral"
  },
@@ -167,7 +165,7 @@
  "planum-sagittale": {
   "artikel": "https://sv.wikipedia.org/wiki/Sagittalplan",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Human_anatomy_planes_signatures.svg/500px-Human_anatomy_planes_signatures.svg.png",
-  "upphov": "Human_anatomy_planes.svg: GYassineMrabetTalk✉ Den här W3C-overifiera…",
+  "upphov": "Human_anatomy_planes.svg: GYassineMrabetTalk✉ Den här W3C-overifiera vektorbilden skapades med Inkscape . derivative work: Marek M (talk)",
   "licens": "CC BY-SA 3.0",
   "licensurl": "https://creativecommons.org/licenses/by-sa/3.0",
   "filsida": "https://commons.wikimedia.org/wiki/File:Human_anatomy_planes_signatures.svg"
@@ -177,7 +175,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Anatomical-directions-kangaroo.svg/500px-Anatomical-directions-kangaroo.svg.png",
   "upphov": "Jmerritt på engelska Wikipedia / أبو تائب på arabiska Wikipedia",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Anatomical-directions-kangaroo.svg"
  },
  "proximalis": {
@@ -185,7 +183,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Anatomical-directions-kangaroo.svg/500px-Anatomical-directions-kangaroo.svg.png",
   "upphov": "Jmerritt på engelska Wikipedia / أبو تائب på arabiska Wikipedia",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Anatomical-directions-kangaroo.svg"
  },
  "sinister": {
@@ -207,7 +205,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Peripheral_nerve%2C_cross_section.jpg/500px-Peripheral_nerve%2C_cross_section.jpg",
   "upphov": "Okänd",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Peripheral_nerve,_cross_section.jpg"
  },
  "thorax": {
@@ -269,7 +267,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Animal_Cell.svg/500px-Animal_Cell.svg.png",
   "upphov": "Kelvinsong",
   "licens": "CC0",
-  "licensurl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "licensurl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
   "filsida": "https://commons.wikimedia.org/wiki/File:Animal_Cell.svg"
  },
  "mitosis": {
@@ -277,7 +275,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Three_cell_growth_types.png",
   "upphov": "Okänd",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Three_cell_growth_types.png"
  },
  "nucleus": {
@@ -301,7 +299,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Biological_cell.svg/500px-Biological_cell.svg.png",
   "upphov": "MesserWoland och Szczepan1990",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Biological_cell.svg"
  },
  "textus-adiposus": {
@@ -323,7 +321,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Peripheral_nerve%2C_cross_section.jpg/500px-Peripheral_nerve%2C_cross_section.jpg",
   "upphov": "Okänd",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Peripheral_nerve,_cross_section.jpg"
  },
  "textus-osseus": {
@@ -331,7 +329,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Compact_bone.png/500px-Compact_bone.png",
   "upphov": "Lord of Konrad",
   "licens": "CC0",
-  "licensurl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "licensurl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
   "filsida": "https://commons.wikimedia.org/wiki/File:Compact_bone.png"
  },
  "cardia": {
@@ -361,12 +359,6 @@
   "licensurl": "",
   "filsida": "https://commons.wikimedia.org/wiki/File:Human_Hepar.jpg"
  },
- "hyper": {
-  "artikel": "https://sv.wikipedia.org/wiki/Lista_%C3%B6ver_prefix_i_svenskan"
- },
- "hypo": {
-  "artikel": "https://sv.wikipedia.org/wiki/Lista_%C3%B6ver_prefix_i_svenskan"
- },
  "nefro-reno": {
   "artikel": "https://sv.wikipedia.org/wiki/Njure",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Gray1120.png/500px-Gray1120.png",
@@ -374,9 +366,6 @@
   "licens": "Public domain",
   "licensurl": "",
   "filsida": "https://commons.wikimedia.org/wiki/File:Gray1120.png"
- },
- "poly": {
-  "artikel": "https://sv.wikipedia.org/wiki/Poly-"
  },
  "pulmo": {
   "artikel": "https://sv.wikipedia.org/wiki/Lunga",
@@ -386,9 +375,7 @@
   "licensurl": "",
   "filsida": "https://commons.wikimedia.org/wiki/File:Heart-and-lungs.jpg"
  },
- "atlas": {
-  "artikel": "https://sv.wikipedia.org/wiki/Atlas"
- },
+ "atlas": {},
  "axis": {
   "artikel": "https://sv.wikipedia.org/wiki/Axis"
  },
@@ -397,7 +384,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Subtalar_Joint.PNG/500px-Subtalar_Joint.PNG",
   "upphov": "Okänd",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Subtalar_Joint.PNG"
  },
  "cartilago": {
@@ -570,9 +557,9 @@
  "ossa-metacarpi": {
   "artikel": "https://sv.wikipedia.org/wiki/Metacarpus",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Metacarpus_ant.jpg/500px-Metacarpus_ant.jpg",
-  "upphov": "Ingen maskinläsbar skapare angavs. Palica antaget (baserat på…",
+  "upphov": "Ingen maskinläsbar skapare angavs. Palica antaget (baserat på upphovsrättsanspråk).",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Metacarpus_ant.jpg"
  },
  "ossa-metatarsi": {
@@ -610,9 +597,7 @@
  "periosteum": {
   "artikel": "https://sv.wikipedia.org/wiki/Benhinna"
  },
- "phalanx": {
-  "artikel": "https://sv.wikipedia.org/wiki/Falang"
- },
+ "phalanx": {},
  "radius": {
   "artikel": "https://sv.wikipedia.org/wiki/Str%C3%A5lben",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Illu_upper_extremity.svg/500px-Illu_upper_extremity.svg.png",
@@ -626,7 +611,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Scapula_post.jpg/500px-Scapula_post.jpg",
   "upphov": "Okänd",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Scapula_post.jpg"
  },
  "sternum": {
@@ -642,7 +627,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Subtalar_Joint.PNG/500px-Subtalar_Joint.PNG",
   "upphov": "Okänd",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Subtalar_Joint.PNG"
  },
  "tibia": {
@@ -697,9 +682,9 @@
  "articulatio-coxae": {
   "artikel": "https://sv.wikipedia.org/wiki/H%C3%B6ftled",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Hueftgelenk-gesund.jpg",
-  "upphov": "Ingen maskinläsbar skapare angavs. Scuba-limp~commonswiki antaget (baserat på…",
+  "upphov": "Ingen maskinläsbar skapare angavs. Scuba-limp~commonswiki antaget (baserat på upphovsrättsanspråk).",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Hueftgelenk-gesund.jpg"
  },
  "articulatio-cubiti": {
@@ -715,7 +700,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Knee.female.jpg/500px-Knee.female.jpg",
   "upphov": "ArnoldReinhold",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Knee.female.jpg"
  },
  "articulatio-humeri": {
@@ -734,7 +719,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/3D_CT_Reconstruction_of_Distal_tibia_fracture.gif/500px-3D_CT_Reconstruction_of_Distal_tibia_fracture.gif",
   "upphov": "RoTTe",
   "licens": "CC0",
-  "licensurl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "licensurl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
   "filsida": "https://commons.wikimedia.org/wiki/File:3D_CT_Reconstruction_of_Distal_tibia_fracture.gif"
  },
  "bursa": {
@@ -761,7 +746,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Respiratory_system.svg/500px-Respiratory_system.svg.png",
   "upphov": "Theresa knott",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Respiratory_system.svg"
  },
  "extensio": {
@@ -772,7 +757,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Anatomical-directions-kangaroo.svg/500px-Anatomical-directions-kangaroo.svg.png",
   "upphov": "Jmerritt på engelska Wikipedia / أبو تائب på arabiska Wikipedia",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Anatomical-directions-kangaroo.svg"
  },
  "ginglymus": {
@@ -812,7 +797,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Deltoideus.png/500px-Deltoideus.png",
   "upphov": "Original: sv:Användare:Chrizz",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Deltoideus.png"
  },
  "musculus-gluteus-maximus": {
@@ -820,7 +805,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Gluteus_maximus.png/500px-Gluteus_maximus.png",
   "upphov": "Okänd",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Gluteus_maximus.png"
  },
  "musculus-pectoralis-major": {
@@ -828,7 +813,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Pectoralis_major.png/500px-Pectoralis_major.png",
   "upphov": "Okänd",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Pectoralis_major.png"
  },
  "musculus-sphincter": {
@@ -844,7 +829,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Trapezius.png/500px-Trapezius.png",
   "upphov": "Okänd",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Trapezius.png"
  },
  "musculus-triceps-brachii": {
@@ -852,7 +837,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Triceps_brachii.png/500px-Triceps_brachii.png",
   "upphov": "Okänd",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Triceps_brachii.png"
  },
  "pronatio": {
@@ -868,7 +853,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/PotteryShaping.ogv/250px--PotteryShaping.ogv.jpg",
   "upphov": "Raysonho @ Open Grid Scheduler / Scalable Grid Engine",
   "licens": "CC0",
-  "licensurl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "licensurl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
   "filsida": "https://commons.wikimedia.org/wiki/File:PotteryShaping.ogv"
  },
  "supinatio": {
@@ -909,7 +894,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Aorta_scheme.jpg/500px-Aorta_scheme.jpg",
   "upphov": "J. Heuser",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Aorta_scheme.jpg"
  },
  "arteria": {
@@ -917,7 +902,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Artery.png/500px-Artery.png",
   "upphov": "Lord of Konrad",
   "licens": "CC0",
-  "licensurl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "licensurl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
   "filsida": "https://commons.wikimedia.org/wiki/File:Artery.png"
  },
  "arteria-pulmonalis": {
@@ -925,7 +910,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Diagram_of_the_human_heart_%28cropped%29-sv.svg/500px-Diagram_of_the_human_heart_%28cropped%29-sv.svg.png",
   "upphov": "Diagram of the human heart (cropped).svg: Wapcaplet / härlett verk: Caesar",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Diagram_of_the_human_heart_(cropped)-sv.svg"
  },
  "arteriae-coronariae": {
@@ -960,7 +945,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Heart_diastole.png",
   "upphov": "Okänd",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Heart_diastole.png"
  },
  "myocardium": {
@@ -968,7 +953,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Diagram_of_the_human_heart_%28cropped%29-sv.svg/500px-Diagram_of_the_human_heart_%28cropped%29-sv.svg.png",
   "upphov": "Diagram of the human heart (cropped).svg: Wapcaplet / härlett verk: Caesar",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Diagram_of_the_human_heart_(cropped)-sv.svg"
  },
  "pericardium": {
@@ -995,7 +980,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Sage_Instruments_sphygmomanometer.JPG/500px-Sage_Instruments_sphygmomanometer.JPG",
   "upphov": "BrokenSphere",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Sage_Instruments_sphygmomanometer.JPG"
  },
  "capillaris": {
@@ -1014,7 +999,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Heart_numlabels.svg/500px-Heart_numlabels.svg.png",
   "upphov": "Wapcaplet.",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Heart_numlabels.svg"
  },
  "vena-cava-superior": {
@@ -1053,7 +1038,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/1/19/Hemoglobin.jpg",
   "upphov": "Okänd",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Hemoglobin.jpg"
  },
  "immunitas": {
@@ -1090,11 +1075,7 @@
   "filsida": "https://commons.wikimedia.org/wiki/File:Lymph_nodes_illustration.jpg"
  },
  "phagocytosis": {
-  "artikel": "https://sv.wikipedia.org/wiki/Fagocytos",
-  "upphov": "Okänd",
-  "licens": "Okänd",
-  "licensurl": "",
-  "filsida": "https://commons.wikimedia.org/wiki/File:Neutrophil_with_anthrax_copy.jpg"
+  "artikel": "https://sv.wikipedia.org/wiki/Fagocytos"
  },
  "plasma": {
   "artikel": "https://sv.wikipedia.org/wiki/Blodplasma",
@@ -1131,7 +1112,7 @@
  "thrombocytus": {
   "artikel": "https://sv.wikipedia.org/wiki/Trombocyt",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/2/24/Red_White_Blood_cells.jpg",
-  "upphov": "Electron Microscopy Facility at The National Cancer Institute at Frederick…",
+  "upphov": "Electron Microscopy Facility at The National Cancer Institute at Frederick (NCI-Frederick)",
   "licens": "Public domain",
   "licensurl": "",
   "filsida": "https://commons.wikimedia.org/wiki/File:Red_White_Blood_cells.jpg"
@@ -1171,7 +1152,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Illu01_head_neck_sv.svg/500px-Illu01_head_neck_sv.svg.png",
   "upphov": "Njaelkies Lea",
   "licens": "CC0",
-  "licensurl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "licensurl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
   "filsida": "https://commons.wikimedia.org/wiki/File:Illu01_head_neck_sv.svg"
  },
  "dyspnoe": {
@@ -1260,7 +1241,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/2/29/Anatomy-human-appendix-in-colon.png",
   "upphov": "Mikael Häggström, B jonas",
   "licens": "CC0",
-  "licensurl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "licensurl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
   "filsida": "https://commons.wikimedia.org/wiki/File:Anatomy-human-appendix-in-colon.png"
  },
  "bilis": {
@@ -1389,7 +1370,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Illu01_head_neck_sv.svg/500px-Illu01_head_neck_sv.svg.png",
   "upphov": "Njaelkies Lea",
   "licens": "CC0",
-  "licensurl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "licensurl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
   "filsida": "https://commons.wikimedia.org/wiki/File:Illu01_head_neck_sv.svg"
  },
  "pancreas": {
@@ -1397,7 +1378,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Endokrina_k%C3%B6rtlar_swe_290507.png",
   "upphov": "Uploaded originally by User:PDH, modified by me.",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Endokrina_k%C3%B6rtlar_swe_290507.png"
  },
  "peristalsis": {
@@ -1416,9 +1397,7 @@
   "licensurl": "",
   "filsida": "https://commons.wikimedia.org/wiki/File:Gray1039.png"
  },
- "pylorus": {
-  "artikel": "https://sv.wikipedia.org/wiki/Portvakt"
- },
+ "pylorus": {},
  "rectum": {
   "artikel": "https://sv.wikipedia.org/wiki/%C3%84ndtarm",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Tarmsystem_diagram.png",
@@ -1432,7 +1411,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Abdomal_organs.svg/500px-Abdomal_organs.svg.png",
   "upphov": "Original: ErnstA och Ustas Vektor: Sjef och Jmarchn",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Abdomal_organs.svg"
  },
  "villi-intestinales": {
@@ -1462,13 +1441,13 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Hematuria.jpg/500px-Hematuria.jpg",
   "upphov": "Okänd",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Hematuria.jpg"
  },
  "glomerulus": {
   "artikel": "https://sv.wikipedia.org/wiki/Glomerulus",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Renal_corpuscle.svg/500px-Renal_corpuscle.svg.png",
-  "upphov": "M.Komorniczak (polish Wikipedist) Illustration by : Michał Komorniczak This…",
+  "upphov": "M.Komorniczak (polish Wikipedist) Illustration by : Michał Komorniczak This file has been released into the Creative Commons 3.0. Attribution-ShareAlike (CC BY-SA 3.0) If you use on your website or in your publication my images (either original or modified), you are requested to give me details: Michał Komorniczak (Poland) or Michal Komorniczak (Poland). For more information, write to my e-mail address: m.komorniczak.pl@gmail.com",
   "licens": "CC BY-SA 3.0",
   "licensurl": "https://creativecommons.org/licenses/by-sa/3.0",
   "filsida": "https://commons.wikimedia.org/wiki/File:Renal_corpuscle.svg"
@@ -1540,7 +1519,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Hematuria.jpg/500px-Hematuria.jpg",
   "upphov": "Okänd",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Hematuria.jpg"
  },
  "vesica-urinaria": {
@@ -1556,7 +1535,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Very-minor-scar.jpg/500px-Very-minor-scar.jpg",
   "upphov": "Icecold.trashcan på engelska Wikipedia",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Very-minor-scar.jpg"
  },
  "cutis": {
@@ -1696,7 +1675,7 @@
  "glucagonum": {
   "artikel": "https://sv.wikipedia.org/wiki/Glukagon",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/1gcn.jpg/500px-1gcn.jpg",
-  "upphov": "Deposition authors: Blundell, T.L., Sasaki, K., Dockerill, S., Tickle, I.J…",
+  "upphov": "Deposition authors: Blundell, T.L., Sasaki, K., Dockerill, S., Tickle, I.J.; visualization author: User:Astrojan",
   "licens": "CC BY 3.0",
   "licensurl": "https://creativecommons.org/licenses/by/3.0",
   "filsida": "https://commons.wikimedia.org/wiki/File:1gcn.jpg"
@@ -1710,9 +1689,9 @@
  "hypophysis": {
   "artikel": "https://sv.wikipedia.org/wiki/Hypofys",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Pituitary_gland.png",
-  "upphov": "Ingen maskinläsbar skapare angavs. Jomegat antaget (baserat på…",
+  "upphov": "Ingen maskinläsbar skapare angavs. Jomegat antaget (baserat på upphovsrättsanspråk).",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Pituitary_gland.png"
  },
  "hypothalamus": {
@@ -1768,7 +1747,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Neuron-no_labels.png",
   "upphov": "Selket",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Neuron-no_labels.png"
  },
  "cerebellum": {
@@ -1800,7 +1779,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Neuron-no_labels.png",
   "upphov": "Selket",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Neuron-no_labels.png"
  },
  "encephalon": {
@@ -1808,7 +1787,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/3/36/MRI_head_side.jpg",
   "upphov": "en:User:TheBrain",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:MRI_head_side.jpg"
  },
  "liquor-cerebrospinalis": {
@@ -1870,7 +1849,7 @@
  "nervi-craniales": {
   "artikel": "https://sv.wikipedia.org/wiki/Kranialnerv",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Brain_human_normal_inferior_view_with_labels_en-2.svg/500px-Brain_human_normal_inferior_view_with_labels_en-2.svg.png",
-  "upphov": "Brain_human_normal_inferior_view_with_labels_en.svg…",
+  "upphov": "Brain_human_normal_inferior_view_with_labels_en.svg: *Brain_human_normal_inferior_view.svg: Patrick J. Lynch, medical illustrator derivative work: Beao derivative work: Dwstultz (talk)",
   "licens": "CC BY 2.5",
   "licensurl": "https://creativecommons.org/licenses/by/2.5",
   "filsida": "https://commons.wikimedia.org/wiki/File:Brain_human_normal_inferior_view_with_labels_en-2.svg"
@@ -1896,7 +1875,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Serotonin_27feb.gif",
   "upphov": "ProxyChemist",
   "licens": "CC0",
-  "licensurl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "licensurl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
   "filsida": "https://commons.wikimedia.org/wiki/File:Serotonin_27feb.gif"
  },
  "pars-parasympathica": {
@@ -1913,7 +1892,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Neuron-no_labels.png",
   "upphov": "Selket",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Neuron-no_labels.png"
  },
  "systema-nervosum-autonomicum": {
@@ -1961,7 +1940,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Trommelfell.png/500px-Trommelfell.png",
   "upphov": "Zoph på tyska Wikipedia",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Trommelfell.png"
  },
  "cochlea": {
@@ -1981,18 +1960,16 @@
  "iris": {
   "artikel": "https://sv.wikipedia.org/wiki/Regnb%C3%A5gshinna",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Eye_iris.jpg/500px-Eye_iris.jpg",
-  "upphov": "che (Please credit as \"Petr Novák, Wikipedia\" in case you use this outside…",
+  "upphov": "che (Please credit as \"Petr Novák, Wikipedia\" in case you use this outside Wikimedia projects.)",
   "licens": "CC BY-SA 2.5",
   "licensurl": "https://creativecommons.org/licenses/by-sa/2.5",
   "filsida": "https://commons.wikimedia.org/wiki/File:Eye_iris.jpg"
  },
- "lens": {
-  "artikel": "https://sv.wikipedia.org/wiki/Lins"
- },
+ "lens": {},
  "nervus-opticus": {
   "artikel": "https://sv.wikipedia.org/wiki/Synnerv",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/1/17/Calf-Eye-Posterior-Outside-2005-Oct-13.jpg",
-  "upphov": "Ingen maskinläsbar skapare angavs. Naib antaget (baserat på…",
+  "upphov": "Ingen maskinläsbar skapare angavs. Naib antaget (baserat på upphovsrättsanspråk).",
   "licens": "CC BY-SA 2.5",
   "licensurl": "https://creativecommons.org/licenses/by-sa/2.5",
   "filsida": "https://commons.wikimedia.org/wiki/File:Calf-Eye-Posterior-Outside-2005-Oct-13.jpg"
@@ -2002,7 +1979,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Auge_IMG_4057-2.jpg/500px-Auge_IMG_4057-2.jpg",
   "upphov": "ChiantiDenna fil bygger på: Light Blue Eye IMG 4057.JPG:",
   "licens": "FAL",
-  "licensurl": "http://artlibre.org/licence/lal/en",
+  "licensurl": "https://artlibre.org/licence/lal/en",
   "filsida": "https://commons.wikimedia.org/wiki/File:Auge_IMG_4057-2.jpg"
  },
  "olfactus": {
@@ -2024,7 +2001,7 @@
  "ossicula-auditus": {
   "artikel": "https://sv.wikipedia.org/wiki/H%C3%B6rselben",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Illu_auditory_ossicles-en.svg/500px-Illu_auditory_ossicles-en.svg.png",
-  "upphov": "Illu auditory ossicles.jpg: US Government (original); SVG version: Angelito7…",
+  "upphov": "Illu auditory ossicles.jpg: US Government (original); SVG version: Angelito7 (talk)",
   "licens": "Public domain",
   "licensurl": "",
   "filsida": "https://commons.wikimedia.org/wiki/File:Illu_auditory_ossicles-en.svg"
@@ -2037,7 +2014,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Iris.eye.225px.jpg",
   "upphov": "Michael Reeve",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Iris.eye.225px.jpg"
  },
  "retina": {
@@ -2054,7 +2031,7 @@
  "tactus": {
   "artikel": "https://sv.wikipedia.org/wiki/K%C3%A4nsel",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Blausen_0809_Skin_TactileReceptors.png/500px-Blausen_0809_Skin_TactileReceptors.png",
-  "upphov": "BruceBlaus. When using this image in external sources it can be cited as…",
+  "upphov": "BruceBlaus. When using this image in external sources it can be cited as: Blausen.com staff (2014). \"Medical gallery of Blausen Medical 2014\". WikiJournal of Medicine 1 (2). DOI:10.15347/wjm/2014.010. ISSN 2002-4436.",
   "licens": "CC BY 3.0",
   "licensurl": "https://creativecommons.org/licenses/by/3.0",
   "filsida": "https://commons.wikimedia.org/wiki/File:Blausen_0809_Skin_TactileReceptors.png"
@@ -2204,7 +2181,7 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Clinical_thermometer_38.7.JPG/500px-Clinical_thermometer_38.7.JPG",
   "upphov": "Menchi",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Clinical_thermometer_38.7.JPG"
  },
  "infectio": {
@@ -2218,7 +2195,7 @@
  "nausea": {
   "artikel": "https://sv.wikipedia.org/wiki/Illam%C3%A5ende",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/2/22/3205_-_Milano%2C_Duomo_-_Giorgio_Bonola_-_Miracolo_di_Marco_Spagnolo_%281681%29_-_Foto_Giovanni_Dall%27Orto%2C_6-Dec-2007-cropped.jpg",
-  "upphov": "derivative work: Kostisl (talk)…",
+  "upphov": "derivative work: Kostisl (talk) 3205_-_Milano,_Duomo_-_Giorgio_Bonola_-_Miracolo_di_Marco_Spagnolo_(1681)_-_Foto_Giovanni_Dall'Orto,_6-Dec-2007.jpg: User:G.dallorto",
   "licens": "Public domain",
   "licensurl": "",
   "filsida": "https://commons.wikimedia.org/wiki/File:3205_-_Milano,_Duomo_-_Giorgio_Bonola_-_Miracolo_di_Marco_Spagnolo_(1681)_-_Foto_Giovanni_Dall%27Orto,_6-Dec-2007-cropped.jpg"
@@ -2260,13 +2237,13 @@
   "bild": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Vertigo_08018.jpg/500px-Vertigo_08018.jpg",
   "upphov": "Nevit Dilmen",
   "licens": "CC BY-SA 3.0",
-  "licensurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "licensurl": "https://creativecommons.org/licenses/by-sa/3.0/",
   "filsida": "https://commons.wikimedia.org/wiki/File:Vertigo_08018.jpg"
  },
  "vomitus": {
   "artikel": "https://sv.wikipedia.org/wiki/Kr%C3%A4kning",
   "bild": "https://upload.wikimedia.org/wikipedia/commons/2/22/3205_-_Milano%2C_Duomo_-_Giorgio_Bonola_-_Miracolo_di_Marco_Spagnolo_%281681%29_-_Foto_Giovanni_Dall%27Orto%2C_6-Dec-2007-cropped.jpg",
-  "upphov": "derivative work: Kostisl (talk)…",
+  "upphov": "derivative work: Kostisl (talk) 3205_-_Milano,_Duomo_-_Giorgio_Bonola_-_Miracolo_di_Marco_Spagnolo_(1681)_-_Foto_Giovanni_Dall'Orto,_6-Dec-2007.jpg: User:G.dallorto",
   "licens": "Public domain",
   "licensurl": "",
   "filsida": "https://commons.wikimedia.org/wiki/File:3205_-_Milano,_Duomo_-_Giorgio_Bonola_-_Miracolo_di_Marco_Spagnolo_(1681)_-_Foto_Giovanni_Dall%27Orto,_6-Dec-2007-cropped.jpg"

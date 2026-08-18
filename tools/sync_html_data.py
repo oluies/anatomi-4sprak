@@ -45,8 +45,12 @@ def replace_block(html, marker, opener, value):
     start = html.find(marker)
     if start == -1:
         raise SystemExit(f"index.html: hittade ingen '{marker}' -rad")
-    begin = html.index(opener, start)
-    end = html.index({"[": "];", "{": "};"}[opener], begin)
+    closer = {"[": "];", "{": "};"}[opener]
+    try:
+        begin = html.index(opener, start)
+        end = html.index(closer, begin)
+    except ValueError:
+        raise SystemExit(f"index.html: '{marker}' saknar avslutande '{closer}'")
     return html[:begin] + value + html[end + 1:], html[begin:end + 1] == value
 
 
@@ -64,7 +68,10 @@ def main(argv=None):
         raise SystemExit(f"{CATS_PATH.name}: saknar översättning för {missing}")
     unused = sorted(set(cats) - {t["cat"] for t in terms})
     if unused:
-        raise SystemExit(f"{CATS_PATH.name}: {unused} används inte av någon term")
+        # Varning, inte fel: en kategori kan bli tom en stund under redigering,
+        # och --check kör i CI:s validate-jobb där ett stopp vore oproportionerligt.
+        print(f"varning: {CATS_PATH.name} har översättningar som ingen term använder: {unused}",
+              file=sys.stderr)
 
     langs = json.loads(LANGS_PATH.read_text(encoding="utf-8"))
     term_langs = {k: v["namn"] for k, v in langs.items() if v.get("term")}
@@ -90,14 +97,23 @@ def main(argv=None):
 
     html = HTML_PATH.read_text(encoding="utf-8")
     in_sync = True
-    imgs = json.loads(IMGS_PATH.read_text(encoding="utf-8")) if IMGS_PATH.exists() else {}
+    imgs = json.loads(IMGS_PATH.read_text(encoding="utf-8"))
     ids = {t["id"] for t in terms}
     stray = sorted(set(imgs) - ids)
     if stray:
         raise SystemExit(f"{IMGS_PATH.name}: {len(stray)} poster saknar term, t.ex. {stray[:3]}")
     for term_id, entry in imgs.items():
-        if entry.get("bild") and not entry.get("licens"):
-            raise SystemExit(f"{IMGS_PATH.name}: {term_id} har bild utan licensuppgift")
+        if entry.get("bild") and entry.get("licens", "Okänd") == "Okänd":
+            raise SystemExit(f"{IMGS_PATH.name}: {term_id} har bild utan känd licens")
+        # Bilden är en subresurs på en https-sida och måste vara https.
+        # Länkarna får vara http, men ingenting annat — en javascript:-adress i
+        # ett redigerbart metadatafält ska inte kunna bli en klickbar länk.
+        if entry.get("bild") and not str(entry["bild"]).startswith("https://"):
+            raise SystemExit(f"{IMGS_PATH.name}: {term_id}.bild är inte https: {entry['bild']!r}")
+        for key in ("licensurl", "filsida", "artikel"):
+            url = entry.get(key)
+            if url and not str(url).startswith(("https://", "http://")):
+                raise SystemExit(f"{IMGS_PATH.name}: {term_id}.{key} är varken http eller https: {url!r}")
 
     values = [dump(terms), dump(cats), dump(imgs),
               dump(term_langs), dump(def_langs), dump(ui_langs)]

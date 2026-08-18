@@ -18,7 +18,7 @@ funktion och vanlig medicinsk terminologi.
 | `data/kategorier.json` | Kategorinamnen översatta till ukrainska, ryska och engelska. |
 | `data/bilder.json` | Bild och artikellänk per term, hämtade från svenskspråkiga Wikipedia, med licens och upphovsperson. |
 | `data/bilder-uteslutna.json` | Term-id vars automatiskt valda bild underkänts vid granskning, med skäl. |
-| `tools/fetch_images.py` | Slår upp bilderna mot Wikipedias API och skriver `bilder.json`. Körs för hand. |
+| `tools/fetch_images.py` | Slår upp bilderna mot Wikipedias API och skriver `bilder.json`. Körs för hand. `--only <kategori>` uppdaterar bara den kategorin och lämnar övriga poster orörda. |
 | `data/sprak.json` | Språkuppsättningen: vilka språk som är termspråk, har förklaringar, går att välja som gränssnitt, och vad fälten heter i Anki. |
 | `data/anatomi-4sprak.apkg` | Anki-deck genererat från JSON-filen. |
 | `tools/build_deck.py` | Bygger om `.apkg` från JSON med `genanki`. |
@@ -165,7 +165,7 @@ funktionen behövs.
 - `pytest tests` — tester för kontrollskriptet
 - ett rökbygge av `.apkg` och en syntaxkontroll av `sw.js`
 - `tools/verify_app.mjs` — serverar katalogen över http, startar webbappen i headless
-  Chromium och kör 24 kontroller: kortvändning, byte av frågespråk till latin, ett rätt
+  Chromium och kör hela kontrollsviten: kortvändning, byte av frågespråk till latin, ett rätt
   quizsvar som ska räknas som rätt, sökning på svenska, ukrainska och ryska förklaringar
   med förväntat radantal, att svenska visas som svar för varje frågespråk, att panelen
   med urvalsinställningar fälls ihop och ut, nedladdningslänken, manifestet och att
@@ -183,7 +183,7 @@ node tools/verify_app.mjs .
 
 ## Bilder
 
-256 termer har en bild från svenskspråkiga Wikipedia. Bilden visas i svaret på
+Drygt 250 termer har en bild från svenskspråkiga Wikipedia. Bilden visas i svaret på
 flashcardet och i lägen *Bildquiz*, där man får se bilden och välja rätt term.
 
 Bilderna **hotlänkas** från `upload.wikimedia.org` — de ligger inte i repot. Service
@@ -210,7 +210,9 @@ homonymer: uppslaget på *atlas* gav titanen i grekisk mytologi, *falang* gav de
 antika stridsformeringen och *lins* gav den optiska linsen. Varningen är avsiktligt
 inte ett automatiskt bortval — flera korrekta artiklar (Bröstkorg, Penis, Förlossning)
 saknar också identifierarna. Underkända bilder förs in i `data/bilder-uteslutna.json`
-med ett skäl, och utesluts vid nästa körning.
+med ett skäl, och utesluts vid nästa körning. Börjar skälet med ordet `homonym`
+tas även artikellänken bort — då är det uppslaget som är fel, inte bara bilden,
+och en kvarvarande länk skulle skicka eleven till fel artikel.
 
 ## Felrapportering
 

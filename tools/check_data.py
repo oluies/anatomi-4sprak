@@ -19,7 +19,20 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 JSON_PATH = ROOT / "data" / "anatomi-termer.json"
 HTML_PATH = ROOT / "index.html"
 
-REQUIRED = ["id", "cat", "sv", "la", "uk", "ru", "def_sv", "def_uk", "def_ru", "n"]
+LANGS_PATH = ROOT / "data" / "sprak.json"
+
+
+def required_fields():
+    """Fältlistan härleds ur data/sprak.json så att ett nytt språk kontrolleras
+    utan att den här filen behöver ändras."""
+    fields = ["id", "cat"]
+    langs = json.loads(LANGS_PATH.read_text(encoding="utf-8"))
+    fields += [k for k, v in langs.items() if v.get("term")]
+    fields += ["def_" + k for k, v in langs.items() if v.get("forklaring")]
+    return fields + ["n"]
+
+
+REQUIRED = required_fields()
 
 # Så många skiljande poster rapporteras innan listan kortas av.
 MAX_REPORTED = 5
@@ -65,15 +78,30 @@ def latin_in_swedish(terms):
     Latinet har ett eget fält och visas som eget svar; en dubblett i sv-fältet
     avslöjar svaret när latin är svarsspråk. Svenska förklaringar i parentes,
     som "anterior (främre)", är avsiktliga och rapporteras inte.
+
+    Alla parenteser granskas, inte bara den första, och parentesen jämförs både
+    mot hela det latinska namnet och mot dess enskilda ord — "tarmben (ilium)"
+    med la "os ilium" röjer svaret lika mycket som en exakt träff.
     """
     problems = []
     for term in terms:
-        match = re.search(r"\(([^)]*)\)", str(term.get("sv", "")))
-        if match and _fold(match.group(1)) == _fold(str(term.get("la", ""))):
-            problems.append(
-                f"post id={term.get('id')!r}: sv {term['sv']!r} upprepar latinet "
-                f"{term['la']!r} — ta bort parentesen"
-            )
+        sv = str(term.get("sv", ""))
+        la = str(term.get("la", ""))
+        folded_la = _fold(la)
+        if not folded_la:
+            continue
+        # Ord som är för korta för att vara avslöjande på egen hand.
+        words = {w for w in folded_la.split() if len(w) > 3}
+        for match in re.finditer(r"\(([^)]*)\)", sv):
+            inner = _fold(match.group(1))
+            if not inner:
+                continue
+            if inner == folded_la or inner in words:
+                problems.append(
+                    f"post id={term.get('id')!r}: sv {sv!r} upprepar latinet "
+                    f"{la!r} — ta bort parentesen"
+                )
+                break
     return problems
 
 

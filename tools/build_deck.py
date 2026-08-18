@@ -42,10 +42,35 @@ def load_langs():
 
 TERM_LANGS, DEF_LANGS = load_langs()
 
+# Anki kopplar notinnehåll till fält via ordningsnummer, inte namn, och MODEL_ID
+# är pinnad. Om fältordningen ändras hamnar därför latin i svenskfältet på alla
+# befintliga användares kort vid nästa import. Ordningen får bara växa i slutet.
+FIELD_ORDER = ["Svenska", "Latin", "Ukrainska", "Ryska",
+               "DefSv", "DefUk", "DefRu", "Kategori"]
+
+
+def stable_field_order(fields):
+    """Lås de åtta ursprungliga fälten vid sina ordningsnummer.
+
+    Ett nytt språk ger både ett term- och ett förklaringsfält, som naturligt
+    skulle hamna mitt i listan och putta DefSv från plats 4 till 5. Eftersom
+    Anki kopplar notinnehåll till fält via ordningsnummer, och MODEL_ID är
+    pinnad, skulle det flytta latin in i svenskfältet på alla befintliga kort
+    vid nästa import. Nya fält läggs därför alltid sist.
+    """
+    missing = [f for f in FIELD_ORDER if f not in fields]
+    if missing:
+        raise SystemExit(
+            f"data/sprak.json saknar fälten {missing}, som är låsta av MODEL_ID "
+            f"{MODEL_ID}. Att ta bort ett språk kräver ett nytt MODEL_ID och en "
+            "ny import hos alla användare."
+        )
+    return FIELD_ORDER + [f for f in fields if f not in FIELD_ORDER]
+
 # Fältnamnen i Anki: ett per termspråk, ett per förklaringsspråk, plus kategori.
-FIELDS = ([field for _, field, _ in TERM_LANGS]
-          + [field for _, field in DEF_LANGS]
-          + ["Kategori"])
+FIELDS = stable_field_order([field for _, field, _ in TERM_LANGS]
+                            + [field for _, field in DEF_LANGS]
+                            + ["Kategori"])
 
 CSS = """
 .card {
@@ -133,6 +158,21 @@ class StableNote(genanki.Note):
         pass
 
 
+# Fältnamn -> hur värdet plockas ur en term.
+FIELD_SOURCE = {}
+for _code, _field, _ in TERM_LANGS:
+    FIELD_SOURCE[_field] = ("term", _code)
+for _code, _field in DEF_LANGS:
+    FIELD_SOURCE[_field] = ("def", "def_" + _code)
+
+
+def field_value(term, name, cat):
+    if name == "Kategori":
+        return cat
+    kind, key = FIELD_SOURCE[name]
+    return term[key] if kind == "term" else term.get(key, "")
+
+
 def build(json_path, out_path):
     terms = json.loads(pathlib.Path(json_path).read_text(encoding="utf-8"))
     model = build_model()
@@ -146,9 +186,7 @@ def build(json_path, out_path):
         note = StableNote(
             term["id"],
             model=model,
-            fields=([term[code] for code, _, _ in TERM_LANGS]
-                    + [term.get("def_" + code, "") for code, _ in DEF_LANGS]
-                    + [cat]),
+            fields=[field_value(term, name, cat) for name in FIELDS],
             tags=["anatomi"],
         )
         decks[cat].add_note(note)
