@@ -192,19 +192,34 @@ def drop_image(entry, drop_article=False):
     return had
 
 
-def is_homonym(reason):
-    return str(reason).lower().startswith("homonym")
-
-
 def load_excluded():
-    """Term-id vars automatiskt valda bild har underkänts vid granskning."""
-    if not EXCLUDE_PATH.exists():
-        return {}
+    """Term-id vars automatiskt valda bild har underkänts vid granskning.
+
+    Värdet är ett objekt: {"skal": "...", "artikel_ok": bool}. Avsikten
+    deklareras alltså i stället för att gissas ur en fritextsträng — en
+    formulering som "artikeln är en homonym: ..." skulle annars behålla
+    artikellänken fast uppslaget är fel.
+    """
     raw = json.loads(EXCLUDE_PATH.read_text(encoding="utf-8"))
-    return {k: v for k, v in raw.items() if not k.startswith("_")}
+    out = {}
+    for term_id, value in raw.items():
+        if term_id.startswith("_"):
+            continue
+        if not isinstance(value, dict) or "skal" not in value or "artikel_ok" not in value:
+            raise SystemExit(
+                f"{EXCLUDE_PATH.name}: {term_id} måste vara "
+                '{"skal": "...", "artikel_ok": true|false}'
+            )
+        if not isinstance(value["artikel_ok"], bool):
+            raise SystemExit(f"{EXCLUDE_PATH.name}: {term_id}.artikel_ok måste vara true eller false")
+        out[term_id] = value
+    return out
 
 
-def build(terms, dry_run=False):
+def build(terms, dry_run=False, order=None):
+    """`terms` styr vad som hämtas och vilka id som tas bort. `order` är hela
+    termlistan och styr ordningen i utfilen — skickas den inte in används
+    `terms`, så en delmängd aldrig kan bestämma ordningen för hela filen."""
     excluded = load_excluded()
     wanted = [t for t in terms if not is_affix(t)]
     titles = {t["id"]: strip_paren(t["sv"]) for t in wanted}
@@ -242,10 +257,10 @@ def build(terms, dry_run=False):
             if entry.get("bild") and not entry.get("licens"):
                 entry.pop("bild", None)
 
-    for term_id, reason in excluded.items():
+    for term_id, rule in excluded.items():
         entry = entries.get(term_id)
-        if entry and drop_image(entry, drop_article=is_homonym(reason)):
-            print(f"  utesluten vid granskning: {term_id} ({reason})")
+        if entry and drop_image(entry, drop_article=not rule["artikel_ok"]):
+            print(f"  utesluten vid granskning: {term_id} ({rule['skal']})")
 
     # Utan känd licens får bilden inte publiceras — och då ska inte heller
     # kreditfälten ligga kvar och beskriva en bild som inte visas.
@@ -294,10 +309,16 @@ def build(terms, dry_run=False):
             merged[term["id"]] = entries[term["id"]]
         else:
             merged.pop(term["id"], None)
-    all_terms = json.loads(JSON_PATH.read_text(encoding="utf-8"))
-    ordered = {t["id"]: merged[t["id"]] for t in all_terms if t["id"] in merged}
+    ordering = order if order is not None else terms
+    ordered = {t["id"]: merged[t["id"]] for t in ordering if t["id"] in merged}
+    # Poster som saknas i ordningslistan får inte tappas bort tyst.
+    ordered.update({k: v for k, v in merged.items() if k not in ordered})
     OUT_PATH.write_text(json.dumps(ordered, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"\nskrev {OUT_PATH.relative_to(ROOT)}")
+    try:
+        shown = OUT_PATH.relative_to(ROOT)
+    except ValueError:      # utfilen kan ligga utanför repot, t.ex. i ett test
+        shown = OUT_PATH
+    print(f"\nskrev {shown}")
     return entries
 
 
@@ -307,12 +328,13 @@ def main(argv=None):
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args(argv)
 
-    terms = json.loads(JSON_PATH.read_text(encoding="utf-8"))
+    all_terms = json.loads(JSON_PATH.read_text(encoding="utf-8"))
+    terms = all_terms
     if args.only:
-        terms = [t for t in terms if t["cat"] == args.only]
+        terms = [t for t in all_terms if t["cat"] == args.only]
         if not terms:
             raise SystemExit(f"ingen kategori som heter {args.only!r}")
-    build(terms, dry_run=args.dry_run)
+    build(terms, dry_run=args.dry_run, order=all_terms)
     return 0
 
 

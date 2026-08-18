@@ -1,10 +1,10 @@
 {
- "_kommentar": "Term-id vars automatiskt hämtade Wikipedia-bild underkänts vid granskning. Kör tools/fetch_images.py efter ändring. Nyckeln är term-id, värdet är skälet.",
- "glandula-mammaria": "närbild på bröst — olämplig som automatiskt vald bild i ett skolmaterial",
- "atlas": "homonym: artikeln Atlas handlar om titanen i grekisk mytologi, inte halskotan",
- "phalanx": "homonym: artikeln Falang handlar om den antika stridsformeringen",
- "inferior": "homonym: artikeln Inferiör vara är nationalekonomi",
- "lens": "homonym: artikeln Lins handlar om den optiska linsen, inte ögats lins",
- "pylorus": "homonym: artikeln Portvakt handlar om yrket, inte magmunnen",
- "tonsilla": "upphovsfältet på Commons är klottrat ('The quick brown fox...') — går inte att attribuera korrekt"
+ "_kommentar": "Term-id vars automatiskt hämtade Wikipedia-bild underkänts vid granskning. artikel_ok=false betyder att uppslaget självt är fel (homonym) — då tas även artikellänken bort, annars skickas eleven till fel artikel. Kör tools/fetch_images.py efter ändring.",
+ "glandula-mammaria": {"skal": "närbild på bröst — olämplig som automatiskt vald bild i ett skolmaterial", "artikel_ok": true},
+ "tonsilla": {"skal": "upphovsfältet på Commons är klottrat ('The quick brown fox...') — går inte att attribuera korrekt", "artikel_ok": true},
+ "atlas": {"skal": "artikeln Atlas handlar om titanen i grekisk mytologi, inte halskotan", "artikel_ok": false},
+ "phalanx": {"skal": "artikeln Falang handlar om den antika stridsformeringen", "artikel_ok": false},
+ "inferior": {"skal": "artikeln Inferiör vara är nationalekonomi", "artikel_ok": false},
+ "lens": {"skal": "artikeln Lins handlar om den optiska linsen, inte ögats lins", "artikel_ok": false},
+ "pylorus": {"skal": "artikeln Portvakt handlar om yrket, inte magmunnen", "artikel_ok": false}
 }

@@ -93,21 +93,64 @@ def test_drop_image_clears_all_credit_keys():
     assert entry == {"artikel": "a"}, "kreditfält får inte bli kvar utan bild"
 
 
-def test_homonym_exclusion_also_drops_the_article():
-    """Vid homonym är uppslaget fel — artikellänken skickar eleven vilse."""
+def test_wrong_article_exclusion_also_drops_the_article():
+    """artikel_ok=false betyder att uppslaget är fel, inte bara bilden."""
     entry = {"artikel": "https://sv.wikipedia.org/wiki/Atlas", "bild": "b", "licens": "c"}
-    fi.drop_image(entry, drop_article=fi.is_homonym("homonym: titanen"))
+    fi.drop_image(entry, drop_article=True)
     assert entry == {}
     keep = {"artikel": "https://sv.wikipedia.org/wiki/Tonsill", "bild": "b", "licens": "c"}
-    fi.drop_image(keep, drop_article=fi.is_homonym("klottrat upphovsfält"))
+    fi.drop_image(keep, drop_article=False)
     assert keep == {"artikel": "https://sv.wikipedia.org/wiki/Tonsill"}
 
 
-def test_load_excluded_ignores_comment_keys(monkeypatch, tmp_path):
+def test_load_excluded_requires_declared_intent(monkeypatch, tmp_path):
+    """Avsikten ska deklareras, inte gissas ur en fritextsträng."""
     path = tmp_path / "x.json"
-    path.write_text(json.dumps({"_kommentar": "text", "atlas": "homonym"}), encoding="utf-8")
     monkeypatch.setattr(fi, "EXCLUDE_PATH", path)
-    assert fi.load_excluded() == {"atlas": "homonym"}
+
+    path.write_text(json.dumps({
+        "_kommentar": "text",
+        "atlas": {"skal": "titanen", "artikel_ok": False}}, ensure_ascii=False), encoding="utf-8")
+    assert fi.load_excluded() == {"atlas": {"skal": "titanen", "artikel_ok": False}}
+
+    # gammalt fritextformat ska avvisas, inte tolkas
+    path.write_text(json.dumps({"atlas": "homonym: titanen"}), encoding="utf-8")
+    with pytest.raises(SystemExit):
+        fi.load_excluded()
+
+    path.write_text(json.dumps({"atlas": {"skal": "x", "artikel_ok": "nej"}}), encoding="utf-8")
+    with pytest.raises(SystemExit):
+        fi.load_excluded()
+
+
+def test_build_merges_instead_of_truncating(monkeypatch, tmp_path):
+    """Regressionstest för HIGH-buggen: --only fick inte radera övriga termer."""
+    out = tmp_path / "bilder.json"
+    out.write_text(json.dumps({
+        "gammal": {"artikel": "https://sv.wikipedia.org/wiki/Gammal",
+                   "bild": "https://u/g.png", "licens": "CC0", "upphov": "N",
+                   "licensurl": "", "filsida": ""},
+        "ny": {"artikel": "https://sv.wikipedia.org/wiki/Ny"}}, ensure_ascii=False),
+        encoding="utf-8")
+    monkeypatch.setattr(fi, "OUT_PATH", out)
+    monkeypatch.setattr(fi, "EXCLUDE_PATH", tmp_path / "saknas.json")
+    monkeypatch.setattr(fi, "load_excluded", lambda: {})
+    monkeypatch.setattr(fi, "lookup_pages", lambda titles: {
+        "Ny": {"title": "Ny", "pageimage": "n.png",
+               "thumbnail": {"source": "https://u/n.png"}}})
+    monkeypatch.setattr(fi, "lookup_licenses", lambda names: {
+        "n.png": {"upphov": "A", "licens": "CC0", "licensurl": "", "filsida": ""}})
+    monkeypatch.setattr(fi, "suspicious_articles", lambda titles: set())
+
+    subset = [{"id": "ny", "sv": "Ny", "cat": "K"}]
+    order = [{"id": "gammal", "sv": "Gammal", "cat": "K"}] + subset
+    fi.build(subset, order=order)
+
+    written = json.loads(out.read_text(encoding="utf-8"))
+    assert list(written) == ["gammal", "ny"], "ordningen ska följa order-listan"
+    assert written["gammal"]["bild"] == "https://u/g.png", \
+        "en delmängd får inte radera övriga termers bilder"
+    assert written["ny"]["bild"] == "https://u/n.png"
 
 
 def test_committed_data_has_no_orphan_credits_or_bad_urls():
@@ -124,6 +167,7 @@ def test_committed_data_has_no_orphan_credits_or_bad_urls():
     for term_id, reason in excluded.items():
         if term_id.startswith("_"):
             continue
-        if fi.is_homonym(reason):
+        assert isinstance(reason, dict) and isinstance(reason.get("artikel_ok"), bool)
+        if not reason["artikel_ok"]:
             assert "artikel" not in data.get(term_id, {}), \
-                f"{term_id}: homonym men artikellänken finns kvar"
+                f"{term_id}: artikel_ok=false men artikellänken finns kvar"

@@ -22,6 +22,7 @@ JSON_PATH = ROOT / "data" / "anatomi-termer.json"
 CATS_PATH = ROOT / "data" / "kategorier.json"
 LANGS_PATH = ROOT / "data" / "sprak.json"
 IMGS_PATH = ROOT / "data" / "bilder.json"
+EXCLUDE_PATH = ROOT / "data" / "bilder-uteslutna.json"
 HTML_PATH = ROOT / "index.html"
 
 # (variabelnamn i index.html, öppnande tecken)
@@ -98,6 +99,22 @@ def main(argv=None):
     html = HTML_PATH.read_text(encoding="utf-8")
     in_sync = True
     imgs = json.loads(IMGS_PATH.read_text(encoding="utf-8"))
+    excluded = json.loads(EXCLUDE_PATH.read_text(encoding="utf-8"))
+    for term_id, rule in excluded.items():
+        if term_id.startswith("_"):
+            continue
+        if not isinstance(rule, dict) or not isinstance(rule.get("artikel_ok"), bool) \
+                or not str(rule.get("skal", "")).strip():
+            raise SystemExit(
+                f"{EXCLUDE_PATH.name}: {term_id} måste vara "
+                '{"skal": "...", "artikel_ok": true|false}')
+        entry = imgs.get(term_id, {})
+        if entry.get("bild"):
+            raise SystemExit(f"{EXCLUDE_PATH.name}: {term_id} är utesluten men har ändå en bild")
+        if not rule["artikel_ok"] and entry.get("artikel"):
+            raise SystemExit(
+                f"{EXCLUDE_PATH.name}: {term_id} har artikel_ok=false men "
+                f"artikellänken finns kvar: {entry['artikel']}")
     ids = {t["id"] for t in terms}
     stray = sorted(set(imgs) - ids)
     if stray:

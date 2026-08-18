@@ -209,10 +209,17 @@ TA98, UBERON, MeSH) och **varnar** för dem som saknar den, eftersom det ofta ä
 homonymer: uppslaget på *atlas* gav titanen i grekisk mytologi, *falang* gav den
 antika stridsformeringen och *lins* gav den optiska linsen. Varningen är avsiktligt
 inte ett automatiskt bortval — flera korrekta artiklar (Bröstkorg, Penis, Förlossning)
-saknar också identifierarna. Underkända bilder förs in i `data/bilder-uteslutna.json`
-med ett skäl, och utesluts vid nästa körning. Börjar skälet med ordet `homonym`
-tas även artikellänken bort — då är det uppslaget som är fel, inte bara bilden,
-och en kvarvarande länk skulle skicka eleven till fel artikel.
+saknar också identifierarna. Underkända bilder förs in i `data/bilder-uteslutna.json` och utesluts vid nästa
+körning:
+
+```json
+"atlas": {"skal": "artikeln handlar om titanen", "artikel_ok": false}
+```
+
+`artikel_ok: false` betyder att uppslaget självt är fel, inte bara bilden — då tas
+även artikellänken bort, annars skulle "Läs mer på Wikipedia" skicka eleven till
+fel artikel. Avsikten deklareras alltså i stället för att läsas ut ur en fritext,
+och formen kontrolleras av `sync_html_data.py`.
 
 ## Felrapportering
 

@@ -64,7 +64,8 @@ tr:hover td{background:var(--panel2)}
 .hidden{display:none}
 .termimg{margin-top:16px;text-align:center}
 .termimg img{max-width:100%;max-height:230px;border-radius:8px;background:#fff}
-.imgcred{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.45}
+.imgcred{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.45;
+  max-width:520px;margin-left:auto;margin-right:auto;overflow-wrap:anywhere}
 .imgcred a{color:var(--muted)}
 #qimg img{max-width:100%;max-height:260px;border-radius:8px;background:#fff}
 .report{margin-top:14px;text-align:center;font-size:12px}
@@ -255,6 +256,11 @@ function uniqueImg(item){ const e=imgOf(item); return e && IMG_USES[e.bild]===1 
 const MAX_CREDIT = 80;
 function shortCredit(t){
   t=String(t||"").trim();
+  /* Commons anger härledda verk som "Fil_A.svg: *Fil_B.svg: Namn Namnsson
+     derivative work: Någon". Filnamnen äter upp hela utrymmet och namnet — som
+     CC BY kräver att vi anger — faller bort. Skala av filnamnsleden först. */
+  t=t.replace(/^(?:\**\s*[^\s:]+\.(?:svg|png|jpe?g|gif|tif+)\s*:\s*)+/i,"").trim();
+  t=t.replace(/^\*+\s*/,"").trim();
   if(t.length<=MAX_CREDIT) return t;
   const cut=t.slice(0,MAX_CREDIT).replace(/\s+\S*$/,"").replace(/[ ,.;:-]+$/,"");
   return (cut||t.slice(0,MAX_CREDIT))+"…";
@@ -290,14 +296,31 @@ function reportLinks(item){
 
 function renderReport(item, revealed){
   const el=$("creport");
-  if(!item){ el.innerHTML=""; return; }
-  const l=reportLinks(item);
-  // Artikeladressen innehåller den svenska termen, så länken röjer svaret om
-  // den visas innan kortet vänts.
-  const a=revealed?safeLink(articleOf(item)):"";
-  el.innerHTML=(a?'<a href="'+esc(a)+'" rel="noopener">'+esc(T("b_wiki"))+'</a> · ':"")
-    +'<a href="'+esc(l.gh)+'" rel="noopener">'+esc(T("b_report"))+'</a>'
-    +' · <a href="'+esc(l.mail)+'">e-post</a>';
+  el.innerHTML="";
+  if(!item) return;
+
+  /* Både artikeladressen och rapportlänkarna bär svaret: artikel-URL:en
+     innehåller den svenska termen, och rapportens titel och brödtext innehåller
+     alla fyra språken plus term-id:t (som är härlett ur latinet). Före
+     avslöjandet skulle de synas i statusraden vid hovring och i DOM:en, så då
+     byggs adressen först vid klick i stället för att stå i href. */
+  const add=(text,href,onclick)=>{
+    if(el.childNodes.length) el.appendChild(document.createTextNode(" · "));
+    const a=document.createElement("a");
+    a.textContent=text;
+    a.rel="noopener";
+    if(href){ a.href=href; }
+    else { a.href="#"; a.onclick=e=>{ e.preventDefault(); window.open(onclick(), "_blank", "noopener"); }; }
+    el.appendChild(a);
+  };
+
+  if(revealed){
+    const a=safeLink(articleOf(item));
+    if(a) add(T("b_wiki"), a);
+  }
+  const links=()=>reportLinks(item);
+  add(T("b_report"), revealed?links().gh:null, ()=>links().gh);
+  add("e-post",      revealed?links().mail:null, ()=>links().mail);
 }
 
 const I18N = {
@@ -398,7 +421,7 @@ function buildCatChips(){
     b.className="chip"+(state.cats.has(cat)?" on":"");
     b.textContent=catName(cat)+" ("+n+")";
     b.onclick=()=>{ state.cats.has(cat)?state.cats.delete(cat):state.cats.add(cat);
-      buildCatChips(); resetQueue(); render(); };
+      buildCatChips(); invalidateQuestions(); resetQueue(); render(); };
     c.appendChild(b);
   }
   $("count").textContent=pool().length+" / "+DATA.length;
@@ -471,6 +494,11 @@ function resetQueue(){
 
 function backLangs(){ return state.backs.filter(k=>k!==state.front); }
 
+/* En pågående fråga kan handla om en term som inte längre ingår i urvalet.
+   Rapportraden ligger utanför lägesvyerna och skulle annars fortsätta visa den. */
+function invalidateQuestions(){ state.qcur=null; state.icur=null;
+  state.qanswered=false; state.ianswered=false; }
+
 function renderCardImage(item, shown){
   const box=$("cimg"), e=item&&imgOf(item);
   if(!e||!shown){ box.className="termimg hidden"; box.innerHTML=""; return; }
@@ -527,7 +555,8 @@ function next(known){
 
 function newQuestion(){
   const p=pool();
-  if(p.length<4){ $("qterm").textContent=T("nocards"); $("qopts").innerHTML=""; return; }
+  if(p.length<4){ $("qterm").textContent=T("nocards"); $("qopts").innerHTML="";
+    state.qcur=null; renderReport(null); return; }
   const item=p[Math.floor(Math.random()*p.length)];
   const ansLang=backLangs()[0]||"la";
   const others=shuffle(p.filter(x=>x.id!==item.id && x[ansLang]!==item[ansLang])).slice(0,3);
@@ -661,11 +690,11 @@ $("qnext").onclick=()=>newQuestion();
 $("inext").onclick=()=>newImageQuestion();
 $("front").onchange=e=>{ state.front=e.target.value;
   if(!backLangs().length) state.backs=Object.keys(LANGS).filter(k=>k!==state.front);
-  buildBackChips(); resetQueue(); state.qcur=null; state.icur=null; render(); };
+  buildBackChips(); invalidateQuestions(); resetQueue(); render(); };
 $("deflang").onchange=e=>{ state.def=e.target.value; render(); };
 $("ui").onchange=e=>{ state.ui=e.target.value; buildCatChips(); applyI18n(); render(); };
-$("allcats").onclick=()=>{ state.cats=new Set(DATA.map(d=>d.cat)); buildCatChips(); resetQueue(); render(); };
-$("nocats").onclick=()=>{ state.cats=new Set(); buildCatChips(); resetQueue(); render(); };
+$("allcats").onclick=()=>{ state.cats=new Set(DATA.map(d=>d.cat)); buildCatChips(); invalidateQuestions(); resetQueue(); render(); };
+$("nocats").onclick=()=>{ state.cats=new Set(); buildCatChips(); invalidateQuestions(); resetQueue(); render(); };
 $("search").oninput=()=>renderList();
 document.addEventListener("keydown",e=>{
   if(e.target.tagName==="INPUT"||e.target.tagName==="SELECT") return;

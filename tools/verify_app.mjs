@@ -303,8 +303,24 @@ try {
   });
   check('kreditraden kapas vid visning', creditCheck.longestShown <= creditCheck.MAX_CREDIT + 1,
     `visad ${creditCheck.longestShown}, gräns ${creditCheck.MAX_CREDIT}`);
-  check('datan behåller hela attributionen', creditCheck.longestRaw > creditCheck.MAX_CREDIT,
-    `längsta rå upphovssträng: ${creditCheck.longestRaw}`);
+  // Egenskapen, inte datans råstorlek: bara strängar över gränsen får kapas,
+  // och kapningen får aldrig lämna kvar enbart ett filnamn utan upphovsperson.
+  const creditProps = await page.evaluate(() => {
+    const bad = [];
+    const FILEPREFIX = /^(?:\**\s*[^\s:]+\.(?:svg|png|jpe?g|gif|tif+)\s*:\s*)+/i;
+    for (const [id, e] of Object.entries(IMGS)) {
+      if (!e.bild) continue;
+      const raw = e.upphov || '', shown = shortCredit(raw);
+      if (shown.length > MAX_CREDIT + 1) bad.push(id + ':för-lång');
+      // Filnamnsledet skalas bort med flit; i övrigt får inget kapas i onödan.
+      if (raw.length <= MAX_CREDIT && !FILEPREFIX.test(raw) && shown !== raw)
+        bad.push(id + ':kapad-i-onödan');
+      if (/^[^\s]+\.(svg|png|jpe?g)/i.test(shown)) bad.push(id + ':bara-filnamn');
+    }
+    return bad;
+  });
+  check('kapningen rör bara det som är för långt och behåller upphovspersonen',
+    creditProps.length === 0, creditProps.slice(0, 3).join(', '));
   const titled = await page.evaluate(() => {
     const s = document.querySelector('.imgcred span[title]');
     return s ? s.getAttribute('title').length >= s.textContent.length : false;
@@ -352,10 +368,22 @@ try {
     };
   });
   check('rapportraden syns i bildquizet', repImg.synlig);
-  check('bildquizet har en rapportlänk',
-    repImg.hrefs.some(h => h.includes('/discussions/new')));
+  // Före avslöjandet är href medvetet "#" — adressen byggs vid klick, annars
+  // skulle titeln och brödtexten röja svaret i statusraden.
+  check('bildquizet har en rapportlänk', repImg.hrefs.length >= 2, repImg.hrefs.join(' '));
+  check('rapportadressen byggs först vid klick i obesvarat läge',
+    repImg.hrefs.every(h => h === '#'), repImg.hrefs.join(' '));
   check('wikipedialänken röjer inte svaret i en obesvarad bildfråga',
     !repImg.hrefs.some(h => h.includes('sv.wikipedia.org')), repImg.hrefs.join(' '));
+  const quizLeak = await page.evaluate(() => {
+    const it = state.icur.item;
+    const dec = [...document.querySelectorAll('#creport a')]
+      .map(a => decodeURIComponent(a.getAttribute('href') || '')).join(' ');
+    return ['sv', 'la', 'uk', 'ru'].filter(k => dec.includes(it[k]))
+      .concat(dec.includes(it.id) ? ['id'] : []);
+  });
+  check('rapportlänken bär inte svaret i en obesvarad bildfråga',
+    quizLeak.length === 0, quizLeak.join(','));
   const afterAnswer = await page.evaluate(() => {
     const c = state.icur.item[state.front];
     [...document.getElementById('iopts').children].find(b => b.textContent === c).click();
@@ -380,6 +408,17 @@ try {
   });
   check('wikipedialänken visas inte innan kortet vänts',
     !beforeFlip.some(h => h.includes('sv.wikipedia.org')), beforeFlip.join(' '));
+  // Rapportlänkens egen URL innehöll titel och brödtext med alla fyra språken
+  // plus term-id:t, som är härlett ur latinet — allt syns i statusraden.
+  const leak = await page.evaluate(() => {
+    state.flipped = false; renderCard();
+    const it = state.current;
+    const dec = [...document.querySelectorAll('#creport a')]
+      .map(a => decodeURIComponent(a.getAttribute('href') || '')).join(' ');
+    return ['sv', 'la', 'uk', 'ru'].filter(k => dec.includes(it[k]))
+      .concat(dec.includes(it.id) ? ['id'] : []);
+  });
+  check('rapportlänken bär inte svaret innan kortet vänts', leak.length === 0, leak.join(','));
   const afterFlip = await page.evaluate(() => {
     state.flipped = true; renderCard();
     return [...document.querySelectorAll('#creport a')].map(a => a.getAttribute('href'));

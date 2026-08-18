@@ -48,6 +48,26 @@ TERM_LANGS, DEF_LANGS = load_langs()
 FIELD_ORDER = ["Svenska", "Latin", "Ukrainska", "Ryska",
                "DefSv", "DefUk", "DefRu", "Kategori"]
 
+# Anki binder även befintliga kort till korttyper via ordningsnummer. Ett språk
+# som läggs in före ru i sprak.json skulle annars döpa om varje "Ryska → övriga"
+# -kort till ett annat korttyp vid nästa import.
+TEMPLATE_ORDER = ["Svenska → övriga", "Latin → övriga",
+                  "Ukrainska → övriga", "Ryska → övriga"]
+
+
+def stable_template_order(specs):
+    """Lås de fyra ursprungliga korttyperna vid sina ordningsnummer."""
+    by_name = {spec[0]: spec for spec in specs}
+    missing = [n for n in TEMPLATE_ORDER if n not in by_name]
+    if missing:
+        raise SystemExit(
+            f"data/sprak.json saknar korttyperna {missing}, som är låsta av "
+            f"MODEL_ID {MODEL_ID}. Att ta bort ett språk kräver ett nytt "
+            "MODEL_ID och en ny import hos alla användare."
+        )
+    return ([by_name[n] for n in TEMPLATE_ORDER]
+            + [s for s in specs if s[0] not in TEMPLATE_ORDER])
+
 
 def stable_field_order(fields):
     """Lås de åtta ursprungliga fälten vid sina ordningsnummer.
@@ -89,11 +109,11 @@ CSS = """
 """
 
 # Ett korttyp per frågespråk: (kortnamn, frågefält, etikett, svarsfält i ordning)
-CARD_SPECS = [
+CARD_SPECS = stable_template_order([
     (f"{field} → övriga", field, label,
      [other for _, other, _ in TERM_LANGS if other != field])
     for _, field, label in TERM_LANGS
-]
+])
 
 def _qfmt(qfield, qlang):
     return (
