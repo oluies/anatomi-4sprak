@@ -118,9 +118,10 @@ funktionen behövs.
 - `pytest tests` — tester för kontrollskriptet
 - ett rökbygge av `.apkg` och en syntaxkontroll av `sw.js`
 - `tools/verify_app.mjs` — serverar katalogen över http, startar webbappen i headless
-  Chromium och kör 18 kontroller: kortvändning, byte av frågespråk till latin, ett rätt
-  quizsvar som ska räknas som rätt, sökning på svenska, ukrainska och ryska förklaringar,
-  nedladdningslänken, manifestet och att konsolen är fri från fel
+  Chromium och kör 24 kontroller: kortvändning, byte av frågespråk till latin, ett rätt
+  quizsvar som ska räknas som rätt, sökning på svenska, ukrainska och ryska förklaringar
+  med förväntat radantal, nedladdningslänken, manifestet och att konsolen är fri från fel.
+  Sökord och antal härleds ur datan, så en ny eller ändrad term fäller inte bygget
 
 Kör detsamma lokalt:
 

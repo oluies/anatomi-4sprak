@@ -160,3 +160,17 @@ def test_non_dict_entries_give_readable_error(tmp_path, monkeypatch):
     with pytest.raises(SystemExit) as exc:
         check_data.main()
     assert "post 1 är str" in str(exc.value)
+
+
+def test_non_dict_entry_in_index_html(tmp_path, monkeypatch):
+    """DATA-blocket är handredigerad JavaScript — samma typkontroll måste gälla där."""
+    json_path = tmp_path / "anatomi-termer.json"
+    html_path = tmp_path / "index.html"
+    json_path.write_text(json.dumps([term(1)], ensure_ascii=False), encoding="utf-8")
+    html_path.write_text('<script>const DATA = ["inte ett objekt"];</script>', encoding="utf-8")
+    monkeypatch.setattr(check_data, "JSON_PATH", json_path)
+    monkeypatch.setattr(check_data, "HTML_PATH", html_path)
+    with pytest.raises(SystemExit) as exc:
+        check_data.main()
+    assert "index.html DATA" in str(exc.value)
+    assert "post 0 är str" in str(exc.value)

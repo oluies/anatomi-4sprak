@@ -23,9 +23,11 @@ const TYPES = {
 
 const server = http.createServer(async (req, res) => {
   const rel = decodeURIComponent(new URL(req.url, 'http://x').pathname);
-  const file = path.join(ROOT, rel === '/' ? 'index.html' : rel);
-  // Släpp inte ut något utanför den serverade katalogen.
-  if (!file.startsWith(ROOT)) { res.writeHead(403).end(); return; }
+  // resolve mot '.' + rel så att ../ i sökvägen normaliseras bort innan
+  // jämförelsen, och kräv separatorn — annars matchar en systerkatalog med
+  // samma prefix som ROOT.
+  const file = path.resolve(ROOT, '.' + (rel === '/' ? '/index.html' : rel));
+  if (file !== ROOT && !file.startsWith(ROOT + path.sep)) { res.writeHead(403).end(); return; }
   try {
     const body = await fs.readFile(file);
     res.writeHead(200, { 'content-type': TYPES[path.extname(file)] || 'application/octet-stream' });
@@ -57,7 +59,14 @@ try {
   await page.goto(base, { waitUntil: 'load' });
 
   // --- kortvyn ---
-  check('423 termer laddade', (await page.textContent('#total')).includes('423'));
+  // Jämför mot JSON-filen i stället för en hårdkodad siffra: en ny term ska
+  // inte fälla bygget, men appen ska aldrig visa ett annat antal än den laddat.
+  const jsonTerms = await (await page.request.get(base + 'data/anatomi-termer.json')).json();
+  const inlineCount = await page.evaluate(() => DATA.length);
+  check('index.html har lika många termer som JSON-filen',
+    inlineCount === jsonTerms.length, `index.html=${inlineCount} json=${jsonTerms.length}`);
+  check('sidfoten visar antalet laddade termer',
+    (await page.textContent('#total')).includes(String(inlineCount)), await page.textContent('#total'));
   check('svar dolda före vändning', (await page.getAttribute('#answers', 'class')).includes('hidden'));
   await page.click('#card');
   check('kortet vänds', !(await page.getAttribute('#answers', 'class')).includes('hidden'));
@@ -76,8 +85,18 @@ try {
   check('fyra svarsalternativ', (await page.locator('#qopts button').count()) === 4);
   // Läs det korrekta svaret ur appens eget tillstånd i stället för att härleda
   // det ur frågetexten — två termer kan dela form på ett av språken.
-  const correct = await page.evaluate(() => state.qcur.item[state.qcur.ansLang]);
-  await page.locator('#qopts button', { hasText: correct }).first().click();
+  // Klicka via exakt textmatchning i sidan. Playwrights hasText matchar delsträngar,
+  // och datan har 82 par där ett svar ryms i ett annat ("вена" i "яремна вена"),
+  // vilket skulle klicka fel knapp ungefär varannan gång.
+  const clicked = await page.evaluate(() => {
+    const correct = state.qcur.item[state.qcur.ansLang];
+    const btn = [...document.getElementById('qopts').children]
+      .find(b => b.textContent === correct);
+    if (!btn) return null;
+    btn.click();
+    return correct;
+  });
+  check('rätt alternativ fanns bland knapparna', clicked !== null, clicked || '');
   check('rätt svar räknas som rätt',
     (await page.textContent('#q_n')).trim() === '1' && (await page.textContent('#q_r')).trim() === '1',
     `frågor=${await page.textContent('#q_n')} rätt=${await page.textContent('#q_r')}`);
@@ -88,10 +107,36 @@ try {
   await page.click('#modes button[data-mode="list"]');
   const headers = await page.locator('#tbl thead th').allTextContents();
   check('kategorikolumnen har rätt rubrik', headers.at(-1) === 'Kategori', headers.join(' | '));
-  for (const [term, label] of [['Bålens', 'svenska'], ['тулуба', 'ukrainska'], ['туловища', 'ryska']]) {
-    await page.fill('#search', term);
-    check(`sökning i ${label} förklaring ger träff`, (await page.locator('#tbl tbody tr').count()) > 0, term);
+  // Sökorden hämtas ur datan i stället för att hårdkodas, och förväntat antal
+  // rader räknas ut i sidan — så fångas både en trasig och en alltid-sann filtrering.
+  for (const field of ['def_sv', 'def_uk', 'def_ru']) {
+    const probe = await page.evaluate(f => {
+      const langs = ['sv', 'la', 'uk', 'ru'];
+      // Ett ord som bara finns i förklaringen, aldrig i något termfält.
+      for (const d of DATA) {
+        for (const w of String(d[f]).toLowerCase().match(/\p{L}{6,}/gu) || []) {
+          if (DATA.some(x => langs.some(k => String(x[k]).toLowerCase().includes(w)))) continue;
+          const expected = DATA.filter(x =>
+            langs.some(k => String(x[k]).toLowerCase().includes(w)) ||
+            ['def_sv', 'def_uk', 'def_ru'].some(k => String(x[k] || '').toLowerCase().includes(w))
+          ).length;
+          return { word: w, expected, n: d.n };
+        }
+      }
+      return null;
+    }, field);
+    if (!probe) { check(`hittade ett testord för ${field}`, false); continue; }
+    await page.fill('#search', probe.word);
+    const rows = await page.locator('#tbl tbody tr').count();
+    const firstCol = await page.locator('#tbl tbody tr td:first-child').allTextContents();
+    check(`sökning i ${field} ger exakt ${probe.expected} rad(er)`, rows === probe.expected,
+      `"${probe.word}" gav ${rows}`);
+    check(`sökning i ${field} innehåller rätt term`, firstCol.includes(String(probe.n)), `n=${probe.n}`);
   }
+  // Kontroll att filtret inte alltid är sant.
+  await page.fill('#search', 'zzzqqqxyz');
+  check('sökning utan träff ger noll rader', (await page.locator('#tbl tbody tr').count()) === 0);
+  await page.fill('#search', '');
 
   // --- sidfot, manifest och service worker ---
   check('nedladdningslänk till decket',
@@ -103,6 +148,10 @@ try {
   await page.waitForTimeout(500);
   check('ingen service worker över http',
     (await page.evaluate(async () => (await navigator.serviceWorker.getRegistrations()).length)) === 0);
+} catch (e) {
+  // Utan detta dör skriptet på ett rått Playwright-stacktrace och operatören
+  // ser aldrig vilka kontroller som hann gå igenom.
+  errors.push(`[avbrott] ${e.message}`);
 } finally {
   await browser.close();
   server.close();

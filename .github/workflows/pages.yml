@@ -3,17 +3,22 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-    # Ren avdubblering: pushar som bara rör deck.yml:s egna källor deployas av
-    # deck.yml efter bygget. Korrektheten vilar inte på den här listan — en push
-    # som rör både en ignorerad och en icke-ignorerad fil kör ändå det här
-    # workflowet, och därför validerar validate-jobbet nedan varje deploy.
+    # Ren avdubblering, inte en säkerhetsgräns: korrektheten ligger i
+    # validate-jobbet nedan, som varje deploy passerar oavsett trigger.
     paths-ignore:
+      # Speglar deck.yml:s paths exakt — de pushar deployas av deck.yml efter
+      # att decket byggts om, annars publiceras det gamla decket.
       - 'data/anatomi-termer.json'
+      - 'index.html'
       - 'tools/build_deck.py'
       - 'tools/check_data.py'
+      - 'requirements.txt'
       - '.github/workflows/deck.yml'
+      # Rör inte det som publiceras — ingen deploy behövs alls.
       - 'tests/**'
+      - 'tools/verify_app.mjs'
       - 'requirements-dev.txt'
+      - '.github/workflows/ci.yml'
   workflow_call:
   workflow_dispatch:
 
@@ -31,10 +36,17 @@ jobs:
   # in i det här workflowet kan publicera osynkad termdata.
   validate:
     runs-on: ubuntu-latest
+    outputs:
+      # deploy checkar ut exakt den commit som validerats. Utan det kan grenen
+      # ha flyttat sig mellan jobben — till exempel av deck.yml:s egen push —
+      # och deployen publicera ett träd som aldrig kontrollerats.
+      sha: ${{ steps.rev.outputs.sha }}
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
+      - id: rev
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -50,7 +62,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref }}
+          ref: ${{ needs.validate.outputs.sha }}
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
