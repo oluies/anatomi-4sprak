@@ -255,6 +255,49 @@ try {
   check('sidfoten översätts', /[\u0400-\u04FF]/.test(ukFoot) && ukFoot.includes('Örjan Lundberg'), ukFoot);
   await page.selectOption('#ui', 'sv');
 
+  // --- tema ---
+  const theme = () => page.evaluate(() => ({
+    attr: document.documentElement.getAttribute('data-theme'),
+    bg: getComputedStyle(document.body).backgroundColor,
+    meta: document.querySelector('meta[name="theme-color"]').content,
+    label: document.getElementById('themebtn').getAttribute('aria-label')
+  }));
+  const t0 = await theme();
+  check('utan val följer temat systemet', t0.attr === null, String(t0.attr));
+  await page.click('#themebtn');
+  const t1 = await theme();
+  check('första klicket ger ljust tema', t1.attr === 'light', String(t1.attr));
+  await page.click('#themebtn');
+  const t2 = await theme();
+  check('andra klicket ger mörkt tema', t2.attr === 'dark', String(t2.attr));
+  check('ljust och mörkt ger olika bakgrund', t1.bg !== t2.bg, `${t1.bg} / ${t2.bg}`);
+  check('adressfältets färg följer temat', t1.meta !== t2.meta, `${t1.meta} / ${t2.meta}`);
+  check('knappen berättar vilket tema som gäller',
+    !!t2.label && t2.label !== t1.label, `${t1.label} / ${t2.label}`);
+  await page.click('#themebtn');
+  check('tredje klicket återgår till systemets', (await theme()).attr === null);
+
+  // t ska växla precis som knappen, i alla lägen
+  await page.keyboard.press('t');
+  check('t växlar temat', (await theme()).attr === 'light');
+  await page.click('#modes button[data-mode="list"]');
+  await page.keyboard.press('t');
+  check('t fungerar även i listläget', (await theme()).attr === 'dark');
+  await page.click('#modes button[data-mode="card"]');
+  // valet ska överleva en omladdning, och sättas innan sidan målas
+  await page.reload({ waitUntil: 'load' });
+  const afterReload = await page.evaluate(() =>
+    document.documentElement.getAttribute('data-theme'));
+  check('temavalet överlever omladdning', afterReload === 'dark', String(afterReload));
+  check('temat sätts av ett skript i head, före första målningen',
+    await page.evaluate(() => {
+      const head = document.head.innerHTML;
+      return head.includes('data-theme') && head.includes('localStorage');
+    }));
+  await page.evaluate(() => applyTheme('auto'));
+  check('temat går att återställa till systemets',
+    (await page.evaluate(() => document.documentElement.getAttribute('data-theme'))) === null);
+
   // --- besöksräkning ---
   // Anropa laddaren direkt med stubbar: annars går varken https-grinden,
   // adressen eller do-not-track att pröva, eftersom sviten kör över http.
@@ -350,7 +393,7 @@ try {
   // innehåll och översättning
   await page.keyboard.press('h');
   const caps = await page.locator('.keycap').allTextContents();
-  check('hjälpen listar kortlägets genvägar', caps.length === 7, caps.join(' '));
+  check('hjälpen listar kortlägets genvägar', caps.length === 8, caps.join(' '));
   check('hjälpen nämner både h och ?', caps.some(c => c.includes('h') && c.includes('?')));
   await page.keyboard.press('Escape');
   // Genvägslistan ska gälla det läge man är i: 1, 2, mellanslag och vänsterpil

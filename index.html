@@ -6,15 +6,50 @@
 <title>Anatomi och fysiologi — flashcards (sv / la / uk / ru)</title>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0f1216">
+<script>
+/* Körs före sidan målas upp: annars hinner fel tema synas som en blink. Måste
+   ligga här, inte i huvudskriptet längst ned. */
+(function(){
+  try{
+    var t=localStorage.getItem("tema");
+    if(t==="light"||t==="dark") document.documentElement.setAttribute("data-theme",t);
+  }catch(e){/* localStorage kan vara avstängt — då gäller systemets tema */}
+})();
+</script>
 <style>
+/* Paletterna står en gång var; blocken nedan väljer bara vilken som gäller.
+   Utan data-theme följer sidan systemet, annars vinner det valda temat. */
 :root{
-  --bg:#0f1216; --panel:#171b21; --panel2:#1e242c; --line:#2a323c;
-  --fg:#e8ecf1; --muted:#9aa6b4; --accent:#5aa9e6; --good:#4caf7d; --bad:#d4736b;
+  --d-bg:#0f1216; --d-panel:#171b21; --d-panel2:#1e242c; --d-line:#2a323c;
+  --d-fg:#e8ecf1; --d-muted:#9aa6b4; --d-accent:#5aa9e6; --d-good:#4caf7d; --d-bad:#d4736b;
+  --l-bg:#f6f7f9; --l-panel:#ffffff; --l-panel2:#eef1f5; --l-line:#d8dee6;
+  --l-fg:#141a20; --l-muted:#5b6673; --l-accent:#1f6fb2; --l-good:#2f7d55; --l-bad:#a8443b;
   --radius:10px;
+
+  color-scheme:dark;
+  --bg:var(--d-bg); --panel:var(--d-panel); --panel2:var(--d-panel2); --line:var(--d-line);
+  --fg:var(--d-fg); --muted:var(--d-muted); --accent:var(--d-accent);
+  --good:var(--d-good); --bad:var(--d-bad);
 }
 @media (prefers-color-scheme: light){
-  :root{ --bg:#f6f7f9; --panel:#ffffff; --panel2:#eef1f5; --line:#d8dee6;
-         --fg:#141a20; --muted:#5b6673; --accent:#1f6fb2; --good:#2f7d55; --bad:#a8443b; }
+  :root:not([data-theme]){
+    color-scheme:light;
+    --bg:var(--l-bg); --panel:var(--l-panel); --panel2:var(--l-panel2); --line:var(--l-line);
+    --fg:var(--l-fg); --muted:var(--l-muted); --accent:var(--l-accent);
+    --good:var(--l-good); --bad:var(--l-bad);
+  }
+}
+:root[data-theme="light"]{
+  color-scheme:light;
+  --bg:var(--l-bg); --panel:var(--l-panel); --panel2:var(--l-panel2); --line:var(--l-line);
+  --fg:var(--l-fg); --muted:var(--l-muted); --accent:var(--l-accent);
+  --good:var(--l-good); --bad:var(--l-bad);
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:var(--d-bg); --panel:var(--d-panel); --panel2:var(--d-panel2); --line:var(--d-line);
+  --fg:var(--d-fg); --muted:var(--d-muted); --accent:var(--d-accent);
+  --good:var(--d-good); --bad:var(--d-bad);
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);
@@ -138,6 +173,7 @@ footer a{color:var(--accent)}
         <button id="togglesettings" aria-expanded="true" aria-controls="settings">
           <span data-i18n="b_settings">Inställningar</span><span class="chev">▼</span>
         </button>
+        <button id="themebtn"></button>
         <button id="helpbtn" aria-haspopup="dialog" aria-controls="help" aria-expanded="false">?</button>
       </div>
     </div>
@@ -379,8 +415,8 @@ const I18N = {
      s_cats:["kategori","kategorier"],s_cards:["kort","kort"],
      f_by:"Skapad av",f_license:"Innehåll och kod under",f_wiki:"Termdata delvis baserad på %s på svenskspråkiga Wikipedia.",f_source:"Källkod på GitHub",f_donate:"Stöd Wikipedia",f_download:"Ladda ner Anki-deck (.apkg)",
      m_image:"Bildquiz",b_report:"Rapportera fel i den här termen",b_wiki:"Läs mer på Wikipedia",s_noimg:"Inga bilder i det här urvalet. Välj fler kategorier.",
-     h_keys:"← föregående · → visa svar, sedan nästa · 1 repetera · 2 kan · h hjälp",
-     b_help:"Hjälp",help_title:"Hjälp",help_close:"Stäng",
+     h_keys:"← föregående · → visa svar, sedan nästa · 1 repetera · 2 kan · t tema · h hjälp",
+     b_help:"Hjälp",b_theme:"Tema",t_auto:"följer systemet",t_light:"ljust",t_dark:"mörkt",help_title:"Hjälp",help_close:"Stäng",
      k_space:"mellanslag",k_esc:"Esc",
      h_right:"Visar svaret. Nästa tryck går till nästa kort.",
      h_left:"Föregående kort, med svaret framme.",
@@ -390,6 +426,7 @@ const I18N = {
      h_h:"Visar och döljer den här hjälpen.",
      h_esc:"Stänger hjälpen.",
      h_next:"Nästa fråga.",
+     h_t:"Växlar tema: systemets, ljust, mörkt.",
      hs_privacy:"Statistik",hprivacy:"Sajten räknar besök med GoatCounter. Det som registreras är sidadress, hänvisande sida, webbläsare, skärmstorlek och land — ingen kaka, ingen lagrad IP-adress och inget som pekar ut dig som enskild besökare. Skickar din webbläsare Do Not Track eller Global Privacy Control räknas du inte alls.",
      hs_modes:"Lägen",hs_keys:"Tangentbord",hs_settings:"Inställningar",hs_more:"Övrigt",
      hm_card:"Flashcards — term på ett språk, svaren på de andra när du vänder.",
@@ -408,8 +445,8 @@ const I18N = {
      s_cats:["категорія","категорії","категорій"],s_cards:["картка","картки","карток"],
      f_by:"Створив",f_license:"Вміст і код за ліцензією",f_wiki:"Термінологія частково базується на статті %s у шведській Вікіпедії.",f_source:"Вихідний код на GitHub",f_donate:"Підтримати Вікіпедію",f_download:"Завантажити колоду Anki (.apkg)",
      m_image:"Вікторина з малюнками",b_report:"Повідомити про помилку в цьому терміні",b_wiki:"Докладніше у Вікіпедії",s_noimg:"У цій добірці немає зображень. Виберіть більше категорій.",
-     h_keys:"← попереднє · → показати відповідь, потім наступне · 1 повторити · 2 знаю · h довідка",
-     b_help:"Довідка",help_title:"Довідка",help_close:"Закрити",
+     h_keys:"← попереднє · → показати відповідь, потім наступне · 1 повторити · 2 знаю · t тема · h довідка",
+     b_help:"Довідка",b_theme:"Тема",t_auto:"за системою",t_light:"світла",t_dark:"темна",help_title:"Довідка",help_close:"Закрити",
      k_space:"пробіл",k_esc:"Esc",
      h_right:"Показує відповідь. Наступне натискання — наступна картка.",
      h_left:"Попередня картка, з показаною відповіддю.",
@@ -419,6 +456,7 @@ const I18N = {
      h_h:"Показує і ховає цю довідку.",
      h_esc:"Закриває довідку.",
      h_next:"Наступне питання.",
+     h_t:"Перемикає тему: системна, світла, темна.",
      hs_privacy:"Статистика",hprivacy:"Сайт рахує відвідування за допомогою GoatCounter. Записуються адреса сторінки, сторінка-джерело, браузер, розмір екрана і країна — без кук, без збереження IP-адреси й без нічого, що вказує саме на вас. Якщо ваш браузер надсилає Do Not Track або Global Privacy Control, вас не рахують узагалі.",
      hs_modes:"Режими",hs_keys:"Клавіатура",hs_settings:"Налаштування",hs_more:"Інше",
      hm_card:"Картки — термін однією мовою, відповіді іншими після перевертання.",
@@ -437,8 +475,8 @@ const I18N = {
      s_cats:["категория","категории","категорий"],s_cards:["карточка","карточки","карточек"],
      f_by:"Создал",f_license:"Содержание и код под лицензией",f_wiki:"Терминология частично основана на статье %s в шведской Википедии.",f_source:"Исходный код на GitHub",f_donate:"Поддержать Википедию",f_download:"Скачать колоду Anki (.apkg)",
      m_image:"Викторина с картинками",b_report:"Сообщить об ошибке в этом термине",b_wiki:"Подробнее в Википедии",s_noimg:"В этой подборке нет изображений. Выберите больше категорий.",
-     h_keys:"← предыдущая · → показать ответ, затем следующая · 1 повторить · 2 знаю · h справка",
-     b_help:"Справка",help_title:"Справка",help_close:"Закрыть",
+     h_keys:"← предыдущая · → показать ответ, затем следующая · 1 повторить · 2 знаю · t тема · h справка",
+     b_help:"Справка",b_theme:"Тема",t_auto:"как в системе",t_light:"светлая",t_dark:"тёмная",help_title:"Справка",help_close:"Закрыть",
      k_space:"пробел",k_esc:"Esc",
      h_right:"Показывает ответ. Следующее нажатие — следующая карточка.",
      h_left:"Предыдущая карточка, с показанным ответом.",
@@ -448,6 +486,7 @@ const I18N = {
      h_h:"Показывает и скрывает эту справку.",
      h_esc:"Закрывает справку.",
      h_next:"Следующий вопрос.",
+     h_t:"Переключает тему: системная, светлая, тёмная.",
      hs_privacy:"Статистика",hprivacy:"Сайт считает посещения с помощью GoatCounter. Записываются адрес страницы, страница-источник, браузер, размер экрана и страна — без кук, без хранения IP-адреса и без чего-либо, указывающего именно на вас. Если браузер отправляет Do Not Track или Global Privacy Control, вас не считают вовсе.",
      hs_modes:"Режимы",hs_keys:"Клавиатура",hs_settings:"Настройки",hs_more:"Прочее",
      hm_card:"Карточки — термин на одном языке, ответы на остальных после переворота.",
@@ -466,8 +505,8 @@ const I18N = {
      s_cats:["category","categories"],s_cards:["card","cards"],
      f_by:"Created by",f_license:"Content and code under",f_wiki:"Term data partly based on %s on Swedish Wikipedia.",f_source:"Source code on GitHub",f_donate:"Support Wikipedia",f_download:"Download Anki deck (.apkg)",
      m_image:"Picture quiz",b_report:"Report an error in this term",b_wiki:"Read more on Wikipedia",s_noimg:"No pictures in this selection. Pick more categories.",
-     h_keys:"← previous · → reveal, then next · 1 repeat · 2 known · h help",
-     b_help:"Help",help_title:"Help",help_close:"Close",
+     h_keys:"← previous · → reveal, then next · 1 repeat · 2 known · t theme · h help",
+     b_help:"Help",b_theme:"Theme",t_auto:"follows the system",t_light:"light",t_dark:"dark",help_title:"Help",help_close:"Close",
      k_space:"space",k_esc:"Esc",
      h_right:"Reveals the answer. Press again for the next card.",
      h_left:"Previous card, with the answer showing.",
@@ -477,6 +516,7 @@ const I18N = {
      h_h:"Shows and hides this help.",
      h_esc:"Closes the help.",
      h_next:"Next question.",
+     h_t:"Cycles the theme: system, light, dark.",
      hs_privacy:"Statistics",hprivacy:"The site counts visits with GoatCounter. What is recorded is the page address, referring page, browser, screen size and country — no cookie, no stored IP address and nothing that identifies you individually. If your browser sends Do Not Track or Global Privacy Control you are not counted at all.",
      hs_modes:"Modes",hs_keys:"Keyboard",hs_settings:"Settings",hs_more:"Other",
      hm_card:"Flashcards — a term in one language, the answers in the others when you flip.",
@@ -574,7 +614,7 @@ const HELP_KEYS = {
   image: [["\u2192","h_next"]],
   list:  []
 };
-const HELP_KEYS_ALWAYS = [["h / ?", "h_h"], [null, "h_esc"]];
+const HELP_KEYS_ALWAYS = [["h / ?", "h_h"], ["t", "h_t"], [null, "h_esc"]];
 
 function renderHelp(){
   $("help_h").textContent=T("help_title");
@@ -597,6 +637,43 @@ function renderHelp(){
 }
 
 function helpOpen(){ return $("help").className!=="hidden"; }
+
+/* Tema: auto -> ljust -> mörkt -> auto. "auto" lagras genom att attributet tas
+   bort, så mediefrågan får styra igen. */
+const THEMES = ["auto","light","dark"];
+const THEME_ICON = {auto:"\u25D1", light:"\u2600", dark:"\u263E"};
+
+function currentTheme(){
+  return document.documentElement.getAttribute("data-theme") || "auto";
+}
+
+function applyTheme(name){
+  const root=document.documentElement;
+  if(name==="auto") root.removeAttribute("data-theme");
+  else root.setAttribute("data-theme", name);
+  try{
+    if(name==="auto") localStorage.removeItem("tema");
+    else localStorage.setItem("tema", name);
+  }catch(e){/* avstängd lagring: valet gäller bara den här sidvisningen */}
+  // Adressfältets färg på telefon ska följa med.
+  const bg=getComputedStyle(root).getPropertyValue("--bg").trim();
+  const meta=document.querySelector('meta[name="theme-color"]');
+  if(meta && bg) meta.setAttribute("content", bg);
+  renderThemeButton();
+}
+
+function renderThemeButton(){
+  const t=currentTheme();
+  const label=T("b_theme")+": "+T({auto:"t_auto",light:"t_light",dark:"t_dark"}[t]);
+  const b=$("themebtn");
+  b.textContent=THEME_ICON[t];
+  b.setAttribute("aria-label", label);
+  b.title=label;
+}
+
+function cycleTheme(){
+  applyTheme(THEMES[(THEMES.indexOf(currentTheme())+1) % THEMES.length]);
+}
 
 /* aria-modal ensamt gör ingenting åt tangentbordet: utan det här kunde Tab
    vandra ut till knapparna bakom överlägget. */
@@ -621,6 +698,7 @@ function applyI18n(){
   // Knappen visar bara "?" — skärmläsaren behöver ett riktigt namn.
   $("helpbtn").setAttribute("aria-label", T("b_help"));
   $("helpbtn").title=T("b_help");
+  renderThemeButton();
   renderFooter();
   $("title").textContent=T("title");
   $("search").placeholder=T("search");
@@ -876,6 +954,7 @@ function render(){
 }
 
 $("togglesettings").onclick=()=>setSettingsOpen(!state.settingsOpen);
+$("themebtn").onclick=cycleTheme;
 $("helpbtn").onclick=()=>toggleHelp();
 $("helpclose").onclick=()=>toggleHelp(false);
 $("help").onclick=e=>{ if(e.target===$("help")) toggleHelp(false); };
@@ -911,6 +990,7 @@ document.addEventListener("keydown",e=>{
 
   // Hjälpen gäller hela appen och ligger därför före lägeskontrollerna.
   if(e.key==="h"||e.key==="H"||e.key==="?"){ e.preventDefault(); toggleHelp(); return; }
+  if(e.key==="t"||e.key==="T"){ e.preventDefault(); cycleTheme(); return; }
   // Med hjälpen öppen ska inga andra genvägar plocka upp tangenten.
   if(helpOpen()) return;
 
@@ -939,7 +1019,8 @@ document.addEventListener("keydown",e=>{
   if(e.key==="ArrowLeft"){ e.preventDefault(); prev(); return; }
 });
 
-buildSelects(); buildBackChips(); buildCatChips(); setSettingsOpen(state.settingsOpen); applyI18n(); resetQueue(); render();
+buildSelects(); buildBackChips(); buildCatChips(); setSettingsOpen(state.settingsOpen);
+applyTheme(currentTheme()); applyI18n(); resetQueue(); render();
 </script>
 <script>
 if("serviceWorker" in navigator && location.protocol==="https:"){
