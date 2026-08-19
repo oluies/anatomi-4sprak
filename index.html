@@ -163,6 +163,18 @@ footer a{color:var(--accent)}
   .front{font-size:26px}
 }
 </style>
+<script>
+/* Adressfältets färg kan inte sättas i skriptet ovan: paletterna finns först när
+   stilmallen är läst. Här är den läst — och sidan är ännu inte målad. Utan det
+   här står adressfältet kvar på det statiska mörka värdet på en ljus telefon. */
+(function(){
+  try{
+    var bg=getComputedStyle(document.documentElement).getPropertyValue("--bg").trim();
+    var m=document.querySelector('meta[name="theme-color"]');
+    if(m&&bg) m.setAttribute("content", bg);
+  }catch(e){}
+})();
+</script>
 </head>
 <body>
 <header>
@@ -955,6 +967,11 @@ function render(){
 
 $("togglesettings").onclick=()=>setSettingsOpen(!state.settingsOpen);
 $("themebtn").onclick=cycleTheme;
+/* I auto-läge byter CSS palett av sig själv när systemet byter, men
+   adressfältets färg sitter i en meta-tagg som bara applyTheme rör. */
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>{
+  if(currentTheme()==="auto") applyTheme("auto");
+});
 $("helpbtn").onclick=()=>toggleHelp();
 $("helpclose").onclick=()=>toggleHelp(false);
 $("help").onclick=e=>{ if(e.target===$("help")) toggleHelp(false); };

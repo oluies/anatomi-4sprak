@@ -33,14 +33,15 @@ svarsspråk, förklaring på svenska/ukrainska/ryska och filtrering per kategori
 Gränssnittet finns på svenska, ukrainska och ryska.
 
 Sajten följer systemets ljusa eller mörka läge. Knappen i sidhuvudet, eller
-tangenten **t**, växlar mellan *systemets*, *ljust* och *mörkt*; valet sparas i
-`localStorage` och sätts av ett litet skript i `<head>` så att fel färg aldrig
-hinner blinka förbi. Är lagringen avstängd gäller valet bara den sidvisningen.
+tangenten **t** — som gäller i alla lägen — växlar mellan *systemets*, *ljust*
+och *mörkt*; valet sparas i `localStorage` och sätts av ett litet skript i
+`<head>` så att fel färg aldrig hinner blinka förbi. Är lagringen avstängd
+gäller valet bara den sidvisningen.
 
 På dator finns kortkommandon i flashcard-läget: **→** visar först svaret och går
 vid nästa tryck vidare till nästa kort, **←** går tillbaka till föregående kort
 (med svaret framme, så pilarna blir symmetriska), **mellanslag** vänder kortet,
-**1** lägger kortet sist i kön för repetition, **2** markerar det som kunnigt och **t** växlar tema.
+**1** lägger kortet sist i kön för repetition och **2** markerar det som kunnigt.
 Att gå bakåt återställer även räknarna och repetera-kön, så statistiken stämmer.
 I quizlägena går **→** till nästa fråga. **h** eller **?** öppnar en hjälpruta som
 beskriver lägena, genvägarna och inställningarna på gränssnittets språk, och listar

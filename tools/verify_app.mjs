@@ -262,8 +262,34 @@ try {
     meta: document.querySelector('meta[name="theme-color"]').content,
     label: document.getElementById('themebtn').getAttribute('aria-label')
   }));
+  // Paletterna ur sidan sjalv, sa checkarna inte upprepar hexvardena.
+  const pal = await page.evaluate(() => {
+    const cs = getComputedStyle(document.documentElement);
+    return { d: cs.getPropertyValue('--d-bg').trim(), l: cs.getPropertyValue('--l-bg').trim() };
+  });
+  const rgb = hex => {
+    const n = parseInt(hex.replace('#', ''), 16);
+    return `rgb(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255})`;
+  };
   const t0 = await theme();
   check('utan val följer temat systemet', t0.attr === null, String(t0.attr));
+  // Utan att rendera bada riktningarna kan mediefragan vara trasig och auto
+  // ratt tyst nagla sig fast vid en palett medan attributet ser ratt ut.
+  for (const [scheme, namn, want] of [['dark', 'mörka', pal.d], ['light', 'ljusa', pal.l]]) {
+    await page.emulateMedia({ colorScheme: scheme });
+    // emulateMedia atervander innan matchMedia-handelsen natt sidan, sa
+    // adressfaltet hinner inte uppdateras: vanta in det i stallet for att
+    // lasa for tidigt. Ett verkligt fel faller pa check-raden nedan.
+    await page.waitForFunction(v =>
+      document.querySelector('meta[name="theme-color"]').content === v,
+      want, { timeout: 2000 }).catch(() => {});
+    const got = await theme();
+    check(`auto följer systemets ${namn} läge`,
+      got.attr === null && got.bg === rgb(want), `${got.bg} / ${rgb(want)}`);
+    check(`adressfältet följer systemets ${namn} läge`, got.meta === want,
+      `${got.meta} / ${want}`);
+  }
+  await page.emulateMedia({ colorScheme: null });
   await page.click('#themebtn');
   const t1 = await theme();
   check('första klicket ger ljust tema', t1.attr === 'light', String(t1.attr));
@@ -271,7 +297,8 @@ try {
   const t2 = await theme();
   check('andra klicket ger mörkt tema', t2.attr === 'dark', String(t2.attr));
   check('ljust och mörkt ger olika bakgrund', t1.bg !== t2.bg, `${t1.bg} / ${t2.bg}`);
-  check('adressfältets färg följer temat', t1.meta !== t2.meta, `${t1.meta} / ${t2.meta}`);
+  check('adressfältets färg är sidans bakgrund', t1.meta === pal.l && t2.meta === pal.d,
+    `${t1.meta} / ${t2.meta} mot ${pal.l} / ${pal.d}`);
   check('knappen berättar vilket tema som gäller',
     !!t2.label && t2.label !== t1.label, `${t1.label} / ${t2.label}`);
   await page.click('#themebtn');
@@ -285,15 +312,23 @@ try {
   check('t fungerar även i listläget', (await theme()).attr === 'dark');
   await page.click('#modes button[data-mode="card"]');
   // valet ska överleva en omladdning, och sättas innan sidan målas
+  // Observera nar attributet faktiskt sätts. Att greppa efter kallkod i <head>
+  // kan inte fallera pa det den handlar om: ordningen.
+  await page.addInitScript(() => {
+    new MutationObserver((m, o) => {
+      window.__themeAt = { body: !!document.body, state: document.readyState };
+      o.disconnect();
+      // documentElement finns inte an nar init-skriptet kors: observera
+      // dokumentet med subtree, sa haknings-punkten sjalv inte blir ett fel.
+    }).observe(document, { attributes: true, subtree: true, attributeFilter: ['data-theme'] });
+  });
   await page.reload({ waitUntil: 'load' });
   const afterReload = await page.evaluate(() =>
     document.documentElement.getAttribute('data-theme'));
   check('temavalet överlever omladdning', afterReload === 'dark', String(afterReload));
-  check('temat sätts av ett skript i head, före första målningen',
-    await page.evaluate(() => {
-      const head = document.head.innerHTML;
-      return head.includes('data-theme') && head.includes('localStorage');
-    }));
+  const at = await page.evaluate(() => window.__themeAt);
+  check('temat sätts innan sidan finns att måla', at != null && at.body === false,
+    JSON.stringify(at));
   await page.evaluate(() => applyTheme('auto'));
   check('temat går att återställa till systemets',
     (await page.evaluate(() => document.documentElement.getAttribute('data-theme'))) === null);
