@@ -55,7 +55,7 @@ jobs:
         run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.15'
       - name: Validate term data and index.html sync
         run: |
           python tools/sync_html_data.py --check
