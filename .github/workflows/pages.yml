@@ -48,7 +48,7 @@ jobs:
       # och deployen publicera ett träd som aldrig kontrollerats.
       sha: ${{ steps.rev.outputs.sha }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.ref }}
       - id: rev
@@ -68,7 +68,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.validate.outputs.sha }}
       - name: Configure Pages
